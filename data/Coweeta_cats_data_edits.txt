@@ -1,0 +1,24 @@
+Notes about the Coweeta Caterpillars file provided by Bob Cooper, Coweeta UGA Caterpillar data.xlsx.
+
+1) There were several (~16) rows which were blank, except for a “0” in the number and/or biomass fields. I just wanted to confirm that these rows should be ignored, and that it’s not the case that data from the other fields somehow got deleted. (e.g., row 31938 in the file you sent)
+ 
+2) The Point field is usually a letter-number combination which I imagine refers to a grid system. In a few cases, the Point is just a number, or just a letter. Can you confirm that these values are true Point values, and not typos? In Plot BB, there are Points “3”, “59”, and “9”. In Plot BS, there are Points “1” and “9”. In Plot RK, there is a Point “ZA”.
+ 
+3) Most of the Tree Species labels are perfectly intelligible, but there were 1081 records where Tree Species was listed as “8”, and 554 records where Tree Species was “9”. Any idea what happened here?
+
+Answers from Will Lewis, 4/8/19:
+
+1) Go ahead and delete these records. We use a filemaker database to store the data, so these blank rows likely represent someone mistakenly adding a record and not filling it out.
+ 
+2) These are typos. Caterpillar points are generally done in a similar order along gridlines (e.g. A1, then C1, then E1, etc.) so I can guess that:
+rows 53859-53868  =  O1
+rows 52360-52369  =  Q9
+rows 52676-52681  = O3
+rows 52138-52141  =  O9
+row 56524  =  S9
+rows 51767-51776  =  O9
+Though these are just guesses based on their position in the database.
+ 
+3) These are from the first year or two of the study and I can't find any documentation for what these codes mean. I think that one is rhododendron and one is American beech, but am not sure.
+
+A file with these edits (and modified column names) is saved as Coweeta_cats.txt
