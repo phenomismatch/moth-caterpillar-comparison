@@ -29846,7 +29846,6 @@ Year	Plot	Yearday	Point	TreeSpecies	Sample	NumCaterpillars	Length_mm	Caterpillar
 2011	BB	160	U11	Mountain-Winterberry	1	0	 	0	 	
 2011	BB	160	S11	Witch-Hazel	1	1	14	4.244612078	Tortricid/Pyraloid	
 2011	BB	160	S11	Witch-Hazel	2	0	 	0	 	
-2011	BB	160	S11	Red-Oak	1	0	 	0	 	Not 50 leaf sample
 2011	BB	160	S11	Black-Birch	1	0	 	0	 	
 2011	BB	160	S11	Black-Birch	2	0	 	0	 	
 2011	BB	160	S11	American-Chestnut	1	0	 	0	 	
@@ -29860,7 +29859,6 @@ Year	Plot	Yearday	Point	TreeSpecies	Sample	NumCaterpillars	Length_mm	Caterpillar
 2011	BB	160	Q11	American-Beech	1	0	 	0	 	
 2011	BB	160	Q11	American-Beech	2	0	 	0	 	
 2011	BB	160	Q11	Yellow-Birch	1	0	 	0	 	
-2011	BB	160	Q11	Red-Maple	1	0	 	0	 	Not 50 leaf sample
 2011	BB	160	Q11	Black-Locust	1	1	10	1.746063329	Geometrid	
 2011	BB	160	O11	Witch-Hazel	1	0	 	0	 	
 2011	BB	160	O11	Witch-Hazel	2	0	 	0	 	
@@ -29876,7 +29874,6 @@ Year	Plot	Yearday	Point	TreeSpecies	Sample	NumCaterpillars	Length_mm	Caterpillar
 2011	BB	160	K11	Mountain-Winterberry	1	0	 	0	 	
 2011	BB	160	I11	Witch-Hazel	1	0	 	0	 	
 2011	BB	160	I11	Witch-Hazel	2	0	 	0	 	
-2011	BB	160	I11	White-Oak	1	0	 	0	 	36 leaves
 2011	BB	160	G11	Witch-Hazel	1	0	 	0	 	
 2011	BB	160	G11	Witch-Hazel	2	0	 	0	 	
 2011	BB	160	G11	American-Chestnut	1	0	 	0	 	
@@ -30992,7 +30989,6 @@ Year	Plot	Yearday	Point	TreeSpecies	Sample	NumCaterpillars	Length_mm	Caterpillar
 2011	BB	168	A11	Witch-Hazel	1	0	 	0	 	
 2011	BB	168	A11	Witch-Hazel	2	0	 	0	 	
 2011	BB	168	A11	Red-Maple	1	0	 	0	 	
-2011	BB	168	A11	Red-Maple	2	0	 	0	 	Down to 20 leaves
 2011	BB	168	A11	Hawthorn sp.	1	0	 	0	 	
 2011	BB	168	A11	Hawthorn sp.	2	0	 	0	 	
 2011	BB	168	A11	Striped-Maple	1	0	 	0	 	
@@ -31046,7 +31042,6 @@ Year	Plot	Yearday	Point	TreeSpecies	Sample	NumCaterpillars	Length_mm	Caterpillar
 2011	BB	169	S11	Mountain-Winterberry	1	0	 	0	 	
 2011	BB	169	S11	Mountain-Winterberry	2	0	 	0	 	
 2011	BB	169	S11	American-Chestnut	1	0	 	0	 	
-2011	BB	169	S11	Red-Oak	1	0	 	0	 	38 leaf sample
 2011	BB	169	U11	Black-Birch	1	0	 	0	 	
 2011	BB	169	U11	Black-Birch	2	0	 	0	 	
 2011	BB	169	U11	Striped-Maple	1	0	 	0	 	
@@ -34110,7 +34105,6 @@ Year	Plot	Yearday	Point	TreeSpecies	Sample	NumCaterpillars	Length_mm	Caterpillar
 2011	BB	193	S9	Red-Maple	1	1	7	0.680955633	Noctuid	
 2011	BB	193	O9	Witch-Hazel	1	0	 	0	 	
 2011	BB	193	O9	Witch-Hazel	2	0	 	0	 	
-2011	BB	193	O9	Yellow-Birch	1	0	 	0	 	25 leaf sample
 2011	BB	193	O9	Striped-Maple	1	0	 	0	 	
 2011	BB	193	O9	Chestnut-Oak	1	0	 	0	 	
 2011	BB	193	O9	Mountain-Winterberry	1	0	 	0	 	
@@ -60593,7 +60587,6 @@ Year	Plot	Yearday	Point	TreeSpecies	Sample	NumCaterpillars	Length_mm	Caterpillar
 2017	BB	169	A13	Serviceberry	1	1	16	6.038606714	Tortricid/Pyraloid	"AMC, WBL"
 2017	BB	169	A13	Serviceberry	2	1	12	2.825520619	Tortricid/Pyraloid	"AMC, WBL"
 2017	BB	169	A13	Striped-Maple	2	0	 	0	 	"AMC, WBL"
-2017	BB	169	A13	Striped-Maple	1	0	 	0	 	"AMC, WBL, 30 leaves, 2 stems"
 2017	BB	169	A13	Red-Maple	1	0	 	0	 	"AMC, WBL, multiple stems"
 2017	BB	169	A13	Red-Maple	2	0	 	0	 	"AMC, WBL"
 2017	BB	169	A13	Yellow-Birch	2	0	 	0	 	"AMC, WBL"
@@ -60632,7 +60625,6 @@ Year	Plot	Yearday	Point	TreeSpecies	Sample	NumCaterpillars	Length_mm	Caterpillar
 2017	BB	176	K9	Serviceberry	2	0	 	0	 	"AMC, WBL"
 2017	BB	176	O9	Serviceberry	1	0	 	0	 	"AMC, WBL"
 2017	BB	176	O9	Red-Oak	1	0	 	0	 	"AMC, WBL, multiple stems"
-2017	BB	176	O9	Striped-Maple	1	0	 	0	 	"AMC, WBL, 15 leaves"
 2017	BB	176	O9	Red-Maple	1	0	 	0	 	"AMC, WBL"
 2017	BB	176	O9	Serviceberry	2	0	 	0	 	"AMC, WBL"
 2017	BB	176	O9	Red-Maple	2	0	 	0	 	"AMC, WBL"
@@ -60644,7 +60636,6 @@ Year	Plot	Yearday	Point	TreeSpecies	Sample	NumCaterpillars	Length_mm	Caterpillar
 2017	BB	176	S9	American-Chestnut	1	0	 	0	 	"AMC, WBL multiple stems"
 2017	BB	176	S9	Serviceberry	1	0	 	0	 	"AMC, WBL"
 2017	BB	176	S9	Serviceberry	2	0	 	0	 	"AMC, WBL"
-2017	BB	176	S9	Red-Oak	1	0	 	0	 	"AMC, WBL, 20 leaves"
 2017	BB	174	S1	Serviceberry	1	0	 	0	 	"RWC, ZSZ, BMW"
 2017	BB	174	S1	Serviceberry	2	0	 	0	 	"RWC, ZSZ, BMW"
 2017	BB	174	S1	Striped-Maple	2	0	 	0	 	"RWC, ZSZ, BMW"
