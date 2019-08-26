@@ -26868,11 +26868,10 @@ Year	Plot	Yearday	Point	TreeSpecies	Sample	NumCaterpillars	Length_mm	Caterpillar
 2010	BB	136	U11	Striped-Maple	1	0	0	0		JLH/BMM/ABC
 2010	BB	136	U11	Striped-Maple	2	0	0	0		JLH/BMM/ABC
 2010	BB	136	S11	American-Chestnut	1	1	18	8.240990335		JLH/BMM/ABC
-2010	BB	136	S11	American-Chestnut	1	1	16	6.038606714		JLH/BMM/ABC
+2010	BB	136	S11	American-Chestnut	2	1	16	6.038606714		JLH/BMM/ABC
 2010	BB	136	S11	Red-Oak	1	0	0	0		JLH/BMM/ABC
 2010	BB	136	S11	Red-Maple	1	1	7	0.680955633		JLH/BMM/ABC
-2010	BB	136	S11	Red-Maple	1	1	10	1.746063329		JLH/BMM/ABC
-2010	BB	136	S11	Red-Maple	2	0	0	0		JLH/BMM/ABC
+2010	BB	136	S11	Red-Maple	2	1	10	1.746063329		JLH/BMM/ABC
 2010	BB	136	S11	Red-Oak	2	0	0	0		JLH/BMM/ABC
 2010	BB	136	S11	Striped-Maple	1	0	0	0		JLH/BMM/ABC
 2010	BB	136	S11	Striped-Maple	2	0	0	0		JLH/BMM/ABC
@@ -26917,7 +26916,7 @@ Year	Plot	Yearday	Point	TreeSpecies	Sample	NumCaterpillars	Length_mm	Caterpillar
 2010	BB	136	A11	Striped-Maple	1	0	0	0		JLH/BMM/ABC
 2010	BB	136	A11	Striped-Maple	2	0	0	0		JLH/BMM/ABC
 2010	BB	136	A11	Red-Oak	1	1	8	0.96876303		JLH/BMM/ABC
-2010	BB	136	A11	Red-Oak	1	1	5	0.280117862		JLH/BMM/ABC
+2010	BB	136	A11	Red-Oak	2	1	5	0.280117862		JLH/BMM/ABC
 2010	BB	137	A3	Red-Maple	1	0	0	0		ABC
 2010	BB	137	A3	Red-Maple	2	0	0	0		ABC
 2010	BB	137	A3	Red-Oak	1	0	0	0		ABC
@@ -35118,9 +35117,9 @@ Year	Plot	Yearday	Point	TreeSpecies	Sample	NumCaterpillars	Length_mm	Caterpillar
 2012	BB	150	M11	Rhododendron	2	0	 	0	 	"JLH, GSP, SAW, CMK"
 2012	BB	150	M11	Mountain-Winterberry	1	0	 	0	 	"JLH, GSP, SAW, CMK"
 2012	BB	150	M11	Serviceberry	1	0	 	0	 	"JLH, GSP, SAW, CMK"
-2012	BB	150	K11	Serviceberry	1	0	 	0	 	"JLH, GSP, SAW, CMK"
-2012	BB	150	K11	Witch-Hazel	1	0	 	0	 	"JLH, GSP, SAW, CMK"
-2012	BB	150	K11	Witch-Hazel	2	1	11	2.245622133	Tortricid/Pyraloid	"JLH, GSP, SAW, CMK"
+2012	BB	150	K11	Serviceberry	1	0	 	0	 	"JLH, GSP, SAW, CMK"
+2012	BB	150	K11	Witch-Hazel	1	0	 	0	 	"JLH, GSP, SAW, CMK"
+2012	BB	150	K11	Witch-Hazel	2	1	11	2.245622133	Tortricid/Pyraloid	"JLH, GSP, SAW, CMK"
 2012	BS	151	U29	Tulip-Poplar	1	0	 	0	 	"MHC, CAH, LTC"
 2012	BS	151	U29	Pignut-Hickory	1	0	 	0	 	"MHC, CAH, LTC"
 2012	BS	151	U29	Pignut-Hickory	2	0	 	0	 	"MHC, CAH, LTC"
@@ -37578,7 +37577,7 @@ Year	Plot	Yearday	Point	TreeSpecies	Sample	NumCaterpillars	Length_mm	Caterpillar
 2012	BB	180	C9	White_Ash	1	0	 	0	 	"CMK, SAW, GSP"
 2012	BB	180	C9	White_Ash	2	0	 	0	 	"CMK, SAW, GSP"
 2012	BB	180	C9	Serviceberry	1	0	 	0	 	"CMK, SAW, GSP"
-2012	BB	180	A9	Striped-Maple	1	0	 	0	 	"CMK, SAW, GSP"
+2012	BB	180	A9	Striped-Maple	1	0	 	0	 	"CMK, SAW, GSP"
 2012	BB	180	A9	Serviceberry	1	0	 	0	 	"CMK, SAW, GSP"
 2012	BB	180	A9	Serviceberry	2	0	 	0	 	"CMK, SAW, GSP"
 2012	BB	180	A9	Rhododendron	2	0	 	0	 	"CMK, SAW, GSP"
@@ -52615,8 +52614,7 @@ Year	Plot	Yearday	Point	TreeSpecies	Sample	NumCaterpillars	Length_mm	Caterpillar
 2015	BB	127	U13	Red-Maple	2	0	 	0	 	"RWC, JDH, MHC, JLH"
 2015	BB	127	U13	Serviceberry	1	0	 	0	 	"RWC, JDH, MHC, JLH"
 2015	BB	127	S13	Serviceberry	1	1	6	0.453293292	Tortricid/Pyraloid	"RWC, JDH, MHC, JLH"
-2015	BB	127	S13	Serviceberry	1	1	5	0.280117862	Tortricid/Pyraloid	"RWC, JDH, MHC, JLH"
-2015	BB	127	S13	Serviceberry	2	0	 	0	 	"RWC, JDH, MHC, JLH"
+2015	BB	127	S13	Serviceberry	2	1	5	0.280117862	Tortricid/Pyraloid	"RWC, JDH, MHC, JLH"
 2015	BB	127	S13	Yellow-Birch	2	0	 	0	 	"RWC, JDH, MHC, JLH"
 2015	BB	127	S13	Yellow-Birch	1	0	 	0	 	"RWC, JDH, MHC, JLH"
 2015	BB	127	S13	Red-Maple	1	0	 	0	 	"RWC, JDH, MHC, JLH"
@@ -52636,7 +52634,7 @@ Year	Plot	Yearday	Point	TreeSpecies	Sample	NumCaterpillars	Length_mm	Caterpillar
 2015	BB	127	O13	Serviceberry	1	0	 	0	 	"RWC, JDH, MHC, JLH"
 2015	BB	127	O13	Yellow-Birch	1	0	 	0	 	"RWC, JDH, MHC, JLH"
 2015	BB	127	M13	Yellow-Birch	1	0	 	0	 	"RWC, JDH, MHC, JLH"
-2015	BB	127	M13	Serviceberry	1	1	7	0.680955633	Noctuid	"RWC, JDH, MHC, JLH"
+2015	BB	127	M13	Serviceberry	2	1	7	0.680955633	Noctuid	"RWC, JDH, MHC, JLH"
 2015	BB	132	U1	Striped-Maple	1	0	 	0	 	RJC
 2015	BB	132	U1	Striped-Maple	2	0	 	0	 	RJC
 2015	BB	132	U1	Yellow-Birch	2	0	 	0	 	RJC
