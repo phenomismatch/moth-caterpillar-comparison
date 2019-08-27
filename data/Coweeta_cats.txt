@@ -28254,6 +28254,7 @@ Year	Plot	Yearday	Point	TreeSpecies	Sample	NumCaterpillars	Length_mm	Caterpillar
 2010	BS	167	A7	Striped-Maple	2	1	3	0.072721044		MHC/AES
 2010	BS	167	A7	American-Chestnut	1	0	0	0		MHC/AES
 2010	BS	167	A7	American-Chestnut	2	0	0	0		MHC/AES
+										
 2010	BS	166	A1	American-Chestnut	1	0	0	0		MHC/AES
 2010	BS	166	A1	Striped-Maple	1	1	7	0.680955633		MHC/AES
 2010	BS	166	A1	Red-Maple	1	0	0	0		MHC/AES
