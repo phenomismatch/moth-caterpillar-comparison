@@ -5,7 +5,7 @@ library(dplyr)
 library(stringr)
 
 # Read in data, clean up leading/trailing spaces, weird symbols
-cats = read.table('z:/lab/databases/coweetacaterpillars/coweeta_cats.txt', header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE) %>%
+cats = read.table('z:/databases/CoweetaCaterpillars/Coweeta_cats.txt', header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE) %>%
   filter(Plot != "") %>%
   mutate(Point = trimws(Point)) %>%
   mutate(Point = gsub("\v", "", Point)) %>%
@@ -16,7 +16,7 @@ cats = read.table('z:/lab/databases/coweetacaterpillars/coweeta_cats.txt', heade
 catcomments = count(cats, Comments)
 #write.table(catcomments, 'z:/lab/databases/coweetacaterpillars/coweeta_comments.txt', sep = '\t', row.names = F)
 
-comments = read.table('z:/lab/databases/coweetacaterpillars/coweeta_comments.txt', sep = '\t', header = T, quote = '\"', fill = TRUE, stringsAsFactors = FALSE)
+comments = read.table('z:/databases/coweetacaterpillars/coweeta_comments.txt', sep = '\t', header = T, quote = '\"', fill = TRUE, stringsAsFactors = FALSE)
 
 # Go through comments and pull out pieces that need to go in the following fields:
 #   arthropodNotes, NumberOfLeaves, Group, Hairy, Rolled, Tented, BeetleLarva, Sawfly
@@ -81,7 +81,7 @@ multSurveyRecs = catplus %>%
 # second survey event of the same branch on the same yearday-year, 9 the appropriate surveyNote
 # is provided in the 'x' field.
 
-dups = read.table('z:/lab/databases/coweetacaterpillars/coweeta_dup_surveys.txt', 
+dups = read.table('z:/databases/coweetacaterpillars/coweeta_dup_surveys.txt', 
                   sep = '\t', header = T, quote = '\"', fill = TRUE, stringsAsFactors = FALSE)
 
 dups019 = filter(dups, n %in% c(0, 1, 9)) %>%
