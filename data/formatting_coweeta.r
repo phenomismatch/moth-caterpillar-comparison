@@ -3,9 +3,10 @@
 
 library(dplyr)
 library(stringr)
+library(tidyr)
 
 # Read in data, clean up leading/trailing spaces, weird symbols
-cats = read.table('z:/databases/CoweetaCaterpillars/Coweeta_cats.txt', header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE) %>%
+cats = read.table('data/Coweeta_cats.txt', header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE) %>%
   filter(Plot != "") %>%
   mutate(Point = trimws(Point)) %>%
   mutate(Point = gsub("\v", "", Point)) %>%
@@ -16,7 +17,7 @@ cats = read.table('z:/databases/CoweetaCaterpillars/Coweeta_cats.txt', header = 
 catcomments = count(cats, Comments)
 #write.table(catcomments, 'z:/lab/databases/coweetacaterpillars/coweeta_comments.txt', sep = '\t', row.names = F)
 
-comments = read.table('z:/databases/coweetacaterpillars/coweeta_comments.txt', sep = '\t', header = T, quote = '\"', fill = TRUE, stringsAsFactors = FALSE)
+comments = read.table('z:/lab/databases/coweetacaterpillars/coweeta_comments.txt', sep = '\t', header = T, quote = '\"', fill = TRUE, stringsAsFactors = FALSE)
 
 # Go through comments and pull out pieces that need to go in the following fields:
 #   arthropodNotes, NumberOfLeaves, Group, Hairy, Rolled, Tented, BeetleLarva, Sawfly
@@ -81,7 +82,7 @@ multSurveyRecs = catplus %>%
 # second survey event of the same branch on the same yearday-year, 9 the appropriate surveyNote
 # is provided in the 'x' field.
 
-dups = read.table('z:/databases/coweetacaterpillars/coweeta_dup_surveys.txt', 
+dups = read.table('z:/lab/databases/coweetacaterpillars/coweeta_dup_surveys.txt', 
                   sep = '\t', header = T, quote = '\"', fill = TRUE, stringsAsFactors = FALSE)
 
 dups019 = filter(dups, n %in% c(0, 1, 9)) %>%
@@ -101,7 +102,8 @@ grouped_cow<-cowplusnotes%>%
               select(Plot,Yearday,Point,TreeSpecies,Sample,NumCaterpillars,CaterpillarBiomass_ma,CaterpillarFamily,surveyed)
               
 widecowplusnotes= grouped_cow%>%
-                  spread(Yearday,surveyed,fill=NA,convert=TRUE)
+                  spread(Yearday,surveyed,fill=NA,convert=TRUE) %>%
+  arrange(`136`)
 
 cowsurvs = cowplusnotes%>%
   select(Year, Plot, Yearday, Point, TreeSpecies, Sample, Notes) %>%
