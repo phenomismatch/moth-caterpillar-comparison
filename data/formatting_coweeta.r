@@ -94,6 +94,15 @@ dups019 = filter(dups, n %in% c(0, 1, 9)) %>%
 cowplusnotes = left_join(catplus, dups019, by = c('Year', 'Plot', 'Yearday', 'Point', 'TreeSpecies', 'Sample')) %>%
   mutate(Notes = ifelse(is.na(Notes), Comments, Notes))
 
+cowplusnotes$surveyed<-ifelse(cowplusnotes$NumCaterpillars>=0,"1",NA)
+
+grouped_cow<-cowplusnotes%>%
+              filter(Year==2010)%>%
+              select(Plot,Yearday,Point,TreeSpecies,Sample,NumCaterpillars,CaterpillarBiomass_ma,CaterpillarFamily,surveyed)
+              
+widecowplusnotes= grouped_cow%>%
+                  spread(Yearday,surveyed,fill=NA,convert=TRUE)
+
 cowsurvs = cowplusnotes%>%
   select(Year, Plot, Yearday, Point, TreeSpecies, Sample, Notes) %>%
   distinct() %>%
