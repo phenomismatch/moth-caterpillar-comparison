@@ -1,0 +1,225 @@
+Year	Plot	Yearday	Point	TreeSpecies	Sample	NumCaterpillars	Length_mm	CaterpillarBiomass_ma	CaterpillarFamily	Comments	n	x
+2011	BB	141	I3	Witch-Hazel	1	1	16	6.038606714	Noctuid	green with white stripes	0	
+2011	BB	143	I9	Witch-Hazel	1	1	6	0.453293292	Tortricid/Pyraloid	green with black head	0	
+2011	BS	150	E7	Basswood	1	1	31	34.61424498	Noctuid	yellow with diamond patterns	0	
+2011	BB	145	O11	Witch-Hazel	1	1	12	2.825520619	Tortricid/Pyraloid		1	
+2011	BB	191	U1	Striped-Maple	2	1	21	12.3799511	Sawfly		1	
+2011	BS	142	M9	Black-Locust	1	1	11	2.245622133	Sawfly		1	
+2011	BS	144	I7	Witch-Hazel	1	1	14	4.244612078	Tortricid/Pyraloid		1	
+2011	BS	162	M25	Striped-Maple	1	1	12	2.825520619	Geometrid		1	
+2011	BS	162	Q27	Witch-Hazel	2	1	20	10.8837656	Tortricid/Pyraloid		1	
+2011	BS	201	Q11	Witch-Hazel	2	1	4	0.155416945	Sawfly		1	
+2011	BS	201	Q13	Serviceberry	1	1	9	1.322087552	Sawfly		1	
+2012	BB	182	U11	Serviceberry	1	1	4	0.155416945	Other	"CMK, SAW, JLH"	1	
+2012	BB	198	Q13	Mountain-Winterberry	1	1	5	0.280117862	Sawfly	" MHC, JLH, AJC"	1	
+2012	BS	149	U23	Witch-Hazel	1	1	19	9.505380314	Geometrid	"JLH, CAH, LTC, JMC"	1	
+2012	BS	166	I13	Striped-Maple	2	1	30	31.74388695	Geometrid	"CAH, LTC, AJC, MHC"	1	
+2012	BS	187	I19	Black-Cherry	1	1	4	0.155416945	Sawfly	"CAH, AJC, JLH, LTC"	1	
+2012	BS	202	I17	Yellow-Birch	2	1	5	0.280117862	Geometrid	"MHC, JLH, AJC"	1	
+2013	BB	168	E9	Yellow-Birch	2	1	5	0.280117862	Tortricid/Pyraloid	"MHC, RWC, JMW"	1	
+2013	BB	170	S9	Yellow-Birch	2	1	12	2.825520619	Noctuid	"MHC, JMW, RWC"	1	
+2013	BB	178	O13	Yellow-Birch	2	1	13	3.490361756	Geometrid	"JLH, JMW, RWC"	1	
+2013	BB	180	U3	Striped-Maple	1	2	8	1.93752606	Sawfly	"JMW, JLH"	1	
+2013	BB	191	Q3	Yellow-Birch	1	1	3	0.072721044	Notodontid	"JMW, RWC"	1	
+2013	BS	155	Q19	Red-Oak	2	1	10	1.746063329	Noctuid	"JLH, MHC, JMF"	1	
+2014	BB	146	U13	Serviceberry	1	1	14	4.244612078	Noctuid	"JMF, JMW"	1	
+2014	BB	157	I3	Striped-Maple	1	1	16	6.038606714	Geometrid	"MHC, JMW, RWC, BML"	1	
+2014	BB	160	K9	Serviceberry	1	1	3	0.072721044	Tortricid/Pyraloid	"JMW, BML, RWC"	1	
+2014	BB	167	S9	Yellow-Birch	1	1	23	15.74060709	Noctuid	"JMW, BML, RWC"	1	
+2014	BB	168	E9	Yellow-Birch	2	1	16	6.038606714	Noctuid	"JMW, RWC, BML"	1	
+2014	BB	170	S13	Red-Maple	2	1	6	0.453293292	Geometrid	JMW BML RWC JLH	1	
+2014	BB	170	S13	Yellow-Birch	1	1	21	12.3799511	Tortricid/Pyraloid	JMW BML RWC JLH	1	
+2014	BB	171	U3	American-Chestnut	1	1	7	0.680955633	Noctuid	"JLH, RWC, JMW, BML"	1	
+2014	BB	172	A3	Yellow-Birch	2	1	3	0.072721044	Sawfly	JMW JMF	1	
+2014	BB	172	C3	Red-Oak	1	1	21	12.3799511	Geometrid	JMW JMF	1	
+2014	BB	172	E3	Yellow-Birch	1	1	15	5.092615825	Noctuid	JMW JMF	1	
+2014	BB	175	U1	Serviceberry	1	2	5	0.560235724	Sawfly	"JMW, RWC, BML"	1	
+2014	BB	183	M1	Striped-Maple	2	1	8	0.96876303	Sawfly	"JMW, BML, JDH"	1	
+2014	BB	183	S1	Serviceberry	2	1	4	0.155416945	Geometrid	"JMW, BML, JDH"	1	
+2014	BB	183	U1	Serviceberry	2	1	4	0.155416945	Sawfly	"JMW, BML, JDH"	1	
+2014	BB	186	O9	Striped-Maple	2	1	16	6.038606714	Sawfly	"JMW, RWC"	1	
+2014	BB	189	C13	Red-Maple	1	1	7	0.680955633	Tortricid/Pyraloid	"JMW, BML, JDH"	1	
+2014	BB	189	K1	Striped-Maple	1	1	7	0.680955633	Sawfly	"JMW, BML, JDH"	1	
+2014	BB	189	K1	Yellow-Birch	1	1	4	0.155416945	Sawfly	"JMW, BML, JDH"	1	
+2014	BB	192	I9	Striped-Maple	1	1	8	0.96876303	Sawfly	"JMF, JMW, RWC, BML, EAB, JDH"	1	
+2014	BB	196	A3	Serviceberry	2	1	8	0.96876303	Sawfly	"JMF, JMW"	1	
+2014	BB	196	C3	Serviceberry	2	1	4	0.155416945	Notodontid	"JMF, JMW"	1	
+2014	BB	198	Q9	Serviceberry	2	1	6	0.453293292	Sawfly	"JMF, JMW"	1	
+2014	BB	203	A1	American-Chestnut	2	1	7	0.680955633	Notodontid	"JMF, JMW, JLH"	1	
+2014	BB	203	A1	Serviceberry	2	2	10	3.492126658	Sawfly	"JMF, JMW, JLH"	1	
+2014	BB	203	A1	Yellow-Birch	1	1	24	17.61236468	Notodontid	"JMF, JMW, JLH"	1	
+2014	BB	203	C1	American-Chestnut	1	1	7	0.680955633	Notodontid	"JMF, JMW, JLH"	1	
+2014	BB	203	E1	Yellow-Birch	2	1	9	1.322087552	Sawfly	"JMF, JMW, JLH"	1	
+2014	BB	203	G1	Serviceberry	1	1	20	10.8837656	Geometrid	"JMF, JMW, JLH"	1	
+2014	BB	203	M1	Red-Maple	2	1	9	1.322087552	Noctuid	"JMF, JMW, JLH"	1	
+2014	BB	203	M1	Yellow-Birch	2	1	12	2.825520619	Tortricid/Pyraloid	"JMF, JMW, JLH"	1	
+2014	BB	203	Q1	Serviceberry	1	1	8	0.96876303	Noctuid	"JMF, JMW, JLH"	1	
+2014	BB	203	S1	Serviceberry	2	1	11	2.245622133	Sawfly	"JMF, JMW, JLH"	1	
+2014	BB	204	M13	Serviceberry	1	1	9	1.322087552	Sawfly	"JMF, JMW, JLH"	1	
+2014	BB	204	O13	Serviceberry	2	1	9	1.322087552	Geometrid	"JMF, JMW, JLH"	1	
+2014	BB	204	S13	Yellow-Birch	2	1	14	4.244612078	Noctuid	"JMF, JMW, JLH"	1	
+2014	BS	136	Q27	Red-Oak	2	1	12	2.825520619	Noctuid	"JLH, EAB, CRB"	1	
+2014	BS	139	M15	Serviceberry	1	1	7	0.680955633	Geometrid	"JMF, EAB, CRB"	1	
+2014	BS	140	E9	Serviceberry	1	1	15	5.092615825	Noctuid	"MHC, JLH, JMF, EAB, CRB"	1	
+2014	BS	141	O1	Striped-Maple	2	1	10	1.746063329	Sawfly	"JMF, EAB, CRB, RWC, JMW, JLH, BML"	1	
+2014	BS	160	Q1	Serviceberry	1	1	6	0.453293292	Geometrid	"MHC, EAB, CRB, JLH"	1	
+2014	BS	160	S1	Red-Oak	1	1	4	0.155416945	Geometrid	"MHC, EAB, CRB, JLH"	1	
+2014	BS	166	I1	Red-Oak	2	1	9	1.322087552	Tortricid/Pyraloid	"JLH, BML, CRB"	1	
+2014	BS	167	U25	Striped-Maple	2	2	8	1.93752606	Sawfly	"JLH, CRB"	1	
+2014	BS	180	M19	Striped-Maple	2	1	22	13.9976738	Tortricid/Pyraloid	"EAB, CRB"	1	
+2014	BS	183	M1	Serviceberry	2	1	5	0.280117862	Sawfly	"JMF,CRB, RWC"	1	
+2014	BS	184	Q1	Serviceberry	1	1	5	0.280117862	Sawfly	"EAB, BAB, JDH"	1	
+2014	BS	184	Q7	Striped-Maple	2	1	6	0.453293292	Sawfly	"EAB, BAB, JDH"	1	
+2014	BS	188	S1	Red-Oak	1	1	18	8.240990335	Geometrid	"JMW, CRB, EAB"	1	
+2014	BS	197	M9	Red-Maple	1	1	12	2.825520619	Tortricid/Pyraloid	"JMF, JMW"	1	
+2014	BS	201	U29	Yellow-Birch	1	1	11	2.245622133	Sawfly	"JMF, JLH"	1	
+2014	BS	202	Q21	Serviceberry	1	1	10	1.746063329	Sawfly	"JLH, JMW"	1	
+2014	BS	205	C1	American-Chestnut	1	1	28	26.45801108	Geometrid	"JLH, JMW"	1	
+2014	BS	205	Q3	American-Chestnut	1	1	4	0.155416945	Notodontid	"JLH, JMW, JMF"	1	
+2015	BB	127	M13	Serviceberry	1	1	4	0.155416945	Noctuid	"RWC, JLH, JDH, MHC"	1	
+2015	BB	134	G13	Serviceberry	2	1	9	1.322087552	Sawfly	"RWC, JDH, RJC"	1	
+2015	BB	139	E1	Serviceberry	1	1	5	0.280117862	Noctuid	"RWC, JDH"	1	
+2015	BB	167	O1	Striped-Maple	1	1	19	9.505380314	Sawfly	"JDH, ADK, AMR, 2 stems"	1	
+2015	BB	177	M9	Serviceberry	1	1	6	0.453293292	Geometrid	"ADK, AMR, RWC"	1	
+2015	BB	194	E1	American-Chestnut	1	1	18	8.240990335	Tortricid/Pyraloid	"RWC, JDH, ADK, AMR"	1	
+2015	BS	142	E9	Serviceberry	1	1	18	8.240990335	Geometrid	"RWC, JDH"	1	
+2015	BS	159	M19	Striped-Maple	2	1	12	2.825520619	Geometrid	"RWC, ADK, AMR"	1	
+2016	BS	165	K9	Striped-Maple	2	1	20	10.8837656	Geometrid	"RWC, JDH, RJC, NRH, NAW"	1	
+2018	BB	164	U13	Striped-Maple	2	1	19	9.505380314	Noctuid	"ZSZ, WBL, 2 stem"	1	
+2018	BB	189	A13	Serviceberry	2	1	8	0.96876303	Sawfly	ZSZ	1	
+2018	BS	178	K1	Serviceberry	1	1	11	2.245622133	Tortricid/Pyraloid	"ZSZ, BMW, 2 stem"	1	
+2003	BB	124	C9	8	1	0	0	0		JAC	2	same
+2003	BB	124	C9	8	1	0	0	0		DHK	2	same
+2003	BB	124	C9	8	2	0	0	0		JAC	2	same
+2003	BB	124	C9	8	2	0	0	0		DHK	2	same
+2004	BB	140	U5	Red-Oak	1	0	0	0		KWS	2	same
+2004	BB	140	U5	Red-Oak	1	0	0	0		ABJ	2	same
+2004	BB	140	U5	Red-Oak	2	0	0	0		KWS	2	diff
+2004	BB	140	U5	Red-Oak	2	1	7	0.680955633		ABJ	2	diff
+2004	BB	140	U5	Red-Oak	2	1	8	0.96876303		ABJ	2	diff
+2004	BB	140	U5	Striped-Maple	1	0	0	0		KWS	2	same
+2004	BB	140	U5	Striped-Maple	1	0	0	0		ABJ	2	same
+2004	BB	140	U5	Striped-Maple	2	0	0	0		KWS	2	same
+2004	BB	140	U5	Striped-Maple	2	0	0	0		ABJ	2	same
+2004	BB	169	A11	Red-Maple	1	0	0	0		KWS	2	same
+2004	BB	169	A11	Red-Maple	1	0	0	0		ABJ	2	same
+2004	BB	169	A11	Red-Maple	2	0	0	0		KWS	2	same
+2004	BB	169	A11	Red-Maple	2	0	0	0		ABJ	2	same
+2004	BS	155	I7	American-Chestnut	1	0	0	0		KML	2	diff
+2004	BS	155	I7	American-Chestnut	1	1	17	7.086717877		JWH	2	diff
+2004	BS	155	I7	American-Chestnut	2	1	13	3.490361756		KML	2	diff
+2004	BS	155	I7	American-Chestnut	2	1	14	4.244612078		JWH	2	diff
+2004	BS	155	I7	Red-Maple	1	0	0	0		KML	2	diff
+2004	BS	155	I7	Red-Maple	1	1	19	9.505380314		JWH	2	diff
+2004	BS	155	I7	Red-Maple	2	1	15	5.092615825		KML	2	diff
+2004	BS	155	I7	Red-Maple	2	1	6	0.453293292		JWH	2	diff
+2004	BS	155	I7	Red-Oak	1	0	0	0		KML	2	same
+2004	BS	155	I7	Red-Oak	1	0	0	0		JWH	2	same
+2004	BS	155	I7	Red-Oak	2	1	13	3.490361756		KML	2	diff
+2004	BS	155	I7	Red-Oak	2	0	0	0		JWH	2	diff
+2004	BS	155	I7	Striped-Maple	1	0	0	0		KML	2	same
+2004	BS	155	I7	Striped-Maple	1	0	0	0		JWH	2	same
+2004	BS	155	I7	Striped-Maple	2	0	0	0		KML	2	same
+2004	BS	155	I7	Striped-Maple	2	0	0	0		JWH	2	same
+2004	RK	124	C3	American-Chestnut	1	0	0	0		LAW	2	same
+2004	RK	124	C3	American-Chestnut	1	0	0	0		ABJ	2	same
+2004	RK	124	C3	American-Chestnut	2	0	0	0		LAW	2	same
+2004	RK	124	C3	American-Chestnut	2	0	0	0		ABJ	2	same
+2004	RK	124	C3	Red-Maple	1	0	0	0		LAW	2	same
+2004	RK	124	C3	Red-Maple	1	0	0	0		ABJ	2	same
+2004	RK	124	C3	Red-Maple	2	0	0	0		LAW	2	same
+2004	RK	124	C3	Red-Maple	2	0	0	0		ABJ	2	same
+2004	RK	124	C3	Red-Oak	1	0	0	0		LAW	2	same
+2004	RK	124	C3	Red-Oak	1	0	0	0		ABJ	2	same
+2004	RK	124	C3	Red-Oak	2	0	0	0		LAW	2	same
+2004	RK	124	C3	Red-Oak	2	0	0	0		ABJ	2	same
+2004	RK	170	S7	American-Chestnut	1	0	0	0		KWS	2	same
+2004	RK	170	S7	American-Chestnut	1	0	0	0		JWH	2	same
+2004	RK	170	S7	American-Chestnut	2	0	0	0		KWS	2	same
+2004	RK	170	S7	American-Chestnut	2	0	0	0		JWH	2	same
+2005	BB	137	S11	Red-Oak	1	0	0	0		KWS	2	same
+2005	BB	137	S11	Red-Oak	1	0	0	0		ACM	2	same
+2005	BB	137	S11	Red-Oak	2	0	0	0		KWS	2	same
+2005	BB	137	S11	Red-Oak	2	0	0	0		ACM	2	same
+2005	BB	137	U11	Red-Maple	1	0	0	0		KWS	2	same
+2005	BB	137	U11	Red-Maple	1	0	0	0		ACM	2	same
+2005	BB	137	U11	Red-Oak	1	0	0	0		KWS	2	same
+2005	BB	137	U11	Red-Oak	1	0	0	0		ACM	2	same
+2005	BB	137	U11	Red-Oak	2	0	0	0		KWS	2	same
+2005	BB	137	U11	Red-Oak	2	0	0	0		ACM	2	same
+2005	RK	138	Q3	American-Chestnut	1	0	0	0		KWS	2	same
+2005	RK	138	Q3	American-Chestnut	1	0	0	0		KML	2	same
+2005	RK	138	Q3	American-Chestnut	2	0	0	0		KWS	2	same
+2005	RK	138	Q3	American-Chestnut	2	0	0	0		KML	2	same
+2005	RK	138	Q3	Red-Maple	1	1	4	0.155416945		KWS	2	diff
+2005	RK	138	Q3	Red-Maple	1	0	0	0		KML	2	diff
+2005	RK	138	Q3	Red-Maple	2	0	0	0		KWS	2	same
+2005	RK	138	Q3	Red-Maple	2	0	0	0		KML	2	same
+2005	RK	138	Q3	Red-Oak	1	0	0	0		KWS	2	same
+2005	RK	138	Q3	Red-Oak	1	0	0	0		KML	2	same
+2005	RK	138	Q3	Red-Oak	2	0	0	0		KWS	2	same
+2005	RK	138	Q3	Red-Oak	2	0	0	0		KML	2	same
+2005	RK	138	Q3	Striped-Maple	1	0	0	0		KWS	2	same
+2005	RK	138	Q3	Striped-Maple	1	0	0	0		KML	2	same
+2005	RK	138	Q3	Striped-Maple	2	0	0	0		KWS	2	same
+2005	RK	138	Q3	Striped-Maple	2	0	0	0		KML	2	same
+2006	BS	154	A9	Striped-Maple	1	0	0	0		MNW	2	diff
+2006	BS	154	A9	Striped-Maple	1	1	18	8.240990335		PFS	2	diff
+2006	BS	154	A9	Striped-Maple	2	0	0	0		MNW	2	same
+2006	BS	154	A9	Striped-Maple	2	0	0	0		PFS	2	same
+2006	BS	154	C9	Red-Maple	1	0	0	0		MNW	2	same
+2006	BS	154	C9	Red-Maple	1	0	0	0		PFS	2	same
+2006	BS	154	C9	Red-Maple	2	0	0	0		MNW	2	same
+2006	BS	154	C9	Red-Maple	2	0	0	0		PFS	2	same
+2006	BS	154	C9	Striped-Maple	1	0	0	0		MNW	2	same
+2006	BS	154	C9	Striped-Maple	1	0	0	0		PFS	2	same
+2006	BS	154	C9	Striped-Maple	2	0	0	0		MNW	2	diff
+2006	BS	154	C9	Striped-Maple	2	1	16	6.038606714		PFS	2	diff
+2007	BB	198	K11	Red-Maple	1	0	0	0		BMM	2	same
+2007	BB	198	K11	Red-Maple	1	0	0	0		MTR	2	same
+2007	RK	123	S3	American-Chestnut	1	0	0	0		MTR	2	same
+2007	RK	123	S3	American-Chestnut	1	0	0	0		KWS	2	same
+2007	RK	123	S3	Red-Maple	1	0	0	0		MTR	2	same
+2007	RK	123	S3	Red-Maple	1	0	0	0		KWS	2	same
+2007	RK	123	S3	Striped-Maple	1	0	0	0		MTR	2	same
+2007	RK	123	S3	Striped-Maple	1	0	0	0		KWS	2	same
+2007	RK	138	O3	American-Chestnut	1	0	0	0		KWS	2	same
+2007	RK	138	O3	American-Chestnut	1	0	0	0		JRT	2	same
+2009	BB	137	A1	Red-Maple	1	0	0	0		JHW	2	same
+2009	BB	137	A1	Red-Maple	1	0	0	0		PFS	2	same
+2009	BB	137	A1	Red-Oak	1	0	0	0		JHW	2	same
+2009	BB	137	A1	Red-Oak	1	0	0	0		PFS	2	same
+2009	BB	137	A9	American-Chestnut	1	1	10	1.746063329		BMM	2	diff
+2009	BB	137	A9	American-Chestnut	1	0	0	0		NAS	2	diff
+2009	BB	137	A9	American-Chestnut	2	0	0	0		BMM	2	diff
+2009	BB	137	A9	American-Chestnut	2	1	7	0.680955633		NAS	2	diff
+2009	BB	137	A9	Red-Maple	1	0	0	0		BMM	2	same
+2009	BB	137	A9	Red-Maple	1	0	0	0		NAS	2	same
+2009	BB	137	A9	Red-Maple	2	0	0	0		BMM	2	diff
+2009	BB	137	A9	Red-Maple	2	1	10	1.746063329		NAS	2	diff
+2009	BB	137	A9	Striped-Maple	1	0	0	0		BMM	2	same
+2009	BB	137	A9	Striped-Maple	1	0	0	0		NAS	2	same
+2009	BB	137	A9	Striped-Maple	2	0	0	0		BMM	2	same
+2009	BB	137	A9	Striped-Maple	2	0	0	0		NAS	2	same
+2009	BB	137	C1	American-Chestnut	1	0	0	0		JHW	2	same
+2009	BB	137	C1	American-Chestnut	1	0	0	0		PFS	2	same
+2009	BB	137	C1	Red-Maple	1	0	0	0		JHW	2	same
+2009	BB	137	C1	Red-Maple	1	0	0	0		PFS	2	same
+2009	BB	137	C1	Red-Oak	1	0	0	0		JHW	2	same
+2009	BB	137	C1	Red-Oak	1	0	0	0		PFS	2	same
+2009	BS	168	A1	Striped-Maple	1	0	0	0		JHW	2	same
+2009	BS	168	A1	Striped-Maple	1	0	0	0		NAS	2	same
+2009	BS	168	A1	Striped-Maple	2	0	0	0		JHW	2	diff
+2009	BS	168	A1	Striped-Maple	2	1	14	4.244612078		NAS	2	diff
+2014	BS	123	U25	Red-Oak	1	1	5	0.280117862	Tortricid/Pyraloid	"JLH, JMW, JMF, MHC"	2	diff
+2014	BS	123	U25	Red-Oak	1	0	 	0		"JLH, JMW, JMF, MHC, not enough leaves"	2	diff
+2015	BS	180	M11	Striped-Maple	2	0	 	0		"ADK, RWC, AMR, JDH"	2	same
+2015	BS	180	M11	Striped-Maple	2	0	 	0		"ADK, AMR, RWC, JDH"	2	same
+2018	BB	156	Q3	Striped-Maple	1	0	 	0		"AMC, WBL,2 stem"	2	same
+2018	BB	156	Q3	Striped-Maple	1	0	 	0		"AMC, WBL"	2	same
+2018	BS	129	Q21	Red-Oak	1	0	 	0		"ZSZ, AMC, small leaves"	2	same
+2018	BS	129	Q21	Red-Oak	1	0	 	0		"ZSZ, AMC, small leaves, multistem"	2	same
+2014	BB	184	U13	Red-Oak	2	1	15	5.092615825	Noctuid	"JMW,CRB, BML, confused woodgrain"	9	"JMW,CRB, BML"
+2014	BB	185	K3	Serviceberry	2	1	8	0.96876303	Sawfly	"JMW, RWC, PSR, on stem"	9	"JMW, RWC, PSR"
+2014	BB	196	C3	Yellow-Birch	2	1	13	3.490361756	Other	"JMF, JMW, fuzzy"	9	"JMF, JMW"
+2014	BB	198	O9	Striped-Maple	2	1	20	10.8837656	Sawfly	"JMF, JMW, “ugly-ass sawfly” -JMF"	9	"JMF, JMW"

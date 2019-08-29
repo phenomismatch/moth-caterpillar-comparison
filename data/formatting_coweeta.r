@@ -17,7 +17,7 @@ cats = read.table('data/Coweeta_cats.txt', header = T, sep = '\t', fill = TRUE, 
 catcomments = count(cats, Comments)
 #write.table(catcomments, 'z:/lab/databases/coweetacaterpillars/coweeta_comments.txt', sep = '\t', row.names = F)
 
-comments = read.table('z:/lab/databases/coweetacaterpillars/coweeta_comments.txt', sep = '\t', header = T, quote = '\"', fill = TRUE, stringsAsFactors = FALSE)
+comments = read.table('data/coweeta_comments.txt', sep = '\t', header = T, quote = '\"', fill = TRUE, stringsAsFactors = FALSE)
 
 # Go through comments and pull out pieces that need to go in the following fields:
 #   arthropodNotes, NumberOfLeaves, Group, Hairy, Rolled, Tented, BeetleLarva, Sawfly
@@ -82,7 +82,7 @@ multSurveyRecs = catplus %>%
 # second survey event of the same branch on the same yearday-year, 9 the appropriate surveyNote
 # is provided in the 'x' field.
 
-dups = read.table('z:/lab/databases/coweetacaterpillars/coweeta_dup_surveys.txt', 
+dups = read.table('data/coweeta_dup_surveys.txt', 
                   sep = '\t', header = T, quote = '\"', fill = TRUE, stringsAsFactors = FALSE)
 
 dups019 = filter(dups, n %in% c(0, 1, 9)) %>%
@@ -178,3 +178,4 @@ write.table(cowarths, "ArthropodSighting_Coweeta.txt", sep = '\t', row.names = F
 #TreeSpecies
 "8" (1081)
 "9" (554)
+

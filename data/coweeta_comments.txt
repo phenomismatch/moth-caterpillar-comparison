@@ -1,0 +1,1193 @@
+Comments	arthropodNotes	NumberOfLeaves	Group	Hairy	Rolled	Tented	BeetleLarva	Sawfly
+		NA		NA	NA	NA	NA	NA
+"  JLH, MHC, CMK, AJC"		NA		NA	NA	NA	NA	NA
+"  JLH, MHC, CMK, AJC, sad looking"	sad looking	NA		NA	NA	NA	NA	NA
+" AJC, CAH, LTC, SAW, CMK"		NA		NA	NA	NA	NA	NA
+" JLH, MHC, CMK, AJC"		NA		NA	NA	NA	NA	NA
+" JLH, MHC, SAW, RJC"		NA		NA	NA	NA	NA	NA
+" MHC, CMK, GSP"		NA		NA	NA	NA	NA	NA
+" MHC, JLH, AJC"		NA		NA	NA	NA	NA	NA
+" MHC, JLH, AJC, chubby"	chubby	NA		NA	NA	NA	NA	NA
+“Almost dead”	Almost dead	NA		NA	NA	NA	NA	NA
+2 stem 		NA		NA	NA	NA	NA	NA
+2 stem sample		NA		NA	NA	NA	NA	NA
+2 stems		NA		NA	NA	NA	NA	NA
+2 tiny snails		NA		NA	NA	NA	NA	NA
+2 trees for 50 leaf sample		NA		NA	NA	NA	NA	NA
+2 trees for 50 leaves		NA		NA	NA	NA	NA	NA
+"2 trees, JLH, CAH, LTC"		NA		NA	NA	NA	NA	NA
+"2 trees, JLH, MHC, SAW, RJC"		NA		NA	NA	NA	NA	NA
+25 leaf sample		25		NA	NA	NA	NA	NA
+36 leaves		36		NA	NA	NA	NA	NA
+38 leaf sample		38		NA	NA	NA	NA	NA
+40 leaves		40		NA	NA	NA	NA	NA
+"46 leaves, MHC, GSP, SAW, CMK"		46		NA	NA	NA	NA	NA
+"46 leaves, MHC, GSP, SAW, PKS"		46		NA	NA	NA	NA	NA
+ABC		NA		NA	NA	NA	NA	NA
+ABC/JLH		NA		NA	NA	NA	NA	NA
+ABC/MHC		NA		NA	NA	NA	NA	NA
+ABJ		NA		NA	NA	NA	NA	NA
+ACM		NA		NA	NA	NA	NA	NA
+ACP		NA		NA	NA	NA	NA	NA
+"ADK, AMR"		NA		NA	NA	NA	NA	NA
+"ADK, AMR, 2 stems"		NA		NA	NA	NA	NA	NA
+"ADK, AMR, 3 stems"		NA		NA	NA	NA	NA	NA
+"ADK, AMR, JDH"		NA		NA	NA	NA	NA	NA
+"ADK, AMR, RWC"		NA		NA	NA	NA	NA	NA
+"ADK, AMR, RWC, 2 stems"		NA		NA	NA	NA	NA	NA
+"ADK, AMR, RWC, 2stems"		NA		NA	NA	NA	NA	NA
+"ADK, AMR, RWC, 3 stems"		NA		NA	NA	NA	NA	NA
+"ADK, AMR, RWC, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"ADK, AMR, RWC, JDH"		NA		NA	NA	NA	NA	NA
+"ADK, AMR, RWC, JDH, 2 stems"		NA		NA	NA	NA	NA	NA
+"ADK, AMR, RWC, JDH, fat!"	fat!	NA		NA	NA	NA	NA	NA
+"ADK, AMR, RWC, multiple stems"		NA		NA	NA	NA	NA	NA
+"ADK, AMR, RWC, saturnid (oakworm)"	saturnid (oakworm)	NA		NA	NA	NA	NA	NA
+"ADK, JDH, AMR"		NA		NA	NA	NA	NA	NA
+"ADK, JDH, AMR, 2 stems"		NA		NA	NA	NA	NA	NA
+"ADK, JDH, AMR, RWC"		NA		NA	NA	NA	NA	NA
+"ADK, RWC, AMR"		NA		NA	NA	NA	NA	NA
+"ADK, RWC, AMR, 2 stems"		NA		NA	NA	NA	NA	NA
+"ADK, RWC, AMR, 3 stems"		NA		NA	NA	NA	NA	NA
+"ADK, RWC, AMR, JDH"		NA		NA	NA	NA	NA	NA
+AES		NA		NA	NA	NA	NA	NA
+AES/ABC		NA		NA	NA	NA	NA	NA
+AES/JLH		NA		NA	NA	NA	NA	NA
+"AJC LTC, CAH"		NA		NA	NA	NA	NA	NA
+"AJC LTC, CAH, JLH"		NA		NA	NA	NA	NA	NA
+"AJC, CAH, LTC, SAW, CMK"		NA		NA	NA	NA	NA	NA
+"AJC, CAH, LTC, SAW, CMK "		NA		NA	NA	NA	NA	NA
+"AJC, LTC"		NA		NA	NA	NA	NA	NA
+"AJC, SAW, MHC, JLH, GSP, CAH"		NA		NA	NA	NA	NA	NA
+AMC		NA		NA	NA	NA	NA	NA
+"AMC,  WBL"		NA		NA	NA	NA	NA	NA
+"AMC,  WBL,  2 stem"		NA		NA	NA	NA	NA	NA
+"AMC,  WBL, 2 stem"		NA		NA	NA	NA	NA	NA
+"AMC,  WBL, 3 stem"		NA		NA	NA	NA	NA	NA
+"AMC,  WBL, multistem"		NA		NA	NA	NA	NA	NA
+"AMC,  WBL, wrapped up in ball, fuzzy, yellow but see though cocoon "	" wrapped up in ball, fuzzy, yellow but see though cocoon "	NA		NA	NA	NA	NA	NA
+"AMC, BMW"		NA		NA	NA	NA	NA	NA
+"AMC, BMW, 2 stem"		NA		NA	NA	NA	NA	NA
+"AMC, BMW, 3-stem"		NA		NA	NA	NA	NA	NA
+"AMC, BMW, 3 insect legs, 7 pro legs; round head and eyes"	"3 insect legs, 7 pro legs; round head and eyes"	NA	bee	NA	NA	NA	NA	1
+"AMC, BMW, 3 stem"		NA		NA	NA	NA	NA	NA
+"AMC, BMW, fat and thick"	fat and thick	NA		NA	NA	NA	NA	NA
+"AMC, BMW, fuzzy, 3 insect legs, 4 pro legs, multistem"	"fuzzy, 3 insect legs, 4 pro legs"	NA		1	NA	NA	NA	NA
+"AMC, BMW, in webbing"	in webbing	NA		NA	NA	1	NA	NA
+"AMC, BMW, multistem"		NA		NA	NA	NA	NA	NA
+"AMC, multistem"		NA		NA	NA	NA	NA	NA
+"AMC, WBL"		NA		NA	NA	NA	NA	NA
+"AMC, WBL multiple stems"		NA		NA	NA	NA	NA	NA
+"AMC, WBL,"		NA		NA	NA	NA	NA	NA
+"AMC, WBL,  small leaves, multistem"		NA		NA	NA	NA	NA	NA
+"AMC, WBL, 15 leaves"		15		NA	NA	NA	NA	NA
+"AMC, WBL, 2 stem"		NA		NA	NA	NA	NA	NA
+"AMC, WBL, 2 stems"		NA		NA	NA	NA	NA	NA
+"AMC, WBL, 20 leaves"		20		NA	NA	NA	NA	NA
+"AMC, WBL, 30 leaves, 2 stems"		30		NA	NA	NA	NA	NA
+"AMC, WBL, BMW"		NA		NA	NA	NA	NA	NA
+"AMC, WBL, multiple stems"		NA		NA	NA	NA	NA	NA
+"AMC, WBL, multistem"		NA		NA	NA	NA	NA	NA
+"AMC, WBL, multistem, 44 leaves"		44		NA	NA	NA	NA	NA
+"AMC, WBL, multistem, tiny leaves"		NA		NA	NA	NA	NA	NA
+"AMC, WBL, small leaves"		NA		NA	NA	NA	NA	NA
+"AMC, WBL, small leaves, multistem"		NA		NA	NA	NA	NA	NA
+"AMC, WBL,2 stem"		NA		NA	NA	NA	NA	NA
+"AMC, WBL.multiple stems"		NA		NA	NA	NA	NA	NA
+"AMC, ZSZ"		NA		NA	NA	NA	NA	NA
+"AMC, ZSZ, 2 stem"		NA		NA	NA	NA	NA	NA
+"AMC, ZSZ, 3 stem"		NA		NA	NA	NA	NA	NA
+"AMC, ZSZ, 7 rows back pro legs, 3 pro legs"	"7 rows back pro legs, 3 pro legs"	NA		NA	NA	NA	NA	NA
+"AMC, ZSZ, BMW"		NA		NA	NA	NA	NA	NA
+"AMC, ZSZ, BMW, 2 stem"		NA		NA	NA	NA	NA	NA
+"AMC, ZSZ, BMW, 2 stem, fuzzy lep"	fuzzy lep	NA		1	NA	NA	NA	NA
+"AMC, ZSZ, BMW, 3 stem"		NA		NA	NA	NA	NA	NA
+"AMC, ZSZ, BMW, multistem"		NA		NA	NA	NA	NA	NA
+"AMC, ZSZ, fat"	fat	NA		NA	NA	NA	NA	NA
+"AMC, ZSZ, multistem"		NA		NA	NA	NA	NA	NA
+"AMC, ZSZ, WBL"		NA		NA	NA	NA	NA	NA
+"AMC, ZSZ, WBL, 2 stem"		NA		NA	NA	NA	NA	NA
+"AMC, ZSZ, WBL, 2 stem, small leaves"		NA		NA	NA	NA	NA	NA
+"AMC, ZSZ, WBL, 2 stems"		NA		NA	NA	NA	NA	NA
+"AMC, ZSZ, WBL, 41 leaves"		41		NA	NA	NA	NA	NA
+"AMC, ZSZ, WBL, multistem"		NA		NA	NA	NA	NA	NA
+"AMC, ZSZ, WBL, multistem, small leaves"		NA		NA	NA	NA	NA	NA
+"AMC, ZSZ, WBL, multistem, small leavse"		NA		NA	NA	NA	NA	NA
+"AMC, ZSZ, WBL, small leaves"		NA		NA	NA	NA	NA	NA
+"AMC, ZSZ, WBL, small leaves, multistem"		NA		NA	NA	NA	NA	NA
+"AMW, JMW, MHC, RWC"		NA		NA	NA	NA	NA	NA
+"AMW, JMW, MHC, RWC, multiple stems"		NA		NA	NA	NA	NA	NA
+and fat!	and fat!	NA		NA	NA	NA	NA	NA
+"B&W, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+BAC		NA		NA	NA	NA	NA	NA
+BAS		NA		NA	NA	NA	NA	NA
+black	black	NA		NA	NA	NA	NA	NA
+"black flattened head, green w/ white fine hairs"	"black flattened head, green w/ white fine hairs"	NA		1	NA	NA	NA	NA
+"black fuzzy tussock, AJC, LTC"	black fuzzy tussock	NA		1	NA	NA	NA	NA
+"black head capsule, lots of legs"	"black head capsule, lots of legs"	NA		NA	NA	NA	NA	NA
+BMM		NA		NA	NA	NA	NA	NA
+BMM/JLH/AES		NA		NA	NA	NA	NA	NA
+BMW		NA		NA	NA	NA	NA	NA
+"BMW, 2 stem"		NA		NA	NA	NA	NA	NA
+"BMW, 3 STEM"		NA		NA	NA	NA	NA	NA
+"BMW, AMC, multistem"		NA		NA	NA	NA	NA	NA
+"BMW, AMC, WBL"		NA		NA	NA	NA	NA	NA
+"BMW, AMC, WBL,"		NA		NA	NA	NA	NA	NA
+"BMW, AMC, WBL, "		NA		NA	NA	NA	NA	NA
+"BMW, AMC, WBL, 2 stems"		NA		NA	NA	NA	NA	NA
+"BMW, AMC, WBL, multiple stems"		NA		NA	NA	NA	NA	NA
+"BMW, multistem"		NA		NA	NA	NA	NA	NA
+"BMW, WBL"		NA		NA	NA	NA	NA	NA
+"BMW, WBL, 2 stem"		NA		NA	NA	NA	NA	NA
+"BMW, WBL, 2 stems"		NA		NA	NA	NA	NA	NA
+"BMW, WBL, multistem"		NA		NA	NA	NA	NA	NA
+"BMW, WBL, multistem, small leaves"		NA		NA	NA	NA	NA	NA
+"BMW, WBL, small leaves"		NA		NA	NA	NA	NA	NA
+"BMW, WBL, small leaves, multistem"		NA		NA	NA	NA	NA	NA
+brown	brown	NA		NA	NA	NA	NA	NA
+"brown,flat"	"brown, flat"	NA		NA	NA	NA	NA	NA
+brown/translucent	brown/translucent	NA		NA	NA	NA	NA	NA
+"bumpy on sides, little brown Xs on back, 3 sets of pro-legs"	"bumpy on sides, little brown Xs on back, 3 sets of pro-legs"	NA		NA	NA	NA	NA	NA
+"CAH, AJC, JLH, LTC"		NA		NA	NA	NA	NA	NA
+"CAH, AJC, JLH, LTC, almost dead"	almost dead	NA		NA	NA	NA	NA	NA
+"CAH, AJC, JLH, LTC, sphingidae"	sphingidae	NA		NA	NA	NA	NA	NA
+"CAH, JLH, LTC, SAW, MHC, GSP, RJC"		NA		NA	NA	NA	NA	NA
+"CAH, LTC, AJC"		NA		NA	NA	NA	NA	NA
+"CAH, LTC, AJC, MHC"		NA		NA	NA	NA	NA	NA
+"CAH, LTC, AJC, unhealthy moving slow"	unhealthy moving slow	NA		NA	NA	NA	NA	NA
+"CAH, LTC, JLH"		NA		NA	NA	NA	NA	NA
+"CAH, MHC, AJC, MGR"		NA		NA	NA	NA	NA	NA
+"CMK, GSP"		NA		NA	NA	NA	NA	NA
+"CMK, GSP, SAW"		NA		NA	NA	NA	NA	NA
+"CMK, GSP, SAW, green guy"	green guy	NA		NA	NA	NA	NA	NA
+"CMK, MHC, GSP"		NA		NA	NA	NA	NA	NA
+"CMK, MHC, SAW, GSP"		NA		NA	NA	NA	NA	NA
+"CMK, SAW"		NA		NA	NA	NA	NA	NA
+"CMK, SAW, GSP"		NA		NA	NA	NA	NA	NA
+"CMK, SAW, GSP, 2 stems"		NA		NA	NA	NA	NA	NA
+"CMK, SAW, GSP, AM, SH"		NA		NA	NA	NA	NA	NA
+"CMK, SAW, GSP, AM, SH, 3 stems counted as one"		NA		NA	NA	NA	NA	NA
+"CMK, SAW, GSP, AM, SH, only 45 leaves"		45		NA	NA	NA	NA	NA
+"CMK, SAW, GSP, spiny faced dude"	spiny faced dude	NA		1	NA	NA	NA	NA
+"CMK, SAW, JLH"		NA		NA	NA	NA	NA	NA
+"CMK, SAW, JLH, fire*"		NA		NA	NA	NA	NA	NA
+"CMK, SAW, JLH, kind of fat in front, looks gooey, black head with legs clear on sides, green stripe on top"	"kind of fat in front, looks gooey, black head with legs clear "	NA		NA	NA	NA	NA	NA
+"CMK, SAW, JLH, multiple stems"		NA		NA	NA	NA	NA	NA
+copper underwing	copper underwing	NA		NA	NA	NA	NA	NA
+"CRB, EAB, JMF"		NA		NA	NA	NA	NA	NA
+"CRB, EAB, JMF, JLH"		NA		NA	NA	NA	NA	NA
+"CRB, EAB, JMF, JLH, linden looper!"	linden looper!	NA		NA	NA	NA	NA	NA
+"CRB, EAB, JMF, JLH, two stems for 50"		NA		NA	NA	NA	NA	NA
+"CRB, EAB, JMF, RWC, JMW, BML"		NA		NA	NA	NA	NA	NA
+"CRB, EAB, RWC, JLH"		NA		NA	NA	NA	NA	NA
+"CRB, EAB, RWC, JLH, 2 stems"		NA		NA	NA	NA	NA	NA
+"CRB, EAB, RWC, JLH, two stems"		NA		NA	NA	NA	NA	NA
+"CRB, JMF, MHC"		NA		NA	NA	NA	NA	NA
+"CRB, JMF, MHC, 2 stems for fifty leaves"		NA		NA	NA	NA	NA	NA
+"CRB, MHC, JMF, EAB"		NA		NA	NA	NA	NA	NA
+"CRB, MHC, JMF, EAB, 2 STEMS"		NA		NA	NA	NA	NA	NA
+CRO		NA		NA	NA	NA	NA	NA
+DHD		NA		NA	NA	NA	NA	NA
+DHK		NA		NA	NA	NA	NA	NA
+disgusting	disgusting	NA		NA	NA	NA	NA	NA
+Down to 20 leaves		20		NA	NA	NA	NA	NA
+"dropped from leaf - Andy again!, CAH, LTC, AJC, MHC"	dropped from leaf - Andy again!	NA		NA	NA	NA	NA	NA
+"dropped from leaf, CAH, LTC, AJC, MHC"	dropped from leaf	NA		NA	NA	NA	NA	NA
+"EAB, BAB, JDH"		NA		NA	NA	NA	NA	NA
+"EAB, BAB, JDH, 2 stems"		NA		NA	NA	NA	NA	NA
+"EAB, BAB, JDH, fly larva"	fly larva	NA	fly	NA	NA	NA	NA	NA
+"EAB, BAB, JDH, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"EAB, CRB"		NA		NA	NA	NA	NA	NA
+"EAB, CRB, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"EAB, CRB, JLH"		NA		NA	NA	NA	NA	NA
+fuzzy	fuzzy	NA		1	NA	NA	NA	NA
+fuzzy and green	fuzzy and green	NA		1	NA	NA	NA	NA
+"fuzzy, JLH, CAH, LTC, JMC"	fuzzy	NA		1	NA	NA	NA	NA
+"fuzzy, white"	"fuzzy, white"	NA		1	NA	NA	NA	NA
+fuzzy. with red stripe	fuzzy with red stripe	NA		1	NA	NA	NA	NA
+GJC		NA		NA	NA	NA	NA	NA
+grayish brown	grayish brown	NA		NA	NA	NA	NA	NA
+green	green	NA		NA	NA	NA	NA	NA
+green and white	green and white	NA		NA	NA	NA	NA	NA
+green and white striped	green and white striped	NA		NA	NA	NA	NA	NA
+green and white striped down side	green and white striped down side	NA		NA	NA	NA	NA	NA
+green and yellow	green and yellow	NA		NA	NA	NA	NA	NA
+green w/ white stripe	green w/ white stripe	NA		NA	NA	NA	NA	NA
+green with black hairs	green with black hairs	NA		1	NA	NA	NA	NA
+green with black head	green with black head	NA		NA	NA	NA	NA	NA
+green with white stripes	green with white stripes	NA		NA	NA	NA	NA	NA
+"GSP, CMK, MHC, SAW"		NA		NA	NA	NA	NA	NA
+"GSP, SAW, JLH, CMK"		NA		NA	NA	NA	NA	NA
+"GSP, SAW, JLH, CMK, it pooped : / "		NA		NA	NA	NA	NA	NA
+hairy	hairy	NA		1	NA	NA	NA	NA
+hesperiidae	hesperiidae	NA		NA	NA	NA	NA	NA
+hornworm? black and white sphingidae	hornworm? black and white sphingidae	NA		NA	NA	NA	NA	NA
+"hymenoptera, MHC, JMC, CAH, LTC"	hymenoptera	NA	bee	NA	NA	NA	NA	1
+JAC		NA		NA	NA	NA	NA	NA
+JDH		NA		NA	NA	NA	NA	NA
+"JDH, ADK, AMR"		NA		NA	NA	NA	NA	NA
+"JDH, ADK, AMR, 2 stems"		NA		NA	NA	NA	NA	NA
+"JDH, ADK, AMR, 3 stems"		NA		NA	NA	NA	NA	NA
+"JDH, ADK, AMR, multiple stems"		NA		NA	NA	NA	NA	NA
+"JDH, ADK, AMR, RWC"		NA		NA	NA	NA	NA	NA
+"JDH, ADK, AMR, RWC, 2 stems"		NA		NA	NA	NA	NA	NA
+"JDH, ADK, AMR, RWC, 3 stems"		NA		NA	NA	NA	NA	NA
+"JDH, ADK, RWC"		NA		NA	NA	NA	NA	NA
+"JDH, ADK, RWC, 2 stems"		NA		NA	NA	NA	NA	NA
+"JDH, ADK, RWC, AMR"		NA		NA	NA	NA	NA	NA
+"JDH, ADK, RWC, AMR, 2 stems"		NA		NA	NA	NA	NA	NA
+"JDH, ADK, RWC, AMR, mult. stems"		NA		NA	NA	NA	NA	NA
+"JDH, ADK, RWC, AMR, slug-like"	slug-like	NA		NA	NA	NA	NA	NA
+"JDH, AMR, ADK"		NA		NA	NA	NA	NA	NA
+"JDH, AMR, ADK, 2 stems"		NA		NA	NA	NA	NA	NA
+"JDH, AMR, ADK, hairy"	hairy	NA		1	NA	NA	NA	NA
+"JDH, AMR, ADK, leaf-stitcher"	leaf-stitcher	NA		NA	1	NA	NA	NA
+"JDH, AMR, ADK, little leaves"		NA		NA	NA	NA	NA	NA
+"JDH, AMR, ADK, multiple stems"		NA		NA	NA	NA	NA	NA
+"JDH, AMR, ADK, RWC"		NA		NA	NA	NA	NA	NA
+"JDH, AMR, ADK, RWC, JMS"		NA		NA	NA	NA	NA	NA
+"JDH, AMR, ADK, RWC, JMS, 2 stems"		NA		NA	NA	NA	NA	NA
+"JDH, AMR, ADK, RWC, JMS, multiple stems"		NA		NA	NA	NA	NA	NA
+"JDH, AMR, ADK, saturnid (oakworm)"	saturnid (oakworm)	NA		NA	NA	NA	NA	NA
+"JDH, AMR, RWC"		NA		NA	NA	NA	NA	NA
+"JDH, AMR, RWC, 2 stems"		NA		NA	NA	NA	NA	NA
+"JDH, AMR, RWC, all on one leaf!"	all on one leaf!	NA		NA	NA	NA	NA	NA
+"JDH, AMR, RWC, multiple stems"		NA		NA	NA	NA	NA	NA
+"JDH, JLH, MHC"		NA		NA	NA	NA	NA	NA
+"JDH, JLH, MHC, 2 stems"		NA		NA	NA	NA	NA	NA
+"JDH, MHC, JLH"		NA		NA	NA	NA	NA	NA
+"JDH, NRH"		NA		NA	NA	NA	NA	NA
+"JDH, NRH, 2 stems"		NA		NA	NA	NA	NA	NA
+"JDH, RWC"		NA		NA	NA	NA	NA	NA
+"JDH, RWC two stems for 50"		NA		NA	NA	NA	NA	NA
+"JDH, RWC, JLH"		NA		NA	NA	NA	NA	NA
+"JDH, RWC, JLH, 2 stems"		NA		NA	NA	NA	NA	NA
+"JDH, RWC, JLH, MHC, NAW"		NA		NA	NA	NA	NA	NA
+"JDH, RWC, JLH, MHC, NAW 2 stems"		NA		NA	NA	NA	NA	NA
+"JDH, RWC, RJC"		NA		NA	NA	NA	NA	NA
+"JDH, RWC. RJC"		NA		NA	NA	NA	NA	NA
+JHW		NA		NA	NA	NA	NA	NA
+JLH		NA		NA	NA	NA	NA	NA
+"JLH, ADK"		NA		NA	NA	NA	NA	NA
+"JLH, ADK, 2 stems"		NA		NA	NA	NA	NA	NA
+"JLH, ADK, AMR"		NA		NA	NA	NA	NA	NA
+"JLH, ADK, AMR, 2 stems"		NA		NA	NA	NA	NA	NA
+"JLH, AJL, JMW"		NA		NA	NA	NA	NA	NA
+"JLH, AJL, JMW, two stems for 50"		NA		NA	NA	NA	NA	NA
+"JLH, AMR, ADK"		NA		NA	NA	NA	NA	NA
+"JLH, AMR, ADK, fat!"	fat!	NA		NA	NA	NA	NA	NA
+"JLH, AMR, ADK, RWC"		NA		NA	NA	NA	NA	NA
+"JLH, AMR, ADK, RWC, 2 stems"		NA		NA	NA	NA	NA	NA
+"JLH, AMR, ADK, RWC, a linden looper!"	a linden looper!	NA		NA	NA	NA	NA	NA
+"JLH, AMR, ADK, RWC, caterpillar dropped (probably a noctuid)"	caterpillar dropped (probably a noctuid)	NA		NA	NA	NA	NA	NA
+"JLH, AMR, MHC, JDH"		NA		NA	NA	NA	NA	NA
+"JLH, AMR, MHC, JDH, fat!"	fat!	NA		NA	NA	NA	NA	NA
+"JLH, AMR, MHC, JDH, parasitized"	parasitized	NA		NA	NA	NA	NA	NA
+"JLH, BML, CRB"		NA		NA	NA	NA	NA	NA
+"JLH, BML, CRB, can’t find second yellow birch"		NA		NA	NA	NA	NA	NA
+"JLH, BML, CRB, dotted with orange head (confused woodgrain?)"	dotted with orange head (confused woodgrain?)	NA		NA	NA	NA	NA	NA
+"JLH, BML, CRB, dotted with orange head again! (confused woodgrain)"	dotted with orange head again! (confused woodgrain)	NA		NA	NA	NA	NA	NA
+"JLH, BML, CRB, fly larva"	fly larva	NA	fly	NA	NA	NA	NA	NA
+"JLH, BML, CRB, fly larva, two stems for fifty leaves"	fly larva	NA	fly	NA	NA	NA	NA	NA
+"JLH, BML, RWC"		NA		NA	NA	NA	NA	NA
+"JLH, BML, RWC, counted little scraggly leaves on base of tree, where is the other service?"		NA		NA	NA	NA	NA	NA
+"JLH, BML, RWC, EAB, MHC, JMW"		NA		NA	NA	NA	NA	NA
+"JLH, BML, RWC, EAB, MHC, JMW, 2 stems for 50 leaves"		NA		NA	NA	NA	NA	NA
+"JLH, BML, RWC, JDH, DS"		NA		NA	NA	NA	NA	NA
+"JLH, BML, RWC, JDH, DS, 2 stems for fifty leaves"		NA		NA	NA	NA	NA	NA
+"JLH, BML, RWC, JDH, DS, fly larva"	fly larva	NA	fly	NA	NA	NA	NA	NA
+"JLH, BML, RWC, JDH, DS, saturnid - fat with spikes and patterned purpley-green"	saturnid - fat with spikes and patterned purpley-green	NA		1	NA	NA	NA	NA
+"JLH, CAH"		NA		NA	NA	NA	NA	NA
+"JLH, CAH, AJC"		NA		NA	NA	NA	NA	NA
+"JLH, CAH, AJC, LTC"		NA		NA	NA	NA	NA	NA
+"JLH, CAH, AJC, LTC, andy squished it!"	andy squished it!	NA		NA	NA	NA	NA	NA
+"JLH, CAH, AJC, LTC, saturnid"	saturnid	NA		NA	NA	NA	NA	NA
+"JLH, CAH, AJC, LTC, tunnel maker"	tunnel maker	NA		NA	NA	NA	NA	NA
+"JLH, CAH, JMC, LTC"		NA		NA	NA	NA	NA	NA
+"JLH, CAH, LTC"		NA		NA	NA	NA	NA	NA
+"JLH, CAH, LTC, AJC"		NA		NA	NA	NA	NA	NA
+"JLH, CAH, LTC, JMC"		NA		NA	NA	NA	NA	NA
+"JLH, CK, MHC"		NA		NA	NA	NA	NA	NA
+"JLH, CMK, SAW, Nissa"		NA		NA	NA	NA	NA	NA
+"JLH, CMK, SAW, Nissa, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"JLH, CMK, SAW, Nissa, no length recorded, estimated"	"no length recorded, estimated"	NA		NA	NA	NA	NA	NA
+"JLH, CMK, SAW, Nissa, pathetic leaves"		NA		NA	NA	NA	NA	NA
+"JLH, CRB"		NA		NA	NA	NA	NA	NA
+"JLH, CRB, confused woodgrain"	confused woodgrain	NA		NA	NA	NA	NA	NA
+"JLH, CRB, EAB"		NA		NA	NA	NA	NA	NA
+"JLH, CRB, EAB, 2 STEMS"		NA		NA	NA	NA	NA	NA
+"JLH, CRB, EAB, 3 STEMS"		NA		NA	NA	NA	NA	NA
+"JLH, CRB, EAB, FLY LARVA"	fly larva	NA	fly	NA	NA	NA	NA	NA
+"JLH, CRB, MHC, EAB"		NA		NA	NA	NA	NA	NA
+"JLH, CRB, MHC, EAB, 2 stems"		NA		NA	NA	NA	NA	NA
+"JLH, CRB, speckled green fruitworm"	speckled green fruitworm	NA		NA	NA	NA	NA	NA
+"JLH, DS, BML, RWC, JDH"		NA		NA	NA	NA	NA	NA
+"JLH, EAB"		NA		NA	NA	NA	NA	NA
+"JLH, EAB, BML, JMW, JMF"		NA		NA	NA	NA	NA	NA
+"JLH, EAB, can’t find red maple 2"		NA		NA	NA	NA	NA	NA
+"JLH, EAB, CRB"		NA		NA	NA	NA	NA	NA
+"JLH, EAB, CRB "		NA		NA	NA	NA	NA	NA
+"JLH, EAB, sphingidae"	sphingidae	NA		NA	NA	NA	NA	NA
+"JLH, EAB, two trees for 50 leaves"		NA		NA	NA	NA	NA	NA
+"JLH, GSP, CAH, RJC"		NA		NA	NA	NA	NA	NA
+"JLH, GSP, CAH, RJC, two trees"		NA		NA	NA	NA	NA	NA
+"JLH, GSP, CMK"		NA		NA	NA	NA	NA	NA
+"JLH, GSP, SAW, CMK"		NA		NA	NA	NA	NA	NA
+"JLH, GSP, SAW, PKS, CMK"		NA		NA	NA	NA	NA	NA
+"JLH, JDH, ADK, AMR"		NA		NA	NA	NA	NA	NA
+"JLH, JDH, ADK, AMR, 2 stems"		NA		NA	NA	NA	NA	NA
+"JLH, JDH, ADK, AMR, multiple stems"		NA		NA	NA	NA	NA	NA
+"JLH, JDH, ADK, AMR, RED SPOTS!!!!"	red spots!!!!	NA		NA	NA	NA	NA	NA
+"JLH, JDH, RJC, RWC, MHC"		NA		NA	NA	NA	NA	NA
+"JLH, JMF"		NA		NA	NA	NA	NA	NA
+"JLH, JMF (2 stems for 50 leaves)"		NA		NA	NA	NA	NA	NA
+"JLH, JMF, EAB, CRB"		NA		NA	NA	NA	NA	NA
+"JLH, JMF, EAB, CRB,"		NA		NA	NA	NA	NA	NA
+"JLH, JMF, EAB, CRB, "		NA		NA	NA	NA	NA	NA
+"JLH, JMF, EAB, CRB, 2 trees for 50"		NA		NA	NA	NA	NA	NA
+"JLH, JMF, JMW"		NA		NA	NA	NA	NA	NA
+"JLH, JMF, JMW, MHC"		NA		NA	NA	NA	NA	NA
+"JLH, JMF, JMW, MHC two trees for 50"		NA		NA	NA	NA	NA	NA
+"JLH, JMF, JMW, MHC, bristly"	bristly	NA		1	NA	NA	NA	NA
+"JLH, JMF, JMW, MHC, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"JLH, JMF, JMW, RWC"		NA		NA	NA	NA	NA	NA
+"JLH, JMF, JMW, RWC, MHC"		NA		NA	NA	NA	NA	NA
+"JLH, JMF, JMW, RWC, two stems for 50"		NA		NA	NA	NA	NA	NA
+"JLH, JMF, JMW, RWC, two trees for 50"		NA		NA	NA	NA	NA	NA
+"JLH, JMF, JMW, three trees for 50"		NA		NA	NA	NA	NA	NA
+"JLH, JMF, JMW, two trees for 50"		NA		NA	NA	NA	NA	NA
+"JLH, JMF, MHC"		NA		NA	NA	NA	NA	NA
+"JLH, JMF, MHC  "		NA		NA	NA	NA	NA	NA
+"JLH, JMF, MHC (2 trees for 50)"		NA		NA	NA	NA	NA	NA
+"JLH, JMF, two trees for 50"		NA		NA	NA	NA	NA	NA
+"JLH, JMW"		NA		NA	NA	NA	NA	NA
+"JLH, JMW "		NA		NA	NA	NA	NA	NA
+"JLH, JMW 2 stems"		NA		NA	NA	NA	NA	NA
+"JLH, JMW fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"JLH, JMW mult. stems"		NA		NA	NA	NA	NA	NA
+"JLH, JMW,  MHC"		NA		NA	NA	NA	NA	NA
+"JLH, JMW,  MHC, two trees for 50"		NA		NA	NA	NA	NA	NA
+"JLH, JMW, 2 stems"		NA		NA	NA	NA	NA	NA
+"JLH, JMW, 2 STEMS"		NA		NA	NA	NA	NA	NA
+"JLH, JMW, 2 stems for 50 leaves"		NA		NA	NA	NA	NA	NA
+"JLH, JMW, 3 stems"		NA		NA	NA	NA	NA	NA
+"JLH, JMW, back end is slightly crushed"	back end is slightly crushed	NA		NA	NA	NA	NA	NA
+"JLH, JMW, BML"		NA		NA	NA	NA	NA	NA
+"JLH, JMW, BML, RWC, JDH"		NA		NA	NA	NA	NA	NA
+"JLH, JMW, BML, RWC, JDH, 2 stems"		NA		NA	NA	NA	NA	NA
+"JLH, JMW, BML, RWC, JDH, SKINNY (THE LEP)"	skinny	NA		NA	NA	NA	NA	NA
+"JLH, JMW, confused woodgrain"	confused woodgrain	NA		NA	NA	NA	NA	NA
+"JLH, JMW, CONFUSED WOODGRAIN"	confused woodgrain	NA		NA	NA	NA	NA	NA
+"JLH, JMW, fat, confused woodgrain"	"fat, confused woodgrain"	NA		NA	NA	NA	NA	NA
+"JLH, JMW, fine bristles"	fine bristles	NA		1	NA	NA	NA	NA
+"JLH, JMW, FINE BRISTLY"	fine bristly	NA		1	NA	NA	NA	NA
+"JLH, JMW, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"JLH, JMW, fuzzy, 2 stems"	fuzzy	NA		1	NA	NA	NA	NA
+"JLH, JMW, JMF"		NA		NA	NA	NA	NA	NA
+"JLH, JMW, JMF, 1 pupating tortricoid"	1 pupating tortricoid	NA		NA	NA	NA	NA	NA
+"JLH, JMW, JMF, bristly"	bristly	NA		1	NA	NA	NA	NA
+"JLH, JMW, JMF, confused woodgrain"	confused woodgrain	NA		NA	NA	NA	NA	NA
+"JLH, JMW, JMF, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"JLH, JMW, JMF, legit fuzzy"	legit fuzzy	NA		1	NA	NA	NA	NA
+"JLH, JMW, JMF, MHC"		NA		NA	NA	NA	NA	NA
+"JLH, JMW, JMF, MHC, microscopic leaves"		NA		NA	NA	NA	NA	NA
+"JLH, JMW, JMF, MHC, not enough leaves"		NA		NA	NA	NA	NA	NA
+"JLH, JMW, JMF, MHC, small leaves, many aphids"		NA		NA	NA	NA	NA	NA
+"JLH, JMW, MHC"		NA		NA	NA	NA	NA	NA
+"JLH, JMW, no legs, beetle larva?"	"no legs, beetle larva?"	NA		NA	NA	NA	1	NA
+"JLH, JMW, no legs, butt spikes, beetle larva?"	"no legs, butt spikes, beetle larva?"	NA		NA	NA	NA	1	NA
+"JLH, JMW, RWC"		NA		NA	NA	NA	NA	NA
+"JLH, JMW, RWC (2 stems for 50 leaves)"		NA		NA	NA	NA	NA	NA
+"JLH, JMW, RWC, BML, EAB, CRB"		NA		NA	NA	NA	NA	NA
+"JLH, JMW, RWC, HA"		NA		NA	NA	NA	NA	NA
+"JLH, JMW, RWC, slug-like"	slug-like	NA		NA	NA	NA	NA	NA
+"JLH, JMW, two stems for 50"		NA		NA	NA	NA	NA	NA
+"JLH, JMW. 2 stems for 50 leaves"		NA		NA	NA	NA	NA	NA
+"JLH, KDC"		NA		NA	NA	NA	NA	NA
+"JLH, KDC, (AMW)"		NA		NA	NA	NA	NA	NA
+"JLH, KDC, (AMW), 2 stems"		NA		NA	NA	NA	NA	NA
+"JLH, KDC, (AMW), fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"JLH, KDC, (AMW), light green underside w/ dark green/gray upperside. 4 prolegs. Head-reddish/beige w/2 large false eyes"	", light green underside w/ dark green/gray upperside. 4 prolegs. Head-reddish/beige w/2 large false eyes"	NA		NA	NA	NA	NA	NA
+"JLH, KDC, JMF"		NA		NA	NA	NA	NA	NA
+"JLH, KDC, JMF, three shoots"		NA		NA	NA	NA	NA	NA
+"JLH, KDC, JMF, two stems"		NA		NA	NA	NA	NA	NA
+"JLH, KDC, MHC"		NA		NA	NA	NA	NA	NA
+"JLH, KDC, slug-like"	slug-like	NA		NA	NA	NA	NA	NA
+"JLH, LTC, AJC"		NA		NA	NA	NA	NA	NA
+"JLH, LTC, AJC, CAH"		NA		NA	NA	NA	NA	NA
+"JLH, LTC, CAH"		NA		NA	NA	NA	NA	NA
+"JLH, MHC"		NA		NA	NA	NA	NA	NA
+"JLH, MHC, "		NA		NA	NA	NA	NA	NA
+"JLH, MHC, AMR"		NA		NA	NA	NA	NA	NA
+"JLH, MHC, AMR, 2 stems"		NA		NA	NA	NA	NA	NA
+"JLH, MHC, AMR, skinny"	skinny	NA		NA	NA	NA	NA	NA
+"JLH, MHC, CRB, JMF, RWC"		NA		NA	NA	NA	NA	NA
+"JLH, MHC, JMF"		NA		NA	NA	NA	NA	NA
+"JLH, MHC, JMF (2 stems for 50 leaves)"		NA		NA	NA	NA	NA	NA
+"JLH, MHC, JMF (tussock moth)"	tussock moth	NA		1	NA	NA	NA	NA
+"JLH, MHC, JMW, RWC, KDC"		NA		NA	NA	NA	NA	NA
+"JLH, MHC, not enough leaves"		NA		NA	NA	NA	NA	NA
+"JLH, MHC, SAW, RJC"		NA		NA	NA	NA	NA	NA
+"JLH, MHC, two stems for 50"		NA		NA	NA	NA	NA	NA
+"JLH, MJC, RJC, SAW"		NA		NA	NA	NA	NA	NA
+"JLH, PKS, CAH, JMC, LTC"		NA		NA	NA	NA	NA	NA
+"JLH, RWC"		NA		NA	NA	NA	NA	NA
+"JLH, RWC, AMR, MCC, SAM, VCW, NAW"		NA		NA	NA	NA	NA	NA
+"JLH, RWC, BLM, JMW"		NA		NA	NA	NA	NA	NA
+"JLH, RWC, BLM, JMW, partially rolled"	partially rolled	NA		NA	1	NA	NA	NA
+"JLH, RWC, BLM, JMW, two trees for 50"		NA		NA	NA	NA	NA	NA
+"JLH, RWC, BML, JMW"		NA		NA	NA	NA	NA	NA
+"JLH, RWC, JDH"		NA		NA	NA	NA	NA	NA
+"JLH, RWC, JDH, 2 stems"		NA		NA	NA	NA	NA	NA
+"JLH, RWC, JDH, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"JLH, RWC, JMW"		NA		NA	NA	NA	NA	NA
+"JLH, RWC, JMW, BML"		NA		NA	NA	NA	NA	NA
+"JLH, RWC, JMW, BML, 2 STEM"		NA		NA	NA	NA	NA	NA
+"JLH, RWC, JMW, BML, 2 STEMS"		NA		NA	NA	NA	NA	NA
+"JLH, RWC, JMW, BML, 2 stems for 50"		NA		NA	NA	NA	NA	NA
+"JLH, RWC, JMW, BML, 3 STEMS"		NA		NA	NA	NA	NA	NA
+"JLH, RWC, JMW, BML, 3 stems for 50"		NA		NA	NA	NA	NA	NA
+"JLH, RWC, JMW, BML, FLY LARVA"	fly larva	NA	fly	NA	NA	NA	NA	NA
+"JLH, RWC, JMW, BML, IN A LEAF ROLL?"	in a leaf roll?	NA		NA	1	NA	NA	NA
+"JLH, RWC, JMW, fatboi"	fatboi	NA		NA	NA	NA	NA	NA
+"JLH, RWC, JMW, tussock"	tussock	NA		1	NA	NA	NA	NA
+"JLH, RWC, slug-like caterpillar"	slug-like caterpillar	NA		NA	NA	NA	NA	NA
+"JLH, RWC, tussock moth"	tussock moth	NA		1	NA	NA	NA	NA
+"JLH, SAW, CMK"		NA		NA	NA	NA	NA	NA
+"JLH, two stems"		NA		NA	NA	NA	NA	NA
+"JLH, two stems for 50"		NA		NA	NA	NA	NA	NA
+JLH/AES		NA		NA	NA	NA	NA	NA
+JLH/BMM/ABC		NA		NA	NA	NA	NA	NA
+JLH/MHC		NA		NA	NA	NA	NA	NA
+JLH/RJC		NA		NA	NA	NA	NA	NA
+"JMC, CAH, LTC, KMS"		NA		NA	NA	NA	NA	NA
+"JMC, LTC, CAH"		NA		NA	NA	NA	NA	NA
+"JMC, LTC, MHC"		NA		NA	NA	NA	NA	NA
+"JMC, LTC, MHC, hymenopteran"	hymenopteran	NA	bee	NA	NA	NA	NA	1
+"JMC, SAW, GSP, CMK"		NA		NA	NA	NA	NA	NA
+JMF		NA		NA	NA	NA	NA	NA
+JMF (2 stems for 50 leaves)		NA		NA	NA	NA	NA	NA
+JMF JLH EAB CRB APF		NA		NA	NA	NA	NA	NA
+"JMF JLH EAB CRB APF, confused woodgrain"	confused woodgrain	NA		NA	NA	NA	NA	NA
+"JMF JLH EAB CRB APF, dipteran"	dipteran	NA	fly	NA	NA	NA	NA	NA
+"JMF JLH EAB CRB APF, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"JMF, CRB, EAB"		NA		NA	NA	NA	NA	NA
+"JMF, CRB, EAB, 2 stems"		NA		NA	NA	NA	NA	NA
+"JMF, CRB, EAB, 2 STEMS FOR 50"		NA		NA	NA	NA	NA	NA
+"JMF, CRB, EAB, fly larva"	fly larva	NA	fly	NA	NA	NA	NA	NA
+"JMF, EAB"		NA		NA	NA	NA	NA	NA
+"JMF, EAB, 2 stems for fifty leaves"		NA		NA	NA	NA	NA	NA
+"JMF, EAB, 2 trees"		NA		NA	NA	NA	NA	NA
+"JMF, EAB, CRB"		NA		NA	NA	NA	NA	NA
+"JMF, EAB, CRB, 2 stems for 50"		NA		NA	NA	NA	NA	NA
+"JMF, EAB, CRB, 2 stems for fifty leaves"		NA		NA	NA	NA	NA	NA
+"JMF, EAB, CRB, 3 stems for 50 leaves, spiky, green, green head capsule, black eyespots"	"spiky, green, green head capsule, black eyespots"	NA		1	NA	NA	NA	NA
+"JMF, EAB, CRB, 3 stems for fifty leaves"		NA		NA	NA	NA	NA	NA
+"JMF, EAB, CRB, dipteran larva"	dipteran larva	NA	fly	NA	NA	NA	NA	NA
+"JMF, EAB, CRB, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"JMF, EAB, CRB, JLH"		NA		NA	NA	NA	NA	NA
+"JMF, EAB, CRB, JLH, fly larvae"	fly larvae	NA	fly	NA	NA	NA	NA	NA
+"JMF, EAB, CRB, JLH, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"JMF, EAB, CRB, JLH, two trees for 50"		NA		NA	NA	NA	NA	NA
+"JMF, EAB, CRB, RWC, JMW, JLH, BML"		NA		NA	NA	NA	NA	NA
+"JMF, EAB, CRB, RWC, JMW, JLH, BML, 2 stems for 50 leaves"		NA		NA	NA	NA	NA	NA
+"JMF, EAB, CRB, RWC, JMW, JLH, BML, 2 stems for 50 leaves; linden looper"	linden looper	NA		NA	NA	NA	NA	NA
+"JMF, EAB, CRB, RWC, JMW, JLH, BML, fly larva"	fly larva	NA	fly	NA	NA	NA	NA	NA
+"JMF, EAB, CRB, RWC, JMW, JLH, BML, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"JMF, EAB, CRB, same as M17 RedOak 1"		NA		NA	NA	NA	NA	NA
+"JMF, EAB, CRB, spiky, green, black head capsule"	"spiky, green, black head capsule"	NA		1	NA	NA	NA	NA
+"JMF, EAB, CRB, two stems for 50"		NA		NA	NA	NA	NA	NA
+"JMF, EAB, FUZZY"	fuzzy	NA		1	NA	NA	NA	NA
+"JMF, EAB, PKKX ate several of our leps!!!!!!!"		NA		NA	NA	NA	NA	NA
+"JMF, JLH"		NA		NA	NA	NA	NA	NA
+"JMF, JLH "		NA		NA	NA	NA	NA	NA
+"JMF, JLH (2 stems for 50)"		NA		NA	NA	NA	NA	NA
+"JMF, JLH, 2 stems for 50 leaves"		NA		NA	NA	NA	NA	NA
+"JMF, JLH, 2 STEMS FOR FIFTY LEAVES"		NA		NA	NA	NA	NA	NA
+"JMF, JLH, fat linden looper"	fat linden looper	NA		NA	NA	NA	NA	NA
+"JMF, JLH, FAT!"	fat!	NA		NA	NA	NA	NA	NA
+"JMF, JLH, fine bristles red striped eyes, green body, red dots"	"fine bristles red striped eyes, green body, red dots"	NA		1	NA	NA	NA	NA
+"JMF, JLH, in silk"	in silk	NA		NA	NA	1	NA	NA
+"JMF, JLH, spiky"	spiky	NA		1	NA	NA	NA	NA
+"JMF, JLH, two stems for 50"		NA		NA	NA	NA	NA	NA
+"JMF, JMW"		NA		NA	NA	NA	NA	NA
+"JMF, JMW, “ugly-ass sawfly” -JMF"	ugly-ass sawfly	NA	bee	NA	NA	NA	NA	1
+"JMF, JMW, 2 stems"		NA		NA	NA	NA	NA	NA
+"JMF, JMW, 2 stems for fifty leaves"		NA		NA	NA	NA	NA	NA
+"JMF, JMW, 3 stems for fifty leaves"		NA		NA	NA	NA	NA	NA
+"JMF, JMW, 4mm of it are dried up"	4mm of it are dried up	NA		NA	NA	NA	NA	NA
+"JMF, JMW, 6mm wide"	6mm wide	NA		NA	NA	NA	NA	NA
+"JMF, JMW, also a 14mm recently dead sawfly that was parasitized"	also a 14mm recently dead sawfly that was parasitized	NA		NA	NA	NA	NA	NA
+"JMF, JMW, back half smashed, front end still alive..."	"back half smashed, front end still alive..."	NA		NA	NA	NA	NA	NA
+"JMF, JMW, bristly"	bristly	NA		1	NA	NA	NA	NA
+"JMF, JMW, confused woodgrain"	confused woodgrain	NA		NA	NA	NA	NA	NA
+"JMF, JMW, fly larva"	fly larva	NA	fly	NA	NA	NA	NA	NA
+"JMF, JMW, fly larvae"	fly larvae	NA	fly	NA	NA	NA	NA	NA
+"JMF, JMW, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"JMF, JMW, humpback yellow stripe"	humpback yellow stripe	NA		NA	NA	NA	NA	NA
+"JMF, JMW, JLH"		NA		NA	NA	NA	NA	NA
+"JMF, JMW, JLH, 2 stems for fifty leaves"		NA		NA	NA	NA	NA	NA
+"JMF, JMW, JLH, 2 stems for fifty leaves, confused woodgrain"	confused woodgrain	NA		NA	NA	NA	NA	NA
+"JMF, JMW, JLH, beetle larva"	beetle larva	NA	beetle	NA	NA	NA	1	NA
+"JMF, JMW, JLH, beetle larvae"	beetle larvae	NA	beetle	NA	NA	NA	1	NA
+"JMF, JMW, JLH, bristly"	bristly	NA		1	NA	NA	NA	NA
+"JMF, JMW, JLH, bristly picture guy (O13 service #2)"	bristly picture guy (O13 service 	NA		NA	NA	NA	NA	NA
+"JMF, JMW, JLH, fine bristles, light green head with eyes, sets of hashmarks on back, sorta flattened head"	"fine bristles, light green head with eyes, sets of hashmarks on back, sorta flattened head"	NA		1	NA	NA	NA	NA
+"JMF, JMW, JLH, fly larva"	fly larva	NA	fly	NA	NA	NA	NA	NA
+"JMF, JMW, JLH, fragile dagger"	fragile dagger	NA		NA	NA	NA	NA	NA
+"JMF, JMW, JLH, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"JMF, JMW, JLH, huge and red with big yellow spots"	huge and red with big yellow spots	NA		NA	NA	NA	NA	NA
+"JMF, JMW, JLH, real slug caterpillar "	real slug caterpillar	NA		NA	NA	NA	NA	NA
+"JMF, JMW, JLH, red oak no longer has enough leaves"		NA		NA	NA	NA	NA	NA
+"JMF, JMW, JLH, RWC, MHC"		NA		NA	NA	NA	NA	NA
+"JMF, JMW, JLH, second striped maple no longer has enough leaves"		NA		NA	NA	NA	NA	NA
+"JMF, JMW, JLH, slug caterpillar"	slug caterpillar	NA		NA	NA	NA	NA	NA
+"JMF, JMW, JLH, thyatirid"	thyatirid	NA		NA	NA	NA	NA	NA
+"JMF, JMW, JLH, thyatirid, 3 stems for fifty leaves"	thyatirid	NA		NA	NA	NA	NA	NA
+"JMF, JMW, JLH, tufted thyatirid"	tufted thyatirid	NA		NA	NA	NA	NA	NA
+"JMF, JMW, JLH, with hashmarks on back, see pic"	"with hashmarks on back, see pic"	NA		NA	NA	NA	NA	NA
+"JMF, JMW, linden looper"	linden looper	NA		NA	NA	NA	NA	NA
+"JMF, JMW, parasitized"	parasitized	NA		NA	NA	NA	NA	NA
+"JMF, JMW, red maple we have been counting all season no longer has enough leaves!"		NA		NA	NA	NA	NA	NA
+"JMF, JMW, RWC, BML, EAB, JDH"		NA		NA	NA	NA	NA	NA
+"JMF, JMW, RWC, BML, EAB, JDH, 2 STEMS FOR FIFTY LEAVES"		NA		NA	NA	NA	NA	NA
+"JMF, JMW, RWC, BML, EAB, JDH, dead notodontid with capsule next to it"		NA		NA	NA	NA	NA	NA
+"JMF, JMW, RWC, BML, EAB, JDH, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"JMF, JMW, second red maple we used to count is dead"		NA		NA	NA	NA	NA	NA
+"JMF, JMW, slug caterpillar, 6mm wide"	"slug caterpillar, 6mm wide"	NA		NA	NA	NA	NA	NA
+"JMF, JMW, tussock moth"	tussock moth	NA		1	NA	NA	NA	NA
+"JMF, KDC"		NA		NA	NA	NA	NA	NA
+"JMF, KDC "		NA		NA	NA	NA	NA	NA
+"JMF, KDC (2 stems for 50 leaves)"		NA		NA	NA	NA	NA	NA
+"JMF, KDC,"		NA		NA	NA	NA	NA	NA
+"JMF, KDC, 2 stems"		NA		NA	NA	NA	NA	NA
+"JMF, KDC, 4 stems"		NA		NA	NA	NA	NA	NA
+"JMF, KDC, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"JMF, KDC, JLH"		NA		NA	NA	NA	NA	NA
+"JMF, KDC, JMW, RWC"		NA		NA	NA	NA	NA	NA
+"JMF, KDC, MHC"		NA		NA	NA	NA	NA	NA
+"JMF, KDC, soft non lep"	soft non lep	NA	unidentified	NA	NA	NA	NA	NA
+"JMF, KDC, three stems"		NA		NA	NA	NA	NA	NA
+"JMF, KDC, two stems"		NA		NA	NA	NA	NA	NA
+"JMF, KDC, two stems for 50"		NA		NA	NA	NA	NA	NA
+"JMF, MHC"		NA		NA	NA	NA	NA	NA
+"JMF, MHC, CB, KDC"		NA		NA	NA	NA	NA	NA
+"JMF, MHC, EAB"		NA		NA	NA	NA	NA	NA
+"JMF, MHC, EAB, 3 STEMS"		NA		NA	NA	NA	NA	NA
+"JMF, MHC, EAB, CRB"		NA		NA	NA	NA	NA	NA
+"JMF, MHC, EAB, CRB, two trees for 50"		NA		NA	NA	NA	NA	NA
+"JMF, MHC, fuzzy, but looks like a noctuid"	"fuzzy, but looks like a noctuid"	NA		1	NA	NA	NA	NA
+"JMF, MHC, KDC"		NA		NA	NA	NA	NA	NA
+"JMF, RWC"		NA		NA	NA	NA	NA	NA
+"JMF, RWC, 2 stems"		NA		NA	NA	NA	NA	NA
+"JMF, RWC, BML"		NA		NA	NA	NA	NA	NA
+"JMF, RWC, BML "		NA		NA	NA	NA	NA	NA
+"JMF, RWC, BML FOUR STEMS "		NA		NA	NA	NA	NA	NA
+"JMF, RWC, BML SLUG-LIKE DIPTERAN"	slug-like dipteran	NA	fly	NA	NA	NA	NA	NA
+"JMF, RWC, BML slug-like, dipteran"	slug-like dipteran	NA	fly	NA	NA	NA	NA	NA
+"JMF, RWC, BML THREE STEMS"		NA		NA	NA	NA	NA	NA
+"JMF, RWC, BML TWO STEMS"		NA		NA	NA	NA	NA	NA
+"JMF, RWC, BML, 2 stems for fifty leaves"		NA		NA	NA	NA	NA	NA
+"JMF, RWC, BML, 3 stems for fifty leaves"		NA		NA	NA	NA	NA	NA
+"JMF, RWC, BML, THREE STEMS"		NA		NA	NA	NA	NA	NA
+"JMF,CRB, RWC"		NA		NA	NA	NA	NA	NA
+"JMF,CRB, RWC, 2 stems"		NA		NA	NA	NA	NA	NA
+"JMF,CRB, RWC, 2 STEMS"		NA		NA	NA	NA	NA	NA
+"JMF,CRB, RWC, 2 STEMS, RYAN SAID CONFUSED WOODGRAIN?"	 RYAN SAID CONFUSED WOODGRAIN?	NA		NA	NA	NA	NA	NA
+"JMF,CRB, RWC, DIPTERAN LARVA"	dipteran larva	NA	fly	NA	NA	NA	NA	NA
+"JMF,CRB, RWC, FUZZY-ISH, green with single hairs"	"fuzzy-ish, green with single hairs"	NA		NA	NA	NA	NA	NA
+JMW		NA		NA	NA	NA	NA	NA
+JMW BML RWC JH		NA		NA	NA	NA	NA	NA
+"JMW BML RWC JH, estimate, really fat"	"estimate, really fat"	NA		NA	NA	NA	NA	NA
+"JMW BML RWC JH, had a green, jumpy lep that got away, no estimate"	"had a green, jumpy lep that got away, no estimate"	NA		NA	NA	NA	NA	NA
+JMW BML RWC JLH		NA		NA	NA	NA	NA	NA
+"JMW BML RWC JLH, 2 stems for 50"		NA		NA	NA	NA	NA	NA
+"JMW BML RWC JLH, 2 stems for 50 leaves"		NA		NA	NA	NA	NA	NA
+"JMW BML RWC JLH, confused woodgrain"	confused woodgrain	NA		NA	NA	NA	NA	NA
+"JMW BML RWC JLH, fly larva"	fly larva	NA	fly	NA	NA	NA	NA	NA
+"JMW BML RWC JLH, parasitized"	parasitized	NA		NA	NA	NA	NA	NA
+"JMW BML RWC JLH, skinny"	skinny	NA		NA	NA	NA	NA	NA
+JMW JMF		NA		NA	NA	NA	NA	NA
+"JMW JMF, confused woodgrain"	confused woodgrain	NA		NA	NA	NA	NA	NA
+"JMW JMF, huge!!"	huge!!	NA		NA	NA	NA	NA	NA
+"JMW JMF, leaf miner"	leaf miner	NA		NA	NA	NA	NA	NA
+"JMW JMF, on stem"	on stem	NA		NA	NA	NA	NA	NA
+"JMW JMF, skinny"	skinny	NA		NA	NA	NA	NA	NA
+"JMW JMF, tussock moth"	tussock moth	NA		1	NA	NA	NA	NA
+"JMW, BML, JDH"		NA		NA	NA	NA	NA	NA
+"JMW, BML, JDH, 2 stem"		NA		NA	NA	NA	NA	NA
+"JMW, BML, JDH, 2 stem, dead leaf miners"		NA		NA	NA	NA	NA	NA
+"JMW, BML, JDH, 2 stems"		NA		NA	NA	NA	NA	NA
+"JMW, BML, JDH, 3 stems, 2 dead leaf miners"		NA		NA	NA	NA	NA	NA
+"JMW, BML, JDH, bristly"	bristly	NA		1	NA	NA	NA	NA
+"JMW, BML, JDH, BRISTLY"	bristly	NA		1	NA	NA	NA	NA
+"JMW, BML, JDH, BRISTLY "	bristly	NA		1	NA	NA	NA	NA
+"JMW, BML, JDH, fly larva"	fly larva	NA	fly	NA	NA	NA	NA	NA
+"JMW, BML, JDH, fly larvae"	fly larvae	NA	fly	NA	NA	NA	NA	NA
+"JMW, BML, JDH, green with light green stripes and brown diamonds in between"	green with light green stripes and brown diamonds in between	NA		NA	NA	NA	NA	NA
+"JMW, BML, JDH, skinny!"	skinny!	NA		NA	NA	NA	NA	NA
+"JMW, BML, JDH. bristly"	bristly	NA		NA	NA	NA	NA	NA
+"JMW, BML, RWC"		NA		NA	NA	NA	NA	NA
+"JMW, BML, RWC (point close to active nest - couldn’t count striped maple)"		NA		NA	NA	NA	NA	NA
+"JMW, BML, RWC, fly larva"	fly larva	NA	fly	NA	NA	NA	NA	NA
+"JMW, BML, RWC, linden looper"	linden looper	NA		NA	NA	NA	NA	NA
+"JMW, BML, RWC, linden loopy"	linden loopy	NA		NA	NA	NA	NA	NA
+"JMW, BML, RWC, OOOX carries lep at Q10"		NA		NA	NA	NA	NA	NA
+"JMW, BML, RWC, rolled up"	rolled up	NA		NA	1	NA	NA	NA
+"JMW, BML, RWC, spotted, confused woodgrain"	"spotted, confused woodgrain"	NA		NA	NA	NA	NA	NA
+"JMW, CRB, EAB"		NA		NA	NA	NA	NA	NA
+"JMW, CRB, EAB, 2 stems for fifty leaves"		NA		NA	NA	NA	NA	NA
+"JMW, CRB, EAB, fly larva"	fly larva	NA	fly	NA	NA	NA	NA	NA
+"JMW, CRB, EAB, SHOOTS"		NA		NA	NA	NA	NA	NA
+"JMW, CRB, EAB, small shoots"		NA		NA	NA	NA	NA	NA
+"JMW, EAB, CRB, BAB"		NA		NA	NA	NA	NA	NA
+"JMW, EAB, CRB, BAB, 2 stems for fifty leaves"		NA		NA	NA	NA	NA	NA
+"JMW, EAB, CRB, BAB, brown with cream lateral line, brown/orange head with huge eyespots in curled leaf"	"brown with cream lateral line, brown/orange head with huge eyespots in curled leaf"	NA		NA	NA	NA	NA	NA
+"JMW, EAB, CRB, BAB, red maple without enough leaves"		NA		NA	NA	NA	NA	NA
+"JMW, EAB, CRB, BAB, so small!"	so small!	NA		NA	NA	NA	NA	NA
+"JMW, EAB, JLH"		NA		NA	NA	NA	NA	NA
+"JMW, EAB, JLH, 45 leaves"		45		NA	NA	NA	NA	NA
+"JMW, JLH"		NA		NA	NA	NA	NA	NA
+"JMW, JLH "		NA		NA	NA	NA	NA	NA
+"JMW, JLH, bristly"	bristly	NA		1	NA	NA	NA	NA
+"JMW, JLH, multiple shoots"		NA		NA	NA	NA	NA	NA
+"JMW, JLH, sluglike caterpillar?"	sluglike caterpillar?	NA		NA	NA	NA	NA	NA
+"JMW, JLH, two stems"		NA		NA	NA	NA	NA	NA
+"JMW, JMF"		NA		NA	NA	NA	NA	NA
+"JMW, JMF, "		NA		NA	NA	NA	NA	NA
+"JMW, JMF, 2 stem"		NA		NA	NA	NA	NA	NA
+"JMW, JMF, Linden looper"	linden looper	NA		NA	NA	NA	NA	NA
+"JMW, JMF. under webs"	under webs	NA		NA	NA	1	NA	NA
+"JMW, MHC, BML, RWC"		NA		NA	NA	NA	NA	NA
+"JMW, MHC, BML, RWC, 2 stems for 50 leaves"		NA		NA	NA	NA	NA	NA
+"JMW, MHC, BML, RWC, linden looper"	linden looper	NA		NA	NA	NA	NA	NA
+"JMW, MHC, BML, RWC, rolled"	rolled	NA		NA	1	NA	NA	NA
+"JMW, RWC"		NA		NA	NA	NA	NA	NA
+"JMW, RWC (2 stems for 50 leaves)"		NA		NA	NA	NA	NA	NA
+"JMW, RWC (black and fuzzy)"	black and fuzzy	NA		1	NA	NA	NA	NA
+"JMW, RWC, 2 stems"		NA		NA	NA	NA	NA	NA
+"JMW, RWC, 2 stems for fifty leaves"		NA		NA	NA	NA	NA	NA
+"JMW, RWC, black and slimy, no legs"	"black and slimy, no legs"	NA	unidentified	NA	NA	NA	NA	NA
+"JMW, RWC, BML"		NA		NA	NA	NA	NA	NA
+"JMW, RWC, BML (nest in vicinity - didn’t count all)"		NA		NA	NA	NA	NA	NA
+"JMW, RWC, BML 2 stems for fifty leaves"		NA		NA	NA	NA	NA	NA
+"JMW, RWC, BML, 2 stems"		NA		NA	NA	NA	NA	NA
+"JMW, RWC, BML, 2 stems for 50 leaves"		NA		NA	NA	NA	NA	NA
+"JMW, RWC, BML, 2 stems for fifty leaves"		NA		NA	NA	NA	NA	NA
+"JMW, RWC, BML, 2 stems for fifty leaves, confused woodgrain"	confused woodgrain	NA		NA	NA	NA	NA	NA
+"JMW, RWC, BML, 3 stems"		NA		NA	NA	NA	NA	NA
+"JMW, RWC, BML, fly larva"	fly larva	NA	fly	NA	NA	NA	NA	NA
+"JMW, RWC, BML, oaks don’t have enough leaves"		NA		NA	NA	NA	NA	NA
+"JMW, RWC, BML, rolled in a shit-ton of leaves - RWC"	rolled in a shit-ton of leaves	NA		NA	1	NA	NA	NA
+"JMW, RWC, BML, spotted, confused woodgrain"	"spotted, confused woodgrain"	NA		NA	NA	NA	NA	NA
+"JMW, RWC, BML, striped maple don’t have enough leaves"		NA		NA	NA	NA	NA	NA
+"JMW, RWC, BML, striped maple too close to BBOX nest"		NA		NA	NA	NA	NA	NA
+"JMW, RWC, BML, three stems for 50"		NA		NA	NA	NA	NA	NA
+"JMW, RWC, BML, two stems for 50"		NA		NA	NA	NA	NA	NA
+"JMW, RWC, BML, yellow"	yellow	NA		NA	NA	NA	NA	NA
+"JMW, RWC, JLH"		NA		NA	NA	NA	NA	NA
+"JMW, RWC, multiple stems"		NA		NA	NA	NA	NA	NA
+"JMW, RWC, on stem"	on stem	NA		NA	NA	NA	NA	NA
+"JMW, RWC, PSR"		NA		NA	NA	NA	NA	NA
+"JMW, RWC, PSR, 2 stems for fifty leaves"		NA		NA	NA	NA	NA	NA
+"JMW, RWC, PSR, 3 stems for fifty leaves"		NA		NA	NA	NA	NA	NA
+"JMW, RWC, PSR, bristly"	bristly	NA		1	NA	NA	NA	NA
+"JMW, RWC, PSR, on stem"	on stem	NA		NA	NA	NA	NA	NA
+"JMW, RWC, sluglike caterpillar?"	sluglike caterpillar?	NA		NA	NA	NA	NA	NA
+"JMW, RWC, two stems"		NA		NA	NA	NA	NA	NA
+"JMW, RWC, two stems for 50"		NA		NA	NA	NA	NA	NA
+"JMW, RWC, white, red eyes, white and black bristles, 4 prolegs"	"white, red eyes, white and black bristles, 4 prolegs"	NA		1	NA	NA	NA	NA
+"JMW,CRB, BML"		NA		NA	NA	NA	NA	NA
+"JMW,CRB, BML, 2 stems"		NA		NA	NA	NA	NA	NA
+"JMW,CRB, BML, confused woodgrain"	confused woodgrain	NA		NA	NA	NA	NA	NA
+"JMW,CRB, BML, ESCAPED, estimate"	"escaped, estimate"	NA		NA	NA	NA	NA	NA
+"JMW,CRB, BML, leaf miners"	leaf miners	NA		NA	NA	NA	NA	NA
+JOB		NA		NA	NA	NA	NA	NA
+JRT		NA		NA	NA	NA	NA	NA
+just at 50 leaves		NA		NA	NA	NA	NA	NA
+just now at 50 leaves		NA		NA	NA	NA	NA	NA
+JW		NA		NA	NA	NA	NA	NA
+JWH		NA		NA	NA	NA	NA	NA
+"KDC, JMF, JLH"		NA		NA	NA	NA	NA	NA
+KML		NA		NA	NA	NA	NA	NA
+KWS		NA		NA	NA	NA	NA	NA
+"larva of some sort, CAH, LTC, AJC, MHC"	larva of some sort	NA	unidentified	NA	NA	NA	NA	NA
+LAS		NA		NA	NA	NA	NA	NA
+LAW		NA		NA	NA	NA	NA	NA
+"length not taken, MHC, JMC, CAH, LTC"	length not taken	NA		NA	NA	NA	NA	NA
+"linden looper, MHC, CAH, LTC"	linden looper	NA		NA	NA	NA	NA	NA
+"linden looper, MHC, LTC, CAH, JMC"	linden looper	NA		NA	NA	NA	NA	NA
+LKR		NA		NA	NA	NA	NA	NA
+LMR		NA		NA	NA	NA	NA	NA
+"LTC, CAH, AJC"		NA		NA	NA	NA	NA	NA
+"LTC, CAH, JLH, JMC"		NA		NA	NA	NA	NA	NA
+"LTC, CAH, SAW"		NA		NA	NA	NA	NA	NA
+Lymantrid-”fuzzy”	Lymantrid-fuzzy	NA		1	NA	NA	NA	NA
+MCP		NA		NA	NA	NA	NA	NA
+"MHC, AJC, LTC"		NA		NA	NA	NA	NA	NA
+"MHC, AJC, LTC, CAH"		NA		NA	NA	NA	NA	NA
+"MHC, AJC, LTC, CAH, nice!"	nice!	NA		NA	NA	NA	NA	NA
+"MHC, AJC, LTC, CAH, wave motion movement"	wave motion movement	NA		NA	NA	NA	NA	NA
+"MHC, AJC, LTC, late!"	late!	NA		NA	NA	NA	NA	NA
+"MHC, CAH, AJC"		NA		NA	NA	NA	NA	NA
+"MHC, CAH, AJC, Tussock moth"	tussock moth	NA		1	NA	NA	NA	NA
+"MHC, CAH, LTC"		NA		NA	NA	NA	NA	NA
+"MHC, CAH, MGR"		NA		NA	NA	NA	NA	NA
+"MHC, CK, SAW, GSP"		NA		NA	NA	NA	NA	NA
+"MHC, CMK, GSP"		NA		NA	NA	NA	NA	NA
+"MHC, CMK, GSP, 2 stems"		NA		NA	NA	NA	NA	NA
+"MHC, CMK, SAW, GSP"		NA		NA	NA	NA	NA	NA
+"MHC, CMK, SAW, GSP, fat, caterpillar-like"	"fat, caterpillar-like"	NA		NA	NA	NA	NA	NA
+"MHC, EAB, CRB, JLH"		NA		NA	NA	NA	NA	NA
+"MHC, EAB, CRB, JLH, fuzzball"	fuzzball	NA		1	NA	NA	NA	NA
+"MHC, EAB, CRB, JLH, lymantrid"	lymantrid	NA		1	NA	NA	NA	NA
+"MHC, EAB, CRB, JLH, two stems for 50"		NA		NA	NA	NA	NA	NA
+"MHC, GSP, SAW, CMK"		NA		NA	NA	NA	NA	NA
+"MHC, GSP, SAW, PKS"		NA		NA	NA	NA	NA	NA
+"MHC, JLH, AJC"		NA		NA	NA	NA	NA	NA
+"MHC, JLH, AJC "		NA		NA	NA	NA	NA	NA
+"MHC, JLH, AJC, 2 stems"		NA		NA	NA	NA	NA	NA
+"MHC, JLH, AJC, CK"		NA		NA	NA	NA	NA	NA
+"MHC, JLH, AJC, CK, JC"		NA		NA	NA	NA	NA	NA
+"MHC, JLH, AJC, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"MHC, JLH, AJC, slug caterpillar?"	slug caterpillar?	NA		NA	NA	NA	NA	NA
+"MHC, JLH, AJC, Sphingidae"	Sphingidae	NA		NA	NA	NA	NA	NA
+"MHC, JLH, AJC, Sphingidae "	Sphingidae	NA		NA	NA	NA	NA	NA
+"MHC, JLH, CMK"		NA		NA	NA	NA	NA	NA
+"MHC, JLH, CMK, 2 stems"		NA		NA	NA	NA	NA	NA
+"MHC, JLH, CMK, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"MHC, JLH, CRB"		NA		NA	NA	NA	NA	NA
+"MHC, JLH, CRB, 2 stems"		NA		NA	NA	NA	NA	NA
+"MHC, JLH, CRB, EAB"		NA		NA	NA	NA	NA	NA
+"MHC, JLH, CRB, EAB, 2 STEMS"		NA		NA	NA	NA	NA	NA
+"MHC, JLH, CRB, multiple stems"		NA		NA	NA	NA	NA	NA
+"MHC, JLH, JMF, EAB, CRB"		NA		NA	NA	NA	NA	NA
+"MHC, JLH, JMF, EAB, CRB, linden looper"	linden looper	NA		NA	NA	NA	NA	NA
+"MHC, JMC, CAH, LTC"		NA		NA	NA	NA	NA	NA
+"MHC, JMC, LTC"		NA		NA	NA	NA	NA	NA
+"MHC, JMF"		NA		NA	NA	NA	NA	NA
+"MHC, JMF not a lep - soft-bodied chunky bug that a bird would eat"	not a lep - soft-bodied chunky bug that a bird would eat	NA	unidentified	NA	NA	NA	NA	NA
+"MHC, JMF, CRB"		NA		NA	NA	NA	NA	NA
+"MHC, JMF, CRB, 2 stems"		NA		NA	NA	NA	NA	NA
+"MHC, JMF, CRB, multiple stems"		NA		NA	NA	NA	NA	NA
+"MHC, JMF, KDC"		NA		NA	NA	NA	NA	NA
+"MHC, JMF, KDC, 2 stems"		NA		NA	NA	NA	NA	NA
+"MHC, JMF, KDC, 4 stems"		NA		NA	NA	NA	NA	NA
+"MHC, JMW, RWC"		NA		NA	NA	NA	NA	NA
+"MHC, JMW, RWC (fuzzy)"	fuzzy	NA		1	NA	NA	NA	NA
+"MHC, JMW, RWC, 2 stems"		NA		NA	NA	NA	NA	NA
+"MHC, JMW, RWC, BML"		NA		NA	NA	NA	NA	NA
+"MHC, JMW, RWC, BML, 2 STEMS"		NA		NA	NA	NA	NA	NA
+"MHC, JMW, RWC, BML, 2 stems for 50 leaves"		NA		NA	NA	NA	NA	NA
+"MHC, JMW, RWC, BML, multiple stems"		NA		NA	NA	NA	NA	NA
+"MHC, JMW, RWC, BML, MULTIPLE STEMS"		NA		NA	NA	NA	NA	NA
+"MHC, JMW, RWC, BML, SKINNY!"	skinny!	NA		NA	NA	NA	NA	NA
+"MHC, JMW, RWC, BML, two stems for 50"		NA		NA	NA	NA	NA	NA
+"MHC, JMW, RWC, BWL"		NA		NA	NA	NA	NA	NA
+"MHC, JMW, RWC, linden looper"	linden looper	NA		NA	NA	NA	NA	NA
+"MHC, JMW, RWC, multiple stems"		NA		NA	NA	NA	NA	NA
+"MHC, LTC, CAH, AJC"		NA		NA	NA	NA	NA	NA
+"MHC, LTC, CAH, AJC, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"MHC, LTC, CAH, JMC"		NA		NA	NA	NA	NA	NA
+"MHC, RWC"		NA		NA	NA	NA	NA	NA
+"MHC, RWC, 2 stems"		NA		NA	NA	NA	NA	NA
+"MHC, RWC, JMW"		NA		NA	NA	NA	NA	NA
+"MHC, RWC, JMW, covered with webs"	covered with webs	NA		NA	NA	1	NA	NA
+"MHC, RWC, JMW, photos taken - Ryan"		NA		NA	NA	NA	NA	NA
+"MHC, RWC, JMW, really rolled up!"	really rolled up!	NA		NA	1	NA	NA	NA
+"MHC, RWC, JMW, slug-like"	slug-like	NA		NA	NA	NA	NA	NA
+"MHC, RWC, JMW, two stems"		NA		NA	NA	NA	NA	NA
+"MHC, RWC, two stems for 50"		NA		NA	NA	NA	NA	NA
+"MHC, SAW, GSP"		NA		NA	NA	NA	NA	NA
+"MHC, SAW, GSP, grub/larva"	grub/larva	NA	beetle	NA	NA	NA	1	NA
+"MHC, SAW, GSP, larva of some sort - white"	larva of some sort - white	NA	unidentified	NA	NA	NA	NA	NA
+"MHC, SAW, GSP, larva of some sort -fat, 3 mm wide"	"larva of some sort -fat, 3 mm wide"	NA	unidentified	NA	NA	NA	NA	NA
+"MHC, SAW, GSP, larva of some sort, fat! 3mm wide!"	"larva of some sort, fat! 3mm wide!"	NA	unidentified	NA	NA	NA	NA	NA
+MHC/ABC		NA		NA	NA	NA	NA	NA
+MHC/AES		NA		NA	NA	NA	NA	NA
+MHC/JLH		NA		NA	NA	NA	NA	NA
+"millipede-looking, MHC, CAH, LTC"	millipede-looking	NA	unidentified	NA	NA	NA	NA	NA
+missing length	missing length	NA		NA	NA	NA	NA	NA
+MNW		NA		NA	NA	NA	NA	NA
+MTR		NA		NA	NA	NA	NA	NA
+Multi-stem		NA		NA	NA	NA	NA	NA
+"multiple stems, JLH, GSP, CMK"		NA		NA	NA	NA	NA	NA
+NAS		NA		NA	NA	NA	NA	NA
+"NAW, JDH"		NA		NA	NA	NA	NA	NA
+needed 2 leaves for 50 leaf sample		NA		NA	NA	NA	NA	NA
+"NEK, AMC, WBL"		NA		NA	NA	NA	NA	NA
+"NEK, AMC, WBL multiple stems"		NA		NA	NA	NA	NA	NA
+"NEK, AMC, WBL, 2 stems"		NA		NA	NA	NA	NA	NA
+"NEK, AMC, WBL, 3 stems"		NA		NA	NA	NA	NA	NA
+"NEK, AMC, WBL, multiple stems"		NA		NA	NA	NA	NA	NA
+"NEK, AMC, WBL, question on noctuid, hairy"	"question on noctuid, hairy"	NA		1	NA	NA	NA	NA
+"NEK, WBL, BMW, RWC"		NA		NA	NA	NA	NA	NA
+"NEK, ZSZ"		NA		NA	NA	NA	NA	NA
+"NEK, ZSZ, WBL, BMW"		NA		NA	NA	NA	NA	NA
+"NEK, ZSZ, WBL, BMW, 2 stems"		NA		NA	NA	NA	NA	NA
+"NEK, ZSZ, WBL, BMW, did not do A13 today, thunder?"		NA		NA	NA	NA	NA	NA
+"NEK, ZSZ, WBL, BMW, multiple stems"		NA		NA	NA	NA	NA	NA
+no measurement	no measurement	NA		NA	NA	NA	NA	NA
+Not 50 leaf sample		NA		NA	NA	NA	NA	NA
+not in plot		NA		NA	NA	NA	NA	NA
+"not in plot, 2 trees for 50 leaf sample"		NA		NA	NA	NA	NA	NA
+not rolled		NA		NA	NA	NA	NA	NA
+NRH		NA		NA	NA	NA	NA	NA
+"NRH, 2 stems"		NA		NA	NA	NA	NA	NA
+"NRH, 3 stems"		NA		NA	NA	NA	NA	NA
+"NRH, 4 stems"		NA		NA	NA	NA	NA	NA
+"NRH, JDH"		NA		NA	NA	NA	NA	NA
+"NRH, JDH, 2 stems"		NA		NA	NA	NA	NA	NA
+"NRH, RWC"		NA		NA	NA	NA	NA	NA
+"NRH, sawfly with no measurement"		NA		NA	NA	NA	NA	NA
+"On weird fuzzy ball, looks sick"	"on weird fuzzy ball, looks sick"	NA		NA	NA	NA	NA	NA
+only 40 leaves		40		NA	NA	NA	NA	NA
+only 48 leaves	48	NA		NA	NA	NA	NA	NA
+out of plot		NA		NA	NA	NA	NA	NA
+Outside 11.3		NA		NA	NA	NA	NA	NA
+pale green	pale green	NA		NA	NA	NA	NA	NA
+parasitized	parasitized	NA		NA	NA	NA	NA	NA
+"Parasitized, CAH, JLH, LTC, SAW, MHC, GSP, RJC "	parasitized	NA		NA	NA	NA	NA	NA
+"Parasitized, JLH, CAH"	parasitized	NA		NA	NA	NA	NA	NA
+PCW		NA		NA	NA	NA	NA	NA
+PFS		NA		NA	NA	NA	NA	NA
+"poor quality leaves, JLH, LTC, CAH"		NA		NA	NA	NA	NA	NA
+possibly out		NA		NA	NA	NA	NA	NA
+previously ID’d as yellow		NA		NA	NA	NA	NA	NA
+probably mis-Id’d as blk birch previously		NA		NA	NA	NA	NA	NA
+"ratty leaves, JLH, LTC, CAH"		NA		NA	NA	NA	NA	NA
+RGB		NA		NA	NA	NA	NA	NA
+RJC		NA		NA	NA	NA	NA	NA
+"RJC,  down near ground"		NA		NA	NA	NA	NA	NA
+"RJC, 2 stems"		NA		NA	NA	NA	NA	NA
+"RJC, JDH"		NA		NA	NA	NA	NA	NA
+"RJC, JDH, mult. stems"		NA		NA	NA	NA	NA	NA
+"RJC, mult stems"		NA		NA	NA	NA	NA	NA
+"RJC, mult. stems"		NA		NA	NA	NA	NA	NA
+"RJC, multiple stems"		NA		NA	NA	NA	NA	NA
+"RJC, RWC, ADK, JDH, AMR"		NA		NA	NA	NA	NA	NA
+"RJC, RWC, ADK, JDH, AMR, 2 stems"		NA		NA	NA	NA	NA	NA
+"RJC, RWC, JDH"		NA		NA	NA	NA	NA	NA
+"RJC, RWC, JDH, 2 stems"		NA		NA	NA	NA	NA	NA
+"RJC, RWC, JDH, possibly a tortricoid"	possibly a tortricoid	NA		NA	NA	NA	NA	NA
+"RJC, RWC, JDH. 2 stems"		NA		NA	NA	NA	NA	NA
+"RJC, two stems"		NA		NA	NA	NA	NA	NA
+rolled from side	rolled from side	NA		NA	1	NA	NA	NA
+ruby quaker	ruby quaker	NA		NA	NA	NA	NA	NA
+RWC		NA		NA	NA	NA	NA	NA
+"RWC, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, a linden looper!"	a linden looper!	NA		NA	NA	NA	NA	NA
+"RWC, ADK"		NA		NA	NA	NA	NA	NA
+"RWC, ADK, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, ADK, AMR"		NA		NA	NA	NA	NA	NA
+"RWC, ADK, AMR, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, ADK, AMR, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"RWC, ADK, AMR, multiple stems"		NA		NA	NA	NA	NA	NA
+"RWC, ADK, AMR, slug-like"	slug-like	NA		NA	NA	NA	NA	NA
+"RWC, ADK, JDH"		NA		NA	NA	NA	NA	NA
+"RWC, ADK, JDH, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, ADK, JDH, AMR"		NA		NA	NA	NA	NA	NA
+"RWC, ADK, JDH, AMR, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, ADK, JDH, dead/parsitized lep"		NA		NA	NA	NA	NA	NA
+"RWC, ADK, JDH, multiple stems"		NA		NA	NA	NA	NA	NA
+"RWC, ADK, JDH, multiples stems"		NA		NA	NA	NA	NA	NA
+"RWC, ADK. 3 stems"		NA		NA	NA	NA	NA	NA
+"RWC, AMC, ZND, BMW"		NA		NA	NA	NA	NA	NA
+"RWC, AMC, ZND, BMW,"		NA		NA	NA	NA	NA	NA
+"RWC, AMC, ZND, BMW, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, AMC, ZND, BMW, fuzzy, 2 stems"	fuzzy	NA		1	NA	NA	NA	NA
+"RWC, AMC, ZND, BMW, multiple stems"		NA		NA	NA	NA	NA	NA
+"RWC, AMR, MCC, SAM, VCW, JLH, NAW"		NA		NA	NA	NA	NA	NA
+"RWC, AMR, MCC, SAM, VCW, JLH, NAW, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, AMR, MCC, SAM, VCW, JLH, NAW, mult. stems"		NA		NA	NA	NA	NA	NA
+"RWC, BML, JDH"		NA		NA	NA	NA	NA	NA
+"RWC, BML, JDH, fly larva"	fly larva	NA	fly	NA	NA	NA	NA	NA
+"RWC, BMW"		NA		NA	NA	NA	NA	NA
+"RWC, BMW, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, BMW, AMC"		NA		NA	NA	NA	NA	NA
+"RWC, BMW, AMC, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, BMW, AMC, first Linden Looper!"	first linden looper!	NA		NA	NA	NA	NA	NA
+"RWC, BMW, AMC, multiple stems"		NA		NA	NA	NA	NA	NA
+"RWC, BMW, multiple stems"		NA		NA	NA	NA	NA	NA
+"RWC, BMW, ZSZ"		NA		NA	NA	NA	NA	NA
+"RWC, BMW, ZSZ, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, BMW, ZSZ, 3 stems"		NA		NA	NA	NA	NA	NA
+"RWC, BMW, ZSZ, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"RWC, BMW, ZSZ, multiple stems"		NA		NA	NA	NA	NA	NA
+"RWC, BMW,AMC"		NA		NA	NA	NA	NA	NA
+"RWC, BMW,AMC ,2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, BMW,AMC, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, JDH"		NA		NA	NA	NA	NA	NA
+"RWC, JDH blackhead"	blackhead	NA		NA	NA	NA	NA	NA
+"RWC, JDH, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, 2 stems, fuzzy!"	fuzzy!	NA		1	NA	NA	NA	NA
+"RWC, JDH, 3 stems"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, a linden looper!"	a linden looper!	NA		NA	NA	NA	NA	NA
+"RWC, JDH, ADK"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, ADK, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, ADK, 2 strems"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, ADK, AMR"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, ADK, AMR, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, ADK, AMR, 3 stems"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, ADK, AMR, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"RWC, JDH, ADK, AMR, multiple stems"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, ADK, AMR, saddleback (rolled?)"	saddleback (rolled?)	NA		NA	NA	NA	NA	NA
+"RWC, JDH, ADK, AMR, slug-like"	slug-like	NA		NA	NA	NA	NA	NA
+"RWC, JDH, AMR"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, AMR, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, AMR, ADK"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, AMR, ADK, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, AMR, ADK, multiple stems"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, blackhead"	blackhead	NA		NA	NA	NA	NA	NA
+"RWC, JDH, blackhead/ stitched"	blackhead/ stitched	NA		NA	1	NA	NA	NA
+"RWC, JDH, BML"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, BML, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, MHC, JLH"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, mult stems"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, mult. stems"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, mult. stems, tiny leaves"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, no prolegs!"	no prolegs!	NA		NA	NA	NA	NA	NA
+"RWC, JDH, NRH"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, NRH, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, RJC"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, RJC, NRH, NAW"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, RJC, NRH, NAW, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, RJC, NRH, NAW, slug-like"	slug-like	NA		NA	NA	NA	NA	NA
+"RWC, JDH, RWC"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, RWC, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, JDH, slug-like"	slug-like	NA		NA	NA	NA	NA	NA
+"RWC, JDH, sluglike"	sluglike	NA		NA	NA	NA	NA	NA
+"RWC, JDH, two stems"		NA		NA	NA	NA	NA	NA
+"RWC, JLH"		NA		NA	NA	NA	NA	NA
+"RWC, JLH, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"RWC, JLH, JDH, ADK, RJC"		NA		NA	NA	NA	NA	NA
+"RWC, JLH, JDH, ADK, RJC, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, JLH, JDH, ADK, RJC, estimated length"	estimated length	NA		NA	NA	NA	NA	NA
+"RWC, JLH, JDH, MHC"		NA		NA	NA	NA	NA	NA
+"RWC, JLH, MHC"		NA		NA	NA	NA	NA	NA
+"RWC, JLH, MHC, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, JLH, MHC, JDH, RJC"		NA		NA	NA	NA	NA	NA
+"RWC, JLH, MHC, JDH, RJC, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, JLH, MHC, not tiny leaves"		NA		NA	NA	NA	NA	NA
+"RWC, JLH, MHC, tiny leave"		NA		NA	NA	NA	NA	NA
+"RWC, JLH, MHC, tiny leaves"		NA		NA	NA	NA	NA	NA
+"RWC, JLH, RJC"		NA		NA	NA	NA	NA	NA
+"RWC, JLH, RJC, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, JLH, two stems for 50"		NA		NA	NA	NA	NA	NA
+"RWC, JMS"		NA		NA	NA	NA	NA	NA
+"RWC, JMS, 3 stems"		NA		NA	NA	NA	NA	NA
+"RWC, JMS, multiple stems"		NA		NA	NA	NA	NA	NA
+"RWC, JMS, multiples stems"		NA		NA	NA	NA	NA	NA
+"RWC, JMW, BML"		NA		NA	NA	NA	NA	NA
+"RWC, JMW, BML, 2 stems for 50"		NA		NA	NA	NA	NA	NA
+"RWC, JMW, BML, LINDEN LOOPER"	linden looper	NA		NA	NA	NA	NA	NA
+"RWC, JMW, BML, little shoots"		NA		NA	NA	NA	NA	NA
+"RWC, JMW, BML, S3 too close to building females, skipped"		NA		NA	NA	NA	NA	NA
+"RWC, JMW, BML, SLUG-LIKE, FLY LARVA"	"slug-like, fly larva"	NA	fly	NA	NA	NA	NA	NA
+"RWC, MCC"		NA		NA	NA	NA	NA	NA
+"RWC, MCC, JDH"		NA		NA	NA	NA	NA	NA
+"RWC, MCC, JDH, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, MCC, mult. stems"		NA		NA	NA	NA	NA	NA
+"RWC, mult. stems"		NA		NA	NA	NA	NA	NA
+"RWC, NEK"		NA		NA	NA	NA	NA	NA
+"RWC, NEK, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, NEK, BMW, ZSZ"		NA		NA	NA	NA	NA	NA
+"RWC, NEK, BMW, ZSZ, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, NEK, BMW, ZSZ, multiple stems"		NA		NA	NA	NA	NA	NA
+"RWC, NEK, ZSZ"		NA		NA	NA	NA	NA	NA
+"RWC, NEK, ZSZ, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, NRH"		NA		NA	NA	NA	NA	NA
+"RWC, NRH, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, NRH, JDH"		NA		NA	NA	NA	NA	NA
+"RWC, NRH, JDH, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, NRH, mult. stems"		NA		NA	NA	NA	NA	NA
+"RWC, NRH, RJC"		NA		NA	NA	NA	NA	NA
+"RWC, NRH, RJC, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, PSR, AJF, JDH"		NA		NA	NA	NA	NA	NA
+"RWC, slug-like"	slug-like	NA		NA	NA	NA	NA	NA
+"RWC, WBL, AMC, BMW, ZSZ"		NA		NA	NA	NA	NA	NA
+"RWC, WBL, AMC, BMW, ZSZ, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, WBL, BMW"		NA		NA	NA	NA	NA	NA
+"RWC, WBL, BMW, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, WBL, BMW, multiple stems"		NA		NA	NA	NA	NA	NA
+"RWC, WBL, RJC, AMC, BMW"		NA		NA	NA	NA	NA	NA
+"RWC, WBL, RJC, AMC, BMW, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, WBL, RJC, AMC, BMW, fuzzy, multiple stems"	fuzzy	NA		1	NA	NA	NA	NA
+"RWC, WBL, RJC, AMC, BMW, multiple stems"		NA		NA	NA	NA	NA	NA
+"RWC, ZND, ZSZ"		NA		NA	NA	NA	NA	NA
+"RWC, ZND, ZSZ, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, ZND, ZSZ, multiple stems"		NA		NA	NA	NA	NA	NA
+"RWC, ZND, ZSZ, no length given"	no length given	NA		NA	NA	NA	NA	NA
+"RWC, ZSZ, BMW"		NA		NA	NA	NA	NA	NA
+"RWC, ZSZ, BMW, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, ZSZ, BMW, 3 stems"		NA		NA	NA	NA	NA	NA
+"RWC, ZSZ, WBC, AMC"		NA		NA	NA	NA	NA	NA
+"RWC, ZSZ, WBC, AMC, multiple stems"		NA		NA	NA	NA	NA	NA
+"RWC, ZSZ, WBL"		NA		NA	NA	NA	NA	NA
+"RWC, ZSZ, WBL,"		NA		NA	NA	NA	NA	NA
+"RWC, ZSZ, WBL, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, ZSZ, WBL, AMC"		NA		NA	NA	NA	NA	NA
+"RWC, ZSZ, WBL, AMC "		NA		NA	NA	NA	NA	NA
+"RWC, ZSZ, WBL, AMC, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, ZSZ, WBL, AMC, BMW"		NA		NA	NA	NA	NA	NA
+"RWC, ZSZ, WBL, AMC, BMW, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, ZSZ, WBL, AMC, BMW, multiple stems"		NA		NA	NA	NA	NA	NA
+"RWC, ZSZ, WBL, AMC, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"RWC, ZSZ, WBL, AMC, length estimated"	length estimated	NA		NA	NA	NA	NA	NA
+"RWC, ZSZ, WBL, AMC, multi stem"		NA		NA	NA	NA	NA	NA
+"RWC, ZSZ, WBL, AMC, tiny leaves"		NA		NA	NA	NA	NA	NA
+"RWC, ZSZ, WBL, AMC, tiny leaves,  2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, ZSZ, WBL, AMC, ZND"		NA		NA	NA	NA	NA	NA
+"RWC, ZSZ, WBL, AMC, ZND, 2 stems"		NA		NA	NA	NA	NA	NA
+"RWC, ZSZ, WBL, AMC, ZND, multiple stems"		NA		NA	NA	NA	NA	NA
+"RWC, ZSZ, WBL, multiple stems"		NA		NA	NA	NA	NA	NA
+"RWC,3 stems"		NA		NA	NA	NA	NA	NA
+"same as on BB, fine hairs, blk cap, green body, 4 pairs prolegs"	"fine hairs, blk cap, green body, 4 pairs prolegs"	NA		1	NA	NA	NA	NA
+"SAW, CMK"		NA		NA	NA	NA	NA	NA
+"SAW, GSP"		NA		NA	NA	NA	NA	NA
+"SAW, GSP, (parasitized)"	parasitized	NA		NA	NA	NA	NA	NA
+"SAW, GSP, CMK"		NA		NA	NA	NA	NA	NA
+"SAW, GSP, JLH, CMK"		NA		NA	NA	NA	NA	NA
+"SAW, GSP, lots of poop!"		NA		NA	NA	NA	NA	NA
+"SAW, GSP, MHC, CMK"		NA		NA	NA	NA	NA	NA
+"SAW, GSP, tiny; black; tufts spikey hair"	tiny; black; tufts spikey hair	NA		1	NA	NA	NA	NA
+"SAW, JLH, CMK, GSP"		NA		NA	NA	NA	NA	NA
+"SAW, JLH, CMK, GSP, Except a weird thing "		NA		NA	NA	NA	NA	NA
+"sawfly?, 5 pairs of pro-legs, fuzzy white and black hairs"	"sawfly?, 5 pairs of pro-legs, fuzzy white and black hairs"	NA		1	NA	NA	NA	NA
+second white oak skipped due to yellow jackets		NA		NA	NA	NA	NA	NA
+skinny	skinny	NA		NA	NA	NA	NA	NA
+"skinny,CAH, LTC, AJC, MHC"	skinny	NA		NA	NA	NA	NA	NA
+slimy	slimy	NA		NA	NA	NA	NA	NA
+"speckled green fruit worm, MHC, JLH, AJC, CK, JC"	speckled green fruit worm	NA		NA	NA	NA	NA	NA
+"striped black and white, cemented/rolled in between 2 leaves"	"striped black and white, cemented/rolled in between 2 leaves"	NA		NA	1	NA	NA	NA
+SVM		NA		NA	NA	NA	NA	NA
+taxa not entered on sheet		NA		NA	NA	NA	NA	NA
+translucent/black	translucent/black	NA		NA	NA	NA	NA	NA
+transparent	transparent	NA		NA	NA	NA	NA	NA
+transparent/black	transparent/black	NA		NA	NA	NA	NA	NA
+"tussock moth, CAH, MHC, AJC, MGR"	tussock moth	NA		1	NA	NA	NA	NA
+"Tussock moth? SAW, GSP, MHC, CMK"	tussock moth?	NA		1	NA	NA	NA	NA
+"two stems, JMC, CAH, LTC, KMS"		NA		NA	NA	NA	NA	NA
+"two stems, JMC, LTC, CAH"		NA		NA	NA	NA	NA	NA
+two trees for 50 leaf sample		NA		NA	NA	NA	NA	NA
+two trees for 50 leaves		NA		NA	NA	NA	NA	NA
+"two trees, JLH, CAH"		NA		NA	NA	NA	NA	NA
+"two trees, JLH, PKS, CAH, JMC, LTC"		NA		NA	NA	NA	NA	NA
+VML		NA		NA	NA	NA	NA	NA
+WBL		NA		NA	NA	NA	NA	NA
+"WBL, 2 stem"		NA		NA	NA	NA	NA	NA
+"WBL, 47 leaves, multistem"		NA		NA	NA	NA	NA	NA
+"WBL, AMC"		NA		NA	NA	NA	NA	NA
+"WBL, AMC,"		NA		NA	NA	NA	NA	NA
+"WBL, AMC, 2 stem"		NA		NA	NA	NA	NA	NA
+"WBL, AMC, 2 stems"		NA		NA	NA	NA	NA	NA
+"WBL, AMC, 3 stem"		NA		NA	NA	NA	NA	NA
+"WBL, AMC, multiple stems"		NA		NA	NA	NA	NA	NA
+"WBL, AMC, multistem"		NA		NA	NA	NA	NA	NA
+"WBL, AMC, NEK"		NA		NA	NA	NA	NA	NA
+"WBL, AMC, ZSZ"		NA		NA	NA	NA	NA	NA
+"WBL, AMC, ZSZ, multistem"		NA		NA	NA	NA	NA	NA
+"WBL, BMW"		NA		NA	NA	NA	NA	NA
+"WBL, BMW, 2 stem"		NA		NA	NA	NA	NA	NA
+"WBL, BMW, 3 stem"		NA		NA	NA	NA	NA	NA
+"WBL, BMW, multistem"		NA		NA	NA	NA	NA	NA
+"WBL, BMW, multistem, small leaves"		NA		NA	NA	NA	NA	NA
+"WBL, BMW, small leaves"		NA		NA	NA	NA	NA	NA
+"WBL, BMW, small leaves, multistem"		NA		NA	NA	NA	NA	NA
+"WBL, multistem"		NA		NA	NA	NA	NA	NA
+"WBL, NEK, BMW, RWC"		NA		NA	NA	NA	NA	NA
+"WBL, NEK, BMW, RWC, 2 stems"		NA		NA	NA	NA	NA	NA
+"WBL, NEK, BMW, RWC, multiple stems"		NA		NA	NA	NA	NA	NA
+"WBL, RJC"		NA		NA	NA	NA	NA	NA
+"WBL, RJC, 2 stem"		NA		NA	NA	NA	NA	NA
+"WBL, RJC, 3 stem"		NA		NA	NA	NA	NA	NA
+"WBL, RJC, multistem"		NA		NA	NA	NA	NA	NA
+"WBL, RWC, ZSZ"		NA		NA	NA	NA	NA	NA
+"WBL, RWC, ZSZ, 2 stems"		NA		NA	NA	NA	NA	NA
+"WBL, RWC, ZSZ, multiple stems"		NA		NA	NA	NA	NA	NA
+"WBL, ZSZ"		NA		NA	NA	NA	NA	NA
+"WBL, ZSZ, "		NA		NA	NA	NA	NA	NA
+"WBL, ZSZ,  3 stem"		NA		NA	NA	NA	NA	NA
+"WBL, ZSZ, 2 stem"		NA		NA	NA	NA	NA	NA
+"WBL, ZSZ, 3 stem"		NA		NA	NA	NA	NA	NA
+"WBL, ZSZ, multistem"		NA		NA	NA	NA	NA	NA
+"white w/ yellow stripes, SAW, CMK"	white w/ yellow stripes	NA		NA	NA	NA	NA	NA
+"wigling insect, emerging from pupa?"	"wigling insect, emerging from pupa?"	NA		NA	NA	NA	NA	NA
+with happy face	with happy face	NA		NA	NA	NA	NA	NA
+yellow and white	yellow and white	NA		NA	NA	NA	NA	NA
+yellow with diamond patterns	yellow with diamond patterns	NA		NA	NA	NA	NA	NA
+yellow with diamonds	yellow with diamonds	NA		NA	NA	NA	NA	NA
+yellow with gray ends	yellow with gray ends	NA		NA	NA	NA	NA	NA
+ZSZ		NA		NA	NA	NA	NA	NA
+"ZSZ, AMC"		NA		NA	NA	NA	NA	NA
+"ZSZ, AMC multistem"		NA		NA	NA	NA	NA	NA
+"ZSZ, AMC,"		NA		NA	NA	NA	NA	NA
+"ZSZ, AMC, 2 stem"		NA		NA	NA	NA	NA	NA
+"ZSZ, AMC, 2 stem, small leaves"		NA		NA	NA	NA	NA	NA
+"ZSZ, AMC, 3 stem"		NA		NA	NA	NA	NA	NA
+"ZSZ, AMC, 43 leaves"		NA		NA	NA	NA	NA	NA
+"ZSZ, AMC, BMW"		NA		NA	NA	NA	NA	NA
+"ZSZ, AMC, BMW, 2 stem"		NA		NA	NA	NA	NA	NA
+"ZSZ, AMC, BMW, 2 stem, tiny leaves"		NA		NA	NA	NA	NA	NA
+"ZSZ, AMC, BMW, 2 stems"		NA		NA	NA	NA	NA	NA
+"ZSZ, AMC, BMW, 3 stem"		NA		NA	NA	NA	NA	NA
+"ZSZ, AMC, BMW, 3 stem, tiny leaves"		NA		NA	NA	NA	NA	NA
+"ZSZ, AMC, BMW, fuzzy"	fuzzy	NA		1	NA	NA	NA	NA
+"ZSZ, AMC, BMW, hanging from leaf"	hanging from leaf	NA		NA	NA	NA	NA	NA
+"ZSZ, AMC, BMW, larva"	larva	NA	unidentified	NA	NA	NA	NA	NA
+"ZSZ, AMC, BMW, multistem"		NA		NA	NA	NA	NA	NA
+"ZSZ, AMC, BMW, multistem, tiny leaves"		NA		NA	NA	NA	NA	NA
+"ZSZ, AMC, BMW, small leaves"		NA		NA	NA	NA	NA	NA
+"ZSZ, AMC, BMW, tiny leaves"		NA		NA	NA	NA	NA	NA
+"ZSZ, AMC, BMW, tiny leaves, 3 stem"		NA		NA	NA	NA	NA	NA
+"ZSZ, AMC, BMW,multistem, tiny leaves"		NA		NA	NA	NA	NA	NA
+"ZSZ, AMC, multistem"		NA		NA	NA	NA	NA	NA
+"ZSZ, AMC, small leaves"		NA		NA	NA	NA	NA	NA
+"ZSZ, AMC, small leaves, multistem"		NA		NA	NA	NA	NA	NA
+"ZSZ, AMC, tiny leaves"		NA		NA	NA	NA	NA	NA
+"ZSZ, AMC,multistem"		NA		NA	NA	NA	NA	NA
+"ZSZ, BMW"		NA		NA	NA	NA	NA	NA
+"ZSZ, BMW ,WBL"		NA		NA	NA	NA	NA	NA
+"ZSZ, BMW ,WBL, 2 stem"		NA		NA	NA	NA	NA	NA
+"ZSZ, BMW ,WBL, multistem"		NA		NA	NA	NA	NA	NA
+"ZSZ, BMW, 2 stem"		NA		NA	NA	NA	NA	NA
+"ZSZ, BMW, 2 stems"		NA		NA	NA	NA	NA	NA
+"ZSZ, BMW, 3 stem"		NA		NA	NA	NA	NA	NA
+"ZSZ, BMW, 3 stems"		NA		NA	NA	NA	NA	NA
+"ZSZ, BMW, AMC"		NA		NA	NA	NA	NA	NA
+"ZSZ, BMW, AMC, 2 stem"		NA		NA	NA	NA	NA	NA
+"ZSZ, BMW, AMC, 2 stems"		NA		NA	NA	NA	NA	NA
+"ZSZ, BMW, AMC, mulistem"		NA		NA	NA	NA	NA	NA
+"ZSZ, BMW, AMC, multistem"		NA		NA	NA	NA	NA	NA
+"ZSZ, BMW, multiple stems"		NA		NA	NA	NA	NA	NA
+"ZSZ, BMW, multistem"		NA		NA	NA	NA	NA	NA
+"ZSZ, BMW, small leaves"		NA		NA	NA	NA	NA	NA
+"ZSZ, BMW, small leaves, 2 stem"		NA		NA	NA	NA	NA	NA
+"ZSZ, BMW, small leaves, multistem"		NA		NA	NA	NA	NA	NA
+"ZSZ, fuzzy, webbed"	"fuzzy, webbed"	NA		1	NA	NA	NA	NA
+"ZSZ, multistem"		NA		NA	NA	NA	NA	NA
+"ZSZ, NEK"		NA		NA	NA	NA	NA	NA
+"ZSZ, NEK,  multiple stems"		NA		NA	NA	NA	NA	NA
+"ZSZ, NEK, multiple stems"		NA		NA	NA	NA	NA	NA
+"ZSZ, RWC"		NA		NA	NA	NA	NA	NA
+"ZSZ, RWC, 2 stems"		NA		NA	NA	NA	NA	NA
+"ZSZ, RWC, multiple stems"		NA		NA	NA	NA	NA	NA
+"ZSZ, WBL"		NA		NA	NA	NA	NA	NA
+"ZSZ, WBL,"		NA		NA	NA	NA	NA	NA
+"ZSZ, WBL, "		NA		NA	NA	NA	NA	NA
+"ZSZ, WBL, 2 stem"		NA		NA	NA	NA	NA	NA
+"ZSZ, WBL, 3 stem"		NA		NA	NA	NA	NA	NA
+"ZSZ, WBL, 46 leaves"		46		NA	NA	NA	NA	NA
+"ZSZ, WBL, AMC"		NA		NA	NA	NA	NA	NA
+"ZSZ, WBL, AMC,"		NA		NA	NA	NA	NA	NA
+"ZSZ, WBL, AMC, 2 stems"		NA		NA	NA	NA	NA	NA
+"ZSZ, WBL, AMC, rain"		NA		NA	NA	NA	NA	NA
+"ZSZ, WBL, AMC, rain,"		NA		NA	NA	NA	NA	NA
+"ZSZ, WBL, AMC, rain, 3 stem"		NA		NA	NA	NA	NA	NA
+"ZSZ, WBL, AMC, rain, multiple stems"		NA		NA	NA	NA	NA	NA
+"ZSZ, WBL, AMC, rain, multistem"		NA		NA	NA	NA	NA	NA
+"ZSZ, WBL, AMC, rain, two stem"		NA		NA	NA	NA	NA	NA
+"ZSZ, WBL, AMC, rain. multistem"		NA		NA	NA	NA	NA	NA
+"ZSZ, WBL, AMC, rain. two stem"		NA		NA	NA	NA	NA	NA
+"ZSZ, WBL, multistem"		NA		NA	NA	NA	NA	NA
+"ZSZ, WBL, multistem, 16 tiny"		NA		NA	NA	NA	NA	NA
