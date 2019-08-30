@@ -99,11 +99,16 @@ cowplusnotes$surveyed<-ifelse(cowplusnotes$NumCaterpillars>=0,"1",NA)
 
 grouped_cow<-cowplusnotes%>%
               filter(Year==2010)%>%
-              select(Plot,Yearday,Point,TreeSpecies,Sample,NumCaterpillars,CaterpillarBiomass_ma,CaterpillarFamily,surveyed)
+              select(Plot,Yearday,Point,TreeSpecies,Sample,surveyed)%>%
+              distinct()
               
 widecowplusnotes= grouped_cow%>%
-                  spread(Yearday,surveyed,fill=NA,convert=TRUE) %>%
-  arrange(`136`)
+                  spread(Yearday,surveyed,fill=NA,convert=TRUE)%>%
+                  arrange(`136`)
+
+widecowsum<-widecowplusnotes%>%
+            summarize((count(`136`)))
+
 
 cowsurvs = cowplusnotes%>%
   select(Year, Plot, Yearday, Point, TreeSpecies, Sample, Notes) %>%
