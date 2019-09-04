@@ -11,8 +11,7 @@ cats = read.table('data/Coweeta_cats.txt', header = T, sep = '\t', fill = TRUE, 
   mutate(Point = trimws(Point)) %>%
   mutate(Point = gsub("\v", "", Point)) %>%
   mutate(CaterpillarFamily = trimws(CaterpillarFamily)) %>%
-  mutate(CaterpillarFamily = gsub("\v", "", CaterpillarFamily),
-         Comments = gsub("\v", "", Comments))
+  mutate(CaterpillarFamily = gsub("\v", "", CaterpillarFamily),Comments = gsub("\v", "", Comments))
 
 catcomments = count(cats, Comments)
 #write.table(catcomments, 'z:/lab/databases/coweetacaterpillars/coweeta_comments.txt', sep = '\t', row.names = F)
@@ -100,14 +99,33 @@ cowplusnotes$surveyed<-ifelse(cowplusnotes$NumCaterpillars>=0,"1",NA)
 grouped_cow<-cowplusnotes%>%
               filter(Year==2010)%>%
               select(Plot,Yearday,Point,TreeSpecies,Sample,surveyed)%>%
-              distinct()
+              distinct()%>%
+              group_by(Point,Plot,TreeSpecies,Sample,Yearday)%>%
+              summarise(n())
               
-widecowplusnotes= grouped_cow%>%
-                  spread(Yearday,surveyed,fill=NA,convert=TRUE)%>%
+
+cow_freq<-grouped_cow%>%
+          group_by(Point,Plot,TreeSpecies,Sample)%>%
+          mutate(freq=(lead(Yearday)-Yearday))
+          
+sampled.days<-grouped_cow%>%
+              group_by(Point,Plot,TreeSpecies,Sample)%>%
+              summarize(n())
+  
+              
+widecowplusnotes<- grouped_cow%>%
+                  spread(Yearday,'n()',fill=NA,convert=TRUE)%>%
                   arrange(`136`)
 
-widecowsum<-widecowplusnotes%>%
-            summarize((count(`136`)))
+write.csv(widecowplusnotes,'widecowplusnotes.csv')
+
+
+
+widecowpointtally<-widecowplusnotes%>%
+            group_by(Point)%>%
+            tally()
+          
+
 
 
 cowsurvs = cowplusnotes%>%
