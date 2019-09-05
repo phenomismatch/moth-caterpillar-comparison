@@ -96,35 +96,68 @@ cowplusnotes = left_join(catplus, dups019, by = c('Year', 'Plot', 'Yearday', 'Po
 
 cowplusnotes$surveyed<-ifelse(cowplusnotes$NumCaterpillars>=0,"1",NA)
 
-grouped_cow<-cowplusnotes%>%
-              filter(Year==2010)%>%
-              select(Plot,Yearday,Point,TreeSpecies,Sample,surveyed)%>%
-              distinct()%>%
-              group_by(Point,Plot,TreeSpecies,Sample,Yearday)%>%
-              summarise(n())
-              
+grouped_cow_2010<-cowplusnotes%>%
+  filter(Year==2010)%>%
+  select(Plot,Yearday,Point,TreeSpecies,Sample,surveyed)%>%
+  distinct()%>%
+  group_by(Point,Plot,TreeSpecies,Sample,Yearday)%>%
+  summarise(n())
 
-cow_freq<-grouped_cow%>%
-          group_by(Point,Plot,TreeSpecies,Sample)%>%
-          mutate(freq=(lead(Yearday)-Yearday))
-          
-sampled.days<-grouped_cow%>%
-              group_by(Point,Plot,TreeSpecies,Sample)%>%
-              summarize(n())
-  
-              
-widecowplusnotes<- grouped_cow%>%
-                  spread(Yearday,'n()',fill=NA,convert=TRUE)%>%
-                  arrange(`136`)
+grouped_cow_2011<-cowplusnotes%>%
+  filter(Year==2011)%>%
+  select(Plot,Yearday,Point,TreeSpecies,Sample,surveyed)%>%
+  distinct()%>%
+  group_by(Point,Plot,TreeSpecies,Sample,Yearday)%>%
+  summarise(n())
 
-write.csv(widecowplusnotes,'widecowplusnotes.csv')
+grouped_cow_2012<-cowplusnotes%>%
+  filter(Year==2012)%>%
+  select(Plot,Yearday,Point,TreeSpecies,Sample,surveyed)%>%
+  distinct()%>%
+  group_by(Point,Plot,TreeSpecies,Sample,Yearday)%>%
+  summarise(n())
+
+
+cow_freq_2010<-grouped_cow_2010%>%
+  group_by(Point,Plot,TreeSpecies,Sample)%>%
+  mutate(freq=(lead(Yearday)-Yearday))
+
+cow_freq_2011<-grouped_cow_2011%>%
+  group_by(Point,Plot,TreeSpecies,Sample)%>%
+  mutate(freq=(lead(Yearday)-Yearday))
+
+cow_freq_2012<-grouped_cow_2012%>%
+  group_by(Point,Plot,TreeSpecies,Sample)%>%
+  mutate(freq=(lead(Yearday)-Yearday))
+
+
+
+
+sampled.days_2010<-grouped_cow_2010%>%
+  group_by(Point,Plot,TreeSpecies,Sample)%>%
+  summarize(n())
+
+sampled.days_2011<-grouped_cow_2011%>%
+  group_by(Point,Plot,TreeSpecies,Sample)%>%
+  summarize(n())
+
+sampled.days_2012<-grouped_cow_2012%>%
+  group_by(Point,Plot,TreeSpecies,Sample)%>%
+  summarize(n())
+
+
+widecowplusnotes_2010<- grouped_cow_2010%>%
+  spread(Yearday,'n()',fill=NA,convert=TRUE)%>%
+  arrange(`136`)
+
+write.csv(widecowplusnotes_2010,'widecowplusnotes_2010.csv')
 
 
 
 widecowpointtally<-widecowplusnotes%>%
-            group_by(Point)%>%
-            tally()
-          
+  group_by(Point)%>%
+  tally()
+
 
 
 
