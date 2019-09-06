@@ -103,6 +103,8 @@ grouped_cow_2010<-cowplusnotes%>%
   group_by(Point,Plot,TreeSpecies,Sample,Yearday)%>%
   summarise(n())
 
+
+
 grouped_cow_2011<-cowplusnotes%>%
   filter(Year==2011)%>%
   select(Plot,Yearday,Point,TreeSpecies,Sample,surveyed)%>%
@@ -110,12 +112,26 @@ grouped_cow_2011<-cowplusnotes%>%
   group_by(Point,Plot,TreeSpecies,Sample,Yearday)%>%
   summarise(n())
 
-grouped_cow_2012<-cowplusnotes%>%
-  filter(Year==2012)%>%
-  select(Plot,Yearday,Point,TreeSpecies,Sample,surveyed)%>%
-  distinct()%>%
-  group_by(Point,Plot,TreeSpecies,Sample,Yearday)%>%
-  summarise(n())
+
+
+coweeta_year_sep<-function(field_year, field_plot){
+  group_cow_set<-cowplusnotes%>%
+  filter(cowplusnotes$Year==field_year, cowplusnotes$Plot==field_plot)%>%
+    select(Plot,Yearday,Point,TreeSpecies,Sample)%>%
+    distinct()%>%
+    group_by(Point,Plot,TreeSpecies,Sample,Yearday)%>%
+    summarise(n())%>%
+    mutate(freq=(lead(Yearday)-Yearday))
+  #Might want to separate these two functions, I want to create two different dataframes with it to plot
+  sample.days<-group_cow_set%>%
+    group_by(Point,Plot,TreeSpecies,Sample)%>%
+    summarize(n())
+  #return(group_cow_set)
+}
+
+Cow_2010_BB<-coweeta_year_sep(2010, "BB")
+Coweeta_year_sep(2011, "BS")
+
 
 
 cow_freq_2010<-grouped_cow_2010%>%
