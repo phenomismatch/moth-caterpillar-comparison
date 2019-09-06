@@ -120,7 +120,10 @@ grouped_cow_2012<-cowplusnotes%>%
 
 cow_freq_2010<-grouped_cow_2010%>%
   group_by(Point,Plot,TreeSpecies,Sample)%>%
-  mutate(freq=(lead(Yearday)-Yearday))
+  mutate(freq=(lead(Yearday)-Yearday),
+         gridLetter = substr(Point, 1, 1),
+         gridY = as.numeric(substr(Point, 2, nchar(Point))),
+         gridX = which(LETTERS == gridLetter))
 
 cow_freq_2011<-grouped_cow_2011%>%
   group_by(Point,Plot,TreeSpecies,Sample)%>%
@@ -135,11 +138,14 @@ cow_freq_2012<-grouped_cow_2012%>%
 
 sampled.days_2010<-grouped_cow_2010%>%
   group_by(Point,Plot,TreeSpecies,Sample)%>%
-  summarize(n())
+  summarize(n = n()) %>%
+  mutate(gridLetter = substr(Point, 1, 1),
+         gridY = as.numeric(substr(Point, 2, nchar(Point))),
+         gridX = which(LETTERS == gridLetter))
 
 sampled.days_2011<-grouped_cow_2011%>%
   group_by(Point,Plot,TreeSpecies,Sample)%>%
-  summarize(n())
+  summarize(n = n())
 
 sampled.days_2012<-grouped_cow_2012%>%
   group_by(Point,Plot,TreeSpecies,Sample)%>%
@@ -158,6 +164,16 @@ widecowpointtally<-widecowplusnotes%>%
   group_by(Point)%>%
   tally()
 
+
+# Plots examining # visits by grid point by yearday
+BBfreq10 = filter(cow_freq_2010, Plot=="BB")
+
+
+par(mfrow = c(5, 5), mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
+for (j in unique(BBfreq10$Yearday)) {
+  tmp = filter(BBfreq10, Yearday == j)
+  plot(BBfreq10$gridX, BBfreq10$gridY, pch = 16, xlab = "", ylab = "")
+}
 
 
 
