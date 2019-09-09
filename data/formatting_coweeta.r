@@ -1,9 +1,10 @@
 # Convert UGA Coweeta Caterpillars dataset into format of Caterpillars Count!
 # --original file provided by Bob Cooper, Coweeta UGA Caterpillar data.xlsx
-
+ 
 library(dplyr)
 library(stringr)
 library(tidyr)
+library(ggplot2)
 
 # Read in data, clean up leading/trailing spaces, weird symbols
 cats = read.table('data/Coweeta_cats.txt', header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE) %>%
@@ -96,76 +97,73 @@ cowplusnotes = left_join(catplus, dups019, by = c('Year', 'Plot', 'Yearday', 'Po
 
 cowplusnotes$surveyed<-ifelse(cowplusnotes$NumCaterpillars>=0,"1",NA)
 
-grouped_cow_2010<-cowplusnotes%>%
-  filter(Year==2010)%>%
-  select(Plot,Yearday,Point,TreeSpecies,Sample,surveyed)%>%
-  distinct()%>%
-  group_by(Point,Plot,TreeSpecies,Sample,Yearday)%>%
-  summarise(n())
 
 
 
-grouped_cow_2011<-cowplusnotes%>%
-  filter(Year==2011)%>%
-  select(Plot,Yearday,Point,TreeSpecies,Sample,surveyed)%>%
-  distinct()%>%
-  group_by(Point,Plot,TreeSpecies,Sample,Yearday)%>%
-  summarise(n())
+#grouped_cow_2010<-cowplusnotes%>%
+#  filter(Year==2010)%>%
+#  select(Plot,Yearday,Point,TreeSpecies,Sample,surveyed)%>%
+#  distinct()%>%
+#  group_by(Point,Plot,TreeSpecies,Sample,Yearday)%>%
+#  summarise(n())
 
 
-
-coweeta_year_sep<-function(field_year, field_plot){
+#Not sure if this is the right way to create the function, if these two need to be separate functions or if I could combine them?
+freq_plot<-function(field_year, field_plot){
   group_cow_set<-cowplusnotes%>%
-  filter(cowplusnotes$Year==field_year, cowplusnotes$Plot==field_plot)%>%
+    filter(cowplusnotes$Year==field_year, cowplusnotes$Plot==field_plot)%>%
     select(Plot,Yearday,Point,TreeSpecies,Sample)%>%
     distinct()%>%
     group_by(Point,Plot,TreeSpecies,Sample,Yearday)%>%
     summarise(n())%>%
-    mutate(freq=(lead(Yearday)-Yearday))
-  #Might want to separate these two functions, I want to create two different dataframes with it to plot
-  sample.days<-group_cow_set%>%
-    group_by(Point,Plot,TreeSpecies,Sample)%>%
-    summarize(n())
-  #return(group_cow_set)
+    mutate(freq=(lead(Yearday)-Yearday), gridLetter = substr(Point, 1, 1),
+           gridY = as.numeric(substr(Point, 2, nchar(Point))),
+           gridX = which(LETTERS == gridLetter))
+ # return(group_cow_set)
+  par(mfrow = c(5, 5), mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
+  for (j in unique(group_cow_set$Yearday)) {
+    tmp = filter(group_cow_set, Yearday == j)
+    plot(group_cow_set$gridX, group_cow_set$gridY, pch = 16, xlab = "", ylab = "")
+  }
 }
 
-Cow_2010_BB<-coweeta_year_sep(2010, "BB")
-Coweeta_year_sep(2011, "BS")
-
-
-
-cow_freq_2010<-grouped_cow_2010%>%
+samp_days<-function(field_year,field_plot){
+  coweeta_data<-cowplusnotes%>%
+  filter(cowplusnotes$Year==field_year,cowplusnotes$Plot==field_plot)%>%
   group_by(Point,Plot,TreeSpecies,Sample)%>%
-  mutate(freq=(lead(Yearday)-Yearday),
-         gridLetter = substr(Point, 1, 1),
-         gridY = as.numeric(substr(Point, 2, nchar(Point))),
-         gridX = which(LETTERS == gridLetter))
-
-cow_freq_2011<-grouped_cow_2011%>%
-  group_by(Point,Plot,TreeSpecies,Sample)%>%
-  mutate(freq=(lead(Yearday)-Yearday))
-
-cow_freq_2012<-grouped_cow_2012%>%
-  group_by(Point,Plot,TreeSpecies,Sample)%>%
-  mutate(freq=(lead(Yearday)-Yearday))
+  summarize(n=n())%>%
+  mutate(gridLetter=substr(Point,1,1),
+         gridY=as.numeric(substr(Point,2,nchar(Point))),
+         gridX=which(LETTERS==gridLetter))
+  
+  par(mfrow = c(5, 5), mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
+  plot(coweeta_data$gridX, coweeta_data$gridY, pch = n, xlab = "", ylab = "")
+}
 
 
 
+BBfreq10<-freq_plot(2010, "BB")
+BSfreq10<-freq_plot(2010, "BS")
+BBfreq11<-freq_plot(2011, "BB")
+BSfreq11<-freq_plot(2011, "BS")
 
-sampled.days_2010<-grouped_cow_2010%>%
-  group_by(Point,Plot,TreeSpecies,Sample)%>%
-  summarize(n = n()) %>%
-  mutate(gridLetter = substr(Point, 1, 1),
-         gridY = as.numeric(substr(Point, 2, nchar(Point))),
-         gridX = which(LETTERS == gridLetter))
+BBday10<-samp_days(2010,"BB")
+Bsday10<-samp_days(2010,"BS")
 
-sampled.days_2011<-grouped_cow_2011%>%
-  group_by(Point,Plot,TreeSpecies,Sample)%>%
-  summarize(n = n())
 
-sampled.days_2012<-grouped_cow_2012%>%
-  group_by(Point,Plot,TreeSpecies,Sample)%>%
-  summarize(n())
+
+
+
+#cow_freq_2010<-grouped_cow_2010%>%
+#  group_by(Point,Plot,TreeSpecies,Sample)%>%
+#  mutate(freq=(lead(Yearday)-Yearday),
+#         gridLetter = substr(Point, 1, 1),
+#         gridY = as.numeric(substr(Point, 2, nchar(Point))),
+#         gridX = which(LETTERS == gridLetter))
+
+
+
+
 
 
 widecowplusnotes_2010<- grouped_cow_2010%>%
