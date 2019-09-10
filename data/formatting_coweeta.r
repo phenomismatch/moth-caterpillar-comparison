@@ -120,11 +120,12 @@ freq_plot<-function(field_year, field_plot){
            gridY = as.numeric(substr(Point, 2, nchar(Point))),
            gridX = which(LETTERS == gridLetter))
   par(mfrow = c(5, 5), mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
+  #pdf(paste0("coweeta_plots_",field_year,"_",field_plot,".pdf"))
   for (j in unique(group_cow_set$Yearday)) {
     tmp = filter(group_cow_set, Yearday == j)
-    plot(group_cow_set$gridX, group_cow_set$gridY, pch = 16, xlab = "", ylab = "")
-    
+    plot(group_cow_set$gridX, group_cow_set$gridY, pch = 16, xlab = "", ylab = "",main="Plot Samples")
   }
+  #dev.off()
   return(group_cow_set)
   
 }
@@ -143,23 +144,41 @@ samp_days<-function(field_year,field_plot){
     mutate(gridLetter=substr(Point,1,1),
            gridY=as.numeric(substr(Point,2,nchar(Point))),
            gridX=which(LETTERS==gridLetter))
-  
 }
 
 
-sampled_days<-cowplusnotes%>%
+sampled_days_BB<-cowplusnotes%>%
               filter(cowplusnotes$Plot=="BB",cowplusnotes$TreeSpecies!="8",cowplusnotes$TreeSpecies!="9")%>%
               group_by(TreeSpecies)%>%
               summarize(n=n())
+
+sampled_days_BS<-cowplusnotes%>%
+  filter(cowplusnotes$Plot=="BS",cowplusnotes$TreeSpecies!="8",cowplusnotes$TreeSpecies!="9")%>%
+  group_by(TreeSpecies)%>%
+  summarize(n=n())
+
 par(mar=c(1,1,1,1))
 #barplot(sampled_days$n, main=sampled_days$n,xlab="",width=1,names.arg=sampled_days$TreeSpecies, ylab="",)
-site_plot<-ggplot(data=sampled_days,aes(x=sampled_days$TreeSpecies,y=sampled_days$n))+
+
+site_plot_BB<-ggplot(data=sampled_days_BB,aes(x=sampled_days_BB$TreeSpecies,y=sampled_days_BB$n))+
   geom_bar(stat="identity")+
   theme(axis.text.x = element_text( color="black", size=8, angle=45,vjust=1,hjust=1))+
   xlab("Tree Species")+
   ylab("Number of Samples")
+pdf(paste("BB_Tree_Samples.pdf"))
+site_plot_BB
+dev.off()
 
-site_plot
+site_plot_BS<-ggplot(data=sampled_days_BS,aes(x=sampled_days_BS$TreeSpecies,y=sampled_days_BS$n))+
+  geom_bar(stat="identity")+
+  theme(axis.text.x = element_text( color="black", size=8, angle=45,vjust=1,hjust=1))+
+  xlab("Tree Species")+
+  ylab("Number of Samples")
+pdf(paste0("BS_Tree_Samples.pdf"))
+site_plot_BS
+dev.off()
+
+
 
 
 #Also we might want to create a plot of the amount of tree species surveyed, as in how many were surveyed, and whether it's the same amount each time.
@@ -169,6 +188,9 @@ BBfreq10<-freq_plot(2010, "BB")
 BSfreq10<-freq_plot(2010, "BS")
 BBfreq11<-freq_plot(2011, "BB")
 BSfreq11<-freq_plot(2011, "BS")
+BBfreq12<-freq_plot(2012, "BB")
+BSfreq12<-freq_plot(2012, "BS")
+BBfreq13<-freq_plot(2013, "BB")
 
 BBday10<-samp_days(2010,"BB")
 Bsday10<-samp_days(2010,"BS")
