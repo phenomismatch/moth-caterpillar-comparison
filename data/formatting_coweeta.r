@@ -119,27 +119,50 @@ freq_plot<-function(field_year, field_plot){
     mutate(freq=(lead(Yearday)-Yearday), gridLetter = substr(Point, 1, 1),
            gridY = as.numeric(substr(Point, 2, nchar(Point))),
            gridX = which(LETTERS == gridLetter))
- # return(group_cow_set)
   par(mfrow = c(5, 5), mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
   for (j in unique(group_cow_set$Yearday)) {
     tmp = filter(group_cow_set, Yearday == j)
     plot(group_cow_set$gridX, group_cow_set$gridY, pch = 16, xlab = "", ylab = "")
+    
   }
+  return(group_cow_set)
+  
+}
+
+BBfreq <- NA
+
+for(i in 2010:2019){
+  freq_plot(i,"BB")
 }
 
 samp_days<-function(field_year,field_plot){
   coweeta_data<-cowplusnotes%>%
-  filter(cowplusnotes$Year==field_year,cowplusnotes$Plot==field_plot)%>%
-  group_by(Point,Plot,TreeSpecies,Sample)%>%
-  summarize(n=n())%>%
-  mutate(gridLetter=substr(Point,1,1),
-         gridY=as.numeric(substr(Point,2,nchar(Point))),
-         gridX=which(LETTERS==gridLetter))
+    filter(cowplusnotes$Year==field_year,cowplusnotes$Plot==field_plot)%>%
+    group_by(Point,Plot,TreeSpecies,Sample)%>%
+    summarize(n=n())%>%
+    mutate(gridLetter=substr(Point,1,1),
+           gridY=as.numeric(substr(Point,2,nchar(Point))),
+           gridX=which(LETTERS==gridLetter))
   
-  par(mfrow = c(5, 5), mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
-  plot(coweeta_data$gridX, coweeta_data$gridY, pch = n, xlab = "", ylab = "")
 }
 
+
+sampled_days<-cowplusnotes%>%
+              filter(cowplusnotes$Plot=="BB",cowplusnotes$TreeSpecies!="8",cowplusnotes$TreeSpecies!="9")%>%
+              group_by(TreeSpecies)%>%
+              summarize(n=n())
+par(mar=c(1,1,1,1))
+#barplot(sampled_days$n, main=sampled_days$n,xlab="",width=1,names.arg=sampled_days$TreeSpecies, ylab="",)
+site_plot<-ggplot(data=sampled_days,aes(x=sampled_days$TreeSpecies,y=sampled_days$n))+
+  geom_bar(stat="identity")+
+  theme(axis.text.x = element_text( color="black", size=8, angle=45,vjust=1,hjust=1))+
+  xlab("Tree Species")+
+  ylab("Number of Samples")
+
+site_plot
+
+
+#Also we might want to create a plot of the amount of tree species surveyed, as in how many were surveyed, and whether it's the same amount each time.
 
 
 BBfreq10<-freq_plot(2010, "BB")
