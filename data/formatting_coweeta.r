@@ -123,12 +123,32 @@ freq_plot<-function(field_year, field_plot){
   #pdf(paste0("coweeta_plots_",field_year,"_",field_plot,".pdf"))
   for (j in unique(group_cow_set$Yearday)) {
     tmp = filter(group_cow_set, Yearday == j)
-    plot(group_cow_set$gridX, group_cow_set$gridY, pch = 16, xlab = "", ylab = "",main="Plot Samples")
+   plot(group_cow_set$gridX, group_cow_set$gridY, pch = 16, xlab = "", ylab = "",main="Plot Samples")
   }
   #dev.off()
   return(group_cow_set)
   
 }
+#
+
+treesByYear = cowplusnotes %>%
+  filter(Plot == field_plot) %>%
+  select(Year, Plot,Yearday,Point,TreeSpecies,Sample)%>%
+  distinct()%>%
+  count(Year, TreeSpecies) %>%
+  arrange(Year, desc(n)) %>%
+  spread(key = TreeSpecies,value = n, fill = 0)
+
+
+pdf("coweeta_tree_surveys_by_year.pdf", height = 11, width = 8)
+par(mfrow = c(length(unique(treesByYear$Year)), 1))
+for (y in unique(treesByYear$Year)) {
+ bplot = barplot(as.matrix(treesByYear[treesByYear$Year == y, 4:ncol(treesByYear)]), col = 'darkorchid', xaxt = "n", xlab = "", ylab = "")
+}
+text(bplot, rep(-1, ncol(treesByYear)-4), xpd = TRUE, srt = 45)
+dev.off()
+
+BBfreq2011<-freq_plot(2011,"BB")
 
 BBfreq <- NA
 
@@ -136,16 +156,58 @@ for(i in 2010:2018){
   g<-freq_plot(i,"BB")
   print(g)
 }
+boxplot
 
 samp_days<-function(field_year,field_plot){
   coweeta_data<-cowplusnotes%>%
     filter(cowplusnotes$Year==field_year,cowplusnotes$Plot==field_plot)%>%
-    group_by(Point,Plot,TreeSpecies,Sample)%>%
+    select(Plot, Yearday, Point, Sample,TreeSpecies)%>%
+    distinct()%>%
+    group_by(Plot,Point, Yearday)%>%
     summarize(n=n())%>%
     mutate(gridLetter=substr(Point,1,1),
            gridY=as.numeric(substr(Point,2,nchar(Point))),
            gridX=which(LETTERS==gridLetter))
+  par(mfrow = c(6, 5), mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
+  pdf(paste0("coweeta_plots_",field_year,"_",field_plot,".pdf"))
+for (j in unique(coweeta_data$Yearday)) {
+  tmp = filter(coweeta_data, Yearday == j)
+  plots<-ggplot(coweeta_data,aes(x=gridX,y=gridY))+geom_point(aes(size=n))
 }
+  dev.off()
+
+}
+
+
+coweeta_data<-cowplusnotes%>%
+  filter(cowplusnotes$Year==2010,cowplusnotes$Plot=="BB")%>%
+  select(Plot, Yearday, Point, Sample,TreeSpecies)%>%
+  distinct()%>%
+  group_by(Plot,Point, Yearday)%>%
+  summarize(n=n())%>%
+  mutate(gridLetter=substr(Point,1,1),
+         gridY=as.numeric(substr(Point,2,nchar(Point))),
+         gridX=which(LETTERS==gridLetter))
+par(mfrow = c(6, 5), mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
+for (j in unique(coweeta_data$Yearday)){
+  tmp=filter(coweeta_data,Yearday==j)
+  plots<-ggplot(coweeta_data,aes(x=gridX,y=gridY))+geom_point(aes(size=n))
+  print(plots)
+}
+
+
+
+
+
+BBday10<-samp_days(2010,"BB")
+
+ggplot(BBday10,aes(x=gridX,y=gridY))+geom_point(aes(size=n))
+
+
+aggregate(BBday10$n,by=list(Sampled=BBday10$Yearday),FUN=sum)
+
+
+
 
 
 sampled_days_BB<-cowplusnotes%>%
@@ -194,6 +256,8 @@ BSfreq12<-freq_plot(2012, "BS")
 BBfreq13<-freq_plot(2013, "BB")
 BBfreq14<-freq_plot(2014, "BB")
 BBfreq18<-freq_plot(2018, "BB")
+
+
 
 
 BBday10<-samp_days(2010,"BB")
