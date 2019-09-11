@@ -119,7 +119,7 @@ freq_plot<-function(field_year, field_plot){
     mutate(freq=(lead(Yearday)-Yearday), gridLetter = substr(Point, 1, 1),
            gridY = as.numeric(substr(Point, 2, nchar(Point))),
            gridX = which(LETTERS == gridLetter))
-  par(mfrow = c(5, 5), mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
+  par(mfrow = c(6, 5), mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
   #pdf(paste0("coweeta_plots_",field_year,"_",field_plot,".pdf"))
   for (j in unique(group_cow_set$Yearday)) {
     tmp = filter(group_cow_set, Yearday == j)
@@ -132,8 +132,9 @@ freq_plot<-function(field_year, field_plot){
 
 BBfreq <- NA
 
-for(i in 2010:2019){
-  freq_plot(i,"BB")
+for(i in 2010:2018){
+  g<-freq_plot(i,"BB")
+  print(g)
 }
 
 samp_days<-function(field_year,field_plot){
@@ -191,6 +192,9 @@ BSfreq11<-freq_plot(2011, "BS")
 BBfreq12<-freq_plot(2012, "BB")
 BSfreq12<-freq_plot(2012, "BS")
 BBfreq13<-freq_plot(2013, "BB")
+BBfreq14<-freq_plot(2014, "BB")
+BBfreq18<-freq_plot(2018, "BB")
+
 
 BBday10<-samp_days(2010,"BB")
 Bsday10<-samp_days(2010,"BS")
