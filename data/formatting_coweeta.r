@@ -5,7 +5,7 @@ library(dplyr)
 library(stringr)
 library(tidyr)
 library(ggplot2)
-
+library(gridExtra)
 # Read in data, clean up leading/trailing spaces, weird symbols
 cats = read.table('data/Coweeta_cats.txt', header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE) %>%
   filter(Plot != "") %>%
@@ -100,13 +100,6 @@ cowplusnotes$surveyed<-ifelse(cowplusnotes$NumCaterpillars>=0,"1",NA)
 
 
 
-#grouped_cow_2010<-cowplusnotes%>%
-#  filter(Year==2010)%>%
-#  select(Plot,Yearday,Point,TreeSpecies,Sample,surveyed)%>%
-#  distinct()%>%
-#  group_by(Point,Plot,TreeSpecies,Sample,Yearday)%>%
-#  summarise(n())
-
 
 #Not sure if this is the right way to create the function, if these two need to be separate functions or if I could combine them?
 freq_plot<-function(field_year, field_plot){
@@ -132,7 +125,7 @@ freq_plot<-function(field_year, field_plot){
 #
 
 treesByYear = cowplusnotes %>%
-  filter(Plot == field_plot) %>%
+  filter(Plot == Plot) %>%
   select(Year, Plot,Yearday,Point,TreeSpecies,Sample)%>%
   distinct()%>%
   count(Year, TreeSpecies) %>%
@@ -148,20 +141,22 @@ for (y in unique(treesByYear$Year)) {
 text(bplot, rep(-1, ncol(treesByYear)-4), xpd = TRUE, srt = 45)
 dev.off()
 
-BBfreq2011<-freq_plot(2011,"BB")
 
-BBfreq <- NA
 
-for(i in 2010:2018){
-  g<-freq_plot(i,"BB")
-  print(g)
-}
-boxplot
+
+
+#BBfreq <- NA
+
+#for(i in 2010:2018){
+#  g<-freq_plot(i,"BB")
+#  print(g)
+#}
+
 
 samp_days<-function(field_year,field_plot){
   coweeta_data<-cowplusnotes%>%
     filter(cowplusnotes$Year==field_year,cowplusnotes$Plot==field_plot)%>%
-    select(Plot, Yearday, Point, Sample,TreeSpecies)%>%
+    select(Plot, Yearday, Point,TreeSpecies)%>%
     distinct()%>%
     group_by(Plot,Point, Yearday)%>%
     summarize(n=n())%>%
@@ -170,58 +165,54 @@ samp_days<-function(field_year,field_plot){
            gridX=which(LETTERS==gridLetter))
   par(mfrow = c(6, 5), mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
   pdf(paste0("coweeta_plots_",field_year,"_",field_plot,".pdf"))
-for (j in unique(coweeta_data$Yearday)) {
-  tmp = filter(coweeta_data, Yearday == j)
-  plots<-ggplot(coweeta_data,aes(x=gridX,y=gridY))+geom_point(aes(size=n))
-}
+  for (i in unique(coweeta_data$Yearday)) {
+    tmp = filter(coweeta_data, Yearday == i)
+    plots<-ggplot(tmp,aes(x=gridX,y=gridY))+geom_point(aes(size=n))+xlim(0,26)+ylim(0,14)
+    print(plots)
+  }
   dev.off()
-
+  return(coweeta_data)
 }
 
+BBsamp10<-samp_days(2010,"BB")
+BBsamp11<-samp_days(2011,"BB")
 
-coweeta_data<-cowplusnotes%>%
-  filter(cowplusnotes$Year==2010,cowplusnotes$Plot=="BB")%>%
-  select(Plot, Yearday, Point, Sample,TreeSpecies)%>%
-  distinct()%>%
-  group_by(Plot,Point, Yearday)%>%
-  summarize(n=n())%>%
-  mutate(gridLetter=substr(Point,1,1),
-         gridY=as.numeric(substr(Point,2,nchar(Point))),
-         gridX=which(LETTERS==gridLetter))
+#coweeta_data<-cowplusnotes%>%
+#  filter(cowplusnotes$Year==2010,cowplusnotes$Plot=="BB")%>%
+#  select(Plot, Yearday, Point, Sample,TreeSpecies)%>%
+#  distinct()%>%
+#  group_by(Plot,Point, Yearday)%>%
+#  summarize(n=n())%>%
+#  mutate(gridLetter=substr(Point,1,1),
+#         gridY=as.numeric(substr(Point,2,nchar(Point))),
+#         gridX=which(LETTERS==gridLetter))
+
+
 par(mfrow = c(6, 5), mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
+
 for (j in unique(coweeta_data$Yearday)){
   tmp=filter(coweeta_data,Yearday==j)
-  plots<-ggplot(coweeta_data,aes(x=gridX,y=gridY))+geom_point(aes(size=n))
-  print(plots)
+  plot<-ggplot(coweeta_data,aes(x=gridX,y=gridY))+geom_point(aes(size=n))
 }
-
-
-
-
-
-BBday10<-samp_days(2010,"BB")
-
-ggplot(BBday10,aes(x=gridX,y=gridY))+geom_point(aes(size=n))
 
 
 aggregate(BBday10$n,by=list(Sampled=BBday10$Yearday),FUN=sum)
 
 
 
-
-
 sampled_days_BB<-cowplusnotes%>%
-              filter(cowplusnotes$Plot=="BB",cowplusnotes$TreeSpecies!="8",cowplusnotes$TreeSpecies!="9")%>%
-              group_by(TreeSpecies)%>%
-              summarize(n=n())
+  filter(cowplusnotes$Plot=="BB",cowplusnotes$TreeSpecies!="8",cowplusnotes$TreeSpecies!="9")%>%
+  group_by(TreeSpecies)%>%
+  summarize(n=n())
 
 sampled_days_BS<-cowplusnotes%>%
   filter(cowplusnotes$Plot=="BS",cowplusnotes$TreeSpecies!="8",cowplusnotes$TreeSpecies!="9")%>%
   group_by(TreeSpecies)%>%
   summarize(n=n())
 
-par(mar=c(1,1,1,1))
 #barplot(sampled_days$n, main=sampled_days$n,xlab="",width=1,names.arg=sampled_days$TreeSpecies, ylab="",)
+
+
 
 site_plot_BB<-ggplot(data=sampled_days_BB,aes(x=sampled_days_BB$TreeSpecies,y=sampled_days_BB$n))+
   geom_bar(stat="identity")+
@@ -250,30 +241,10 @@ dev.off()
 BBfreq10<-freq_plot(2010, "BB")
 BSfreq10<-freq_plot(2010, "BS")
 BBfreq11<-freq_plot(2011, "BB")
-BSfreq11<-freq_plot(2011, "BS")
-BBfreq12<-freq_plot(2012, "BB")
-BSfreq12<-freq_plot(2012, "BS")
-BBfreq13<-freq_plot(2013, "BB")
-BBfreq14<-freq_plot(2014, "BB")
-BBfreq18<-freq_plot(2018, "BB")
-
-
 
 
 BBday10<-samp_days(2010,"BB")
 Bsday10<-samp_days(2010,"BS")
-
-
-
-
-
-#cow_freq_2010<-grouped_cow_2010%>%
-#  group_by(Point,Plot,TreeSpecies,Sample)%>%
-#  mutate(freq=(lead(Yearday)-Yearday),
-#         gridLetter = substr(Point, 1, 1),
-#         gridY = as.numeric(substr(Point, 2, nchar(Point))),
-#         gridX = which(LETTERS == gridLetter))
-
 
 
 
