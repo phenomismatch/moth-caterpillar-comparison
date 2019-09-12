@@ -156,18 +156,18 @@ dev.off()
 samp_days<-function(field_year,field_plot){
   coweeta_data<-cowplusnotes%>%
     filter(cowplusnotes$Year==field_year,cowplusnotes$Plot==field_plot)%>%
-    select(Plot, Yearday, Point,TreeSpecies)%>%
+    select(Plot, Yearday, Point,TreeSpecies, Sample)%>%
     distinct()%>%
     group_by(Plot,Point, Yearday)%>%
     summarize(n=n())%>%
     mutate(gridLetter=substr(Point,1,1),
            gridY=as.numeric(substr(Point,2,nchar(Point))),
-           gridX=which(LETTERS==gridLetter))
+           gridX=which(LETTERS == gridLetter))
   par(mfrow = c(6, 5), mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
   pdf(paste0("coweeta_plots_",field_year,"_",field_plot,".pdf"))
   for (i in unique(coweeta_data$Yearday)) {
     tmp = filter(coweeta_data, Yearday == i)
-    plots<-ggplot(tmp,aes(x=gridX,y=gridY))+geom_point(aes(size=n))+xlim(0,26)+ylim(0,14)
+    plots<-ggplot(tmp,aes(x=gridX,y=gridY))+geom_point(aes(size=n))+xlim(0,26)+ylim(0,max(coweeta_data$gridY))
     print(plots)
   }
   dev.off()
