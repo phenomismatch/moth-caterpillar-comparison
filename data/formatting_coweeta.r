@@ -159,28 +159,43 @@ samp_days<-function(field_year,field_plot){
     select(Plot, Yearday, Point,TreeSpecies, Sample)%>%
     distinct()%>%
     group_by(Plot,Point, Yearday)%>%
-    summarize(n=n())%>%
+    summarize(obsv=n())%>%
     arrange(Yearday)%>%
     mutate(gridLetter=substr(Point,1,1),
            gridY=as.numeric(substr(Point,2,nchar(Point))),
            gridX=which(LETTERS == gridLetter))
   par(mfrow = c(6, 5), mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
-  pdf(paste0("coweeta_plots_",field_year,"_",field_plot,".pdf"))
-  for (i in unique(coweeta_data$Yearday)) {
-    tmp = filter(coweeta_data, Yearday == i)
-    plots<-ggplot(tmp,aes(x=gridX,y=gridY))+geom_point(aes(size=n))+xlim(0,26)+ylim(0,max(coweeta_data$gridY))+facet_wrap(~Yearday,ncol=5)
-    #print(plots)
-    grid.arrange(plots)
+  plots<-list()
+  for (i in 1:length(unique(coweeta_data$Yearday))){
+    tmp = filter(coweeta_data, Yearday == unique(coweeta_data$Yearday)[i])
+    
+    #plots[[i]]<-ggplot(tmp,aes_string(x=gridX,y=gridY))+geom_point(aes_string(size=n))+xlim(0,26)+ylim(0,max(coweeta_data$gridY))
+    plots[[i]]<-ggplot()+theme_bw(base_size=12*.05)+
+      geom_point(aes_string(x=tmp$gridX,y=tmp$gridY,size=tmp$obsv))+xlim(0,26)+ylim(0,max(coweeta_data$gridY))
+    
   }
- 
+  pdf(paste0("coweeta_plots_",field_year,"_",field_plot,".pdf"))
+  grid.arrange(grobs=plots)
   dev.off()
   return(coweeta_data)
+  
 }
 
 BBsamp10<-samp_days(2010,"BB")
 BBsamp11<-samp_days(2011,"BB")
 BBsamp12<-samp_days(2012,"BB")
 BSsamp12<-samp_days(2012,"BS")
+
+
+cow_samples<-function()
+  
+  #coweeta_data<-cowplusnotes%>%
+  #  filter(cowplusnotes$Year==2010,cowplusnotes$Plot=="BB")%>%
+  #  select(Plot, Yearday, Point, Sample,TreeSpecies)%>%
+  #  distinct()%>%
+  #  group_by(Plot,Point, Yearday)%>%
+  #  summarize(n=n())%>%
+  
 
 
 
