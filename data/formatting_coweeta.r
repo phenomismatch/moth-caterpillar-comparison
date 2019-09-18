@@ -196,8 +196,8 @@ cow_samples<-cowplusnotes%>%
   rename(nSurveys=n)
 hist(cow_samples$nSurveys, 20)
   
-  cow_samp_hist<-ggplot(cow_samples,aes(x=Yearday,y=nSurveys))+geom_histogram(stat="identity")
- cow_samp_hist
+# cow_samp_hist<-ggplot(cow_samples,aes(x=Yearday,y=nSurveys))+geom_histogram(stat="identity")
+# cow_samp_hist
  
  
 threshold<-function(threshold_value){
@@ -211,9 +211,11 @@ threshold<-function(threshold_value){
   summarize(n())
   return(cow_thresh)
 }
+  
+  threshold(40)
   threshold(50)
   threshold(60)
-  threshold(100)
+  threshold(70)
   threshold(140)
  
   
@@ -258,6 +260,8 @@ sampled_days_BB<-cowplusnotes%>%
   group_by(TreeSpecies)%>%
   summarize(n=n())
 
+sum(sampled_days_BB$n)
+sum(sampled_days_BS$n)
 sampled_days_BS<-cowplusnotes%>%
   filter(cowplusnotes$Plot=="BS",cowplusnotes$TreeSpecies!="8",cowplusnotes$TreeSpecies!="9")%>%
   group_by(TreeSpecies)%>%
