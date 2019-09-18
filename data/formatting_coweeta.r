@@ -125,7 +125,7 @@ freq_plot<-function(field_year, field_plot){
 #
 
 treesByYear = cowplusnotes %>%
-  filter(Plot == Plot) %>%
+  filter(Plot != "RK") %>%
   select(Year, Plot,Yearday,Point,TreeSpecies,Sample)%>%
   distinct()%>%
   count(Year, TreeSpecies) %>%
@@ -170,8 +170,9 @@ samp_days<-function(field_year,field_plot){
     tmp = filter(coweeta_data, Yearday == unique(coweeta_data$Yearday)[i])
     
     #plots[[i]]<-ggplot(tmp,aes_string(x=gridX,y=gridY))+geom_point(aes_string(size=n))+xlim(0,26)+ylim(0,max(coweeta_data$gridY))
-    plots[[i]]<-ggplot()+theme_bw(base_size=12*.05)+
-      geom_point(aes_string(x=tmp$gridX,y=tmp$gridY,size=tmp$obsv))+xlim(0,26)+ylim(0,max(coweeta_data$gridY))
+    plots[[i]]<-ggplot()+theme_bw(base_size=12*.3)+
+      geom_point(aes_string(x=tmp$gridX,y=tmp$gridY,size=tmp$obsv))+
+      xlim(0,26)+ylim(0,max(coweeta_data$gridY))+theme(legend.text=element_text(size=4), legend.key.size=unit(.5,"cm"))
     
   }
   pdf(paste0("coweeta_plots_",field_year,"_",field_plot,".pdf"))
@@ -187,8 +188,37 @@ BBsamp12<-samp_days(2012,"BB")
 BSsamp12<-samp_days(2012,"BS")
 
 
-cow_samples<-function()
+cow_samples<-cowplusnotes%>%
+  filter(Year>2009, Plot%in% c("BS", "BB"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
+  select(Year,Yearday,Plot, Point, TreeSpecies, Sample)%>%
+  distinct()%>%
+  count(Year, Yearday)%>%
+  rename(nSurveys=n)
+hist(cow_samples$nSurveys, 20)
   
+  cow_samp_hist<-ggplot(cow_samples,aes(x=Yearday,y=nSurveys))+geom_histogram(stat="identity")
+ cow_samp_hist
+ 
+ 
+threshold<-function(threshold_value){
+  cow_thresh<-cowplusnotes%>%
+  filter(Year>2009, Plot%in% c("BS","BB"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
+  select(Year,Yearday,Plot,Point,TreeSpecies,Sample)%>%
+  distinct()%>%
+  group_by(Year,Yearday)%>%
+  tally()%>%
+  filter(n>threshold_value)%>%
+  summarize(n())
+  return(cow_thresh)
+}
+  threshold(50)
+  threshold(60)
+  threshold(100)
+  threshold(140)
+ 
+  
+ ggplot(cow_thresh,aes(x=Yearday,y=nSurveys))+geom_histogram(stat="identity")
+ 
   #coweeta_data<-cowplusnotes%>%
   #  filter(cowplusnotes$Year==2010,cowplusnotes$Plot=="BB")%>%
   #  select(Plot, Yearday, Point, Sample,TreeSpecies)%>%
