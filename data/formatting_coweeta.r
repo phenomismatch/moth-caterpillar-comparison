@@ -219,7 +219,7 @@ threshold<-function(threshold_value){
   threshold(140)
  
   
- ggplot(cow_thresh,aes(x=Yearday,y=nSurveys))+geom_histogram(stat="identity")
+ #ggplot(cow_thresh,aes(x=Yearday,y=nSurveys))+geom_histogram(stat="identity")
  
   #coweeta_data<-cowplusnotes%>%
   #  filter(cowplusnotes$Year==2010,cowplusnotes$Plot=="BB")%>%
