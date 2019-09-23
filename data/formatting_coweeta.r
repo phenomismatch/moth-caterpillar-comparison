@@ -207,16 +207,23 @@ threshold<-function(threshold_value){
   distinct()%>%
   group_by(Year,Yearday)%>%
   tally()%>%
-  filter(n>threshold_value)%>%
-  summarize(n())
-  return(cow_thresh)
+  rename(nSurveys=n)%>%
+  mutate(JulianWeek=7*floor((Yearday)/7)+4)%>%
+  #aggregate(cow_thresh$nSurveys,by=list(Year=cow_thresh$Year,cow_thresh$JulianWeek=JWeek),FUN=sum)
+  group_by(Year,JulianWeek)%>%
+  summarize(nJulianWeekSurvey=sum(nSurveys))%>%
+  filter(nJulianWeekSurvey>threshold_value)%>%
+  group_by(Year)%>%
+  count()%>%
+  rename(nWeeks=n)%>%
+  mutate()
 }
   
-  threshold(40)
-  threshold(50)
-  threshold(60)
+  thresh_40<-threshold(40)
+  thresh_100<-threshold(100)
+  thresh_160<-threshold(160)
   threshold(70)
-  threshold(140)
+  threshold(80)
  
   
  #ggplot(cow_thresh,aes(x=Yearday,y=nSurveys))+geom_histogram(stat="identity")
