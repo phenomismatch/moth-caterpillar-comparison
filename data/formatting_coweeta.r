@@ -213,17 +213,16 @@ threshold<-function(threshold_value){
   group_by(Year,JulianWeek)%>%
   summarize(nJulianWeekSurvey=sum(nSurveys))%>%
   filter(nJulianWeekSurvey>threshold_value)%>%
+  #count()
   group_by(Year)%>%
-  count()%>%
-  rename(nWeeks=n)%>%
-  mutate()
+  add_count()%>%
+  rename(nWeeks=n)
 }
+
   
-  thresh_40<-threshold(40)
-  thresh_100<-threshold(100)
   thresh_160<-threshold(160)
-  threshold(70)
-  threshold(80)
+  thresh_170<-threshold(170)
+  thresh_180<-threshold(180)
  
   
  #ggplot(cow_thresh,aes(x=Yearday,y=nSurveys))+geom_histogram(stat="identity")
