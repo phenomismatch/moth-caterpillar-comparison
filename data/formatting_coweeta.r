@@ -218,12 +218,13 @@ threshold<-function(threshold_value){
   add_count()%>%
   rename(nWeeks=n)
 }
-
   
   thresh_160<-threshold(160)
   thresh_170<-threshold(170)
   thresh_180<-threshold(180)
- 
+  thresh_100<-threshold(100)
+  thresh_50<-threshold(50)
+  #No point in doing 50, so we can start at 100, maybe 180 is the upper bound? So let's go by 40 (100, 140, 18).
   
  #ggplot(cow_thresh,aes(x=Yearday,y=nSurveys))+geom_histogram(stat="identity")
  
@@ -411,4 +412,6 @@ write.table(cowarths, "ArthropodSighting_Coweeta.txt", sep = '\t', row.names = F
 #TreeSpecies
 "8" (1081)
 "9" (554)
+
+
 
