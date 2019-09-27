@@ -219,6 +219,8 @@ threshold<-function(threshold_value){
   rename(nWeeks=n)
 }
   
+
+
   thresh_160<-threshold(160)
   thresh_170<-threshold(170)
   thresh_180<-threshold(180)
@@ -226,6 +228,22 @@ threshold<-function(threshold_value){
   thresh_50<-threshold(50)
   #No point in doing 50, so we can start at 100, maybe 180 is the upper bound? So let's go by 40 (100, 140, 18).
   
+  
+  
+filter_100_BB_2010<-cowplusnotes%>%
+  filter(Year==2010, Plot%in% c("BB"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
+  select(Year,Yearday,Plot,Point,TreeSpecies,Sample)%>%
+  distinct()%>%
+  group_by(Year,Yearday)%>%
+  tally()%>%
+  rename(nSurveys=n)%>%
+  mutate(JulianWeek=7*floor((Yearday)/7)+4)%>%
+  group_by(JulianWeek)%>%
+ # WeekSurveys<-sum(cowplusnotes$nSurveys)
+  filter(nSurveys>100)
+  left_join(thresh_100, by=)
+ 
+
  #ggplot(cow_thresh,aes(x=Yearday,y=nSurveys))+geom_histogram(stat="identity")
  
   #coweeta_data<-cowplusnotes%>%
