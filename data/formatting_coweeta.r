@@ -229,9 +229,10 @@ threshold<-function(threshold_value){
   #No point in doing 50, so we can start at 100, maybe 180 is the upper bound? So let's go by 40 (100, 140, 18).
   
   
-  
-filter_100_BB_2010<-cowplusnotes%>%
-  filter(Year==2010, Plot%in% c("BB"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
+#Can functionalize this one here
+cow_filter<-function(field_year,field_plot,threshold_value){
+cow_WeeklySurv<-cowplusnotes%>%
+  filter(Year==field_year, Plot==field_plot, TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
   select(Year,Yearday,Plot,Point,TreeSpecies,Sample)%>%
   distinct()%>%
   group_by(Year,Yearday)%>%
@@ -239,8 +240,33 @@ filter_100_BB_2010<-cowplusnotes%>%
   rename(nSurveys=n)%>%
   mutate(JulianWeek=7*floor((Yearday)/7)+4)%>%
   group_by(JulianWeek)%>%
+  mutate(WeeklySurv=sum(nSurveys))%>%
+  filter(WeeklySurv>threshold_value)
+}
+
+BB_100_2010_filter<-cow_filter(field_year = 2010,field_plot = "BB",threshold_value = 100)
+BS_100_2010_filter<-cow_filter(field_year = 2010,field_plot = "BS",threshold_value = 100)
+
+#can also make this a function-can/should i link those together?
+BB_100_2010<-cowplusnotes%>%
+  filter(Year==2010,Plot%in% c("BB"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
+  left_join(BB_100_2010_filter,by=NULL)%>%
+  filter(!is.na(WeeklySurv))%>%
+  subset(select=-c(surveyed,nSurveys,JulianWeek, WeeklySurv))
+
+
+  names(BB_100_2010)[names(BB_100_2010) == 'Yearday'] <- 'julianday'
+
+BS_100_2010<-cowplusnotes%>%
+  filter(Year==2010,Plot%in% c("BS"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
+  left_join(BS_100_2010_filter,by=NULL)%>%
+  filter(!is.na(WeeklySurv))%>%
+  subset(select=-c(surveyed,nSurveys,JulianWeek, WeeklySurv))
+
+meanDensityByWeek(surveyData = BB_100_2010,ordersToInclude = "ALL",minLength = 0,jdRange = c(1,365),outlierCount = 10000,plot = FALSE,plotVar = 'frac Surveys',minSurveyCoverage = 0,allDates = TRUE,new = TRUE,color = 'black')
+
+
  # WeekSurveys<-sum(cowplusnotes$nSurveys)
-  filter(nSurveys>100)
   left_join(thresh_100, by=)
  
 
@@ -357,7 +383,7 @@ for (j in unique(BBfreq10$Yearday)) {
 
 
 
-cowsurvs = cowplusnotes%>%
+cowsurvs = BB_100_2010%>%
   select(Year, Plot, Yearday, Point, TreeSpecies, Sample, Notes) %>%
   distinct() %>%
   left_join(comments[, c('Comments', 'NumberOfLeaves')], by = c('Notes' = 'Comments')) %>%
@@ -394,7 +420,7 @@ multSurveyRecs2 = cowsurvs %>%
   
 
 # arthropods table
-cowarths = cowplusnotes %>%
+cowarths = BB_100_2010 %>%
   mutate(Branch = paste(Plot, Point, TreeSpecies, Sample, sep = "_"),
          LocalDate = as.Date(Yearday, as.Date(paste(Year, "-01-01", sep = "")))) %>%
   left_join(cowsurvs[, c('Branch', 'ID', 'LocalDate', 'Notes')], by = c('Branch', 'LocalDate', 'Notes')) %>%
@@ -420,9 +446,9 @@ cowarths = cowplusnotes %>%
 
 
 # Write files
-write.table(branches[, !names(branches) %in% "Branch"], "Plants_Coweeta.txt", sep = '\t', row.names = F)
-write.table(cowsurvs[, !names(cowsurvs) %in% "Branch"], "Survey_Coweeta.txt", sep = '\t', row.names = F)
-write.table(cowarths, "ArthropodSighting_Coweeta.txt", sep = '\t', row.names = F)
+write.table(branches[, !names(branches) %in% "Branch"], "Plants_Coweeta_2010_BB.txt", sep = '\t', row.names = F)
+write.table(cowsurvs[, !names(cowsurvs) %in% "Branch"], "Survey_Coweeta_2010_BB.txt", sep = '\t', row.names = F)
+write.table(cowarths, "ArthropodSighting_Coweeta_2010_BB.txt", sep = '\t', row.names = F)
 
 # BS 2002-2018, BB 2003-2018, RK 2002-2008
 # Roughly twice as many surveys were conducted at BS and BB in 2012
