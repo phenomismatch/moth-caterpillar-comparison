@@ -247,23 +247,57 @@ cow_WeeklySurv<-cowplusnotes%>%
 
 BB_100_2010_filter<-cow_filter(field_year = 2010,field_plot = "BB",threshold_value = 100)
 BS_100_2010_filter<-cow_filter(field_year = 2010,field_plot = "BS",threshold_value = 100)
+BB_140_2010_filter<-cow_filter(field_year = 2010,field_plot = "BB",threshold_value = 140)
+BS_140_2010_filter<-cow_filter(field_year = 2010,field_plot = "BS",threshold_value = 140)
+BB_180_2010_filter<-cow_filter(field_year = 2010,field_plot = "BB",threshold_value = 180)
+BS_180_2010_filter<-cow_filter(field_year = 2010,field_plot = "BS",threshold_value = 180)
+
+BB_100_2011_filter<-cow_filter(field_year = 2011,field_plot = "BB",threshold_value = 100)
+BS_100_2011_filter<-cow_filter(field_year = 2011,field_plot = "BS",threshold_value = 100)
+BB_140_2011_filter<-cow_filter(field_year = 2011,field_plot = "BB",threshold_value = 140)
+BS_140_2011_filter<-cow_filter(field_year = 2011,field_plot = "BS",threshold_value = 140)
+BB_180_2011_filter<-cow_filter(field_year = 2011,field_plot = "BB",threshold_value = 180)
+BS_180_2011_filter<-cow_filter(field_year = 2011,field_plot = "BS",threshold_value = 180)
+
+BB_100_2012_filter<-cow_filter(field_year = 2012,field_plot = "BB",threshold_value = 100)
+BS_100_2012_filter<-cow_filter(field_year = 2012,field_plot = "BS",threshold_value = 100)
+BB_140_2012_filter<-cow_filter(field_year = 2012,field_plot = "BB",threshold_value = 140)
+BS_140_2012_filter<-cow_filter(field_year = 2012,field_plot = "BS",threshold_value = 140)
+BB_180_2012_filter<-cow_filter(field_year = 2012,field_plot = "BB",threshold_value = 180)
+BS_180_2012_filter<-cow_filter(field_year = 2012,field_plot = "BS",threshold_value = 180)
+
+BB_100_2013_filter<-cow_filter(field_year = 2013,field_plot = "BB",threshold_value = 100)
+BS_100_2013_filter<-cow_filter(field_year = 2013,field_plot = "BS",threshold_value = 100)
+BB_140_2013_filter<-cow_filter(field_year = 2013,field_plot = "BB",threshold_value = 140)
+BS_140_2013_filter<-cow_filter(field_year = 2013,field_plot = "BS",threshold_value = 140)
+BB_180_2013_filter<-cow_filter(field_year = 2013,field_plot = "BB",threshold_value = 180)
+BS_180_2013_filter<-cow_filter(field_year = 2013,field_plot = "BS",threshold_value = 180)
+
+BB_100_2014_filter<-cow_filter(field_year = 2014,field_plot = "BB",threshold_value = 100)
+BS_100_2014_filter<-cow_filter(field_year = 2014,field_plot = "BS",threshold_value = 100)
+BB_140_2014_filter<-cow_filter(field_year = 2014,field_plot = "BB",threshold_value = 140)
+BS_140_2014_filter<-cow_filter(field_year = 2014,field_plot = "BS",threshold_value = 140)
+BB_180_2014_filter<-cow_filter(field_year = 2014,field_plot = "BB",threshold_value = 180)
+BS_180_2014_filter<-cow_filter(field_year = 2014,field_plot = "BS",threshold_value = 180)
 
 #can also make this a function-can/should i link those together?
-BB_100_2010<-cowplusnotes%>%
-  filter(Year==2010,Plot%in% c("BB"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
-  left_join(BB_100_2010_filter,by=NULL)%>%
+cow_join<-function(field_year,field_plot, site_thresh_year_filter){
+  cowplusnotes%>%
+  filter(Year==field_year, Plot==field_plot, TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
+  left_join(site_thresh_year_filter,by=NULL)%>%
   filter(!is.na(WeeklySurv))%>%
   subset(select=-c(surveyed,nSurveys,JulianWeek, WeeklySurv))
+}
 
+BB_100_2010_merged<-cow_join(2010,"BB",BB_100_2010_filter)
+BS_100_2010_merged<-cow_join(2010,"BS",BS_100_2010_filter)
+BB_140_2010_merged<-cow_join(2010,"BB",BB_140_2010_filter)
+BS_140_2010_merged<-cow_join(2010,"BS",BS_140_2010_filter)
+BB_180_2010_merged<-cow_join(2010,"BB",BB_180_2010_filter)
+BS_180_2010_merged<-cow_join(2010,"BS",BS_180_2010_filter)
 
   names(BB_100_2010)[names(BB_100_2010) == 'Yearday'] <- 'julianday'
 
-  
-BS_100_2010<-cowplusnotes%>%
-  filter(Year==2010,Plot%in% c("BS"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
-  left_join(BS_100_2010_filter,by=NULL)%>%
-  filter(!is.na(WeeklySurv))%>%
-  subset(select=-c(surveyed,nSurveys,JulianWeek, WeeklySurv))
 
 
 
@@ -384,7 +418,8 @@ for (j in unique(BBfreq10$Yearday)) {
 
 
 
-cowsurvs = BB_100_2010%>%
+coweeta_surveys<-function(merged){
+  cowsurvs = merged %>%
   select(Year, Plot, Yearday, Point, TreeSpecies, Sample, Notes) %>%
   distinct() %>%
   left_join(comments[, c('Comments', 'NumberOfLeaves')], by = c('Notes' = 'Comments')) %>%
@@ -412,7 +447,12 @@ cowsurvs = BB_100_2010%>%
   select(ID, SubmissionTimestamp, UserFKOfObserver, PlantFK, LocalDate, LocalTime, ObservationMethod, Notes, 
          WetLeaves, PlantSpecies, NumberOfLeaves, AverageLeafLength, HerbivoryScore, SubmittedThroughApp,
          MinimumTemperature, MaximumTemperature, NeedToSendToSciStarter, CORRESPONDING_OLD_DATABASE_SURVEY_ID, Branch)
-         
+}
+
+BS_100_2010_cowsurvs<-coweeta_surveys(BS_100_2010_merged) 
+BS_140_2010_cowsurvs<-coweeta_surveys(BS_140_2010_merged)
+BS_180_2010_cowsurvs<-coweeta_surveys(BS_180_2010_merged)
+
 
 # 69 records with 2 or more "survey events" per branch/date
 multSurveyRecs2 = cowsurvs %>%
@@ -421,10 +461,11 @@ multSurveyRecs2 = cowsurvs %>%
   
 
 # arthropods table
-cowarths = BB_100_2010 %>%
+coweeta_arths<-function(merged,coweeta_surv){
+  cowarths = merged%>%
   mutate(Branch = paste(Plot, Point, TreeSpecies, Sample, sep = "_"),
          LocalDate = as.Date(Yearday, as.Date(paste(Year, "-01-01", sep = "")))) %>%
-  left_join(cowsurvs[, c('Branch', 'ID', 'LocalDate', 'Notes')], by = c('Branch', 'LocalDate', 'Notes')) %>%
+  left_join(coweeta_surv[, c('Branch', 'ID', 'LocalDate', 'Notes')], by = c('Branch', 'LocalDate', 'Notes')) %>%
   rename(SurveyFK = ID) %>%
   filter(NumCaterpillars > 0) %>%
   mutate(ID = highestExistingArthID + 1:n(),
@@ -443,25 +484,48 @@ cowarths = BB_100_2010 %>%
          Group = ifelse(BeetleLarva == 1, "beetle", Group),
          Group = ifelse(CaterpillarFamily == "Sawfly", "bee", Group)) %>%
   select(ID, SurveyFK, Group, Length, Quantity, PhotoURL, Notes, Hairy, Rolled, Tented, Sawfly, BeetleLarva, NeedToSendToINaturalist)
-  
+}
 
+
+BS_100_2010_cowarths<-coweeta_arths(BS_100_2010_merged,BS_100_2010_cowsurvs)
+BS_140_2010_cowarths<-coweeta_arths(BS_140_2010_merged,BS_140_2010_cowsurvs)
+BS_180_2010_cowarths<-coweeta_arths(BS_180_2010_merged,BS_180_2010_cowsurvs)
 
 # Write files
 write.table(branches[, !names(branches) %in% "Branch"], "Plants_Coweeta_2010_BB.txt", sep = '\t', row.names = F)
 write.table(cowsurvs[, !names(cowsurvs) %in% "Branch"], "Survey_Coweeta_2010_BB.txt", sep = '\t', row.names = F)
 write.table(cowarths, "ArthropodSighting_Coweeta_2010_BB.txt", sep = '\t', row.names = F)
 
-
-merged_set<-cowsurvs%>%
+merge_fun<-function(cowsurv,cowarths){
+merged_set<-cowsurv%>%
   left_join(cowarths, by= c('ID'= 'SurveyFK'))%>%
   rename(arthID=ID.y)
+}
+BS_100_2010_final<-merge_fun(BS_100_2010_cowsurvs,BS_100_2010_cowarths)
+BS_140_2010_final<-merge_fun(BS_140_2010_cowsurvs,BS_140_2010_cowarths)
+BS_180_2010_final<-merge_fun(BS_180_2010_cowsurvs,BS_180_2010_cowarths)
 
 
-merged_set$LocalDate = as.Date(merged_set$LocalDate, format = "%Y-%m-%d")
-merged_set$Year = format(merged_set$LocalDate, "%Y")
-merged_set$julianday = yday(merged_set$LocalDate)
 
-merged_meanDens<-meanDensityByWeek(merged_set,ordersToInclude = "All",minLength = 0,jdRange=c(1,365),outlierCount=10000, plot=TRUE, plotVar="fracSurveys", minSurveyCoverage = 0, allDates=TRUE, new=TRUE)
+BS_100_2010_final$LocalDate = as.Date(BS_100_2010_final$LocalDate, format = "%Y-%m-%d")
+BS_100_2010_final$Year = format(BS_100_2010_final$LocalDate, "%Y")
+BS_100_2010_final$julianday = yday(BS_100_2010_final$LocalDate)
+
+BS_140_2010_final$LocalDate = as.Date(BS_140_2010_final$LocalDate, format = "%Y-%m-%d")
+BS_140_2010_final$Year = format(BS_140_2010_final$LocalDate, "%Y")
+BS_140_2010_final$julianday = yday(BS_140_2010_final$LocalDate)
+
+BS_180_2010_final$LocalDate = as.Date(BS_180_2010_final$LocalDate, format = "%Y-%m-%d")
+BS_180_2010_final$Year = format(BS_180_2010_final$LocalDate, "%Y")
+BS_180_2010_final$julianday = yday(BS_180_2010_final$LocalDate)
+
+
+
+
+merged_meanDens_BS_100_2010<-meanDensityByWeek(BS_100_2010_final,ordersToInclude = "All",minLength = 0,jdRange=c(1,365),outlierCount=10000, plot=TRUE, plotVar="fracSurveys", minSurveyCoverage = 0, allDates=TRUE, new=TRUE)
+merged_meanDens_BS_140_2010<-meanDensityByWeek(BS_140_2010_final,ordersToInclude = "All",minLength = 0,jdRange=c(1,365),outlierCount=10000, plot=TRUE, plotVar="fracSurveys", minSurveyCoverage = 0, allDates=TRUE, new=TRUE)
+merged_meanDens_BS_180_2010<-meanDensityByWeek(BS_180_2010_final,ordersToInclude = "All",minLength = 0,jdRange=c(1,365),outlierCount=10000, plot=TRUE, plotVar="fracSurveys", minSurveyCoverage = 0, allDates=TRUE, new=TRUE)
+
 
 
 
