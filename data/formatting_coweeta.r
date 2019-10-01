@@ -6,6 +6,7 @@ library(stringr)
 library(tidyr)
 library(ggplot2)
 library(gridExtra)
+library(lubridate)
 # Read in data, clean up leading/trailing spaces, weird symbols
 cats = read.table('data/Coweeta_cats.txt', header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE) %>%
   filter(Plot != "") %>%
@@ -229,7 +230,7 @@ threshold<-function(threshold_value){
   #No point in doing 50, so we can start at 100, maybe 180 is the upper bound? So let's go by 40 (100, 140, 18).
   
   
-#Can functionalize this one here
+#Function to filter out for threshold value, plot, and year
 cow_filter<-function(field_year,field_plot,threshold_value){
 cow_WeeklySurv<-cowplusnotes%>%
   filter(Year==field_year, Plot==field_plot, TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
@@ -257,17 +258,17 @@ BB_100_2010<-cowplusnotes%>%
 
   names(BB_100_2010)[names(BB_100_2010) == 'Yearday'] <- 'julianday'
 
+  
 BS_100_2010<-cowplusnotes%>%
   filter(Year==2010,Plot%in% c("BS"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
   left_join(BS_100_2010_filter,by=NULL)%>%
   filter(!is.na(WeeklySurv))%>%
   subset(select=-c(surveyed,nSurveys,JulianWeek, WeeklySurv))
 
-meanDensityByWeek(surveyData = BB_100_2010,ordersToInclude = "ALL",minLength = 0,jdRange = c(1,365),outlierCount = 10000,plot = FALSE,plotVar = 'frac Surveys',minSurveyCoverage = 0,allDates = TRUE,new = TRUE,color = 'black')
 
 
  # WeekSurveys<-sum(cowplusnotes$nSurveys)
-  left_join(thresh_100, by=)
+  
  
 
  #ggplot(cow_thresh,aes(x=Yearday,y=nSurveys))+geom_histogram(stat="identity")
@@ -449,6 +450,21 @@ cowarths = BB_100_2010 %>%
 write.table(branches[, !names(branches) %in% "Branch"], "Plants_Coweeta_2010_BB.txt", sep = '\t', row.names = F)
 write.table(cowsurvs[, !names(cowsurvs) %in% "Branch"], "Survey_Coweeta_2010_BB.txt", sep = '\t', row.names = F)
 write.table(cowarths, "ArthropodSighting_Coweeta_2010_BB.txt", sep = '\t', row.names = F)
+
+
+merged_set<-cowsurvs%>%
+  left_join(cowarths, by= c('ID'= 'SurveyFK'))%>%
+  rename(arthID=ID.y)
+
+
+merged_set$LocalDate = as.Date(merged_set$LocalDate, format = "%Y-%m-%d")
+merged_set$Year = format(merged_set$LocalDate, "%Y")
+merged_set$julianday = yday(merged_set$LocalDate)
+
+merged_meanDens<-meanDensityByWeek(merged_set,ordersToInclude = "All",minLength = 0,jdRange=c(1,365),outlierCount=10000, plot=TRUE, plotVar="fracSurveys", minSurveyCoverage = 0, allDates=TRUE, new=TRUE)
+
+
+
 
 # BS 2002-2018, BB 2003-2018, RK 2002-2008
 # Roughly twice as many surveys were conducted at BS and BB in 2012
