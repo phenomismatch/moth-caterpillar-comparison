@@ -505,25 +505,23 @@ BS_100_2010_final<-merge_fun(BS_100_2010_cowsurvs,BS_100_2010_cowarths)
 BS_140_2010_final<-merge_fun(BS_140_2010_cowsurvs,BS_140_2010_cowarths)
 BS_180_2010_final<-merge_fun(BS_180_2010_cowsurvs,BS_180_2010_cowarths)
 
+date_change<-function(Final_set){
+  Final_set$LocalDate=as.Date(Final_set$LocalDate,format="%Y-%m-%d")
+  Final_set$Year = format(Final_set$LocalDate, "%Y")
+  Final_set$julianday = yday(Final_set$LocalDate)
+}
 
-
-BS_100_2010_final$LocalDate = as.Date(BS_100_2010_final$LocalDate, format = "%Y-%m-%d")
-BS_100_2010_final$Year = format(BS_100_2010_final$LocalDate, "%Y")
-BS_100_2010_final$julianday = yday(BS_100_2010_final$LocalDate)
-
-BS_140_2010_final$LocalDate = as.Date(BS_140_2010_final$LocalDate, format = "%Y-%m-%d")
-BS_140_2010_final$Year = format(BS_140_2010_final$LocalDate, "%Y")
-BS_140_2010_final$julianday = yday(BS_140_2010_final$LocalDate)
-
-BS_180_2010_final$LocalDate = as.Date(BS_180_2010_final$LocalDate, format = "%Y-%m-%d")
-BS_180_2010_final$Year = format(BS_180_2010_final$LocalDate, "%Y")
-BS_180_2010_final$julianday = yday(BS_180_2010_final$LocalDate)
+date_change(BS_100_2010_final)
+date_change(BS_140_2010_final)
+date_change(BS_180_2010_final)
 
 
 
-
+par(mfrow=c(2,3))
 merged_meanDens_BS_100_2010<-meanDensityByWeek(BS_100_2010_final,ordersToInclude = "All",minLength = 0,jdRange=c(1,365),outlierCount=10000, plot=TRUE, plotVar="fracSurveys", minSurveyCoverage = 0, allDates=TRUE, new=TRUE)
+par(new=TRUE)
 merged_meanDens_BS_140_2010<-meanDensityByWeek(BS_140_2010_final,ordersToInclude = "All",minLength = 0,jdRange=c(1,365),outlierCount=10000, plot=TRUE, plotVar="fracSurveys", minSurveyCoverage = 0, allDates=TRUE, new=TRUE)
+par(new=TRUE)
 merged_meanDens_BS_180_2010<-meanDensityByWeek(BS_180_2010_final,ordersToInclude = "All",minLength = 0,jdRange=c(1,365),outlierCount=10000, plot=TRUE, plotVar="fracSurveys", minSurveyCoverage = 0, allDates=TRUE, new=TRUE)
 
 
