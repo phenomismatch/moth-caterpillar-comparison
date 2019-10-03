@@ -203,7 +203,7 @@ hist(cow_samples$nSurveys, 20)
  
 threshold<-function(threshold_value){
   cow_thresh<-cowplusnotes%>%
-  filter(Year>2009, Plot%in% c("BS","BB"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
+  filter(Year>2009, Plot%in% c("BB","BS"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
   select(Year,Yearday,Plot,Point,TreeSpecies,Sample)%>%
   distinct()%>%
   group_by(Year,Yearday)%>%
@@ -222,7 +222,7 @@ threshold<-function(threshold_value){
   
 
 
-  thresh_160<-threshold(160)
+  thresh_160<-threshold(50)
   thresh_170<-threshold(170)
   thresh_180<-threshold(180)
   thresh_100<-threshold(100)
@@ -317,7 +317,7 @@ BS_180_2018_filter<-cow_filter(field_year = 2018,field_plot = "BS",threshold_val
 cow_join<-function(field_year,field_plot, site_thresh_year_filter){
   cowplusnotes%>%
   filter(Year==field_year, Plot==field_plot, TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
-  left_join(site_thresh_year_filter,by=NULL)%>%
+  left_join(site_thresh_year_filter,by=c('Year', 'Yearday'))%>%
   filter(!is.na(WeeklySurv))%>%
   subset(select=-c(surveyed,nSurveys,JulianWeek, WeeklySurv))
 }
@@ -987,8 +987,7 @@ BS_180_2018_final$julianday = yday(BS_180_2018_final$LocalDate)
 
 #Plotting-----
 par(mfrow=c(3,2))
-par(new=TRUE)
-merged_meanDens_BS_100_2010<-meanDensityByWeek(BS_100_2010_final,ordersToInclude = "All",minLength = 0,jdRange=c(1,365),outlierCount=10000, plot=TRUE, plotVar="fracSurveys", minSurveyCoverage = 0, allDates=TRUE, new=TRUE, color='black')
+merged_meanDens_BS_100_2010<-meanDensityByWeek(BS_100_2010_final,ordersToInclude = "All",minLength = 0,jdRange=c(1,365),outlierCount=10000, plot=TRUE, plotVar="fracSurveys", minSurveyCoverage = 0, allDates=TRUE, new=TRUE, color='black', cex=2)
 merged_meanDens_BS_140_2010<-meanDensityByWeek(BS_140_2010_final,ordersToInclude = "All",minLength = 0,jdRange=c(1,365),outlierCount=10000, plot=TRUE, plotVar="fracSurveys", minSurveyCoverage = 0, allDates=TRUE, new=F,color='blue',lty=2)
 merged_meanDens_BS_180_2010<-meanDensityByWeek(BS_180_2010_final,ordersToInclude = "All",minLength = 0,jdRange=c(1,365),outlierCount=10000, plot=TRUE, plotVar="fracSurveys", minSurveyCoverage = 0, allDates=TRUE, new=F,color='red',lty=3)
 
