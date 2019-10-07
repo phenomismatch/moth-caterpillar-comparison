@@ -135,9 +135,9 @@ coweeta_surveys<-function(merged){
 
 
 # 69 records with 2 or more "survey events" per branch/date
-multSurveyRecs2 = cowsurvs %>%
-  count(ID, PlantFK, LocalDate, Notes) %>%
-  filter(n > 1)
+#multSurveyRecs2 = cowsurvs %>%
+#  count(ID, PlantFK, LocalDate, Notes) %>%
+#  filter(n > 1)
   
 
 # arthropods table------
@@ -169,9 +169,10 @@ coweeta_arths<-function(merged,coweeta_surv){
 
 
 # Write files
-write.table(branches[, !names(branches) %in% "Branch"], "Plants_Coweeta_2010_BB.txt", sep = '\t', row.names = F)
-write.table(cowsurvs[, !names(cowsurvs) %in% "Branch"], "Survey_Coweeta_2010_BB.txt", sep = '\t', row.names = F)
-write.table(cowarths, "ArthropodSighting_Coweeta_2010_BB.txt", sep = '\t', row.names = F)
+#write.table(branches[, !names(branches) %in% "Branch"], "Plants_Coweeta_2010_BB.txt", sep = '\t', row.names = F)
+#write.table(cowsurvs[, !names(cowsurvs) %in% "Branch"], "Survey_Coweeta_2010_BB.txt", sep = '\t', row.names = F)
+#write.table(cowarths, "ArthropodSighting_Coweeta_2010_BB.txt", sep = '\t', row.names = F)
+
 #Merge arth and surv======
 merge_fun<-function(cowsurv,cowarths){
 merged_set<-cowsurv%>%
@@ -179,7 +180,37 @@ merged_set<-cowsurv%>%
   rename(arthID=ID.y)
 }
 
+#Function to filter out for threshold value, plot, and year
+cow_filter<-function(field_year,field_plot,threshold_value){
+  cow_WeeklySurv<-cowplusnotes%>%
+    filter(Year==field_year, Plot==field_plot, TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
+    select(Year,Yearday,Plot,Point,TreeSpecies,Sample)%>%
+    distinct()%>%
+    group_by(Year,Yearday)%>%
+    tally()%>%
+    rename(nSurveys=n)%>%
+    mutate(JulianWeek=7*floor((Yearday)/7)+4)%>%
+    group_by(JulianWeek)%>%
+    mutate(WeeklySurv=sum(nSurveys))%>%
+    filter(WeeklySurv>=threshold_value)
+}
 
+cow_fil<-function(field_year,field_plot, site_thresh_year_filter){
+  coweetanotes<-cowplusnotes%>%
+    filter(Year==field_year, Plot==field_plot, TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
+    left_join(site_thresh_year_filter,by=c('Year', 'Yearday'))%>%
+    filter(!is.na(WeeklySurv))%>%
+    subset(select=-c(surveyed,nSurveys,JulianWeek, WeeklySurv))
+}
+
+
+
+date_change<-function(Final_set){
+  juliandate <- Final_set%>%
+    mutate(LocalDate = as.Date(LocalDate,format="%Y-%m-%d"))%>%
+    mutate(Year = format(LocalDate, "%Y"))%>%
+    mutate(julianday = yday(LocalDate))
+}
 
 #-----
 
@@ -187,8 +218,8 @@ merged_set<-cowsurv%>%
 # Roughly twice as many surveys were conducted at BS and BB in 2012
 
 #TreeSpecies
-"8" (1081)
-"9" (554)
+#"8" (1081)
+#"9" (554)
 
 
 
