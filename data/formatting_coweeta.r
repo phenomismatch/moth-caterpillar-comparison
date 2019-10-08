@@ -7,6 +7,7 @@ library(tidyr)
 library(ggplot2)
 library(gridExtra)
 library(lubridate)
+
 # Read in data, clean up leading/trailing spaces, weird symbols
 cats = read.table('data/Coweeta_cats.txt', header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE) %>%
   filter(Plot != "") %>%
@@ -178,6 +179,7 @@ merge_fun<-function(cowsurv,cowarths){
 merged_set<-cowsurv%>%
   left_join(cowarths, by= c('ID'= 'SurveyFK'))%>%
   rename(arthID=ID.y)
+
 }
 
 #Function to filter out for threshold value, plot, and year
@@ -204,12 +206,14 @@ cow_fil<-function(field_year,field_plot, site_thresh_year_filter){
 }
 
 
+#Changed yday(localDate) to subtract 1 to account for weird date shift
 
 date_change<-function(Final_set){
   juliandate <- Final_set%>%
     mutate(LocalDate = as.Date(LocalDate,format="%Y-%m-%d"))%>%
     mutate(Year = format(LocalDate, "%Y"))%>%
-    mutate(julianday = yday(LocalDate))
+    mutate(julianday = yday(LocalDate)-1)%>%
+    mutate(julianweek=7*floor((julianday)/7)+4)
 }
 
 #-----
