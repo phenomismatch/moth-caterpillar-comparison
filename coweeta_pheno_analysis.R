@@ -11,16 +11,17 @@ site_filter<-function(field_year,field_plot,threshold_value){
   date<-date_change(merged)
 }
 
-par(mfrow=c(5,2))
+par(mfrow=c(3,3))
 for (i in 2010:2018){
   Tree<-site_filter(i, "BB", 50)%>%
   group_by(PlantSpecies,julianweek)%>%
    summarize(count=n())%>%
   spread(PlantSpecies, count)
-  plot(x=Tree$julianweek, y=Tree$`American chestnut`,xlab="Julian Week", ylab="nSurveys", type="b")
+  plot(x=Tree$julianweek, y=Tree$`American chestnut`,xlab="Julian Week", ylab="nSurveys", type="b",ylim=c(0,100), bty='L')
   points(x=Tree$julianweek, y=Tree$`Red maple`, col="red", type ="b")
   points(x=Tree$julianweek, y=Tree$`Red oak`, col="blue", type="b")
   points(x=Tree$julianweek, y=Tree$`Striped maple`, col="green", type= "b")
+  #legend(140,100,legend=c("American Chestnut", "Red Maple", "Red Oak", "Striped Maple"), col=c("black", "red", "blue", "green"), lty=1, cex=1, pt.cex=1) 
 }
 
 par(mfrow=c(3,2))
@@ -35,11 +36,10 @@ plot(x=Tree$julianweek,y=Tree$count, xlab="Julian Week", ylab="nSurveys", type="
 par(mfrow=c(3,2))
 cow_plots<-for (i in 2010:2018){
   tryCatch({
-    meanDensityByWeek(surveyData = site_filter(i,"BS",50),plot = TRUE,new=TRUE, xlab="Julian Week", ylab="Frac of Surveys")
+    meanDensityByWeek(surveyData = site_filter(i,"BS",50),plot = TRUE,new=TRUE, xlab="Julian Week", ylab="Frac of Surveys", ylim=c(0,40))
     meanDensityByWeek(surveyData = site_filter(i,"BS",100),plot = TRUE,new=FALSE, color='blue', lty=2)
-    meanDensityByWeek(surveyData = site_filter(i,"BB",50),plot = TRUE,new=TRUE,xlab="Julian Week", ylab="Frac of Surveys")
+    meanDensityByWeek(surveyData = site_filter(i,"BB",50),plot = TRUE,new=TRUE,xlab="Julian Week", ylab="Frac of Surveys", ylim=c(0,40))
     meanDensityByWeek(surveyData = site_filter(i,"BB",100),plot = TRUE,new=FALSE, color='blue', lty=2)
- 
     },error=function(e){}
   )
 }
