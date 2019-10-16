@@ -16,17 +16,28 @@ moth_by_day<-moth%>%
   group_by(julian.day)%>%
   summarize(nCount=sum(daily.moth.species))
 
-moth_by_week<-moth%>%
-  mutate(JulianWeek=7*floor((julian.day)/7)+4)%>%
-  select(JulianWeek,daily.moth.species)%>% 
-  group_by(JulianWeek)%>%
-  summarize(count=n(daily.moth.species))
- 
-
-
   
+moth_aggregate<-moth%>%
+  filter(year==2010)%>%
+  group_by(julian.day)%>%
+  summarize(nCount=sum(daily.moth.species))%>%
+  mutate(JulianWeek=7*floor((julian.day)/7)+4)%>%
+  replace_na(list(nCount=0))%>%
+  mutate(avgN=nCount/sum(nCount))
+
+#  select(c(JulianWeek, nCount))%>%
+# group_by(JulianWeek)%>%
+#summarize(nCount=sum(nCount))
+  
+plot(x=moth_aggregate$JulianWeek, y=moth_aggregate$avgN)
+
 plot(moth_by_day)
 lines()
 
-plot(moth_by_week)
+moth_lunar<-
+  for(i in 2010:2018){
+    moth_lunar<-moth%>%
+    mutate(Lunar.Cycle=)
+  }
+plot(moth_lunar$days.past.2009,moth_lunar$daily.moth.species)
 
