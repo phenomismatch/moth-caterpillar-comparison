@@ -1,6 +1,7 @@
 #reading in Moth abundance and Coweeta data
 library(dplyr)
 library(stringr)
+library(tidyr)
 
 moth <- read.table('c:/git/moth-caterpillar-comparison/data/moth-abundance.txt', header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE)%>%
   filter(site=='Blue Heron')
@@ -34,10 +35,27 @@ plot(x=moth_aggregate$JulianWeek, y=moth_aggregate$avgN)
 plot(moth_by_day)
 lines()
 
-moth_lunar<-
-  for(i in 2010:2018){
-    moth_lunar<-moth%>%
-    mutate(Lunar.Cycle=)
-  }
+
+#CreateCounter <- function(curr.count) {
+#  list(
+#    increment = function(amount) {
+#      curr.count <<- curr.count + amount
+#    },
+#    value = function() {
+#      return(curr.count)
+#    }
+#  )
+#}
+
+moth_lunar<-moth%>%
+  select(c(year,month,day,days.past.new.moon))%>%
+  group_by(month, days.past.new.moon)%>%
+  mutate(Lunar.Cycle=seq(days.past.new.moon))
+  
+for(i in 0:29){
+  
+}
+
+  #moth_lunar$Lunar.Cycle[1:14,]<-1
 plot(moth_lunar$days.past.2009,moth_lunar$daily.moth.species)
 
