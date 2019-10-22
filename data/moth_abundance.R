@@ -2,6 +2,7 @@
 library(dplyr)
 library(stringr)
 library(tidyr)
+library(magicfor)
 
 moth <- read.table('c:/git/moth-caterpillar-comparison/data/moth-abundance.txt', header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE)%>%
   filter(site=='Blue Heron')
@@ -47,14 +48,55 @@ lines()
 #  )
 #}
 
+
+listofdfs <- list()
+
+for(i in 2010:2018){
 moth_lunar<-moth%>%
-  select(c(year,month,day,days.past.new.moon))%>%
-  group_by(month, days.past.new.moon)%>%
-  mutate(Lunar.Cycle=seq(days.past.new.moon))
-  
-for(i in 0:29){
-  
+  filter(year==i)%>%
+  mutate(New.moon=(days.past.new.moon==0))%>%
+  mutate(New.moon=replace(New.moon,New.moon==FALSE,0))%>%
+  select(c(year,New.moon))%>%
+  group_by(year,Lunar.Phase=cumsum(New.moon==1L))%>%
+  mutate(Lunar.Cycle=row_number())
+  listofdfs[[i]]<-moth_lunar
 }
+
+final_lunar<-bind_rows(listofdfs)
+
+
+
+for(i in 2010:2018){
+  moth_lunar<-moth%>%
+    group_by(i,Lunar.Phase=cumsum(New.moon==1L))%>%
+    mutate(Lunar.Cycle=row_number())
+}
+  
+  
+  ungroup%>%
+  select(-idx)
+  
+
+
+# mutate(Counter=X==1000)%>%
+ # mutate(Counter=replace(Counter,Counter==FALSE,1))%>%
+ 
+  mutate(Lunar.Cycle=rep(1:n,each=n))
+
+  moth_lunar$Lunar.Cycle<-sequence(rle(moth_lunar$New.moon)$lengths)
+  
+  
+
+  
+  
+
+  {ifelse(New.moon=TRUE,Lunar.Cycle==1,Lunar.Cycle==2)}
+
+  if(moth_lunar$New.moon=FALSE){
+  moth_lunar$Lunar.Cycle=row_number()
+  }   else{
+    moth_lunar$Lunar.Cycle="NA"
+  }
 
   #moth_lunar$Lunar.Cycle[1:14,]<-1
 plot(moth_lunar$days.past.2009,moth_lunar$daily.moth.species)
