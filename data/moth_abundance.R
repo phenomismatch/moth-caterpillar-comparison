@@ -2,7 +2,6 @@
 library(dplyr)
 library(stringr)
 library(tidyr)
-library(magicfor)
 
 moth <- read.table('c:/git/moth-caterpillar-comparison/data/moth-abundance.txt', header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE)%>%
   filter(site=='Blue Heron')
@@ -14,15 +13,16 @@ coweeta<- read.table('c:/git/moth-caterpillar-comparison/data/coweeta_cats.txt',
 #Look at two ways to organize the moth data, one where the years are all aggregated and the julian day records are matched together
 #The other way is to organize by the lunar phases, so to create some function that takes the julian day past new moon and subtract from the first day of that year.
 
+#Organizing data by julian day
 moth_by_day<-moth%>%
   group_by(julian.day)%>%
-  summarize(nCount=sum(daily.moth.species))
+  summarize(nCount=sum(photos))
 
   
 moth_aggregate<-moth%>%
   filter(year==2010)%>%
   group_by(julian.day)%>%
-  summarize(nCount=sum(daily.moth.species))%>%
+  summarize(nCount=sum(photos))%>%
   mutate(JulianWeek=7*floor((julian.day)/7)+4)%>%
   replace_na(list(nCount=0))%>%
   mutate(avgN=nCount/sum(nCount))
@@ -32,72 +32,59 @@ moth_aggregate<-moth%>%
 #summarize(nCount=sum(nCount))
   
 plot(x=moth_aggregate$JulianWeek, y=moth_aggregate$avgN)
-
 plot(moth_by_day)
-lines()
 
 
-#CreateCounter <- function(curr.count) {
-#  list(
-#    increment = function(amount) {
-#      curr.count <<- curr.count + amount
-#    },
-#    value = function() {
-#      return(curr.count)
-#    }
-#  )
-#}
+#Organizing data based on lunar phases
 
-
-listofdfs <- list()
-
-for(i in 2010:2018){
-moth_lunar<-moth%>%
-  filter(year==i)%>%
-  mutate(New.moon=(days.past.new.moon==0))%>%
-  mutate(New.moon=replace(New.moon,New.moon==FALSE,0))%>%
-  select(c(year,New.moon))%>%
-  group_by(year,Lunar.Phase=cumsum(New.moon==1L))%>%
-  mutate(Lunar.Cycle=row_number())
-  listofdfs[[i]]<-moth_lunar
-}
-
-final_lunar<-bind_rows(listofdfs)
-
-
-
-for(i in 2010:2018){
+dfs <- list()
+for(i in 2010:2019){
   moth_lunar<-moth%>%
-    group_by(i,Lunar.Phase=cumsum(New.moon==1L))%>%
-    mutate(Lunar.Cycle=row_number())
+    filter(year==i)%>%
+    mutate(New.moon=(days.past.new.moon==0))%>%
+    mutate(New.moon=replace(New.moon,New.moon==FALSE,0))%>%
+    group_by(year,Lunar.Cycle=cumsum(New.moon)+1)%>%
+    mutate(Lunar.Days=row_number())%>%
+    select(c(days.past.new.moon,New.moon,Lunar.Cycle,Lunar.Days))
+    dfs[[i]]<-moth_lunar
 }
+  final_lunar<-bind_rows(dfs)
+  moth_lunar<-bind_cols(moth,final_lunar)
   
+  moth_set<-moth_lunar%>%
+  group_by(year,Lunar.Cycle)%>%
+  mutate(Lunar.Total=sum(photos),Phase.days=n(),Lunar.photo.avg=photos/((Lunar.Total/Phase.days)),Lunar.avg=Lunar.Total/Phase.days)%>%
+  filter(year==2012)
   
-  ungroup%>%
-  select(-idx)
+  plot(x = moth_set$julian.day,y=moth_set$Lunar.photo.avg,type="l", xlim=c(10,38))
   
+day1 = moth %>%
+  filter(julian.day == 1) %>%
+  select(year, days.past.new.moon)  %>%
+  mutate(shift = days.past.new.moon - days.past.new.moon[1])
+  
+moth$julian.day.shifted = NA
+
+for (y in 2010:2018) {
+  moth$julian.day.shifted[moth$year == y] = moth$julian.day[moth$year == y] - day1$shift[day1$year == y]
+}
 
 
 # mutate(Counter=X==1000)%>%
  # mutate(Counter=replace(Counter,Counter==FALSE,1))%>%
  
-  mutate(Lunar.Cycle=rep(1:n,each=n))
+ # mutate(Lunar.Cycle=rep(1:n,each=n))
 
-  moth_lunar$Lunar.Cycle<-sequence(rle(moth_lunar$New.moon)$lengths)
+#  moth_lunar$Lunar.Cycle<-sequence(rle(moth_lunar$New.moon)$lengths)
   
   
 
+ #moth_lunar$Lunar.Cycle[1:14,]<-1
   
+
+#moth_lunar<-moth%>%
+#  filter(year==2010)%>%
+#  {ifelse(moth_lunar$days.past.new.moon==0,1,0)}%>%
   
-
-  {ifelse(New.moon=TRUE,Lunar.Cycle==1,Lunar.Cycle==2)}
-
-  if(moth_lunar$New.moon=FALSE){
-  moth_lunar$Lunar.Cycle=row_number()
-  }   else{
-    moth_lunar$Lunar.Cycle="NA"
-  }
-
-  #moth_lunar$Lunar.Cycle[1:14,]<-1
-plot(moth_lunar$days.past.2009,moth_lunar$daily.moth.species)
-
+#  group_by(year,Lunar.Cycle=cumsum(New.moon==1L)+1)%>%
+#  mutate(Lunar.Days=row_number())
