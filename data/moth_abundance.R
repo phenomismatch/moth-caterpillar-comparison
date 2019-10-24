@@ -46,17 +46,47 @@ for(i in 2010:2019){
     group_by(year,Lunar.Cycle=cumsum(New.moon)+1)%>%
     mutate(Lunar.Days=row_number())%>%
     select(c(days.past.new.moon,New.moon,Lunar.Cycle,Lunar.Days))
-    dfs[[i]]<-moth_lunar
+  dfs[[i]]<-moth_lunar
 }
-  final_lunar<-bind_rows(dfs)
-  moth_lunar<-bind_cols(moth,final_lunar)
-  
-  moth_set<-moth_lunar%>%
+final_lunar<-bind_rows(dfs)
+moth_lunar<-bind_cols(moth,final_lunar)
+
+
+moth_set<-moth_lunar%>%
   group_by(year,Lunar.Cycle)%>%
-  mutate(Lunar.Total=sum(photos),Phase.days=n(),Lunar.photo.avg=photos/((Lunar.Total/Phase.days)),Lunar.avg=Lunar.Total/Phase.days)%>%
-  filter(year==2012)
+  mutate(Lunar.Total=sum(photos),Phase.days=n(),Frac=photos/((Lunar.Total/Phase.days)),
+         Lunar.avg=Lunar.Total/Phase.days)%>%
+  replace_na(list(Frac=0))
+
+
+#Plot Frac. of avg for lunar days across lunar cycles
+par(mfrow=c(3,3))
+rainbowcols = rainbow(13)
+
+lunar_ratio<-for(y in 2010:2018){
+  moth_plot<-moth_set%>%
+    filter(year==y,Lunar.Cycle==2)
+  #Quadratic model
+  quadmod<-moth_set%>%
+    filter(year==y)
+  Lunar2=quadmod$Lunar.Days^2
+    quad<-lm(quadmod$Frac~quadmod$Lunar.Days+Lunar2)
+    square<-summary(quad)$r.squared
+  plot(x=moth_plot$Lunar.Days,y=moth_plot$Frac,type="l",
+       col=rainbowcols[1],xlab="Lunar Days", ylab="Frac of Average")
   
-  plot(x = moth_set$julian.day,y=moth_set$Lunar.photo.avg,type="l", xlim=c(10,38))
+  lines(predict(quad))
+   mtext(square, side=3)
+  for(i in 2:14){
+    moth_plot<-moth_set%>%
+      filter(year==y,Lunar.Cycle==i)
+    points(x=moth_plot$Lunar.Days,y=moth_plot$Frac,type="p", col = rainbowcols[i])
+  }
+  }
+
+
+
+
   
 day1 = moth %>%
   filter(julian.day == 1) %>%
