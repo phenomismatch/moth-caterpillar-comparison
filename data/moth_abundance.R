@@ -75,12 +75,12 @@ lunar_ratio<-for(y in 2010:2018){
   plot(x=moth_plot$Lunar.Days,y=moth_plot$Frac,type="l",
        col=rainbowcols[1],xlab="Lunar Days", ylab="Frac of Average")
   
-  lines(predict(quad))
+  lines(predict(quad),)
    mtext(square, side=3)
   for(i in 2:14){
     moth_plot<-moth_set%>%
       filter(year==y,Lunar.Cycle==i)
-    points(x=moth_plot$Lunar.Days,y=moth_plot$Frac,type="p", col = rainbowcols[i])
+    points(x=moth_plot$Lunar.Days,y=moth_plot$Frac,type="l", col = rainbowcols[i])
   }
   }
 
