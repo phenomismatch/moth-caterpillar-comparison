@@ -56,7 +56,11 @@ moth_set<-moth_lunar%>%
   group_by(year,Lunar.Cycle)%>%
   mutate(Lunar.Total=sum(photos),Phase.days=n(),Frac=photos/((Lunar.Total/Phase.days)),
          Lunar.avg=Lunar.Total/Phase.days)%>%
-  replace_na(list(Frac=0))
+  replace_na(list(Frac=0))%>%
+  group_by(Lunar.Cycle)%>%
+  mutate(Lunar.Phase1=Lunar.Days<14, Lunar.Phase2=Lunar.Days>14)%>%
+  
+  
 
 
 #Plot Frac. of avg for lunar days across lunar cycles
@@ -70,19 +74,18 @@ lunar_ratio<-for(y in 2010:2018){
   quadmod<-moth_set%>%
     filter(year==y)
   Lunar2=quadmod$Lunar.Days^2
-    quad<-lm(quadmod$Frac~quadmod$Lunar.Days+Lunar2)
-    square<-summary(quad)$r.squared
+  quad<-lm(quadmod$Frac~quadmod$Lunar.Days+Lunar2)
+  square<-summary(quad)$r.squared
   plot(x=moth_plot$Lunar.Days,y=moth_plot$Frac,type="l",
        col=rainbowcols[1],xlab="Lunar Days", ylab="Frac of Average")
-  
   lines(predict(quad),)
-   mtext(square, side=3)
+  mtext(square, side=3)
   for(i in 2:14){
     moth_plot<-moth_set%>%
       filter(year==y,Lunar.Cycle==i)
     points(x=moth_plot$Lunar.Days,y=moth_plot$Frac,type="l", col = rainbowcols[i])
   }
-  }
+}
 
 
 
@@ -118,3 +121,5 @@ for (y in 2010:2018) {
   
 #  group_by(year,Lunar.Cycle=cumsum(New.moon==1L)+1)%>%
 #  mutate(Lunar.Days=row_number())
+
+
