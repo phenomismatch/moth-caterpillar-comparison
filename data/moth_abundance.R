@@ -3,6 +3,7 @@ library(dplyr)
 library(stringr)
 library(tidyr)
 
+
 moth <- read.table('c:/git/moth-caterpillar-comparison/data/moth-abundance.txt', header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE)%>%
   filter(site=='Blue Heron')
 coweeta<- read.table('c:/git/moth-caterpillar-comparison/data/coweeta_cats.txt',header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE)%>%
@@ -56,9 +57,37 @@ moth_set<-moth_lunar%>%
   group_by(year,Lunar.Cycle)%>%
   mutate(Lunar.Total=sum(photos),Phase.days=n(),Frac=photos/((Lunar.Total/Phase.days)),
          Lunar.avg=Lunar.Total/Phase.days)%>%
-  replace_na(list(Frac=0))%>%
-  group_by(Lunar.Cycle)%>%
-  mutate(Lunar.Phase1=Lunar.Days<14, Lunar.Phase2=Lunar.Days>14)%>%
+  replace_na(list(Frac=0))
+
+
+postNmoon<-moth_set%>%
+  group_by(year,Lunar.Cycle)%>%
+  filter(Lunar.Days<=14)%>%
+  mutate(RawCount=sum(photos))%>%
+  mutate(nonzero=photos>0)%>%
+  mutate(n=replace(nonzero,nonzero==FALSE,0))%>%
+  group_by(year,Lunar.Cycle)%>%
+  mutate(nonzerodays=sum(n))%>%
+  select(-c(nonzero,n))
+
+preNmoon<-moth_set%>%
+  group_by(year,Lunar.Cycle)%>%
+  filter(Lunar.Days>14)%>%
+  mutate(RawCount=sum(photos))%>%
+  mutate(nonzero=photos>0)%>%
+  mutate(n=replace(nonzero,nonzero==FALSE,0))%>%
+  group_by(year,Lunar.Cycle)%>%
+  mutate(nonzerodays=sum(n))%>%
+  select(-c(nonzero,n))
+
+  
+  #mutate(Lunar.Phase1=Lunar.Days<=14, Lunar.Phase2=Lunar.Days>14)%>%
+ # mutate(Lunar.Phase1=replace(Lunar.Phase1,Lunar.Phase1==TRUE,1))%>%
+  #group_by(Lunar.Cycle, Lunar.Phase1)%>%
+  #mutate(id=seq_along())
+  
+  group_by(year,PostNewMoon=cumsum(Lunar.Phase1)+1)%>%
+  mutate(Lunar.Days=row_number())
   
   
 
@@ -76,10 +105,10 @@ lunar_ratio<-for(y in 2010:2018){
   Lunar2=quadmod$Lunar.Days^2
   quad<-lm(quadmod$Frac~quadmod$Lunar.Days+Lunar2)
   square<-summary(quad)$r.squared
-  plot(x=moth_plot$Lunar.Days,y=moth_plot$Frac,type="l",
-       col=rainbowcols[1],xlab="Lunar Days", ylab="Frac of Average")
-  lines(predict(quad),)
-  mtext(square, side=3)
+  plot(main=y,x=moth_plot$Lunar.Days,y=moth_plot$Frac,type="l",
+       col=rainbowcols[1],xlab="Lunar Days", ylab="Frac of Surveys")
+    lines(predict(quad),)
+    legend("topleft",bty="n",legend=paste("R^2=",square))
   for(i in 2:14){
     moth_plot<-moth_set%>%
       filter(year==y,Lunar.Cycle==i)
