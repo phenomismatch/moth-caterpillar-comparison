@@ -68,7 +68,11 @@ postNmoon<-moth_set%>%
   mutate(n=replace(nonzero,nonzero==FALSE,0))%>%
   group_by(year,Lunar.Cycle)%>%
   mutate(nonzerodays=sum(n))%>%
+  mutate(phototaken=photos/nonzerodays)%>%
+  mutate(Phase="PostNewMoon")%>%
   select(-c(nonzero,n))
+
+plot(x=postNmoon$Lunar.Days,y=postNmoon$phototaken,col=postNmoon$Lunar.Cycle)
 
 preNmoon<-moth_set%>%
   group_by(year,Lunar.Cycle)%>%
@@ -78,9 +82,38 @@ preNmoon<-moth_set%>%
   mutate(n=replace(nonzero,nonzero==FALSE,0))%>%
   group_by(year,Lunar.Cycle)%>%
   mutate(nonzerodays=sum(n))%>%
+  mutate(phototaken=photos/nonzerodays)%>%
+  mutate(Phase="PreNewMoon")%>%
   select(-c(nonzero,n))
 
+lunar_phase_bind<-bind_rows(postNmoon,preNmoon)
+
+bind_phase<-bind_rows(postNmoon,preNmoon)%>%
+  select(c(year,Lunar.Cycle,Phase,photos,nonzerodays,phototaken))%>%
+  group_by(year,Lunar.Cycle,Phase,nonzerodays)%>%
+  summarize(RawCount=sum(photos))%>%
+  mutate(avg=RawCount/nonzerodays)
   
+  
+
+
+
+
+par(mfrow=c(3,3))
+for (y in 2010:2018){
+  bind_phase<-bind_rows(postNmoon,preNmoon)%>%
+    select(c(year,Lunar.Cycle,Phase,photos,nonzerodays,phototaken))%>%
+    group_by(year,Lunar.Cycle,Phase,nonzerodays)%>%
+    summarize(RawCount=sum(photos))%>%
+    mutate(avg=RawCount/nonzerodays)%>%
+    filter(year==y)
+  plot(x=bind_phase$Lunar.Cycle,y=bind_phase$avg,col=bind_phase$Lunar.Cycle)
+}
+
+
+
+
+
   #mutate(Lunar.Phase1=Lunar.Days<=14, Lunar.Phase2=Lunar.Days>14)%>%
  # mutate(Lunar.Phase1=replace(Lunar.Phase1,Lunar.Phase1==TRUE,1))%>%
   #group_by(Lunar.Cycle, Lunar.Phase1)%>%
