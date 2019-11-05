@@ -96,26 +96,85 @@ bind_phase<-bind_rows(postNmoon,preNmoon)%>%
   
   
 
+fitG = function(x, y, mu, sig, scale, ...){
+  
+  f = function(p){
+    
+    d = p[3] * dnorm(x, mean = p[1], sd = p[2])
+    
+    sum((d - y) ^ 2)
+    
+  }
+  
+  optim(c(mu, sig, scale), f)
+  
+}
+
 
 
 
 par(mfrow=c(3,3))
 for (y in 2010:2018){
   bind_phase<-bind_rows(postNmoon,preNmoon)%>%
-    select(c(year,Lunar.Cycle,Phase,photos,nonzerodays,phototaken))%>%
+   # select(c(year,Lunar.Cycle,Phase,photos,nonzerodays,phototaken,julian.day,days.past.new.moon))%>%
     group_by(year,Lunar.Cycle,Phase,nonzerodays)%>%
-    summarize(RawCount=sum(photos))%>%
+    mutate(RawCount=sum(photos))%>%
     mutate(avg=RawCount/nonzerodays)%>%
-    filter(year==y)
-  plot(x=bind_phase$Lunar.Cycle,y=bind_phase$avg,col=bind_phase$Lunar.Cycle)
-}
+    mutate(prepost=ifelse(Phase=="PreNewMoon", 1,2))%>% 
+    group_by(year,Lunar.Cycle,Phase)%>%
+    mutate(day=median(julian.day))%>% #Median isn't exactly right, so the day will be a little shifted to one side
+    filter(year==y)%>%
+    mutate_cond(is.na(avg), avg = 0)
+  
+  plot(main=y, x=bind_phase$day,y=bind_phase$avg,col=bind_phase$prepost,xlab="Julian Day", ylab="Moth Average")
+
+  }
+title("Moth Data averaged over lunar phases",outer=TRUE,line=-1)
+#legend(-200,400,legend=c("Pre New Moon","Post New Moon"),pch=1,col=c(1,2),title="Legend", xpd=NA,cex=0.8)
 
 
 
+
+  Gauss<-bind_phase%>%
+          bind_rows(postNmoon,preNmoon)%>%
+          group_by(year,Lunar.Cycle,Phase,nonzerodays)%>%
+          mutate(RawCount=sum(photos))%>%
+          mutate(avg=RawCount/nonzerodays)%>%
+          mutate(prepost=ifelse(Phase=="PreNewMoon", 3,4))%>% 
+          mutate(day=median(julian.day))%>%
+          group_by(year,day,Phase,avg)%>%
+          summarize()%>%
+          mutate_cond(is.na(avg), avg = 0)
+  
+
+  par(mfrow=c(3,3))
+for(i in 2010:2018){
+  fit<-Gauss%>%
+    filter(year==i)
+  
+  gfit1=fitG(x=fit$day,y=fit$avg,mu=weighted.mean(fit$day,fit$avg),sig=10000,scale=100,control=list(maxit=10000),method="L-BFGS-B",lower=c(0,0,0,0,0,0))
+  p=gfit1$par
+  r2=cor(fit$day,p[3]*dnorm(fit$day,p[1],p[2]))^2
+  totalAvg=sum(fit$avg)
+  
+  plot(x=fit$day,y=fit$avg)
+  lines(0:365,p[3]*dnorm(0:365,p[1],p[2]),col='blue')
+}    
+           
+  
+  
+
+gfit1=fitG(x=Gauss$day,y=Gauss$avg,mu=weighted.mean(Gauss$day,Gauss$avg),sig=110,scale=200,control=list(maxit=10000),method="L-BFGS-B",lower=c(0,0,0,0,0,0))
+p=gfit1$par
+r2=cor(Gauss$day,p[3]*dnorm(Gauss$day,p[1],p[2]))^2
+totalAvg=sum(Gauss$avg)
+  
+plot(x=Gauss$day,y=Gauss$avg)
+lines(0:365,p[3]*dnorm(0:365,p[1],p[2]),col='blue')
 
 
   #mutate(Lunar.Phase1=Lunar.Days<=14, Lunar.Phase2=Lunar.Days>14)%>%
- # mutate(Lunar.Phase1=replace(Lunar.Phase1,Lunar.Phase1==TRUE,1))%>%
+  # mutate(Lunar.Phase1=replace(Lunar.Phase1,Lunar.Phase1==TRUE,1))%>%
   #group_by(Lunar.Cycle, Lunar.Phase1)%>%
   #mutate(id=seq_along())
   
