@@ -181,8 +181,24 @@ lines(0:365,p[3]*dnorm(0:365,p[1],p[2]),col='blue')
   group_by(year,PostNewMoon=cumsum(Lunar.Phase1)+1)%>%
   mutate(Lunar.Days=row_number())
   
-  
+#Phenometrics 
+  #Extract date where x-th percentile of moths were observed. 
+  #So we need to know the total number of moths in a year observed
+  #Then, we can just use an if statement, or a case-when statement that looks at when the percentage
+  #(sum of moths at that date/sum of total moths>10% or 50%, whatever)
+  #Also, to look at half of the maximum of the half-cycle value, 
+  #so basically first you have to know what the peak is for that cycle, then do an if statement for the date with # of moths that first exceeds that). 
 
+  for(i in 2010:2018){
+    altpheno<-lunar_phase_bind%>%
+      filter(year==i)
+  moth_sum<-cumsum(altpheno$photos)
+  min(which(moth_sum>(0.1*sum(altpheno$photos))))
+  min(which(moth_sum>(0.5*sum(altpheno$photos))))
+  
+  }
+    
+  
 
 #Plot Frac. of avg for lunar days across lunar cycles
 par(mfrow=c(3,3))
