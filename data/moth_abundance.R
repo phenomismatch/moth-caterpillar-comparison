@@ -2,7 +2,7 @@
 library(dplyr)
 library(stringr)
 library(tidyr)
-
+library(tidyverse)
 
 moth <- read.table('c:/git/moth-caterpillar-comparison/data/moth-abundance.txt', header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE)%>%
   filter(site=='Blue Heron')
