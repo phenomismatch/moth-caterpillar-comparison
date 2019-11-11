@@ -6,7 +6,6 @@ library(pracma)
 source('C:/git/caterpillars-analysis-public/code/analysis_functions.r')
 
 
-
 moth <- read.table('c:/git/moth-caterpillar-comparison/data/moth-abundance.txt', header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE)%>%
   filter(site=='Blue Heron')
 coweeta<- read.table('c:/git/moth-caterpillar-comparison/data/coweeta_cats.txt',header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE)%>%
