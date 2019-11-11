@@ -6,6 +6,8 @@ library(stringr)
 library(tidyr)
 library(ggplot2)
 library(gridExtra)
+library(lubridate)
+
 # Read in data, clean up leading/trailing spaces, weird symbols
 cats = read.table('data/Coweeta_cats.txt', header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE) %>%
   filter(Plot != "") %>%
@@ -99,183 +101,10 @@ cowplusnotes$surveyed<-ifelse(cowplusnotes$NumCaterpillars>=0,"1",NA)
 
 
 
+#Cow_survs------
 
-
-#Not sure if this is the right way to create the function, if these two need to be separate functions or if I could combine them?
-freq_plot<-function(field_year, field_plot){
-  group_cow_set<-cowplusnotes%>%
-    filter(cowplusnotes$Year==field_year, cowplusnotes$Plot==field_plot)%>%
-    select(Plot,Yearday,Point,TreeSpecies,Sample)%>%
-    distinct()%>%
-    group_by(Point,Plot,TreeSpecies,Sample,Yearday)%>%
-    summarise(n())%>%
-    mutate(freq=(lead(Yearday)-Yearday), gridLetter = substr(Point, 1, 1),
-           gridY = as.numeric(substr(Point, 2, nchar(Point))),
-           gridX = which(LETTERS == gridLetter))
-  par(mfrow = c(6, 5), mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
-  #pdf(paste0("coweeta_plots_",field_year,"_",field_plot,".pdf"))
-  for (j in unique(group_cow_set$Yearday)) {
-    tmp = filter(group_cow_set, Yearday == j)
-   plot(group_cow_set$gridX, group_cow_set$gridY, pch = 16, xlab = "", ylab = "",main="Plot Samples")
-  }
-  #dev.off()
-  return(group_cow_set)
-  
-}
-#
-
-treesByYear = cowplusnotes %>%
-  filter(Plot == Plot) %>%
-  select(Year, Plot,Yearday,Point,TreeSpecies,Sample)%>%
-  distinct()%>%
-  count(Year, TreeSpecies) %>%
-  arrange(Year, desc(n)) %>%
-  spread(key = TreeSpecies,value = n, fill = 0)
-
-
-pdf("coweeta_tree_surveys_by_year.pdf", height = 11, width = 8)
-par(mfrow = c(length(unique(treesByYear$Year)), 1))
-for (y in unique(treesByYear$Year)) {
- bplot = barplot(as.matrix(treesByYear[treesByYear$Year == y, 4:ncol(treesByYear)]), col = 'darkorchid', xaxt = "n", xlab = "", ylab = "")
-}
-text(bplot, rep(-1, ncol(treesByYear)-4), xpd = TRUE, srt = 45)
-dev.off()
-
-
-
-
-
-#BBfreq <- NA
-
-#for(i in 2010:2018){
-#  g<-freq_plot(i,"BB")
-#  print(g)
-#}
-
-
-samp_days<-function(field_year,field_plot){
-  coweeta_data<-cowplusnotes%>%
-    filter(cowplusnotes$Year==field_year,cowplusnotes$Plot==field_plot)%>%
-    select(Plot, Yearday, Point,TreeSpecies, Sample)%>%
-    distinct()%>%
-    group_by(Plot,Point, Yearday)%>%
-    summarize(n=n())%>%
-    mutate(gridLetter=substr(Point,1,1),
-           gridY=as.numeric(substr(Point,2,nchar(Point))),
-           gridX=which(LETTERS == gridLetter))
-  par(mfrow = c(6, 5), mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
-  pdf(paste0("coweeta_plots_",field_year,"_",field_plot,".pdf"))
-  for (i in unique(coweeta_data$Yearday)) {
-    tmp = filter(coweeta_data, Yearday == i)
-    plots<-ggplot(tmp,aes(x=gridX,y=gridY))+geom_point(aes(size=n))+xlim(0,26)+ylim(0,max(coweeta_data$gridY))
-    print(plots)
-  }
-  dev.off()
-  return(coweeta_data)
-}
-
-BBsamp10<-samp_days(2010,"BB")
-BBsamp11<-samp_days(2011,"BB")
-
-#coweeta_data<-cowplusnotes%>%
-#  filter(cowplusnotes$Year==2010,cowplusnotes$Plot=="BB")%>%
-#  select(Plot, Yearday, Point, Sample,TreeSpecies)%>%
-#  distinct()%>%
-#  group_by(Plot,Point, Yearday)%>%
-#  summarize(n=n())%>%
-#  mutate(gridLetter=substr(Point,1,1),
-#         gridY=as.numeric(substr(Point,2,nchar(Point))),
-#         gridX=which(LETTERS==gridLetter))
-
-
-par(mfrow = c(6, 5), mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
-
-for (j in unique(coweeta_data$Yearday)){
-  tmp=filter(coweeta_data,Yearday==j)
-  plot<-ggplot(coweeta_data,aes(x=gridX,y=gridY))+geom_point(aes(size=n))
-}
-
-
-aggregate(BBday10$n,by=list(Sampled=BBday10$Yearday),FUN=sum)
-
-
-
-sampled_days_BB<-cowplusnotes%>%
-  filter(cowplusnotes$Plot=="BB",cowplusnotes$TreeSpecies!="8",cowplusnotes$TreeSpecies!="9")%>%
-  group_by(TreeSpecies)%>%
-  summarize(n=n())
-
-sampled_days_BS<-cowplusnotes%>%
-  filter(cowplusnotes$Plot=="BS",cowplusnotes$TreeSpecies!="8",cowplusnotes$TreeSpecies!="9")%>%
-  group_by(TreeSpecies)%>%
-  summarize(n=n())
-
-#barplot(sampled_days$n, main=sampled_days$n,xlab="",width=1,names.arg=sampled_days$TreeSpecies, ylab="",)
-
-
-
-site_plot_BB<-ggplot(data=sampled_days_BB,aes(x=sampled_days_BB$TreeSpecies,y=sampled_days_BB$n))+
-  geom_bar(stat="identity")+
-  theme(axis.text.x = element_text( color="black", size=8, angle=45,vjust=1,hjust=1))+
-  xlab("Tree Species")+
-  ylab("Number of Samples")
-pdf(paste("BB_Tree_Samples.pdf"))
-site_plot_BB
-dev.off()
-
-site_plot_BS<-ggplot(data=sampled_days_BS,aes(x=sampled_days_BS$TreeSpecies,y=sampled_days_BS$n))+
-  geom_bar(stat="identity")+
-  theme(axis.text.x = element_text( color="black", size=8, angle=45,vjust=1,hjust=1))+
-  xlab("Tree Species")+
-  ylab("Number of Samples")
-pdf(paste0("BS_Tree_Samples.pdf"))
-site_plot_BS
-dev.off()
-
-
-
-
-#Also we might want to create a plot of the amount of tree species surveyed, as in how many were surveyed, and whether it's the same amount each time.
-
-
-BBfreq10<-freq_plot(2010, "BB")
-BSfreq10<-freq_plot(2010, "BS")
-BBfreq11<-freq_plot(2011, "BB")
-
-
-BBday10<-samp_days(2010,"BB")
-Bsday10<-samp_days(2010,"BS")
-
-
-
-
-
-widecowplusnotes_2010<- grouped_cow_2010%>%
-  spread(Yearday,'n()',fill=NA,convert=TRUE)%>%
-  arrange(`136`)
-
-write.csv(widecowplusnotes_2010,'widecowplusnotes_2010.csv')
-
-
-
-widecowpointtally<-widecowplusnotes%>%
-  group_by(Point)%>%
-  tally()
-
-
-# Plots examining # visits by grid point by yearday
-BBfreq10 = filter(cow_freq_2010, Plot=="BB")
-
-
-par(mfrow = c(5, 5), mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
-for (j in unique(BBfreq10$Yearday)) {
-  tmp = filter(BBfreq10, Yearday == j)
-  plot(BBfreq10$gridX, BBfreq10$gridY, pch = 16, xlab = "", ylab = "")
-}
-
-
-
-cowsurvs = cowplusnotes%>%
+coweeta_surveys<-function(merged){
+  cowsurvs = merged %>%
   select(Year, Plot, Yearday, Point, TreeSpecies, Sample, Notes) %>%
   distinct() %>%
   left_join(comments[, c('Comments', 'NumberOfLeaves')], by = c('Notes' = 'Comments')) %>%
@@ -303,19 +132,21 @@ cowsurvs = cowplusnotes%>%
   select(ID, SubmissionTimestamp, UserFKOfObserver, PlantFK, LocalDate, LocalTime, ObservationMethod, Notes, 
          WetLeaves, PlantSpecies, NumberOfLeaves, AverageLeafLength, HerbivoryScore, SubmittedThroughApp,
          MinimumTemperature, MaximumTemperature, NeedToSendToSciStarter, CORRESPONDING_OLD_DATABASE_SURVEY_ID, Branch)
-         
+}
+
 
 # 69 records with 2 or more "survey events" per branch/date
-multSurveyRecs2 = cowsurvs %>%
-  count(ID, PlantFK, LocalDate, Notes) %>%
-  filter(n > 1)
+#multSurveyRecs2 = cowsurvs %>%
+#  count(ID, PlantFK, LocalDate, Notes) %>%
+#  filter(n > 1)
   
 
-# arthropods table
-cowarths = cowplusnotes %>%
+# arthropods table------
+coweeta_arths<-function(merged,coweeta_surv){
+  cowarths = merged%>%
   mutate(Branch = paste(Plot, Point, TreeSpecies, Sample, sep = "_"),
          LocalDate = as.Date(Yearday, as.Date(paste(Year, "-01-01", sep = "")))) %>%
-  left_join(cowsurvs[, c('Branch', 'ID', 'LocalDate', 'Notes')], by = c('Branch', 'LocalDate', 'Notes')) %>%
+  left_join(coweeta_surv[, c('Branch', 'ID', 'LocalDate', 'Notes')], by = c('Branch', 'LocalDate', 'Notes')) %>%
   rename(SurveyFK = ID) %>%
   filter(NumCaterpillars > 0) %>%
   mutate(ID = highestExistingArthID + 1:n(),
@@ -334,18 +165,65 @@ cowarths = cowplusnotes %>%
          Group = ifelse(BeetleLarva == 1, "beetle", Group),
          Group = ifelse(CaterpillarFamily == "Sawfly", "bee", Group)) %>%
   select(ID, SurveyFK, Group, Length, Quantity, PhotoURL, Notes, Hairy, Rolled, Tented, Sawfly, BeetleLarva, NeedToSendToINaturalist)
-  
+}
+
 
 
 # Write files
-write.table(branches[, !names(branches) %in% "Branch"], "Plants_Coweeta.txt", sep = '\t', row.names = F)
-write.table(cowsurvs[, !names(cowsurvs) %in% "Branch"], "Survey_Coweeta.txt", sep = '\t', row.names = F)
-write.table(cowarths, "ArthropodSighting_Coweeta.txt", sep = '\t', row.names = F)
+#write.table(branches[, !names(branches) %in% "Branch"], "Plants_Coweeta_2010_BB.txt", sep = '\t', row.names = F)
+#write.table(cowsurvs[, !names(cowsurvs) %in% "Branch"], "Survey_Coweeta_2010_BB.txt", sep = '\t', row.names = F)
+#write.table(cowarths, "ArthropodSighting_Coweeta_2010_BB.txt", sep = '\t', row.names = F)
+
+#Merge arth and surv======
+merge_fun<-function(cowsurv,cowarths){
+merged_set<-cowsurv%>%
+  left_join(cowarths, by= c('ID'= 'SurveyFK'))%>%
+  rename(arthID=ID.y)
+
+}
+
+#Function to filter out for threshold value, plot, and year
+cow_filter<-function(field_year,field_plot,threshold_value){
+  cow_WeeklySurv<-cowplusnotes%>%
+    filter(Year==field_year, Plot==field_plot, TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
+    select(Year,Yearday,Plot,Point,TreeSpecies,Sample)%>%
+    distinct()%>%
+    group_by(Year,Yearday)%>%
+    tally()%>%
+    rename(nSurveys=n)%>%
+    mutate(JulianWeek=7*floor((Yearday)/7)+4)%>%
+    group_by(JulianWeek)%>%
+    mutate(WeeklySurv=sum(nSurveys))%>%
+    filter(WeeklySurv>=threshold_value)
+}
+
+cow_fil<-function(field_year,field_plot, site_thresh_year_filter){
+  coweetanotes<-cowplusnotes%>%
+    filter(Year==field_year, Plot==field_plot, TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
+    left_join(site_thresh_year_filter,by=c('Year', 'Yearday'))%>%
+    filter(!is.na(WeeklySurv))%>%
+    subset(select=-c(surveyed,nSurveys,JulianWeek, WeeklySurv))
+}
+
+
+#Changed yday(localDate) to subtract 1 to account for weird date shift
+
+date_change<-function(Final_set){
+  juliandate <- Final_set%>%
+    mutate(LocalDate = as.Date(LocalDate,format="%Y-%m-%d"))%>%
+    mutate(Year = format(LocalDate, "%Y"))%>%
+    mutate(julianday = yday(LocalDate)-1)%>%
+    mutate(julianweek=7*floor((julianday)/7)+4)
+}
+
+#-----
 
 # BS 2002-2018, BB 2003-2018, RK 2002-2008
 # Roughly twice as many surveys were conducted at BS and BB in 2012
 
 #TreeSpecies
-"8" (1081)
-"9" (554)
+#"8" (1081)
+#"9" (554)
+
+
 

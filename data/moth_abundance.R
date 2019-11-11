@@ -1,6 +1,7 @@
 #reading in Moth abundance and Coweeta data
 library(dplyr)
 library(stringr)
+library(tidyr)
 
 moth <- read.table('c:/git/moth-caterpillar-comparison/data/moth-abundance.txt', header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE)%>%
   filter(site=='Blue Heron')
@@ -9,4 +10,252 @@ coweeta<- read.table('c:/git/moth-caterpillar-comparison/data/coweeta_cats.txt',
 #Moth abundance data seems to be clean and complete, has NA's for the morpho species but don't think I need to worry about that.
 #Coweeta data is filtered for 2010 and beyond and each observation has the appropriate amount of leaves (n>40 leaves). 
 #Still need to look into filtering Coweeta data for duplicates of 0 in both records (Same year/yearday/sample, etc, but 0 in both records)
+#Look at two ways to organize the moth data, one where the years are all aggregated and the julian day records are matched together
+#The other way is to organize by the lunar phases, so to create some function that takes the julian day past new moon and subtract from the first day of that year.
+
+#Organizing data by julian day
+moth_by_day<-moth%>%
+  group_by(julian.day)%>%
+  summarize(nCount=sum(photos))
+
+  
+moth_aggregate<-moth%>%
+  filter(year==2010)%>%
+  group_by(julian.day)%>%
+  summarize(nCount=sum(photos))%>%
+  mutate(JulianWeek=7*floor((julian.day)/7)+4)%>%
+  replace_na(list(nCount=0))%>%
+  mutate(avgN=nCount/sum(nCount))
+
+#  select(c(JulianWeek, nCount))%>%
+# group_by(JulianWeek)%>%
+#summarize(nCount=sum(nCount))
+  
+plot(x=moth_aggregate$JulianWeek, y=moth_aggregate$avgN)
+plot(moth_by_day)
+
+
+#Organizing data based on lunar phases
+
+dfs <- list()
+for(i in 2010:2019){
+  moth_lunar<-moth%>%
+    filter(year==i)%>%
+    mutate(New.moon=(days.past.new.moon==0))%>%
+    mutate(New.moon=replace(New.moon,New.moon==FALSE,0))%>%
+    group_by(year,Lunar.Cycle=cumsum(New.moon)+1)%>%
+    mutate(Lunar.Days=row_number())%>%
+    select(c(days.past.new.moon,New.moon,Lunar.Cycle,Lunar.Days))
+  dfs[[i]]<-moth_lunar
+}
+final_lunar<-bind_rows(dfs)
+moth_lunar<-bind_cols(moth,final_lunar)
+
+
+moth_set<-moth_lunar%>%
+  group_by(year,Lunar.Cycle)%>%
+  mutate(Lunar.Total=sum(photos),Phase.days=n(),Frac=photos/((Lunar.Total/Phase.days)),
+         Lunar.avg=Lunar.Total/Phase.days)%>%
+  replace_na(list(Frac=0))
+
+
+postNmoon<-moth_set%>%
+  group_by(year,Lunar.Cycle)%>%
+  filter(Lunar.Days<=14)%>%
+  mutate(RawCount=sum(photos))%>%
+  mutate(nonzero=photos>0)%>%
+  mutate(n=replace(nonzero,nonzero==FALSE,0))%>%
+  group_by(year,Lunar.Cycle)%>%
+  mutate(nonzerodays=sum(n))%>%
+  mutate(phototaken=photos/nonzerodays)%>%
+  mutate(Phase="PostNewMoon")%>%
+  select(-c(nonzero,n))
+
+plot(x=postNmoon$Lunar.Days,y=postNmoon$phototaken,col=postNmoon$Lunar.Cycle)
+
+preNmoon<-moth_set%>%
+  group_by(year,Lunar.Cycle)%>%
+  filter(Lunar.Days>14)%>%
+  mutate(RawCount=sum(photos))%>%
+  mutate(nonzero=photos>0)%>%
+  mutate(n=replace(nonzero,nonzero==FALSE,0))%>%
+  group_by(year,Lunar.Cycle)%>%
+  mutate(nonzerodays=sum(n))%>%
+  mutate(phototaken=photos/nonzerodays)%>%
+  mutate(Phase="PreNewMoon")%>%
+  select(-c(nonzero,n))
+
+lunar_phase_bind<-bind_rows(postNmoon,preNmoon)
+
+bind_phase<-bind_rows(postNmoon,preNmoon)%>%
+  select(c(year,Lunar.Cycle,Phase,photos,nonzerodays,phototaken))%>%
+  group_by(year,Lunar.Cycle,Phase,nonzerodays)%>%
+  summarize(RawCount=sum(photos))%>%
+  mutate(avg=RawCount/nonzerodays)
+  
+  
+
+fitG = function(x, y, mu, sig, scale, ...){
+  
+  f = function(p){
+    
+    d = p[3] * dnorm(x, mean = p[1], sd = p[2])
+    
+    sum((d - y) ^ 2)
+    
+  }
+  
+  optim(c(mu, sig, scale), f)
+  
+}
+
+
+
+
+par(mfrow=c(3,3))
+for (y in 2010:2018){
+  bind_phase<-bind_rows(postNmoon,preNmoon)%>%
+   # select(c(year,Lunar.Cycle,Phase,photos,nonzerodays,phototaken,julian.day,days.past.new.moon))%>%
+    group_by(year,Lunar.Cycle,Phase,nonzerodays)%>%
+    mutate(RawCount=sum(photos))%>%
+    mutate(avg=RawCount/nonzerodays)%>%
+    mutate(prepost=ifelse(Phase=="PreNewMoon", 1,2))%>% 
+    group_by(year,Lunar.Cycle,Phase)%>%
+    mutate(day=median(julian.day))%>% #Median isn't exactly right, so the day will be a little shifted to one side
+    filter(year==y)%>%
+    mutate_cond(is.na(avg), avg = 0)
+  
+  plot(main=y, x=bind_phase$day,y=bind_phase$avg,col=bind_phase$prepost,xlab="Julian Day", ylab="Moth Average")
+
+  }
+title("Moth Data averaged over lunar phases",outer=TRUE,line=-1)
+#legend(-200,400,legend=c("Pre New Moon","Post New Moon"),pch=1,col=c(1,2),title="Legend", xpd=NA,cex=0.8)
+
+
+
+
+  Gauss<-bind_phase%>%
+          bind_rows(postNmoon,preNmoon)%>%
+          group_by(year,Lunar.Cycle,Phase,nonzerodays)%>%
+          mutate(RawCount=sum(photos))%>%
+          mutate(avg=RawCount/nonzerodays)%>%
+          mutate(prepost=ifelse(Phase=="PreNewMoon", 3,4))%>% 
+          mutate(day=median(julian.day))%>%
+          group_by(year,day,Phase,avg)%>%
+          summarize()%>%
+          mutate_cond(is.na(avg), avg = 0)
+  
+
+  par(mfrow=c(3,3))
+for(i in 2010:2018){
+  fit<-Gauss%>%
+    filter(year==i)
+  
+  gfit1=fitG(x=fit$day,y=fit$avg,mu=weighted.mean(fit$day,fit$avg),sig=10000,scale=100,control=list(maxit=10000),method="L-BFGS-B",lower=c(0,0,0,0,0,0))
+  p=gfit1$par
+  r2=cor(fit$day,p[3]*dnorm(fit$day,p[1],p[2]))^2
+  totalAvg=sum(fit$avg)
+  
+  plot(x=fit$day,y=fit$avg)
+  lines(0:365,p[3]*dnorm(0:365,p[1],p[2]),col='blue')
+}    
+           
+  
+  
+
+gfit1=fitG(x=Gauss$day,y=Gauss$avg,mu=weighted.mean(Gauss$day,Gauss$avg),sig=110,scale=200,control=list(maxit=10000),method="L-BFGS-B",lower=c(0,0,0,0,0,0))
+p=gfit1$par
+r2=cor(Gauss$day,p[3]*dnorm(Gauss$day,p[1],p[2]))^2
+totalAvg=sum(Gauss$avg)
+  
+plot(x=Gauss$day,y=Gauss$avg)
+lines(0:365,p[3]*dnorm(0:365,p[1],p[2]),col='blue')
+
+
+  #mutate(Lunar.Phase1=Lunar.Days<=14, Lunar.Phase2=Lunar.Days>14)%>%
+  # mutate(Lunar.Phase1=replace(Lunar.Phase1,Lunar.Phase1==TRUE,1))%>%
+  #group_by(Lunar.Cycle, Lunar.Phase1)%>%
+  #mutate(id=seq_along())
+  
+  group_by(year,PostNewMoon=cumsum(Lunar.Phase1)+1)%>%
+  mutate(Lunar.Days=row_number())
+  
+#Phenometrics 
+  #Extract date where x-th percentile of moths were observed. 
+  #So we need to know the total number of moths in a year observed
+  #Then, we can just use an if statement, or a case-when statement that looks at when the percentage
+  #(sum of moths at that date/sum of total moths>10% or 50%, whatever)
+  #Also, to look at half of the maximum of the half-cycle value, 
+  #so basically first you have to know what the peak is for that cycle, then do an if statement for the date with # of moths that first exceeds that). 
+
+  for(i in 2010:2018){
+    altpheno<-lunar_phase_bind%>%
+      filter(year==i)
+  moth_sum<-cumsum(altpheno$photos)
+  min(which(moth_sum>(0.1*sum(altpheno$photos))))
+  min(which(moth_sum>(0.5*sum(altpheno$photos))))
+  
+  }
+    
+  
+
+#Plot Frac. of avg for lunar days across lunar cycles
+par(mfrow=c(3,3))
+rainbowcols = rainbow(13)
+
+lunar_ratio<-for(y in 2010:2018){
+  moth_plot<-moth_set%>%
+    filter(year==y,Lunar.Cycle==2)
+  #Quadratic model
+  quadmod<-moth_set%>%
+    filter(year==y)
+  Lunar2=quadmod$Lunar.Days^2
+  quad<-lm(quadmod$Frac~quadmod$Lunar.Days+Lunar2)
+  square<-summary(quad)$r.squared
+  plot(main=y,x=moth_plot$Lunar.Days,y=moth_plot$Frac,type="l",
+       col=rainbowcols[1],xlab="Lunar Days", ylab="Frac of Surveys")
+    lines(predict(quad),)
+    legend("topleft",bty="n",legend=paste("R^2=",square))
+  for(i in 2:14){
+    moth_plot<-moth_set%>%
+      filter(year==y,Lunar.Cycle==i)
+    points(x=moth_plot$Lunar.Days,y=moth_plot$Frac,type="l", col = rainbowcols[i])
+  }
+}
+
+
+
+
+  
+day1 = moth %>%
+  filter(julian.day == 1) %>%
+  select(year, days.past.new.moon)  %>%
+  mutate(shift = days.past.new.moon - days.past.new.moon[1])
+  
+moth$julian.day.shifted = NA
+
+for (y in 2010:2018) {
+  moth$julian.day.shifted[moth$year == y] = moth$julian.day[moth$year == y] - day1$shift[day1$year == y]
+}
+
+
+# mutate(Counter=X==1000)%>%
+ # mutate(Counter=replace(Counter,Counter==FALSE,1))%>%
+ 
+ # mutate(Lunar.Cycle=rep(1:n,each=n))
+
+#  moth_lunar$Lunar.Cycle<-sequence(rle(moth_lunar$New.moon)$lengths)
+  
+  
+
+ #moth_lunar$Lunar.Cycle[1:14,]<-1
+  
+
+#moth_lunar<-moth%>%
+#  filter(year==2010)%>%
+#  {ifelse(moth_lunar$days.past.new.moon==0,1,0)}%>%
+  
+#  group_by(year,Lunar.Cycle=cumsum(New.moon==1L)+1)%>%
+#  mutate(Lunar.Days=row_number())
+
 
