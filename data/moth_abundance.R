@@ -140,10 +140,15 @@ for(i in 2010:2018){
   ten<-min(which(moth_sum>(0.1*sum(altpheno$photos))))
   fifty<-min(which(moth_sum>(0.5*sum(altpheno$photos))))
   halfcycle<-min(which(fit$avg>0.5*max(fit$avg)))
-  
+  #halfcycle<-min(which(moth_sum>0.5*max(altpheno$photos)))
   abline(v = ten, col="red", lwd=3, lty=2)
   abline(v = fifty, col="blue", lwd=3, lty=2)
   abline(v = fit[halfcycle,2], col="green", lwd=3, lty=2)
+  
+ 
+  max<-locmax(altpheno,dipFromPeak = 0.28)
+  abline(v=max,col="black",lwd=3,lty=2)
+         
 }    
   title("Moth Data averaged over lunar phases",outer=TRUE,line=-1)
   legend(-200,400,legend=c("Pre New Moon","Post New Moon","10%","50%", "Half of Max"),pch=c(1,1,NA,NA,NA),lty=c(NA,NA,2,2,2),col=c(3,4,2,4,3),title="Legend", xpd=NA,cex=0.8)
@@ -201,7 +206,7 @@ for(i in 2010:2018){
   for(i in 2010:2018){
     filt<-lunar_phase_bind%>%
       filter(year==2011)
-    locmax(filt,dipFromPeak = 0.1)
+    locmax(filt,dipFromPeak = 0.3)
     
   }
   
