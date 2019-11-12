@@ -103,9 +103,7 @@ fitG = function(x, y, mu, sig, scale, ...){
     d = p[3] * dnorm(x, mean = p[1], sd = p[2])
     
     sum((d - y) ^ 2)
-    
   }
-  
   optim(c(mu, sig, scale), f)
   
 }
@@ -133,7 +131,7 @@ for(i in 2010:2018){
   r2=cor(fit$day,p[3]*dnorm(fit$day,p[1],p[2]))^2
   totalAvg=sum(fit$avg)
   
-  gaussplot<-plot(x=fit$day,y=fit$avg,xlab="Julian Day", ylab="Moth Average",col=fit$prepost)
+  gaussplot<-plot(x=fit$day,y=fit$avg,xlab="Julian Day", ylab="Moth Average",col=fit$prepost, pch=16,main=i)
   lines(0:365,p[3]*dnorm(0:365,p[1],p[2]),col='blue')
   
   altpheno<-lunar_phase_bind%>%
@@ -141,11 +139,11 @@ for(i in 2010:2018){
   moth_sum<-cumsum(altpheno$photos)
   ten<-min(which(moth_sum>(0.1*sum(altpheno$photos))))
   fifty<-min(which(moth_sum>(0.5*sum(altpheno$photos))))
-  halfcycle<-min(which(altpheno$photos>0.5*max(altpheno$photos)))
+  halfcycle<-min(which(fit$avg>0.5*max(fit$avg)))
   
   abline(v = ten, col="red", lwd=3, lty=2)
   abline(v = fifty, col="blue", lwd=3, lty=2)
-  abline(v = halfcycle, col="green", lwd=3, lty=2)
+  abline(v = fit[halfcycle,2], col="green", lwd=3, lty=2)
 }    
   title("Moth Data averaged over lunar phases",outer=TRUE,line=-1)
   legend(-200,400,legend=c("Pre New Moon","Post New Moon","10%","50%", "Half of Max"),pch=c(1,1,NA,NA,NA),lty=c(NA,NA,2,2,2),col=c(3,4,2,4,3),title="Legend", xpd=NA,cex=0.8)
@@ -180,9 +178,40 @@ for(i in 2010:2018){
   halfcycle<-min(which(altpheno$photos>0.5*max(altpheno$photos)))
  
   }
-    
-  
 
+#Finding first local maximum
+#we use the raw dataset(which would be lunar_phase_bind I think) and photos=freq
+#Dip angle needs to be tested, starting with 0.1 first
+  locmax=function(df, dipFromPeak=0.1){
+    photoDiff=diff(df$photos)
+    diffRelativeToMax=photoDiff/max(df$photos,na.rm=TRUE)
+    firstIndexRaw=min(which(diffRelativeToMax< -dipFromPeak))
+    
+    runs=rle(sign(diffRelativeToMax))
+    runIDs=rep(1:length(runs$lengths),runs$lengths)
+    runSum=sapply(1:length(runs$lengths), function(x)
+    sum(diffRelativeToMax[runIDs==x]))
+    runIndex=min(which(runSum< -dipFromPeak))
+    runJDindex=min(which(runIDs==(runIndex)))
+    
+    return(df$julian.day[min(firstIndexRaw,runJDindex)])
+  }
+  
+  
+  for(i in 2010:2018){
+    filt<-lunar_phase_bind%>%
+      filter(year==2011)
+    locmax(filt,dipFromPeak = 0.1)
+    
+  }
+  
+  
+  filt<-lunar_phase_bind%>%
+    filter(year==2011)
+plot(x=filt$julian.day,y=filt$photos)
+
+  locmax(lunar_phase_bind,dip=0.1)  
+  
 #Plot Frac. of avg for lunar days across lunar cycles
 par(mfrow=c(3,3))
 rainbowcols = rainbow(13)

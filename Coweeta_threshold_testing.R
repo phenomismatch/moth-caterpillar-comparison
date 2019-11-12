@@ -5,7 +5,6 @@ source('data/formatting_coweeta.r')
 #Frequency plots and threshold values 
 
 
-#Not sure if this is the right way to create the function, if these two need to be separate functions or if I could combine them?
 freq_plot<-function(field_year, field_plot){
   group_cow_set<-cowplusnotes%>%
     filter(cowplusnotes$Year==field_year, cowplusnotes$Plot==field_plot)%>%
@@ -26,7 +25,7 @@ freq_plot<-function(field_year, field_plot){
   return(group_cow_set)
   
 }
-#
+
 
 treesByYear = cowplusnotes %>%
   filter(Plot != "RK") %>%
@@ -56,7 +55,7 @@ dev.off()
 #  print(g)
 #}
 
-
+#Function to filter coweeta data for field year/plot, then get frequency for each day that was sampled
 samp_days<-function(field_year,field_plot){
   coweeta_data<-cowplusnotes%>%
     filter(cowplusnotes$Year==field_year,cowplusnotes$Plot==field_plot)%>%
@@ -91,7 +90,7 @@ BBsamp11<-samp_days(2011,"BB")
 BBsamp12<-samp_days(2012,"BB")
 BSsamp12<-samp_days(2012,"BS")
 
-
+#Histogram of frequency of surveys for every survey period/day
 cow_samples<-cowplusnotes%>%
   filter(Year>2009, Plot%in% c("BS", "BB"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
   select(Year,Yearday,Plot, Point, TreeSpecies, Sample)%>%
@@ -172,7 +171,7 @@ thresh_50<-threshold(50)
 #}
 
 
-aggregate(BBday10$n,by=list(Sampled=BBday10$Yearday),FUN=sum)
+#aggregate(BBday10$n,by=list(Sampled=BBday10$Yearday),FUN=sum)
 
 
 
