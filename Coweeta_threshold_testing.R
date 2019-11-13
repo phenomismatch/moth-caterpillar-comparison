@@ -16,16 +16,16 @@ freq_plot<-function(field_year, field_plot){
            gridY = as.numeric(substr(Point, 2, nchar(Point))),
            gridX = which(LETTERS == gridLetter))
   par(mfrow = c(6, 5), mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
-  #pdf(paste0("coweeta_plots_",field_year,"_",field_plot,".pdf"))
+  pdf(paste0("coweeta_plots_",field_year,"_",field_plot,".pdf"))
   for (j in unique(group_cow_set$Yearday)) {
     tmp = filter(group_cow_set, Yearday == j)
     plot(group_cow_set$gridX, group_cow_set$gridY, pch = 16, xlab = "", ylab = "",main="Plot Samples")
   }
-  #dev.off()
+dev.off()
   return(group_cow_set)
   
 }
-
+freq_plot(2010,"BB")
 
 treesByYear = cowplusnotes %>%
   filter(Plot != "RK") %>%
@@ -124,16 +124,31 @@ threshold<-function(threshold_value){
 
 
 
-thresh_160<-threshold(50)
-thresh_170<-threshold(170)
-thresh_180<-threshold(180)
+
 thresh_100<-threshold(100)
-thresh_50<-threshold(50)
-#No point in doing 50, so we can start at 100, maybe 180 is the upper bound? So let's go by 40 (100, 140, 18).
+
+#No point in doing 50, so we can start at 100
 
 
-
-
+#Set Threshold for all years to 100, then find proportion of surveys-nSurveys for each day/Total nSurveys in that given julian week
+cow_thresh<-cowplusnotes%>%
+  filter(Year>2009, Plot%in% c("BB","BS"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
+  select(Year,Yearday,Plot,Point,TreeSpecies,Sample)%>%
+  distinct()%>%
+  group_by(Year,Yearday)%>%
+  tally()%>%
+  rename(nSurveys=n)%>%
+  mutate(JulianWeek=7*floor((Yearday)/7)+4)%>%
+  #aggregate(cow_thresh$nSurveys,by=list(Year=cow_thresh$Year,cow_thresh$JulianWeek=JWeek),FUN=sum)
+  group_by(Year,JulianWeek)%>%
+  mutate(nJulianWeekSurvey=sum(nSurveys))%>%
+  filter(nJulianWeekSurvey>100)%>%
+  group_by(Year,Yearday)%>%
+  mutate(PropSurv=nSurveys/nJulianWeekSurvey)
+ # group_by(Year)%>%
+#  add_count()%>%
+  #rename(nWeeks=n)
+plot(x=cow_thresh$Yearday,y=cow_thresh$PropSurv)
 
 # WeekSurveys<-sum(cowplusnotes$nSurveys)
 

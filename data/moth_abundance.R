@@ -146,7 +146,7 @@ for(i in 2010:2018){
   abline(v = fit[halfcycle,2], col="green", lwd=3, lty=2)
   
  
-  max<-locmax(altpheno,dipFromPeak = 0.28)
+  max<-locmax(fit,dipFromPeak = 0.2)
   abline(v=max,col="black",lwd=3,lty=2)
          
 }    
@@ -188,8 +188,8 @@ for(i in 2010:2018){
 #we use the raw dataset(which would be lunar_phase_bind I think) and photos=freq
 #Dip angle needs to be tested, starting with 0.1 first
   locmax=function(df, dipFromPeak=0.1){
-    photoDiff=diff(df$photos)
-    diffRelativeToMax=photoDiff/max(df$photos,na.rm=TRUE)
+    photoDiff=diff(df$avg)
+    diffRelativeToMax=photoDiff/max(df$avg,na.rm=TRUE)
     firstIndexRaw=min(which(diffRelativeToMax< -dipFromPeak))
     
     runs=rle(sign(diffRelativeToMax))
@@ -199,14 +199,14 @@ for(i in 2010:2018){
     runIndex=min(which(runSum< -dipFromPeak))
     runJDindex=min(which(runIDs==(runIndex)))
     
-    return(df$julian.day[min(firstIndexRaw,runJDindex)])
+    return(df$day[min(firstIndexRaw,runJDindex)])
   }
   
   
   for(i in 2010:2018){
-    filt<-lunar_phase_bind%>%
+    filt<-Gauss%>%
       filter(year==2011)
-    locmax(filt,dipFromPeak = 0.3)
+    locmax(filt,dipFromPeak = 0.2)
     
   }
   
