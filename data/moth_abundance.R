@@ -61,30 +61,39 @@ moth_set<-moth_lunar%>%
          Lunar.avg=Lunar.Total/Phase.days)%>%
   replace_na(list(Frac=0))
 
-
+#Don't think I need nonzerodays, because if Pick surveyed it every day, then all the zeros that show up can be considered true zeros, and part of the data. So I'm going to take it out and see what changes
 postNmoon<-moth_set%>%
   group_by(year,Lunar.Cycle)%>%
   filter(Lunar.Days<=14)%>%
   mutate(RawCount=sum(photos))%>%
-  mutate(nonzero=photos>0)%>%
-  mutate(n=replace(nonzero,nonzero==FALSE,0))%>%
-  group_by(year,Lunar.Cycle)%>%
-  mutate(nonzerodays=sum(n))%>%
-  mutate(phototaken=photos/nonzerodays)%>%
-  mutate(Phase="PostNewMoon")%>%
-  select(-c(nonzero,n))
+  mutate(nLunarDays=n())%>%
+  mutate(phototaken=photos/nLunarDays)%>%
+  mutate(Phase="PostNewMoon")
+ 
+
+
+  #mutate(nonzero=photos>0)%>%
+  #mutate(n=replace(nonzero,nonzero==FALSE,0))%>%
+  #group_by(year,Lunar.Cycle)%>%
+  #mutate(nonzerodays=sum(n))%>%
+  #mutate(phototaken=photos/nonzerodays)%>%
+# select(-c(nonzero,n))
 
 preNmoon<-moth_set%>%
   group_by(year,Lunar.Cycle)%>%
   filter(Lunar.Days>14)%>%
   mutate(RawCount=sum(photos))%>%
-  mutate(nonzero=photos>0)%>%
-  mutate(n=replace(nonzero,nonzero==FALSE,0))%>%
-  group_by(year,Lunar.Cycle)%>%
-  mutate(nonzerodays=sum(n))%>%
-  mutate(phototaken=photos/nonzerodays)%>%
-  mutate(Phase="PreNewMoon")%>%
-  select(-c(nonzero,n))
+  mutate(nLunarDays=n())%>%
+  mutate(phototaken=photos/nLunarDays)%>%
+  mutate(Phase="PreNewMoon")
+
+
+ # mutate(nonzero=photos>0)%>%
+#  mutate(n=replace(nonzero,nonzero==FALSE,0))%>%
+#  group_by(year,Lunar.Cycle)%>%
+#  mutate(nonzerodays=sum(n))%>%
+#  mutate(phototaken=photos/nonzerodays)%>%
+  #select(-c(nonzero,n))
 
 lunar_phase_bind<-bind_rows(postNmoon,preNmoon)
 
@@ -112,8 +121,8 @@ fitG = function(x, y, mu, sig, scale, ...){
 
 
   Gauss<-lunar_phase_bind%>%
-          group_by(year,Lunar.Cycle,Phase,nonzerodays)%>%
-          mutate(avg=RawCount/nonzerodays)%>%
+          group_by(year,Lunar.Cycle,Phase,nLunarDays)%>%
+          mutate(avg=RawCount/nLunarDays)%>%
           mutate(day=median(julian.day))%>%
           group_by(year,day,Phase,avg)%>%
           summarize()%>%
@@ -143,7 +152,7 @@ for(i in 2010:2018){
   #halfcycle<-min(which(moth_sum>0.5*max(altpheno$photos)))
   abline(v = ten, col="red", lwd=3, lty=2)
   abline(v = fifty, col="blue", lwd=3, lty=2)
-  abline(v = fit[halfcycle,2], col="green", lwd=3, lty=2)
+  abline(v = fit[halfcycle,2], col="green", lwd=4, lty=2)
   
  
   max<-locmax(fit,dipFromPeak = 0.2)

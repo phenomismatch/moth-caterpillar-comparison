@@ -36,7 +36,7 @@ treesByYear = cowplusnotes %>%
   spread(key = TreeSpecies,value = n, fill = 0)
 
 
-pdf("coweeta_tree_surveys_by_year.pdf", height = 11, width = 8)
+#pdf("coweeta_tree_surveys_by_year.pdf", height = 11, width = 8)
 par(mfrow = c(length(unique(treesByYear$Year)), 1))
 for (y in unique(treesByYear$Year)) {
   bplot = barplot(as.matrix(treesByYear[treesByYear$Year == y, 4:ncol(treesByYear)]), col = 'darkorchid', xaxt = "n", xlab = "", ylab = "")
@@ -131,8 +131,10 @@ thresh_100<-threshold(100)
 
 
 #Set Threshold for all years to 100, then find proportion of surveys-nSurveys for each day/Total nSurveys in that given julian week
-cow_thresh<-cowplusnotes%>%
-  filter(Year>2009, Plot%in% c("BB","BS"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
+par(mfrow=c(3,2))
+for (i in 2010:2018){
+  cow_thresh<-cowplusnotes%>%
+  filter(Year==i, Plot%in% c("BB","BS"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
   select(Year,Yearday,Plot,Point,TreeSpecies,Sample)%>%
   distinct()%>%
   group_by(Year,Yearday)%>%
@@ -148,7 +150,27 @@ cow_thresh<-cowplusnotes%>%
  # group_by(Year)%>%
 #  add_count()%>%
   #rename(nWeeks=n)
+  plot(x=cow_thresh$Yearday,y=cow_thresh$PropSurv, main=i, xlab="Yearday", ylab="Proportion of Surveys")
+  }
+  
 plot(x=cow_thresh$Yearday,y=cow_thresh$PropSurv)
+
+
+#Start plotting Phenology and alternative phenometrics 
+cow_thresh<-cowplusnotes%>%
+  filter(Year>2009, Plot%in% c("BB","BS"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
+  select(Year,Yearday,Plot,Point,TreeSpecies,Sample)%>%
+  distinct()%>%
+  group_by(Year,Yearday)%>%
+  tally()%>%
+  rename(nSurveys=n)%>%
+  mutate(JulianWeek=7*floor((Yearday)/7)+4)%>%
+  #aggregate(cow_thresh$nSurveys,by=list(Year=cow_thresh$Year,cow_thresh$JulianWeek=JWeek),FUN=sum)
+  group_by(Year,JulianWeek)%>%
+  mutate(nJulianWeekSurvey=sum(nSurveys))%>%
+  filter(nJulianWeekSurvey>100)
+
+
 
 # WeekSurveys<-sum(cowplusnotes$nSurveys)
 
