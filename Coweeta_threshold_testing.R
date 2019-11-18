@@ -153,13 +153,13 @@ for (i in 2010:2018){
   plot(x=cow_thresh$Yearday,y=cow_thresh$PropSurv, main=i, xlab="Yearday", ylab="Proportion of Surveys")
   }
   
-plot(x=cow_thresh$Yearday,y=cow_thresh$PropSurv)
+
 
 
 #Start plotting Phenology and alternative phenometrics 
 cow_thresh<-cowplusnotes%>%
   filter(Year>2009, Plot%in% c("BB","BS"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
-  select(Year,Yearday,Plot,Point,TreeSpecies,Sample)%>%
+  select(Year,Yearday,Plot,Point,TreeSpecies,Sample, NumCaterpillars)%>%
   distinct()%>%
   group_by(Year,Yearday)%>%
   tally()%>%
@@ -170,6 +170,45 @@ cow_thresh<-cowplusnotes%>%
   mutate(nJulianWeekSurvey=sum(nSurveys))%>%
   filter(nJulianWeekSurvey>100)
 
+cow_pheno<-left_join(cowplusnotes,cow_thresh,by=c("Year","Yearday"))
+
+cow_phen<-cow_pheno%>%
+  replace_na(list(JulianWeek=0))%>%
+  filter(cow_pheno$JulianWeek!=0)%>%
+  group_by(Year,Yearday)%>%
+  summarize(catcount=sum(NumCaterpillars))%>%
+  mutate(JulianWeek=7*floor((Yearday)/7)+4)%>%
+  group_by(Year,JulianWeek)%>%
+  mutate(nDay=n())%>%
+  mutate(catweekcount=sum(catcount))%>%
+  mutate(avg=catweekcount/nDay)
+
+par(mfrow=c(3,3))
+for(i in 2010:2018){
+  fit<-cow_phen%>%
+    filter(Year==i)
+  plot(x=fit$JulianWeek,y=fit$avg,main=i)
+  
+  }
+
+  
+
+  
+plot(x=cow_pheno$Yearday,y=cow_pheno$NumCaterpillars)
+
+
+  fitG = function(x, y, mu, sig, scale, ...){
+    
+    f = function(p){
+      
+      d = p[3] * dnorm(x, mean = p[1], sd = p[2])
+      
+      sum((d - y) ^ 2)
+    }
+    optim(c(mu, sig, scale), f)
+    
+  }
+  
 
 
 # WeekSurveys<-sum(cowplusnotes$nSurveys)
