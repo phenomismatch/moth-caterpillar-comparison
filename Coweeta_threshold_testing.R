@@ -1,7 +1,7 @@
 
 
 source('data/formatting_coweeta.r')
-
+source('C:/git/caterpillars-analysis-public/code/analysis_functions.r')
 #Frequency plots and threshold values 
 
 
@@ -173,6 +173,7 @@ cow_thresh<-cowplusnotes%>%
 cow_pheno<-left_join(cowplusnotes,cow_thresh,by=c("Year","Yearday"))
 
 cow_phen<-cow_pheno%>%
+  filter(Plot==j)%>%
   replace_na(list(JulianWeek=0))%>%
   filter(cow_pheno$JulianWeek!=0)%>%
   group_by(Year,Yearday)%>%
@@ -181,15 +182,58 @@ cow_phen<-cow_pheno%>%
   group_by(Year,JulianWeek)%>%
   mutate(nDay=n())%>%
   mutate(catweekcount=sum(catcount))%>%
-  mutate(avg=catweekcount/nDay)
+  mutate(avg=catweekcount/nDay)%>%
+  group_by(Year,JulianWeek, avg)%>%
+  summarize()%>%
+  mutate_cond(is.na(avg), avg = 0)
 
+
+list<-c("BB","BS")
 par(mfrow=c(3,3))
-for(i in 2010:2018){
+
+for(j in list){
+  for(i in 2010:2018){
+    cow_phen<-cow_pheno%>%
+      filter(Plot==j,Year==i)%>%
+      replace_na(list(JulianWeek=0))%>%
+      filter(JulianWeek!=0)%>%
+      group_by(Year,Yearday)%>%
+      summarize(catcount=sum(NumCaterpillars))%>%
+      mutate(JulianWeek=7*floor((Yearday)/7)+4)%>%
+      group_by(Year,JulianWeek)%>%
+      mutate(nDay=n())%>%
+      mutate(catweekcount=sum(catcount))%>%
+      mutate(avg=catweekcount/nDay)%>%
+      group_by(Year,JulianWeek, avg)%>%
+      summarize()%>%
+      mutate_cond(is.na(avg), avg = 0)
+    
   fit<-cow_phen%>%
     filter(Year==i)
-  plot(x=fit$JulianWeek,y=fit$avg,main=i)
+  
+  gfit1=fitG(x=fit$JulianWeek,y=fit$avg,mu=weighted.mean(fit$JulianWeek,fit$avg),sig=100,scale=500,control=list(maxit=10000),method="L-BFGS-B",lower=c(0,0,0,0,0,0))
+  p=gfit1$par
+  r2=cor(fit$JulianWeek,p[3]*dnorm(fit$JulianWeek,p[1],p[2]))^2
+  totalAvg=sum(fit$avg)
+  
+  plot(x=fit$JulianWeek,y=fit$avg,main=j)
+  lines(0:365,p[3]*dnorm(0:365,p[1],p[2]),col='blue')
+  altpheno<-cow_pheno%>%
+    filter(Year==i)
+  catsum<-cumsum(altpheno$NumCaterpillars)
+  ten<-min(which(catsum>(0.1*sum(altpheno$photos))))
+  fifty<-min(which(catsum>(0.5*sum(altpheno$photos))))
+  halfcycle<-min(which(fit$avg>0.5*max(fit$avg)))
+  abline(v = fit[ten,2], col="red", lwd=3, lty=2)
+  abline(v = fit[fifty,2], col="blue", lwd=3, lty=2)
+  abline(v = fit[halfcycle,2], col="green", lwd=4, lty=2)
+  
+  
+  
+}
   
   }
+
 
   
 
