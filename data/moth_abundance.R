@@ -128,8 +128,25 @@ fitG = function(x, y, mu, sig, scale, ...){
           summarize()%>%
           mutate_cond(is.na(avg), avg = 0)
   
+  
+  locmax=function(df, dipFromPeak=0.1){
+    photoDiff=diff(df$avg)
+    diffRelativeToMax=photoDiff/max(df$avg,na.rm=TRUE)
+    firstIndexRaw=min(which(diffRelativeToMax< -dipFromPeak))
+    
+    runs=rle(sign(diffRelativeToMax))
+    runIDs=rep(1:length(runs$lengths),runs$lengths)
+    runSum=sapply(1:length(runs$lengths), function(x)
+      sum(diffRelativeToMax[runIDs==x]))
+    runIndex=min(which(runSum< -dipFromPeak))
+    runJDindex=min(which(runIDs==(runIndex)))
+    
+    return(df$day[min(firstIndexRaw,runJDindex)])
+  }
+  
 
   par(mfrow=c(3,3))
+
 for(i in 2010:2018){
   fit<-Gauss%>%
     filter(year==i)%>%
@@ -226,9 +243,12 @@ plot(x=filt$julian.day,y=filt$photos)
 
   locmax(lunar_phase_bind,dip=0.1)  
   
-#Plot Frac. of avg for lunar days across lunar cycles
+#Plot Frac. of avg for lunar days across lunar cycles 
+#ISSUE: Has kinks in the fit, not sure why they pop up but there should be a smooth curve for it
+#Possible issue with lines(predict(quad),)
 par(mfrow=c(3,3))
 rainbowcols = rainbow(13)
+
 
 lunar_ratio<-for(y in 2010:2018){
   moth_plot<-moth_set%>%
