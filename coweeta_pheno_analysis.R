@@ -12,6 +12,7 @@ site_filter<-function(field_year,field_plot,threshold_value){
   date<-date_change(merged)
 }
 
+test<-site_filter(i,"BS",50)
 par(mfrow=c(3,3))
 for (i in 2010:2018){
   Tree<-site_filter(i, "BB", 50)%>%
@@ -33,7 +34,7 @@ for (i in 2010:2018){
 #plot(x=Tree$julianweek,y=Tree$count, xlab="Julian Week", ylab="nSurveys", type="b")
 #}
 
-
+#Plotting meanDensityByWeek actually
 par(mfrow=c(3,3))
 
 cow_plots<-for (i in 2010:2018){
@@ -44,13 +45,24 @@ cow_plots<-for (i in 2010:2018){
     },error=function(e){}
   )
 }
-title("Mean Density of Caterpillars by Week For Thresholds 100",outer=TRUE,line=-1)
-legend("topleft",legend=c("Threshold of 100","Threshold of 140"),lty=c(1,2),col=c(1,4),title="Legend", xpd=NA,cex=0.5,pt.cex=2)
+title("Mean Density of Caterpillars by Week For Thresholds 50",outer=TRUE,line=-1)
+#legend("topleft",legend=c("Threshold of 100","Threshold of 140"),lty=c(1,2),col=c(1,4),title="Legend", xpd=NA,cex=0.5,pt.cex=2)
+
+#Plot fracSurveys
+par(mfrow=c(3,3))
+cow_plots<-for (i in 2010:2018){
+  tryCatch({
+    meanDensityByWeek(surveyData = site_filter(i,"BS",50),plot = TRUE,new=TRUE, xlab="Julian Week", ylab="Frac. Surveys",plotVar = 'fracSurveys', main=i,sub="BS")
+    meanDensityByWeek(surveyData = site_filter(i,"BB",50),plot = TRUE,new=TRUE,xlab="Julian Week", ylab="Frac.Survey",plotVar = 'fracSurveys',main=i,sub="BB")
+    
+  },error=function(e){}
+  )
+}
 
 
 test<-meanDensityByWeek(surveyData = site_filter(2010,"BS",50),plot = TRUE,new=TRUE, xlab="Julian Week", ylab="Mean Density", ylim=c(0,40),main=2010)
 
-
+#Proportion of Surveys with caterpillars for each julian day for a given julian week
 #Set Threshold for all years to 100, then find proportion of surveys-nSurveys for each day/Total nSurveys in that given julian week
 par(mfrow=c(3,3))
 list<-c("BB","BS")
@@ -59,26 +71,52 @@ for(j in list){
   for (i in 2010:2018){
     cow_thresh<-cowplusnotes%>%
       filter(Year==i, Plot==j, TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
-      select(Year,Yearday,Plot,Point,TreeSpecies,Sample)%>%
+      select(Year,Yearday,Plot,Point,TreeSpecies,Sample,NumCaterpillars)%>%
       distinct()%>%
       group_by(Year,Yearday)%>%
-      tally()%>%
-      rename(nSurveys=n)%>%
+      mutate(nSurveys=n())%>%
       mutate(JulianWeek=7*floor((Yearday)/7)+4)%>%
-      #aggregate(cow_thresh$nSurveys,by=list(Year=cow_thresh$Year,cow_thresh$JulianWeek=JWeek),FUN=sum)
       group_by(Year,JulianWeek)%>%
-      mutate(nJulianWeekSurvey=sum(nSurveys))%>%
+      mutate(nJulianWeekSurvey=sum(unique(nSurveys)))%>% #Not ideal, could find a better solution since there's a chance the same nSurvey could appear on different days within the same week
       filter(nJulianWeekSurvey>50)%>%
-      group_by(Year,Yearday)%>%
-      mutate(PropSurv=nSurveys/nJulianWeekSurvey)
-    # group_by(Year)%>%
-    #  add_count()%>%
-    #rename(nWeeks=n)
+      mutate(NSurveywithCat=replace(NumCaterpillars,NumCaterpillars>1,1))%>%
+      replace_na(list(NSurveywithCat=0))%>%
+      group_by(Year,Yearday,JulianWeek)%>%
+      mutate(NSurv=sum(NSurveywithCat))%>%
+      mutate(PropSurv=NSurv/nJulianWeekSurvey)%>%
+      group_by(Year,Yearday,JulianWeek,nJulianWeekSurvey,PropSurv)%>%
+      summarize()
+      
+    
     plot(x=cow_thresh$Yearday,y=cow_thresh$PropSurv, main=i,sub=j, xlab="Yearday", ylab="Proportion of Surveys", type="l")
     
   }
   
 }
+title("Proportion of surveys with Caterpillars for a given julian day",outer=TRUE,line=-1)
+
+
+#Just proportion of surveys for each day
+cow_thresh<-cowplusnotes%>%
+  filter(Year==i, Plot==j, TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
+  select(Year,Yearday,Plot,Point,TreeSpecies,Sample,NumCaterpillars)%>%
+  distinct()%>%
+  group_by(Year,Yearday)%>%
+  tally()%>%
+  rename(nSurveys=n)%>%
+  mutate(JulianWeek=7*floor((Yearday)/7)+4)%>%
+  #aggregate(cow_thresh$nSurveys,by=list(Year=cow_thresh$Year,cow_thresh$JulianWeek=JWeek),FUN=sum)
+  group_by(Year,JulianWeek)%>%
+  mutate(nJulianWeekSurvey=sum(nSurveys))%>%
+  filter(nJulianWeekSurvey>50)%>%
+  group_by(Year,Yearday)%>%
+  mutate(PropSurv=nSurveys/nJulianWeekSurvey)
+# group_by(Year)%>%
+#  add_count()%>%
+#rename(nWeeks=n)
+plot(x=cow_thresh$Yearday,y=cow_thresh$PropSurv, main=i,sub=j, xlab="Yearday", ylab="Proportion of Surveys", type="l")
+
+
 
 #Start plotting Phenology and alternative phenometrics 
 cow_thresh<-cowplusnotes%>%
@@ -96,20 +134,6 @@ cow_thresh<-cowplusnotes%>%
 
 cow_pheno<-left_join(cowplusnotes,cow_thresh,by=c("Year","Yearday"))
 
-cow_phen<-cow_pheno%>%
-  filter(Plot==j)%>%
-  replace_na(list(JulianWeek=0))%>%
-  filter(cow_pheno$JulianWeek!=0)%>%
-  group_by(Year,Yearday)%>%
-  summarize(catcount=sum(NumCaterpillars))%>%
-  mutate(JulianWeek=7*floor((Yearday)/7)+4)%>%
-  group_by(Year,JulianWeek)%>%
-  mutate(nDay=n())%>%
-  mutate(catweekcount=sum(catcount))%>%
-  mutate(avg=catweekcount/nDay)%>%
-  group_by(Year,JulianWeek, avg)%>%
-  summarize()%>%
-  mutate_cond(is.na(avg), avg = 0)
 
 #Plotting coweeta data as mean caterpillars for each julian week. 
 list<-c("BB","BS")
@@ -140,7 +164,7 @@ for(j in list){
     r2=cor(fit$JulianWeek,p[3]*dnorm(fit$JulianWeek,p[1],p[2]))^2
     totalAvg=sum(fit$avg)
     
-    plot(x=fit$JulianWeek,y=fit$avg,main=i, sub=j,type="l")
+    plot(x=fit$JulianWeek,y=fit$avg,main=i, sub=j,type="l",xlab="JulianWeek", ylab="Average Caterpillars")
     #lines(0:365,p[3]*dnorm(0:365,p[1],p[2]),col='blue')
     altpheno<-cow_pheno%>%
       filter(Year==i)
@@ -157,6 +181,7 @@ for(j in list){
   }
   
 }
+title("Average Caterpillars for each Julian Week surveyed",outer=TRUE,line=-1)
 
 #Quadratic fit?
 quadmod<-moth_set%>%

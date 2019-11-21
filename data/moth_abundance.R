@@ -165,25 +165,44 @@ for(i in 2010:2018){
   moth_sum<-cumsum(altpheno$photos)
   ten<-min(which(moth_sum>(0.1*sum(altpheno$photos))))
   fifty<-min(which(moth_sum>(0.5*sum(altpheno$photos))))
-  halfcycle<-min(which(fit$avg>0.5*max(fit$avg)))
+  halfcycle<-min(which(fit$avg>0.5*max(fit$avg))) #For true max or local maximum?
   #halfcycle<-min(which(moth_sum>0.5*max(altpheno$photos)))
   abline(v = ten, col="red", lwd=3, lty=2)
   abline(v = fifty, col="blue", lwd=3, lty=2)
   abline(v = fit[halfcycle,2], col="green", lwd=4, lty=2)
   
  
-  max<-locmax(fit,dipFromPeak = 0.2)
+  max1<-locmax(fit,dipFromPeak = 0.2)
+  peakfit<-Gauss%>%
+    filter(year==i,day>200)%>%
+    mutate(prepost=ifelse(Phase=="PreNewMoon", 3,4))
+  max2<-locmax(peakfit,dipFromPeak=0.2)
   abline(v=max,col="black",lwd=3,lty=2)
-         
+  abline(v=max2,col="yellow",lwd=3,lty=2)       
 }    
   title("Moth Data averaged over lunar phases",outer=TRUE,line=-1)
   legend(-200,400,legend=c("Pre New Moon","Post New Moon","10%","50%", "Half of Max"),pch=c(1,1,NA,NA,NA),lty=c(NA,NA,2,2,2),col=c(3,4,2,4,3),title="Legend", xpd=NA,cex=0.8)
   
+  result <- vector("numeric", 2)
+  for (i in 2010:2018){
+    fit<-Gauss%>%
+      filter(year==i)%>%
+      mutate(prepost=ifelse(Phase=="PreNewMoon", 3,4))
+    
+  max1<-locmax(fit,dipFromPeak = 0.2)
+  peakfit<-Gauss%>%
+    filter(year==i,day>200)%>%
+    mutate(prepost=ifelse(Phase=="PreNewMoon", 3,4))
+  max2<-locmax(peakfit,dipFromPeak=0.2)
+  peaks<-c(max1,max2)
+  result<-peaks
+  }
   
+  m<-matrix(peaks,nrow=9,ncol=2)
+  m<-cbind(m,Year)
+  Year<-c(2010:2018)
   
-
-
-
+  mat<-data.frame(Year,peaks)
   #mutate(Lunar.Phase1=Lunar.Days<=14, Lunar.Phase2=Lunar.Days>14)%>%
   # mutate(Lunar.Phase1=replace(Lunar.Phase1,Lunar.Phase1==TRUE,1))%>%
   #group_by(Lunar.Cycle, Lunar.Phase1)%>%

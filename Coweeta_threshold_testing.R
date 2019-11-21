@@ -132,33 +132,7 @@ thresh_100<-threshold(100)
 
 
 #Set Threshold for all years to 100, then find proportion of surveys-nSurveys for each day/Total nSurveys in that given julian week
-par(mfrow=c(3,3))
-list<-c("BB","BS")
-#Plot%in% c("BB","BS")
-for(j in list){
-for (i in 2010:2018){
-  cow_thresh<-cowplusnotes%>%
-  filter(Year==i, Plot==j, TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
-  select(Year,Yearday,Plot,Point,TreeSpecies,Sample)%>%
-  distinct()%>%
-  group_by(Year,Yearday)%>%
-  tally()%>%
-  rename(nSurveys=n)%>%
-  mutate(JulianWeek=7*floor((Yearday)/7)+4)%>%
-  #aggregate(cow_thresh$nSurveys,by=list(Year=cow_thresh$Year,cow_thresh$JulianWeek=JWeek),FUN=sum)
-  group_by(Year,JulianWeek)%>%
-  mutate(nJulianWeekSurvey=sum(nSurveys))%>%
-  filter(nJulianWeekSurvey>50)%>%
-  group_by(Year,Yearday)%>%
-  mutate(PropSurv=nSurveys/nJulianWeekSurvey)
- # group_by(Year)%>%
-#  add_count()%>%
-  #rename(nWeeks=n)
-  plot(x=cow_thresh$Yearday,y=cow_thresh$PropSurv, main=i,sub=j, xlab="Yearday", ylab="Proportion of Surveys", type="l")
- 
-  }
 
-}
 
 
 #Start plotting Phenology and alternative phenometrics 
