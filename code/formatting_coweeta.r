@@ -183,9 +183,9 @@ merged_set<-cowsurv%>%
 }
 
 #Function to filter out for threshold value, plot, and year
-cow_filter<-function(field_year,field_plot,threshold_value){
+cow_filter<-function(threshold_value){
   cow_WeeklySurv<-cowplusnotes%>%
-    filter(Year==field_year, Plot==field_plot, TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
+    filter(Year>2009, Plot %in% c("BB", "BS"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
     select(Year,Yearday,Plot,Point,TreeSpecies,Sample)%>%
     distinct()%>%
     group_by(Year,Yearday)%>%
@@ -197,9 +197,9 @@ cow_filter<-function(field_year,field_plot,threshold_value){
     filter(WeeklySurv>=threshold_value)
 }
 
-cow_fil<-function(field_year,field_plot, site_thresh_year_filter){
+cow_fil<-function(site_thresh_year_filter){
   coweetanotes<-cowplusnotes%>%
-    filter(Year==field_year, Plot==field_plot, TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
+    filter(Year>2009, Plot %in% c("BB","BS"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
     left_join(site_thresh_year_filter,by=c('Year', 'Yearday'))%>%
     filter(!is.na(WeeklySurv))%>%
     subset(select=-c(surveyed,nSurveys,JulianWeek, WeeklySurv))
@@ -217,15 +217,15 @@ date_change<-function(Final_set){
 }
 
 
-site_filter<-function(field_year,field_plot,threshold_value){
-  filter<-cow_filter(field_year,field_plot,threshold_value)
-  fil<-cow_fil(field_year,field_plot,filter)
+site_filter<-function(threshold_value){
+  filter<-cow_filter(threshold_value)
+  fil<-cow_fil(filter)
   cow_surv<-coweeta_surveys(fil)
   cow_arth<-coweeta_arths(fil,cow_surv)
   merged<-merge_fun(cow_surv,cow_arth)
   date<-date_change(merged)
 }
-final_cow<-site_filter(2010:2018, c("BB","BS"), 50)
+final_cow<-site_filter(0)
 
 #-----
 

@@ -21,7 +21,8 @@ site_filter<-function(field_year,field_plot,threshold_value){
   date<-date_change(merged)
 }
 
-test<-site_filter(i,"BS",50)
+
+
 par(mfrow=c(3,3))
 for (i in 2010:2018){
   Tree<-site_filter(i, "BB", 50)%>%
