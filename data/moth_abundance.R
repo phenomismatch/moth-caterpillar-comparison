@@ -162,6 +162,7 @@ for(i in 2010:2018){
   
   altpheno<-lunar_phase_bind%>%
     filter(year==i)
+  
   moth_sum<-cumsum(altpheno$photos)
   ten<-min(which(moth_sum>(0.1*sum(altpheno$photos))))
   fifty<-min(which(moth_sum>(0.5*sum(altpheno$photos))))
@@ -177,7 +178,7 @@ for(i in 2010:2018){
     filter(year==i,day>200)%>%
     mutate(prepost=ifelse(Phase=="PreNewMoon", 3,4))
   max2<-locmax(peakfit,dipFromPeak=0.2)
-  abline(v=max,col="black",lwd=3,lty=2)
+  abline(v=max1,col="black",lwd=3,lty=2)
   abline(v=max2,col="yellow",lwd=3,lty=2)       
 }    
   title("Moth Data averaged over lunar phases",outer=TRUE,line=-1)
@@ -198,11 +199,13 @@ for(i in 2010:2018){
   result<-peaks
   }
   
+  #Use above for loop to place values into container to put into m matrix
+  Year<-c(2010:2018)
   m<-matrix(peaks,nrow=9,ncol=2)
   m<-cbind(m,Year)
-  Year<-c(2010:2018)
+ 
   
-  mat<-data.frame(Year,peaks)
+ 
   #mutate(Lunar.Phase1=Lunar.Days<=14, Lunar.Phase2=Lunar.Days>14)%>%
   # mutate(Lunar.Phase1=replace(Lunar.Phase1,Lunar.Phase1==TRUE,1))%>%
   #group_by(Lunar.Cycle, Lunar.Phase1)%>%

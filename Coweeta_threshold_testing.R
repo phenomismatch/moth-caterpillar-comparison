@@ -105,7 +105,7 @@ hist(cow_samples$nSurveys, 20)
 
 threshold<-function(threshold_value){
   cow_thresh<-cowplusnotes%>%
-    filter(Year>2009, Plot%in% c("BB","BS"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
+    filter(Year>2009, Plot%in% c("BS"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
     select(Year,Yearday,Plot,Point,TreeSpecies,Sample)%>%
     distinct()%>%
     group_by(Year,Yearday)%>%
@@ -127,6 +127,7 @@ threshold<-function(threshold_value){
 
 
 thresh_100<-threshold(100)
+
 
 #No point in doing 50, so we can start at 100
 
@@ -187,19 +188,19 @@ for(j in list){
       summarize()%>%
       mutate_cond(is.na(avg), avg = 0)
     
-  fit<-cow_phen%>%
-    filter(Year==i)
+ # fit<-cow_phen%>%
+ #   filter(Year==i)
   
-  gfit1=fitG(x=fit$JulianWeek,y=fit$avg,mu=weighted.mean(fit$JulianWeek,fit$avg),sig=10,scale=150,control=list(maxit=10000),method="L-BFGS-B",lower=c(0,0,0,0,0,0))
-  p=gfit1$par
-  r2=cor(fit$JulianWeek,p[3]*dnorm(fit$JulianWeek,p[1],p[2]))^2
-  totalAvg=sum(fit$avg)
+#  gfit1=fitG(x=fit$JulianWeek,y=fit$avg,mu=weighted.mean(fit$JulianWeek,fit$avg),sig=10,scale=150,control=list(maxit=10000),method="L-BFGS-B",lower=c(0,0,0,0,0,0))
+#  p=gfit1$par
+#  r2=cor(fit$JulianWeek,p[3]*dnorm(fit$JulianWeek,p[1],p[2]))^2
+#  totalAvg=sum(fit$avg)
   
   plot(x=fit$JulianWeek,y=fit$avg,main=i, sub=j,type="l")
   #lines(0:365,p[3]*dnorm(0:365,p[1],p[2]),col='blue')
-  altpheno<-cow_pheno%>%
-    filter(Year==i)
-  catsum<-cumsum(altpheno$NumCaterpillars)
+#  altpheno<-cow_pheno%>%
+#    filter(Year==i)
+#  catsum<-cumsum(altpheno$NumCaterpillars)
  # ten<-min(which(catsum>(0.1*sum(altpheno$photos))))
 #  fifty<-min(which(catsum>(0.5*sum(altpheno$photos))))
 #  halfcycle<-min(which(fit$avg>0.5*max(fit$avg)))
