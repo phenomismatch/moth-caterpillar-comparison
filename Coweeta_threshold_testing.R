@@ -1,11 +1,10 @@
 
 
 source('data/formatting_coweeta.r')
-
+source('C:/git/caterpillars-analysis-public/code/analysis_functions.r')
 #Frequency plots and threshold values 
 
 
-#Not sure if this is the right way to create the function, if these two need to be separate functions or if I could combine them?
 freq_plot<-function(field_year, field_plot){
   group_cow_set<-cowplusnotes%>%
     filter(cowplusnotes$Year==field_year, cowplusnotes$Plot==field_plot)%>%
@@ -17,16 +16,16 @@ freq_plot<-function(field_year, field_plot){
            gridY = as.numeric(substr(Point, 2, nchar(Point))),
            gridX = which(LETTERS == gridLetter))
   par(mfrow = c(6, 5), mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
-  #pdf(paste0("coweeta_plots_",field_year,"_",field_plot,".pdf"))
+  pdf(paste0("coweeta_plots_",field_year,"_",field_plot,".pdf"))
   for (j in unique(group_cow_set$Yearday)) {
     tmp = filter(group_cow_set, Yearday == j)
     plot(group_cow_set$gridX, group_cow_set$gridY, pch = 16, xlab = "", ylab = "",main="Plot Samples")
   }
-  #dev.off()
+dev.off()
   return(group_cow_set)
   
 }
-#
+freq_plot(2010,"BB")
 
 treesByYear = cowplusnotes %>%
   filter(Plot != "RK") %>%
@@ -37,7 +36,7 @@ treesByYear = cowplusnotes %>%
   spread(key = TreeSpecies,value = n, fill = 0)
 
 
-pdf("coweeta_tree_surveys_by_year.pdf", height = 11, width = 8)
+#pdf("coweeta_tree_surveys_by_year.pdf", height = 11, width = 8)
 par(mfrow = c(length(unique(treesByYear$Year)), 1))
 for (y in unique(treesByYear$Year)) {
   bplot = barplot(as.matrix(treesByYear[treesByYear$Year == y, 4:ncol(treesByYear)]), col = 'darkorchid', xaxt = "n", xlab = "", ylab = "")
@@ -56,7 +55,7 @@ dev.off()
 #  print(g)
 #}
 
-
+#Function to filter coweeta data for field year/plot, then get frequency for each day that was sampled
 samp_days<-function(field_year,field_plot){
   coweeta_data<-cowplusnotes%>%
     filter(cowplusnotes$Year==field_year,cowplusnotes$Plot==field_plot)%>%
@@ -91,7 +90,7 @@ BBsamp11<-samp_days(2011,"BB")
 BBsamp12<-samp_days(2012,"BB")
 BSsamp12<-samp_days(2012,"BS")
 
-
+#Histogram of frequency of surveys for every survey period/day
 cow_samples<-cowplusnotes%>%
   filter(Year>2009, Plot%in% c("BS", "BB"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
   select(Year,Yearday,Plot, Point, TreeSpecies, Sample)%>%
@@ -106,7 +105,7 @@ hist(cow_samples$nSurveys, 20)
 
 threshold<-function(threshold_value){
   cow_thresh<-cowplusnotes%>%
-    filter(Year>2009, Plot%in% c("BB","BS"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
+    filter(Year>2009, Plot%in% c("BS"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
     select(Year,Yearday,Plot,Point,TreeSpecies,Sample)%>%
     distinct()%>%
     group_by(Year,Yearday)%>%
@@ -124,16 +123,125 @@ threshold<-function(threshold_value){
 }
 
 
+#So I forgot to filter out by sites, so actually, when you use a threshold of 100, BB sites are missing values in 2011 as there just weren't enough surveys then
 
-thresh_160<-threshold(50)
-thresh_170<-threshold(170)
-thresh_180<-threshold(180)
+
 thresh_100<-threshold(100)
-thresh_50<-threshold(50)
-#No point in doing 50, so we can start at 100, maybe 180 is the upper bound? So let's go by 40 (100, 140, 18).
+
+
+#No point in doing 50, so we can start at 100
+
+
+#Set Threshold for all years to 100, then find proportion of surveys-nSurveys for each day/Total nSurveys in that given julian week
 
 
 
+#Start plotting Phenology and alternative phenometrics 
+cow_thresh<-cowplusnotes%>%
+  filter(Year>2009, Plot%in% c("BB","BS"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
+  select(Year,Yearday,Plot,Point,TreeSpecies,Sample, NumCaterpillars)%>%
+  distinct()%>%
+  group_by(Year,Yearday)%>%
+  tally()%>%
+  rename(nSurveys=n)%>%
+  mutate(JulianWeek=7*floor((Yearday)/7)+4)%>%
+  #aggregate(cow_thresh$nSurveys,by=list(Year=cow_thresh$Year,cow_thresh$JulianWeek=JWeek),FUN=sum)
+  group_by(Year,JulianWeek)%>%
+  mutate(nJulianWeekSurvey=sum(nSurveys))%>%
+  filter(nJulianWeekSurvey>50)
+
+cow_pheno<-left_join(cowplusnotes,cow_thresh,by=c("Year","Yearday"))
+
+cow_phen<-cow_pheno%>%
+  filter(Plot==j)%>%
+  replace_na(list(JulianWeek=0))%>%
+  filter(cow_pheno$JulianWeek!=0)%>%
+  group_by(Year,Yearday)%>%
+  summarize(catcount=sum(NumCaterpillars))%>%
+  mutate(JulianWeek=7*floor((Yearday)/7)+4)%>%
+  group_by(Year,JulianWeek)%>%
+  mutate(nDay=n())%>%
+  mutate(catweekcount=sum(catcount))%>%
+  mutate(avg=catweekcount/nDay)%>%
+  group_by(Year,JulianWeek, avg)%>%
+  summarize()%>%
+  mutate_cond(is.na(avg), avg = 0)
+
+#Plotting coweeta data as average value of caterpillars seen for each julian week. 
+list<-c("BB","BS")
+par(mfrow=c(3,3))
+
+for(j in list){
+  for(i in 2010:2018){
+    cow_phen<-cow_pheno%>%
+      filter(Plot==j,Year==i)%>%
+      replace_na(list(JulianWeek=0))%>%
+      filter(JulianWeek!=0)%>%
+      group_by(Year,Yearday)%>%
+      summarize(catcount=sum(NumCaterpillars))%>%
+      mutate(JulianWeek=7*floor((Yearday)/7)+4)%>%
+      group_by(Year,JulianWeek)%>%
+      mutate(nDay=n())%>%
+      mutate(catweekcount=sum(catcount))%>%
+      mutate(avg=catweekcount/nDay)%>%
+      group_by(Year,JulianWeek, avg)%>%
+      summarize()%>%
+      mutate_cond(is.na(avg), avg = 0)
+    
+ # fit<-cow_phen%>%
+ #   filter(Year==i)
+  
+#  gfit1=fitG(x=fit$JulianWeek,y=fit$avg,mu=weighted.mean(fit$JulianWeek,fit$avg),sig=10,scale=150,control=list(maxit=10000),method="L-BFGS-B",lower=c(0,0,0,0,0,0))
+#  p=gfit1$par
+#  r2=cor(fit$JulianWeek,p[3]*dnorm(fit$JulianWeek,p[1],p[2]))^2
+#  totalAvg=sum(fit$avg)
+  
+  plot(x=fit$JulianWeek,y=fit$avg,main=i, sub=j,type="l")
+  #lines(0:365,p[3]*dnorm(0:365,p[1],p[2]),col='blue')
+#  altpheno<-cow_pheno%>%
+#    filter(Year==i)
+#  catsum<-cumsum(altpheno$NumCaterpillars)
+ # ten<-min(which(catsum>(0.1*sum(altpheno$photos))))
+#  fifty<-min(which(catsum>(0.5*sum(altpheno$photos))))
+#  halfcycle<-min(which(fit$avg>0.5*max(fit$avg)))
+#  abline(v = fit[ten,2], col="red", lwd=3, lty=2)
+#  abline(v = fit[fifty,2], col="blue", lwd=3, lty=2)
+#  abline(v = fit[halfcycle,2], col="green", lwd=4, lty=2)
+  
+  
+  
+}
+  
+  }
+
+#Quadratic fit?
+quadmod<-moth_set%>%
+  filter(year==y)
+Lunar2=quadmod$Lunar.Days^2
+quad<-lm(quadmod$Frac~quadmod$Lunar.Days+Lunar2)
+square<-summary(quad)$r.squared
+plot(main=y,x=moth_plot$Lunar.Days,y=moth_plot$Frac,type="l",
+     col=rainbowcols[1],xlab="Lunar Days", ylab="Frac of Surveys")
+lines(predict(quad),)
+legend("topleft",bty="n",legend=paste("R^2=",square))
+  
+
+  
+plot(x=cow_pheno$Yearday,y=cow_pheno$NumCaterpillars)
+
+
+  fitG = function(x, y, mu, sig, scale, ...){
+    
+    f = function(p){
+      
+      d = p[3] * dnorm(x, mean = p[1], sd = p[2])
+      
+      sum((d - y) ^ 2)
+    }
+    optim(c(mu, sig, scale), f)
+    
+  }
+  
 
 
 # WeekSurveys<-sum(cowplusnotes$nSurveys)
@@ -172,7 +280,7 @@ thresh_50<-threshold(50)
 #}
 
 
-aggregate(BBday10$n,by=list(Sampled=BBday10$Yearday),FUN=sum)
+#aggregate(BBday10$n,by=list(Sampled=BBday10$Yearday),FUN=sum)
 
 
 
