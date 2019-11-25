@@ -146,7 +146,7 @@ fitG = function(x, y, mu, sig, scale, ...){
   
 
   par(mfrow=c(3,3))
-
+cont<-NULL
 for(i in 2010:2018){
   fit<-Gauss%>%
     filter(year==i)%>%
@@ -180,8 +180,14 @@ for(i in 2010:2018){
   max2<-locmax(peakfit,dipFromPeak=0.2)
   abline(v=max1,col="black",lwd=3,lty=2)
   abline(v=max2,col="yellow",lwd=3,lty=2)    
-  
+  foo<-bind_cols(list(max1, max2, ten, fifty, halfcycle))
+  foo$Year=i
+  cont[[i]]=foo
 }    
+moth_pheno<-bind_rows(cont)
+names(moth_pheno)<-c("Peak 1", "Peak 2", "10% of Max", "50% of Max", "Half of Peak Value","Year")
+
+
   title("Moth Data averaged over lunar phases",outer=TRUE,line=-1)
   legend(-200,400,legend=c("Pre New Moon","Post New Moon","10%","50%", "Half of Max"),pch=c(1,1,NA,NA,NA),lty=c(NA,NA,2,2,2),col=c(3,4,2,4,3),title="Legend", xpd=NA,cex=0.8)
   

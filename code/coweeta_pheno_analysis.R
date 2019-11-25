@@ -6,20 +6,41 @@ source('C:/git/moth-caterpillar-comparison/code/Coweeta_threshold_testing.r')
 
 RawCow <- read.csv("C:/git/moth-caterpillar-comparison/data/coweeta_phenosummary.csv", header=TRUE)
 
-PhenSum<-RawCow%>%
-  filter(Year>2009, Name != "Coweeta - RK")%>%
-  pivot_wider(names_from=Name,
-              values_from=pctPeakDate:massRollingPeakDateWindow)%>%
-  select()
+#phenoSummary function
 
-site_filter<-function(field_year,field_plot,threshold_value){
-  filter<-cow_filter(field_year,field_plot,threshold_value)
-  fil<-cow_fil(field_year,field_plot,filter)
-  cow_surv<-coweeta_surveys(fil)
-  cow_arth<-coweeta_arths(fil,cow_surv)
-  merged<-merge_fun(cow_surv,cow_arth)
-  date<-date_change(merged)
-}
+
+
+
+Phen_BB<-RawCow%>%
+  filter(Year>2009, Name == "Coweeta - BB")%>%
+  pivot_wider(names_from=Name,
+              values_from=medianGreenup:massRollingPeakDateWindow)%>%
+  mutate_if(is.integer,replace_na,0)
+  
+Phen_BS<-RawCow%>%
+  filter(Year>2009, Name == "Coweeta - BS")%>%
+  pivot_wider(names_from=Name,
+              values_from=medianGreenup:massRollingPeakDateWindow)%>%
+  mutate_if(is.integer,replace_na,0)
+
+Phen_final<-left_join(Phen_BS,Phen_BB, by="Year")
+
+  names(PhenSum)[12]<-"medianGreenup_BB"
+  names(PhenSum)[60]<-"pctPeakDateGreenupWindow_BS"
+
+  Phen_BS<-PhenSum%>%
+  filter(medianGreenup_BB>0)
+  Phen_BS<-Phen_BS[,grep(patterns="BB",colnames=Phen_BS)]
+  
+
+  Phen_BB<-PhenSum%>%
+    filter(medianGreenup_BB==0)
+  Phen_final<-left_join(Phen_BS,Phen_BB, by="Year")
+  
+  
+  
+
+
 
 
 

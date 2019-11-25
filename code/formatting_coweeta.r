@@ -16,7 +16,7 @@ cats = read.table('data/Coweeta_cats.txt', header = T, sep = '\t', fill = TRUE, 
   mutate(CaterpillarFamily = trimws(CaterpillarFamily)) %>%
   mutate(CaterpillarFamily = gsub("\v", "", CaterpillarFamily),Comments = gsub("\v", "", Comments))
 
-catcomments = count(cats, Comments)
+catcomments = dplyr::count(cats, Comments)
 #write.table(catcomments, 'z:/lab/databases/coweetacaterpillars/coweeta_comments.txt', sep = '\t', row.names = F)
 
 comments = read.table('data/coweeta_comments.txt', sep = '\t', header = T, quote = '\"', fill = TRUE, stringsAsFactors = FALSE)
@@ -101,7 +101,7 @@ cowplusnotes$surveyed<-ifelse(cowplusnotes$NumCaterpillars>=0,"1",NA)
 
 
 
-#Cow_survs------
+#Cow_survs converting to Caterpillars Count format------
 
 coweeta_surveys<-function(merged){
   cowsurvs = merged %>%
@@ -190,19 +190,19 @@ cow_filter<-function(threshold_value){
     distinct()%>%
     group_by(Year,Yearday)%>%
     tally()%>%
-    rename(nSurveys=n)%>%
     mutate(JulianWeek=7*floor((Yearday)/7)+4)%>%
     group_by(JulianWeek)%>%
-    mutate(WeeklySurv=sum(nSurveys))%>%
+    mutate(WeeklySurv=sum(n))%>%
     filter(WeeklySurv>=threshold_value)
 }
+
 
 cow_fil<-function(site_thresh_year_filter){
   coweetanotes<-cowplusnotes%>%
     filter(Year>2009, Plot %in% c("BB","BS"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
     left_join(site_thresh_year_filter,by=c('Year', 'Yearday'))%>%
     filter(!is.na(WeeklySurv))%>%
-    subset(select=-c(surveyed,nSurveys,JulianWeek, WeeklySurv))
+    subset(select=-c(surveyed,n,JulianWeek, WeeklySurv))
 }
 
 
@@ -225,7 +225,14 @@ site_filter<-function(threshold_value){
   merged<-merge_fun(cow_surv,cow_arth)
   date<-date_change(merged)
 }
-final_cow<-site_filter(0)
+
+
+
+final_cow<-site_filter(0)%>%
+  mutate(site="Coweeta", foo=substring(final_cow$Branch,0,2))%>%
+  unite(Name, site:foo,remove=TRUE,sep=" - ")
+
+  
 
 #-----
 
