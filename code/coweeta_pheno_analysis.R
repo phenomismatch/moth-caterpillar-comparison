@@ -2,6 +2,7 @@
 source('code/formatting_coweeta.r')
 source('C:/git/caterpillars-analysis-public/code/analysis_functions.r')
 source('C:/git/moth-caterpillar-comparison/code/Coweeta_threshold_testing.r')
+source('C:/git/moth-caterpillar-comparison//code/moth_abundance.R')
 
 
 RawCow <- read.csv("C:/git/moth-caterpillar-comparison/data/coweeta_phenosummary.csv", header=TRUE)
@@ -15,15 +16,35 @@ Phen_BB<-RawCow%>%
   filter(Year>2009, Name == "Coweeta - BB")%>%
   pivot_wider(names_from=Name,
               values_from=medianGreenup:massRollingPeakDateWindow)%>%
-  mutate_if(is.integer,replace_na,0)
+  mutate_if(is.integer,replace_na,0)%>%
+  setnames(old=c( "pctPeakDate_Coweeta - BB", "massPeakDate_Coweeta - BB"), new=c( "pct_peak_BB", "mass_peak_BB"))%>%
+  select(c(Year, pct_peak_BB, mass_peak_BB))
   
 Phen_BS<-RawCow%>%
   filter(Year>2009, Name == "Coweeta - BS")%>%
   pivot_wider(names_from=Name,
               values_from=medianGreenup:massRollingPeakDateWindow)%>%
-  mutate_if(is.integer,replace_na,0)
+  mutate_if(is.integer,replace_na,0)%>%
+  setnames(old=c( "pctPeakDate_Coweeta - BS", "massPeakDate_Coweeta - BS"), new=c( "pct_peak_BS", "mass_peak_BS"))%>%
+  select(c(Year, pct_peak_BS, mass_peak_BS))
 
-Phen_final<-left_join(Phen_BS,Phen_BB, by="Year")
+BB_BS<-merge(Phen_BS, Phen_BB, by="Year")
+Phen_Final<-merge(BB_BS,moth_pheno,by="Year")
+ 
+phen_mat<-cor(Phen_Final[2:10], use = 'pairwise.complete.obs' )
+
+
+
+Phen_Final<-left_join(BB_BS,moth_pheno,by="Year")%>%
+subset(select=which(!duplicated(names(.))))
+Phen_Final<-setnames(Phen_Final, old=c("pctPeakDate_Coweeta - BS","massPeakDate_Coweeta - BS", "pctPeakDate_Coweeta - BB", "massPeakDate_Coweeta - BB", "Moth_10%"), new=c("pct_peak_BS", "mass_peak_BS", "pct_peak_BB", "mass_peak_BS", "Moth_10"))%>%
+      select(pct_peak_BB, pct_peak_BS, mass_peak_BS, mass_peak_BB, Year, Moth_Peak_1, Moth_Peak_2, Moth_10, Moth_50, Moth_Half_Peak)
+
+
+
+
+
+
 
   names(PhenSum)[12]<-"medianGreenup_BB"
   names(PhenSum)[60]<-"pctPeakDateGreenupWindow_BS"

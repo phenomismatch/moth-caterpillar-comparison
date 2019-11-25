@@ -171,7 +171,7 @@ for(i in 2010:2018){
   abline(v = ten, col="red", lwd=3, lty=2)
   abline(v = fifty, col="blue", lwd=3, lty=2)
   abline(v = fit[halfcycle,2], col="green", lwd=4, lty=2)
-  
+  half<-fit[halfcycle,2]
  
   max1<-locmax(fit,dipFromPeak = 0.2)
   peakfit<-Gauss%>%
@@ -180,12 +180,12 @@ for(i in 2010:2018){
   max2<-locmax(peakfit,dipFromPeak=0.2)
   abline(v=max1,col="black",lwd=3,lty=2)
   abline(v=max2,col="yellow",lwd=3,lty=2)    
-  foo<-bind_cols(list(max1, max2, ten, fifty, halfcycle))
+  foo<-bind_cols(list(max1, max2, ten, fifty,half$day))
   foo$Year=i
-  cont[[i]]=foo
+   cont[[i]]=foo
 }    
 moth_pheno<-bind_rows(cont)
-names(moth_pheno)<-c("Peak 1", "Peak 2", "10% of Max", "50% of Max", "Half of Peak Value","Year")
+names(moth_pheno)<-c("Moth_Peak_1", "Moth_Peak_2", "Moth_10%", "Moth_50", "Moth_Half_Peak","Year")
 
 
   title("Moth Data averaged over lunar phases",outer=TRUE,line=-1)
