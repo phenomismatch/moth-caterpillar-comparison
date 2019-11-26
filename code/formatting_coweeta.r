@@ -100,10 +100,15 @@ cowplusnotes = left_join(catplus, dups019, by = c('Year', 'Plot', 'Yearday', 'Po
 cowplusnotes$surveyed<-ifelse(cowplusnotes$NumCaterpillars>=0,"1",NA)
 
 
+#Function to filter out for threshold value, plot, and year
+cow_filter<-cowplusnotes%>%
+  filter(Year>2009, Plot %in% c("BB", "BS"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
+  mutate(JulianWeek=7*floor((Yearday)/7)+4)
+
 
 #Cow_survs converting to Caterpillars Count format------
 
-coweeta_surveys<-cow_filter %>%
+coweeta_surveys<-cow_pheno %>%
   select(Year, Plot, Yearday, Point, TreeSpecies, Sample, Notes) %>%
   distinct() %>%
   left_join(comments[, c('Comments', 'NumberOfLeaves')], by = c('Notes' = 'Comments')) %>%
@@ -141,7 +146,7 @@ coweeta_surveys<-cow_filter %>%
   
 
 # arthropods table------
-coweeta_arths<- cow_filter%>%
+coweeta_arths<- cow_pheno%>%
   mutate(Branch = paste(Plot, Point, TreeSpecies, Sample, sep = "_"),
          LocalDate = as.Date(Yearday, as.Date(paste(Year, "-01-01", sep = "")))) %>%
   left_join(coweeta_surveys[, c('Branch', 'ID', 'LocalDate', 'Notes')], by = c('Branch', 'LocalDate', 'Notes')) %>%
@@ -181,16 +186,9 @@ coweeta_arths<- cow_filter%>%
     mutate(Year = format(LocalDate, "%Y"))%>%
     mutate(julianday = yday(LocalDate)-1)%>%
     mutate(julianweek=7*floor((julianday)/7)+4)%>% 
-    mutate(site="Coweeta", foo=substring(final_cow$Branch,0,2))%>%
-    unite(Name, site:foo,remove=TRUE,sep=" - ")
+    mutate(site="Coweeta", foo=substring(Branch,0,2))%>%
+    unite(Name, site:foo,remove=TRUE,sep="_")
 
-
-
-#Function to filter out for threshold value, plot, and year
-cow_filter<-cowplusnotes%>%
-    filter(Year>2009, Plot %in% c("BB", "BS"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
-    mutate(JulianWeek=7*floor((Yearday)/7)+4)
-  
 
 
 
@@ -324,7 +322,8 @@ final_cow<-site_filter(0)%>%
   unite(Name, site:foo,remove=TRUE,sep=" - ")
 
 test<-phenoSummary(fullDataset = merged_set,postGreenupBeg = 40,postGreenupEnd = 75,fullWindowBeg = 135,fullWindowEnd = 212,minNumWeeks = 0)
-  
+
+
 
 #-----
 

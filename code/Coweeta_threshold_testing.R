@@ -150,7 +150,8 @@ cow_thresh<-cowplusnotes%>%
   mutate(nJulianWeekSurvey=sum(nSurveys))%>%
   filter(nJulianWeekSurvey>50)
 
-cow_pheno<-left_join(cowplusnotes,cow_thresh,by=c("Year","Yearday"))
+cow_pheno<-left_join(cowplusnotes,cow_thresh,by=c("Year","Yearday"))%>%
+  drop_na(JulianWeek)
 
 cow_phen<-cow_pheno%>%
   filter(Plot==j)%>%
