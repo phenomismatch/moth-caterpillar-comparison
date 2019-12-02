@@ -1,9 +1,9 @@
-
-source('code/formatting_coweeta.r')
 source('C:/git/caterpillars-analysis-public/code/analysis_functions.r')
+source('code/formatting_coweeta.r')
 source('C:/git/moth-caterpillar-comparison/code/Coweeta_threshold_testing.r')
 source('C:/git/moth-caterpillar-comparison//code/moth_abundance.R')
 library(corrplot)
+library(gridExtra)
 
 RawCow <- read.csv("C:/git/moth-caterpillar-comparison/data/coweeta_phenosummary.csv", header=TRUE)
 
@@ -31,8 +31,32 @@ Phen_BS<-RawCow%>%
 BB_BS<-merge(Phen_BS, Phen_BB, by="Year")
 Phen_Final<-merge(BB_BS,moth_pheno,by="Year")
  
-phen_mat<-round((cor(Phen_Final[2:14], use = 'pairwise.complete.obs' )), 2)
 
+
+
+Phen_BB<-test%>%
+  filter(Year>2009, Name == "Coweeta_BB")%>%
+  pivot_wider(names_from=Name,
+              values_from=medianGreenup:massRollingPeakDateWindow)%>%
+  mutate_if(is.integer,replace_na,0)%>%
+  setnames(old=c( "pctPeakDate_Coweeta - BB", "massPeakDate_Coweeta - BB", "pctRollingPeakDateWindow_Coweeta - BB", "massRollingPeakDateWindow_Coweeta - BB"), new=c( "pct_peak_BB", "mass_peak_BB","pctRolling_BB", "massRolling_BB"))%>%
+  select(c(Year, pct_peak_BB, mass_peak_BB,pctRolling_BB,massRolling_BB))
+
+Phen_BS<-RawCow%>%
+  filter(Year>2009, Name == "Coweeta - BS")%>%
+  pivot_wider(names_from=Name,
+              values_from=medianGreenup:massRollingPeakDateWindow)%>%
+  mutate_if(is.integer,replace_na,0)%>%
+  setnames(old=c( "pctPeakDate_Coweeta - BS", "massPeakDate_Coweeta - BS","pctRollingPeakDateWindow_Coweeta - BS", "massRollingPeakDateWindow_Coweeta - BS"), new=c( "pct_peak_BS", "mass_peak_BS","pctRolling_BS", "massRolling_BS"))%>%
+  select(c(Year, pct_peak_BS, mass_peak_BS, pctRolling_BS,massRolling_BS))
+
+BB_BS<-merge(Phen_BS, Phen_BB, by="Year")
+Phen_Final<-merge(BB_BS,moth_pheno,by="Year")
+
+phen_mat<-round((cor(Phen_Final[2:14], use = 'pairwise.complete.obs' )), 2)
+pdf("Correlation matrix",height=10,width=9,paper="a4r")
+grid.table(phen_mat)
+dev.off()
 
 corrplot(phen_mat,type="upper", order="hclust",tl.col="black", tl.srt=45)
 
@@ -42,7 +66,7 @@ cow_plots<-for (i in 2012){
   foo<-Phen_Final%>%
     filter(Year==i)
   
-tab<-meanDensityByWeek(surveyData = cow_filt, plot=TRUE,plotVar = 'meanBiomass',xlab="Julian Week", ylab="Mean Biomass", main="Mean Biomass for Site BB 2012")
+table<-meanDensityByWeek(surveyData = cow_filt, plot=TRUE,plotVar = 'meanBiomass',xlab="Julian Week", ylab="Mean Biomass", main="Mean Biomass for Site BB 2012")
 abline(v = foo$mass_peak_BB, col="red", lwd=3, lty=2)
 abline(v = foo$massRolling_BB, col="blue", lwd=3, lty=2)
 
@@ -50,19 +74,19 @@ abline(v = foo$massRolling_BB, col="blue", lwd=3, lty=2)
 legend(x = 175, y=0.8, legend = c("Mean BioMass Peak Date", "BioMass Rolling Window"),lty=c(2,2), col=c(2,4))
 par(mfrow=c(2,2))
 
-plot(x=Phen_Final$`Moth_10%`, y=Phen_Final$massRolling_BS, main="Moth 10% vs. mean Biomass (rolling) BS", xlab="Moth 10%", ylab="Mean Biomass Rolling Window BS")
+plot(x=Phen_Final$`Moth_10%`, y=Phen_Final$massRolling_BS, main="Moth 10% vs. mean Biomass (rolling) BS", xlab="Moth 10% Date (Julian Day)", ylab="Mean Biomass Rolling Window BS")
 lm(Phen_Final$massRolling_BS~Phen_Final$`Moth_10%`)
 abline(-143.93, 3.94)
 
-plot(x=Phen_Final$`Moth_50`, y=Phen_Final$massRolling_BS,main="Moth 50% vs. mean Biomass (rolling) BS", xlab="Moth 50%", ylab="Mean Biomass Rolling Window BS")
+plot(x=Phen_Final$`Moth_50`, y=Phen_Final$massRolling_BS,main="Moth 50% vs. mean Biomass (rolling) BS", xlab="Moth 50% Date (Julian Day)", ylab="Mean Biomass Rolling Window BS")
 lm(Phen_Final$massRolling_BS~Phen_Final$`Moth_50`)
 abline(-635.273,3.645)
 
-plot(x=Phen_Final$`Moth_10%`, y=Phen_Final$pct_peak_BS,main="Moth 10% vs. pct Peak Date BS", xlab="Moth 10%", ylab="pct Peak Date BS")
+plot(x=Phen_Final$`Moth_10%`, y=Phen_Final$pct_peak_BS,main="Moth 10% vs. pct Peak Date BS", xlab="Moth 10% Date (Julian Day)", ylab="pct Peak Date BS")
 lm(Phen_Final$pct_peak_BB~Phen_Final$`Moth_10%`)
 abline(135.022,0.4908)
 
-plot(x=Phen_Final$Moth_Half_Peak, y=Phen_Final$pct_peak_BS. , main = "Moth Half Peak vs pct Peak Date BS", xlab="Moth Half Peak", ylab="pct Peak Date BS")
+plot(x=Phen_Final$Moth_Half_Peak, y=Phen_Final$pct_peak_BS. , main = "Moth Half Peak vs pct Peak Date BS", xlab="Moth Half Peak Date (Julian Day)", ylab="pct Peak Date BS")
 lm(Phen_Final$Moth_Half_Peak~Phen_Final$pct_peak_BS)
 abline(178.057, -0.2519)
 

@@ -6,6 +6,20 @@ library(pracma)
 source('C:/git/caterpillars-analysis-public/code/analysis_functions.r')
 
 
+
+fitG = function(x, y, mu, sig, scale, ...){
+  
+  f = function(p){
+    
+    d = p[3] * dnorm(x, mean = p[1], sd = p[2])
+    
+    sum((d - y) ^ 2)
+  }
+  optim(c(mu, sig, scale), f)
+  
+}
+
+
 moth <- read.table('c:/git/moth-caterpillar-comparison/data/moth-abundance.txt', header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE)%>%
   filter(site=='Blue Heron')
 coweeta<- read.table('c:/git/moth-caterpillar-comparison/data/coweeta_cats.txt',header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE)%>%
@@ -30,12 +44,15 @@ moth_aggregate<-moth%>%
   replace_na(list(nCount=0))%>%
   mutate(avgN=nCount/sum(nCount))
 
+#plot(x=moth_aggregate$JulianWeek, y=moth_aggregate$avgN)
+#plot(moth_by_day)
+
+
 #  select(c(JulianWeek, nCount))%>%
 # group_by(JulianWeek)%>%
 #summarize(nCount=sum(nCount))
   
-plot(x=moth_aggregate$JulianWeek, y=moth_aggregate$avgN)
-plot(moth_by_day)
+
 
 
 #Organizing data based on lunar phases
@@ -97,26 +114,13 @@ preNmoon<-moth_set%>%
 
 lunar_phase_bind<-bind_rows(postNmoon,preNmoon)
 
-bind_phase<-bind_rows(postNmoon,preNmoon)%>%
-  select(c(year,Lunar.Cycle,Phase,photos,nonzerodays,phototaken))%>%
-  group_by(year,Lunar.Cycle,Phase,nonzerodays)%>%
-  summarize(RawCount=sum(photos))%>%
-  mutate(avg=RawCount/nonzerodays)
+#bind_phase<-bind_rows(postNmoon,preNmoon)%>%
+#  select(c(year,Lunar.Cycle,Phase,photos,nonzerodays,phototaken))%>%
+#  group_by(year,Lunar.Cycle,Phase,nonzerodays)%>%
+#  summarize(RawCount=sum(photos))%>%
+#  mutate(avg=RawCount/nonzerodays)
   
   
-
-fitG = function(x, y, mu, sig, scale, ...){
-  
-  f = function(p){
-    
-    d = p[3] * dnorm(x, mean = p[1], sd = p[2])
-    
-    sum((d - y) ^ 2)
-  }
-  optim(c(mu, sig, scale), f)
-  
-}
-
 
 
 
@@ -189,7 +193,7 @@ names(moth_pheno)<-c("Moth_Peak_1", "Moth_Peak_2", "Moth_10%", "Moth_50", "Moth_
 
 
   title("Moth Data averaged over lunar phases",outer=TRUE,line=-1)
-  legend(-200,400,legend=c("Pre New Moon","Post New Moon","10%","50%", "Half of Max"),pch=c(1,1,NA,NA,NA),lty=c(NA,NA,2,2,2),col=c(3,4,2,4,3),title="Legend", xpd=NA,cex=0.8)
+  legend(-200,400,legend=c("Pre New Moon","Post New Moon","10%","50%", "Half of Max", "Peak 1", "Peak 2"),pch=c(1,1,NA,NA,NA,NA,NA),lty=c(NA,NA,2,2,2,2,2),col=c(3,4,2,4,3, 1, 7),title="Legend", xpd=NA,cex=.9)
   
   result <- vector("numeric", 2)
   for (i in 2010:2018){
@@ -213,8 +217,8 @@ names(moth_pheno)<-c("Moth_Peak_1", "Moth_Peak_2", "Moth_10%", "Moth_50", "Moth_
   #group_by(Lunar.Cycle, Lunar.Phase1)%>%
   #mutate(id=seq_along())
   
-  group_by(year,PostNewMoon=cumsum(Lunar.Phase1)+1)%>%
-  mutate(Lunar.Days=row_number())
+#  group_by(year,PostNewMoon=cumsum(Lunar.Phase1)+1)%>%
+ # mutate(Lunar.Days=row_number())
   
 #Phenometrics 
   #Extract date where x-th percentile of moths were observed. 

@@ -1,7 +1,8 @@
 
 
-source('code/formatting_coweeta.r')
+
 source('C:/git/caterpillars-analysis-public/code/analysis_functions.r')
+source('code/formatting_coweeta.r')
 #Frequency plots and threshold values 
 
 
@@ -151,7 +152,9 @@ cow_thresh<-cowplusnotes%>%
   filter(nJulianWeekSurvey>50)
 
 cow_pheno<-left_join(cowplusnotes,cow_thresh,by=c("Year","Yearday"))%>%
-  drop_na(JulianWeek)
+  drop_na(JulianWeek)%>%
+  filter(TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))
+  
 
 cow_phen<-cow_pheno%>%
   filter(Plot==j)%>%

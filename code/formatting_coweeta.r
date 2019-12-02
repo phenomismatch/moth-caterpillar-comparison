@@ -100,13 +100,30 @@ cowplusnotes = left_join(catplus, dups019, by = c('Year', 'Plot', 'Yearday', 'Po
 cowplusnotes$surveyed<-ifelse(cowplusnotes$NumCaterpillars>=0,"1",NA)
 
 
-#Function to filter out for threshold value, plot, and year
+#Filter out for threshold value, plot, and year
 cow_filter<-cowplusnotes%>%
   filter(Year>2009, Plot %in% c("BB", "BS"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
   mutate(JulianWeek=7*floor((Yearday)/7)+4)
 
 
 #Cow_survs converting to Caterpillars Count format------
+
+cow_thresh<-cowplusnotes%>%
+  filter(Year>2009, Plot%in% c("BB","BS"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
+  select(Year,Yearday,Plot,Point,TreeSpecies,Sample, NumCaterpillars)%>%
+  distinct()%>%
+  group_by(Year,Yearday)%>%
+  tally()%>%
+  rename(nSurveys=n)%>%
+  mutate(JulianWeek=7*floor((Yearday)/7)+4)%>%
+  #aggregate(cow_thresh$nSurveys,by=list(Year=cow_thresh$Year,cow_thresh$JulianWeek=JWeek),FUN=sum)
+  group_by(Year,JulianWeek)%>%
+  mutate(nJulianWeekSurvey=sum(nSurveys))%>%
+  filter(nJulianWeekSurvey>50)
+
+cow_pheno<-left_join(cowplusnotes,cow_thresh,by=c("Year","Yearday"))%>%
+  drop_na(JulianWeek)%>%
+  filter(TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))
 
 coweeta_surveys<-cow_pheno %>%
   select(Year, Plot, Yearday, Point, TreeSpecies, Sample, Notes) %>%
@@ -178,7 +195,7 @@ coweeta_arths<- cow_pheno%>%
 #write.table(cowsurvs[, !names(cowsurvs) %in% "Branch"], "Survey_Coweeta_2010_BB.txt", sep = '\t', row.names = F)
 #write.table(cowarths, "ArthropodSighting_Coweeta_2010_BB.txt", sep = '\t', row.names = F)
 
-#Merge arth and surv======
+#Merge arth and surv, used as final dataset format
   merged_set<-coweeta_surveys%>%
     left_join(coweeta_arths, by= c('ID'= 'SurveyFK'))%>%
     rename(arthID=ID.y)%>%
@@ -191,34 +208,26 @@ coweeta_arths<- cow_pheno%>%
 
 
 
-
-#cow_fil<-cowplusnotes%>%
-#    filter(Year>2009, Plot %in% c("BB","BS"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
-#    left_join(cow_filter,by=c('Year', 'Yearday'))%>%
-#    subset(select=-c(surveyed,n,JulianWeek))
-
-
-
 #Changed yday(localDate) to subtract 1 to account for weird date shift
 
-  juliandate <- merged_set%>%
-    mutate(LocalDate = as.Date(LocalDate,format="%Y-%m-%d"))%>%
-    mutate(Year = format(LocalDate, "%Y"))%>%
-    mutate(julianday = yday(LocalDate)-1)%>%
-    mutate(julianweek=7*floor((julianday)/7)+4)
+# juliandate <- merged_set%>%
+#    mutate(LocalDate = as.Date(LocalDate,format="%Y-%m-%d"))%>%
+#    mutate(Year = format(LocalDate, "%Y"))%>%
+#    mutate(julianday = yday(LocalDate)-1)%>%
+#    mutate(julianweek=7*floor((julianday)/7)+4)
 
 
 
-site_filter<-function(threshold_value){
+#site_filter<-function(threshold_value){
  # filter<-cow_filter(threshold_value)
  # fil<-cow_fil(filter) this is now just cow_filter, does the same thing 
  # cow_surv<-coweeta_surveys(fil)
  # cow_arth<-coweeta_arths(fil,cow_surv)
  # merged<-merge_fun(cow_surv,cow_arth)
  # date<-date_change(merged)
-}
 
-site_filter(0)
+
+#site_filter(0)
 
 phenoSummary = function(fullDataset, # fullDataset format
                         postGreenupBeg = 40,     # number of days post-greenup marking the beginning of the time window
@@ -317,9 +326,10 @@ phenoSummary = function(fullDataset, # fullDataset format
   
 }
 
-final_cow<-site_filter(0)%>%
-  mutate(site="Coweeta", foo=substring(final_cow$Branch,0,2))%>%
-  unite(Name, site:foo,remove=TRUE,sep=" - ")
+#final_cow<-site_filter(0)%>%
+# mutate(site="Coweeta", foo=substring(final_cow$Branch,0,2))%>%
+#  unite(Name, site:foo,remove=TRUE,sep=" - ")
+#Get Fulldataset format after filtering threshold and tree species
 
 test<-phenoSummary(fullDataset = merged_set,postGreenupBeg = 40,postGreenupEnd = 75,fullWindowBeg = 135,fullWindowEnd = 212,minNumWeeks = 0)
 
