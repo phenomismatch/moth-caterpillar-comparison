@@ -124,152 +124,139 @@ lunar_phase_bind<-bind_rows(postNmoon,preNmoon)
 
 
 
-  Gauss<-lunar_phase_bind%>%
-          group_by(year,Lunar.Cycle,Phase,nLunarDays)%>%
-          mutate(avg=RawCount/nLunarDays)%>%
-          mutate(day=median(julian.day))%>%
-          group_by(year,day,Phase,avg)%>%
-          summarize()%>%
-          mutate_cond(is.na(avg), avg = 0)
-  
-  
-  locmax=function(df, dipFromPeak=0.1){
-    photoDiff=diff(df$avg)
-    diffRelativeToMax=photoDiff/max(df$avg,na.rm=TRUE)
-    firstIndexRaw=min(which(diffRelativeToMax< -dipFromPeak))
-    
-    runs=rle(sign(diffRelativeToMax))
-    runIDs=rep(1:length(runs$lengths),runs$lengths)
-    runSum=sapply(1:length(runs$lengths), function(x)
-      sum(diffRelativeToMax[runIDs==x]))
-    runIndex=min(which(runSum< -dipFromPeak))
-    runJDindex=min(which(runIDs==(runIndex)))
-    
-    return(df$day[min(firstIndexRaw,runJDindex)])
-  }
-  
+Gauss<-lunar_phase_bind%>%
+  group_by(year, Lunar.Cycle , Phase , nLunarDays)%>%
+  mutate(day = median(julian.day))%>%
+  group_by(year, day)%>%
+  mutate(avg = RawCount/nLunarDays)%>%
+  group_by(year, day, Phase, avg)%>%
+  summarize()%>%
+  mutate_cond(is.na(avg), avg = 0)
 
-  par(mfrow=c(3,3))
+
+locmax=function(df, dipFromPeak=0.1){
+  photoDiff = diff(df$avg)
+  diffRelativeToMax = photoDiff/max(df$avg,na.rm=TRUE)
+  firstIndexRaw = min(which(diffRelativeToMax< -dipFromPeak))
+  
+  runs = rle(sign(diffRelativeToMax))
+  runIDs = rep(1:length(runs$lengths),runs$lengths)
+  runSum = sapply(1:length(runs$lengths), function(x)
+    sum(diffRelativeToMax[runIDs==x]))
+  runIndex = min(which(runSum< -dipFromPeak))
+  runJDindex = min(which(runIDs==(runIndex)))
+  
+  return(df$day[min(firstIndexRaw,runJDindex)])
+}
+
+
+par(mfrow=c(3,3))
 cont<-NULL
 for(i in 2010:2018){
   fit<-Gauss%>%
     filter(year==i)%>%
     mutate(prepost=ifelse(Phase=="PreNewMoon", 3,4))
   
-  gfit1=fitG(x=fit$day,y=fit$avg,mu=weighted.mean(fit$day,fit$avg),sig=10000,scale=100,control=list(maxit=10000),method="L-BFGS-B",lower=c(0,0,0,0,0,0))
+  gfit1 = fitG(x = fit$day,y = fit$avg,mu = weighted.mean(fit$day,fit$avg),sig=10000,scale=100,control=list(maxit=10000),method="L-BFGS-B",lower=c(0,0,0,0,0,0))
   p=gfit1$par
   r2=cor(fit$day,p[3]*dnorm(fit$day,p[1],p[2]))^2
   totalAvg=sum(fit$avg)
   
-  gaussplot<-plot(x=fit$day,y=fit$avg,xlab="Julian Day", ylab="Moth Average",col=fit$prepost, pch=16,main=i)
+  gaussplot<-plot(x = fit$day, y = fit$avg, xlab = "Julian Day", ylab = "Mean Density", col=fit$prepost, pch=16,main=i)
   lines(0:365,p[3]*dnorm(0:365,p[1],p[2]),col='blue')
   
   altpheno<-lunar_phase_bind%>%
     filter(year==i)
   
-  moth_sum<-cumsum(altpheno$photos)
-  ten<-min(which(moth_sum>(0.1*sum(altpheno$photos))))
-  fifty<-min(which(moth_sum>(0.5*sum(altpheno$photos))))
-  halfcycle<-min(which(fit$avg>0.5*max(fit$avg))) #For true max or local maximum?
+  moth_sum<- cumsum(altpheno$photos)
+  ten<- min(which(moth_sum>(0.1*sum(altpheno$photos))))
+  fifty<- min(which(moth_sum>(0.5*sum(altpheno$photos))))
+  halfcycle<- min(which(fit$avg>0.5*max(fit$avg))) #For true max or local maximum?
   #halfcycle<-min(which(moth_sum>0.5*max(altpheno$photos)))
   abline(v = ten, col="red", lwd=3, lty=2)
   abline(v = fifty, col="blue", lwd=3, lty=2)
   abline(v = fit[halfcycle,2], col="green", lwd=4, lty=2)
-  half<-fit[halfcycle,2]
- 
-  max1<-locmax(fit,dipFromPeak = 0.2)
-  peakfit<-Gauss%>%
+  half<- fit[halfcycle,2]
+  
+  max1<- locmax(fit,dipFromPeak = 0.2)
+  peakfit<- Gauss%>%
     filter(year==i,day>200)%>%
     mutate(prepost=ifelse(Phase=="PreNewMoon", 3,4))
-  max2<-locmax(peakfit,dipFromPeak=0.2)
+  max2<- locmax(peakfit,dipFromPeak=0.2)
   abline(v=max1,col="black",lwd=3,lty=2)
   abline(v=max2,col="yellow",lwd=3,lty=2)    
-  foo<-bind_cols(list(max1, max2, ten, fifty,half$day))
+  foo<- bind_cols(list(max1, max2, ten, fifty,half$day))
   foo$Year=i
-   cont[[i]]=foo
+  cont[[i]]=foo
 }    
 moth_pheno<-bind_rows(cont)
 names(moth_pheno)<-c("Moth_Peak_1", "Moth_Peak_2", "Moth_10%", "Moth_50", "Moth_Half_Peak","Year")
 
 
-  title("Moth Data averaged over lunar phases",outer=TRUE,line=-1)
-  legend(-200,400,legend=c("Pre New Moon","Post New Moon","10%","50%", "Half of Max", "Peak 1", "Peak 2"),pch=c(1,1,NA,NA,NA,NA,NA),lty=c(NA,NA,2,2,2,2,2),col=c(3,4,2,4,3, 1, 7),title="Legend", xpd=NA,cex=.9)
-  
-  result <- vector("numeric", 2)
-  for (i in 2010:2018){
-    fit<-Gauss%>%
-      filter(year==i)%>%
-      mutate(prepost=ifelse(Phase=="PreNewMoon", 3,4))
-    
-  max1<-locmax(fit,dipFromPeak = 0.2)
-  peakfit<-Gauss%>%
-    filter(year==i,day>200)%>%
-    mutate(prepost=ifelse(Phase=="PreNewMoon", 3,4))
-  max2<-locmax(peakfit,dipFromPeak=0.2)
-  peaks<-c(max1,max2)
-  result<-peaks
-  }
-  
+title("Mean Density of Moths over Lunar Phases",outer=TRUE,line=-1)
+legend(-200,400,legend=c("Pre New Moon","Post New Moon","10%","50%", "Half of Max", "Peak 1", "Peak 2"),pch=c(1,1,NA,NA,NA,NA,NA),lty=c(NA,NA,2,2,2,2,2),col=c(3,4,2,4,3, 1, 7),title="Legend", xpd=NA,cex=.9)
 
- 
-  #mutate(Lunar.Phase1=Lunar.Days<=14, Lunar.Phase2=Lunar.Days>14)%>%
-  # mutate(Lunar.Phase1=replace(Lunar.Phase1,Lunar.Phase1==TRUE,1))%>%
-  #group_by(Lunar.Cycle, Lunar.Phase1)%>%
-  #mutate(id=seq_along())
-  
+
+
+
+#mutate(Lunar.Phase1=Lunar.Days<=14, Lunar.Phase2=Lunar.Days>14)%>%
+# mutate(Lunar.Phase1=replace(Lunar.Phase1,Lunar.Phase1==TRUE,1))%>%
+#group_by(Lunar.Cycle, Lunar.Phase1)%>%
+#mutate(id=seq_along())
+
 #  group_by(year,PostNewMoon=cumsum(Lunar.Phase1)+1)%>%
- # mutate(Lunar.Days=row_number())
-  
-#Phenometrics 
-  #Extract date where x-th percentile of moths were observed. 
-  #So we need to know the total number of moths in a year observed
-  #Then, we can just use an if statement, or a case-when statement that looks at when the percentage
-  #(sum of moths at that date/sum of total moths>10% or 50%, whatever)
-  #Also, to look at half of the maximum of the half-cycle value, 
-  #so basically first you have to know what the peak is for that cycle, then do an if statement for the date with # of moths that first exceeds that). 
+# mutate(Lunar.Days=row_number())
 
-  for(i in 2010:2018){
-    altpheno<-lunar_phase_bind%>%
-      filter(year==i)
-  moth_sum<-cumsum(altpheno$photos)
-  ten<-min(which(moth_sum>(0.1*sum(altpheno$photos))))
-  fifty<-min(which(moth_sum>(0.5*sum(altpheno$photos))))
-  halfcycle<-min(which(altpheno$photos>0.5*max(altpheno$photos)))
- 
-  }
+#Phenometrics 
+#Extract date where x-th percentile of moths were observed. 
+#So we need to know the total number of moths in a year observed
+#Then, we can just use an if statement, or a case-when statement that looks at when the percentage
+#(sum of moths at that date/sum of total moths>10% or 50%, whatever)
+#Also, to look at half of the maximum of the half-cycle value, 
+#so basically first you have to know what the peak is for that cycle, then do an if statement for the date with # of moths that first exceeds that). 
+
+#for(i in 2010:2018){
+#  altpheno<-lunar_phase_bind%>%
+#    filter(year==i)
+#  moth_sum<-cumsum(altpheno$photos)
+#  ten<-min(which(moth_sum>(0.1*sum(altpheno$photos))))
+#  fifty<-min(which(moth_sum>(0.5*sum(altpheno$photos))))
+#  halfcycle<-min(which(altpheno$photos>0.5*max(altpheno$photos)))
+  
+#}
 
 #Finding first local maximum
 #we use the raw dataset(which would be lunar_phase_bind I think) and photos=freq
 #Dip angle needs to be tested, starting with 0.1 first
-  locmax=function(df, dipFromPeak=0.1){
-    photoDiff=diff(df$avg)
-    diffRelativeToMax=photoDiff/max(df$avg,na.rm=TRUE)
-    firstIndexRaw=min(which(diffRelativeToMax< -dipFromPeak))
+#  locmax=function(df, dipFromPeak=0.1){
+#    photoDiff=diff(df$avg)
+#    diffRelativeToMax=photoDiff/max(df$avg,na.rm=TRUE)
+#    firstIndexRaw=min(which(diffRelativeToMax< -dipFromPeak))
     
-    runs=rle(sign(diffRelativeToMax))
-    runIDs=rep(1:length(runs$lengths),runs$lengths)
-    runSum=sapply(1:length(runs$lengths), function(x)
-    sum(diffRelativeToMax[runIDs==x]))
-    runIndex=min(which(runSum< -dipFromPeak))
-    runJDindex=min(which(runIDs==(runIndex)))
+#    runs=rle(sign(diffRelativeToMax))
+#    runIDs=rep(1:length(runs$lengths),runs$lengths)
+#    runSum=sapply(1:length(runs$lengths), function(x)
+#    sum(diffRelativeToMax[runIDs==x]))
+#    runIndex=min(which(runSum< -dipFromPeak))
+#    runJDindex=min(which(runIDs==(runIndex)))
     
-    return(df$day[min(firstIndexRaw,runJDindex)])
-  }
+#    return(df$day[min(firstIndexRaw,runJDindex)])
+#  }
   
   
-  for(i in 2010:2018){
-    filt<-Gauss%>%
-      filter(year==2011)
-    locmax(filt,dipFromPeak = 0.2)
+#  for(i in 2010:2018){
+#    filt<-Gauss%>%
+#      filter(year==2011)
+#    locmax(filt,dipFromPeak = 0.2)
     
-  }
+#  }
   
   
-  filt<-lunar_phase_bind%>%
-    filter(year==2011)
-plot(x=filt$julian.day,y=filt$photos)
+#  filt<-lunar_phase_bind%>%
+#    filter(year==2011)
+#plot(x=filt$julian.day,y=filt$photos)
 
-  locmax(lunar_phase_bind,dip=0.1)  
+#  locmax(lunar_phase_bind,dip=0.1)  
   
 #Plot Frac. of avg for lunar days across lunar cycles 
 #ISSUE: Has kinks in the fit, not sure why they pop up but there should be a smooth curve for it
@@ -297,6 +284,7 @@ lunar_ratio<-for(y in 2010:2018){
     points(x=moth_plot$Lunar.Days,y=moth_plot$Frac,type="l", col = rainbowcols[i])
   }
 }
+title("Fraction of Surveys with Moths across Lunar Cycles",outer=TRUE,line=-1)
 
 
 

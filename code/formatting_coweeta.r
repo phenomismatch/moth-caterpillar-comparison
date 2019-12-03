@@ -196,7 +196,7 @@ coweeta_arths<- cow_pheno%>%
 #write.table(cowarths, "ArthropodSighting_Coweeta_2010_BB.txt", sep = '\t', row.names = F)
 
 #Merge arth and surv, used as final dataset format
-  merged_set<-coweeta_surveys%>%
+  final_cow_set<-coweeta_surveys%>%
     left_join(coweeta_arths, by= c('ID'= 'SurveyFK'))%>%
     rename(arthID=ID.y)%>%
     mutate(LocalDate = as.Date(LocalDate,format="%Y-%m-%d"))%>%
@@ -234,7 +234,7 @@ phenoSummary = function(fullDataset, # fullDataset format
                         postGreenupEnd = 75,     # number of days post-greenup marking the end of the time window
                         fullWindowBeg = 135,     # julian day of the beginning of a specified time window (default May 15)
                         fullWindowEnd = 212,     # julian day of the end of a specified time window (default July 31)
-                        minNumWeeks = 5,         # minimum number of weeks of survey data to calculate pheno summaries
+                        minNumWeeks = 0,         # minimum number of weeks of survey data to calculate pheno summaries
                         ...) {
   
   years = unique(fullDataset$Year)
@@ -332,6 +332,7 @@ phenoSummary = function(fullDataset, # fullDataset format
 #Get Fulldataset format after filtering threshold and tree species
 
 test<-phenoSummary(fullDataset = merged_set,postGreenupBeg = 40,postGreenupEnd = 75,fullWindowBeg = 135,fullWindowEnd = 212,minNumWeeks = 0)
+
 
 
 

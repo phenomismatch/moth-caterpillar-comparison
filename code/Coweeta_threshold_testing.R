@@ -3,9 +3,10 @@
 
 source('C:/git/caterpillars-analysis-public/code/analysis_functions.r')
 source('code/formatting_coweeta.r')
-#Frequency plots and threshold values 
 
 
+
+#Frequency plotting
 freq_plot<-function(field_year, field_plot){
   group_cow_set<-cowplusnotes%>%
     filter(cowplusnotes$Year==field_year, cowplusnotes$Plot==field_plot)%>%
@@ -128,12 +129,6 @@ threshold<-function(threshold_value){
 
 
 thresh_100<-threshold(100)
-
-
-#No point in doing 50, so we can start at 100
-
-
-#Set Threshold for all years to 100, then find proportion of surveys-nSurveys for each day/Total nSurveys in that given julian week
 
 
 
