@@ -107,7 +107,7 @@ cow_filter<-cowplusnotes%>%
 
 
 #Cow_survs converting to Caterpillars Count format------
-
+#Setting threshold value of 50
 cow_thresh<-cowplusnotes%>%
   filter(Year>2009, Plot%in% c("BB","BS"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
   select(Year,Yearday,Plot,Point,TreeSpecies,Sample, NumCaterpillars)%>%
@@ -208,6 +208,7 @@ coweeta_arths<- cow_pheno%>%
 
 
 
+  
 #Changed yday(localDate) to subtract 1 to account for weird date shift
 
 # juliandate <- merged_set%>%
@@ -226,9 +227,13 @@ coweeta_arths<- cow_pheno%>%
  # merged<-merge_fun(cow_surv,cow_arth)
  # date<-date_change(merged)
 
-
 #site_filter(0)
 
+  
+  
+  
+#PhenoSummary function with medianGreenup date set to NA, otherwise errors showed up 
+  
 phenoSummary = function(fullDataset, # fullDataset format
                         postGreenupBeg = 40,     # number of days post-greenup marking the beginning of the time window
                         postGreenupEnd = 75,     # number of days post-greenup marking the end of the time window
@@ -326,12 +331,10 @@ phenoSummary = function(fullDataset, # fullDataset format
   
 }
 
-#final_cow<-site_filter(0)%>%
-# mutate(site="Coweeta", foo=substring(final_cow$Branch,0,2))%>%
-#  unite(Name, site:foo,remove=TRUE,sep=" - ")
-#Get Fulldataset format after filtering threshold and tree species
 
-test<-phenoSummary(fullDataset = merged_set,postGreenupBeg = 40,postGreenupEnd = 75,fullWindowBeg = 135,fullWindowEnd = 212,minNumWeeks = 0)
+#Get Fulldataset format after filtering threshold and tree species, at this point we can switch over to coweeta_pheno_analysis
+#Still coming across NA values in some of the columns besides the greenup ones, at first thought it was numGoodweeks but that doesn't seem to be it
+test<-phenoSummary(fullDataset = final_cow_set,postGreenupBeg = 40,postGreenupEnd = 75,fullWindowBeg = 135,fullWindowEnd = 212,minNumWeeks = 0)
 
 
 

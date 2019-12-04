@@ -19,6 +19,21 @@ fitG = function(x, y, mu, sig, scale, ...){
   
 }
 
+locmax=function(df, dipFromPeak=0.1){
+  photoDiff = diff(df$avg)
+  diffRelativeToMax = photoDiff/max(df$avg,na.rm=TRUE)
+  firstIndexRaw = min(which(diffRelativeToMax< -dipFromPeak))
+  
+  runs = rle(sign(diffRelativeToMax))
+  runIDs = rep(1:length(runs$lengths),runs$lengths)
+  runSum = sapply(1:length(runs$lengths), function(x)
+    sum(diffRelativeToMax[runIDs==x]))
+  runIndex = min(which(runSum< -dipFromPeak))
+  runJDindex = min(which(runIDs==(runIndex)))
+  
+  return(df$day[min(firstIndexRaw,runJDindex)])
+}
+
 
 moth <- read.table('c:/git/moth-caterpillar-comparison/data/moth-abundance.txt', header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE)%>%
   filter(site=='Blue Heron')
@@ -43,16 +58,6 @@ moth_aggregate<-moth%>%
   mutate(JulianWeek=7*floor((julian.day)/7)+4)%>%
   replace_na(list(nCount=0))%>%
   mutate(avgN=nCount/sum(nCount))
-
-#plot(x=moth_aggregate$JulianWeek, y=moth_aggregate$avgN)
-#plot(moth_by_day)
-
-
-#  select(c(JulianWeek, nCount))%>%
-# group_by(JulianWeek)%>%
-#summarize(nCount=sum(nCount))
-  
-
 
 
 #Organizing data based on lunar phases
@@ -88,14 +93,6 @@ postNmoon<-moth_set%>%
   mutate(Phase="PostNewMoon")
  
 
-
-  #mutate(nonzero=photos>0)%>%
-  #mutate(n=replace(nonzero,nonzero==FALSE,0))%>%
-  #group_by(year,Lunar.Cycle)%>%
-  #mutate(nonzerodays=sum(n))%>%
-  #mutate(phototaken=photos/nonzerodays)%>%
-# select(-c(nonzero,n))
-
 preNmoon<-moth_set%>%
   group_by(year,Lunar.Cycle)%>%
   filter(Lunar.Days>14)%>%
@@ -105,21 +102,8 @@ preNmoon<-moth_set%>%
   mutate(Phase="PreNewMoon")
 
 
- # mutate(nonzero=photos>0)%>%
-#  mutate(n=replace(nonzero,nonzero==FALSE,0))%>%
-#  group_by(year,Lunar.Cycle)%>%
-#  mutate(nonzerodays=sum(n))%>%
-#  mutate(phototaken=photos/nonzerodays)%>%
-  #select(-c(nonzero,n))
-
 lunar_phase_bind<-bind_rows(postNmoon,preNmoon)
 
-#bind_phase<-bind_rows(postNmoon,preNmoon)%>%
-#  select(c(year,Lunar.Cycle,Phase,photos,nonzerodays,phototaken))%>%
-#  group_by(year,Lunar.Cycle,Phase,nonzerodays)%>%
-#  summarize(RawCount=sum(photos))%>%
-#  mutate(avg=RawCount/nonzerodays)
-  
   
 
 
@@ -132,22 +116,6 @@ Gauss<-lunar_phase_bind%>%
   group_by(year, day, Phase, avg)%>%
   summarize()%>%
   mutate_cond(is.na(avg), avg = 0)
-
-
-locmax=function(df, dipFromPeak=0.1){
-  photoDiff = diff(df$avg)
-  diffRelativeToMax = photoDiff/max(df$avg,na.rm=TRUE)
-  firstIndexRaw = min(which(diffRelativeToMax< -dipFromPeak))
-  
-  runs = rle(sign(diffRelativeToMax))
-  runIDs = rep(1:length(runs$lengths),runs$lengths)
-  runSum = sapply(1:length(runs$lengths), function(x)
-    sum(diffRelativeToMax[runIDs==x]))
-  runIndex = min(which(runSum< -dipFromPeak))
-  runJDindex = min(which(runIDs==(runIndex)))
-  
-  return(df$day[min(firstIndexRaw,runJDindex)])
-}
 
 
 par(mfrow=c(3,3))
@@ -189,13 +157,59 @@ for(i in 2010:2018){
   foo$Year=i
   cont[[i]]=foo
 }    
+
+#Create df of phenometrics to use for correlation matrix
 moth_pheno<-bind_rows(cont)
 names(moth_pheno)<-c("Moth_Peak_1", "Moth_Peak_2", "Moth_10%", "Moth_50", "Moth_Half_Peak","Year")
 
 
 title("Mean Density of Moths over Lunar Phases",outer=TRUE,line=-1)
-legend(-200,400,legend=c("Pre New Moon","Post New Moon","10%","50%", "Half of Max", "Peak 1", "Peak 2"),pch=c(1,1,NA,NA,NA,NA,NA),lty=c(NA,NA,2,2,2,2,2),col=c(3,4,2,4,3, 1, 7),title="Legend", xpd=NA,cex=.9)
+legend(280,300,legend=c("Pre New Moon","Post New Moon","10%","50%", "Half of Max", "Peak 1", "Peak 2"),pch=c(1,1,NA,NA,NA,NA,NA),lty=c(NA,NA,2,2,2,2,2),col=c(3,4,2,4,3, 1, 7),title="Legend", xpd=NA,cex=.9)
 
+
+
+#Plot Frac. of avg for lunar days across lunar cycles 
+#ISSUE: Has kinks in the fit, not sure why they pop up but there should be a smooth curve for it
+#Possible issue with lines(predict(quad),)
+par(mfrow=c(3,3))
+rainbowcols = rainbow(13)
+
+
+lunar_ratio<-for(y in 2010:2018){
+  moth_plot<-moth_set%>%
+    filter(year==y,Lunar.Cycle==2)
+  #Quadratic model
+  quadmod<-moth_set%>%
+    filter(year==y)
+  Lunar2=quadmod$Lunar.Days^2
+  quad<-lm(quadmod$Frac~quadmod$Lunar.Days+Lunar2)
+  square<-summary(quad)$r.squared
+  plot(main=y,x=moth_plot$Lunar.Days,y=moth_plot$Frac,type="l",
+       col=rainbowcols[1],xlab="Lunar Days", ylab="Frac of Surveys")
+  lines(predict(quad),)
+  legend("topleft",bty="n",legend=paste("R^2=",square))
+  for(i in 2:14){
+    moth_plot<-moth_set%>%
+      filter(year==y,Lunar.Cycle==i)
+    points(x=moth_plot$Lunar.Days,y=moth_plot$Frac,type="l", col = rainbowcols[i])
+  }
+}
+title("Fraction of Surveys with Moths across Lunar Cycles",outer=TRUE,line=-1)
+
+
+
+
+#Shifting each year's observations to account for lunar cycle discrepancy
+day1 = moth %>%
+  filter(julian.day == 1) %>%
+  select(year, days.past.new.moon)  %>%
+  mutate(shift = days.past.new.moon - days.past.new.moon[1])
+
+moth$julian.day.shifted = NA
+
+for (y in 2010:2018) {
+  moth$julian.day.shifted[moth$year == y] = moth$julian.day[moth$year == y] - day1$shift[day1$year == y]
+}
 
 
 
@@ -258,67 +272,6 @@ legend(-200,400,legend=c("Pre New Moon","Post New Moon","10%","50%", "Half of Ma
 
 #  locmax(lunar_phase_bind,dip=0.1)  
   
-#Plot Frac. of avg for lunar days across lunar cycles 
-#ISSUE: Has kinks in the fit, not sure why they pop up but there should be a smooth curve for it
-#Possible issue with lines(predict(quad),)
-par(mfrow=c(3,3))
-rainbowcols = rainbow(13)
 
-
-lunar_ratio<-for(y in 2010:2018){
-  moth_plot<-moth_set%>%
-    filter(year==y,Lunar.Cycle==2)
-  #Quadratic model
-  quadmod<-moth_set%>%
-    filter(year==y)
-  Lunar2=quadmod$Lunar.Days^2
-  quad<-lm(quadmod$Frac~quadmod$Lunar.Days+Lunar2)
-  square<-summary(quad)$r.squared
-  plot(main=y,x=moth_plot$Lunar.Days,y=moth_plot$Frac,type="l",
-       col=rainbowcols[1],xlab="Lunar Days", ylab="Frac of Surveys")
-    lines(predict(quad),)
-    legend("topleft",bty="n",legend=paste("R^2=",square))
-  for(i in 2:14){
-    moth_plot<-moth_set%>%
-      filter(year==y,Lunar.Cycle==i)
-    points(x=moth_plot$Lunar.Days,y=moth_plot$Frac,type="l", col = rainbowcols[i])
-  }
-}
-title("Fraction of Surveys with Moths across Lunar Cycles",outer=TRUE,line=-1)
-
-
-
-
-  
-day1 = moth %>%
-  filter(julian.day == 1) %>%
-  select(year, days.past.new.moon)  %>%
-  mutate(shift = days.past.new.moon - days.past.new.moon[1])
-  
-moth$julian.day.shifted = NA
-
-for (y in 2010:2018) {
-  moth$julian.day.shifted[moth$year == y] = moth$julian.day[moth$year == y] - day1$shift[day1$year == y]
-}
-
-
-# mutate(Counter=X==1000)%>%
- # mutate(Counter=replace(Counter,Counter==FALSE,1))%>%
- 
- # mutate(Lunar.Cycle=rep(1:n,each=n))
-
-#  moth_lunar$Lunar.Cycle<-sequence(rle(moth_lunar$New.moon)$lengths)
-  
-  
-
- #moth_lunar$Lunar.Cycle[1:14,]<-1
-  
-
-#moth_lunar<-moth%>%
-#  filter(year==2010)%>%
-#  {ifelse(moth_lunar$days.past.new.moon==0,1,0)}%>%
-  
-#  group_by(year,Lunar.Cycle=cumsum(New.moon==1L)+1)%>%
-#  mutate(Lunar.Days=row_number())
 
 
