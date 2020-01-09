@@ -13,7 +13,7 @@ Phen_BB<-cow_pheno_sum%>%
   filter(Year>2009, Name == "Coweeta - BB")%>%
   pivot_wider(names_from=Name,
               values_from=medianGreenup:massRollingPeakDateWindow)%>%
-  mutate_if(is.integer,replace_na,0)%>%
+  mutate_if(is.integer,replace_na,0)%>% 
   setnames(old=c( "pctPeakDate_Coweeta - BB", "massPeakDate_Coweeta - BB", "pctRollingPeakDateWindow_Coweeta - BB", "massRollingPeakDateWindow_Coweeta - BB"), new=c( "pct_peak_BB", "mass_peak_BB","pctRolling_BB", "massRolling_BB"))%>%
   select(c(Year, pct_peak_BB, mass_peak_BB,pctRolling_BB,massRolling_BB))
   
@@ -32,7 +32,7 @@ Phen_Final<-merge(BB_BS,moth_pheno,by="Year")
 phen_mat<-round((cor(Phen_Final[2:14], use = 'pairwise.complete.obs' )), 2)
 
 #Quick visualization of correlation matrix
-corrplot(phen_mat,type="upper", order="hclust",tl.col="black", tl.srt=45)
+corrplot(phen_mat,type="upper",tl.col="black", tl.srt=45)
 
 
 
