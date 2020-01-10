@@ -7,7 +7,8 @@ library(tidyr)
 library(ggplot2)
 library(gridExtra)
 library(lubridate)
-
+library(raster)
+library(rgdal)
 # Read in data, clean up leading/trailing spaces, weird symbols
 cats = read.table('data/Coweeta_cats.txt', header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE) %>%
   filter(Plot != "") %>%
@@ -189,6 +190,11 @@ coweeta_arths<- cow_pheno%>%
 
 
 
+#Sites
+greenup = raster("data/inca_midgup_median_nad83_02deg.tif")
+sites<-data.frame(Site=c('Coweeta_BB', 'Coweeta_BS'),Latitude=c('35.041667', '35.025'), Longitude=c('-83.475','-83.458333'))
+sites$medianGreenup = round(extract(greenup, sites[, c('Longitude', 'Latitude')]))
+
 
 # Write files
 #write.table(branches[, !names(branches) %in% "Branch"], "Plants_Coweeta_2010_BB.txt", sep = '\t', row.names = F)
@@ -271,7 +277,7 @@ phenoSummary = function(fullDataset, # fullDataset format
           summarize(# mean for the month of July
             Name = site,
             Year = y,
-            medianGreenup = NA,
+            medianGreenup = greenup,
             minJulianWeek = min(julianweek),
             maxJulianWeek = max(julianweek),
             totalSurveys = sum(nSurveys),
@@ -334,7 +340,7 @@ phenoSummary = function(fullDataset, # fullDataset format
 
 #Get Fulldataset format after filtering threshold and tree species, at this point we can switch over to coweeta_pheno_analysis
 #Still coming across NA values in some of the columns besides the greenup ones, at first thought it was numGoodweeks but that doesn't seem to be it
-test<-phenoSummary(fullDataset = final_cow_set,postGreenupBeg = 40,postGreenupEnd = 75,fullWindowBeg = 135,fullWindowEnd = 212,minNumWeeks = 0)
+test<-phenoSummary(fullDataset = final_cow_set,postGreenupBeg = 40,postGreenupEnd = 75,fullWindowBeg = 120,fullWindowEnd = 212,minNumWeeks = 0)
 
 
 
