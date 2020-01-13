@@ -9,6 +9,8 @@ library(gridExtra)
 library(lubridate)
 library(raster)
 library(rgdal)
+library(dggridR)
+library(sf)
 # Read in data, clean up leading/trailing spaces, weird symbols
 cats = read.table('data/Coweeta_cats.txt', header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE) %>%
   filter(Plot != "") %>%
@@ -111,7 +113,7 @@ cow_filter<-cowplusnotes%>%
 #Setting threshold value of 50
 cow_thresh<-cowplusnotes%>%
   filter(Year>2009, Plot%in% c("BB","BS"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
-  select(Year,Yearday,Plot,Point,TreeSpecies,Sample, NumCaterpillars)%>%
+  dplyr::select(Year,Yearday,Plot,Point,TreeSpecies,Sample, NumCaterpillars)%>%
   distinct()%>%
   group_by(Year,Yearday)%>%
   tally()%>%
@@ -127,7 +129,7 @@ cow_pheno<-left_join(cowplusnotes,cow_thresh,by=c("Year","Yearday"))%>%
   filter(TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))
 
 coweeta_surveys<-cow_pheno %>%
-  select(Year, Plot, Yearday, Point, TreeSpecies, Sample, Notes) %>%
+  dplyr::select(Year, Plot, Yearday, Point, TreeSpecies, Sample, Notes) %>%
   distinct() %>%
   left_join(comments[, c('Comments', 'NumberOfLeaves')], by = c('Notes' = 'Comments')) %>%
   mutate(Branch = paste(Plot, Point, TreeSpecies, Sample, sep = "_"),
@@ -151,7 +153,7 @@ coweeta_surveys<-cow_pheno %>%
          CORRESPONDING_OLD_DATABASE_SURVEY_ID = rep(0,n())) %>%
   left_join(branches[, c('Branch', 'ID')], by = 'Branch') %>%
   rename(PlantFK = ID.y, ID = ID.x) %>%
-  select(ID, SubmissionTimestamp, UserFKOfObserver, PlantFK, LocalDate, LocalTime, ObservationMethod, Notes, 
+  dplyr::select(ID, SubmissionTimestamp, UserFKOfObserver, PlantFK, LocalDate, LocalTime, ObservationMethod, Notes, 
          WetLeaves, PlantSpecies, NumberOfLeaves, AverageLeafLength, HerbivoryScore, SubmittedThroughApp,
          MinimumTemperature, MaximumTemperature, NeedToSendToSciStarter, CORRESPONDING_OLD_DATABASE_SURVEY_ID, Branch)
 
@@ -186,14 +188,14 @@ coweeta_arths<- cow_pheno%>%
          Group = ifelse(BeetleLarva == 1, "beetle", Group),
          Group = ifelse(CaterpillarFamily == "Sawfly", "bee", Group),
          Biomass_mg=CaterpillarBiomass_ma) %>%
-  select(ID, SurveyFK, Group, Length, Quantity, PhotoURL, Notes, Hairy, Rolled, Tented, Sawfly, BeetleLarva, NeedToSendToINaturalist,Biomass_mg)
+  dplyr::select(ID, SurveyFK, Group, Length, Quantity, PhotoURL, Notes, Hairy, Rolled, Tented, Sawfly, BeetleLarva, NeedToSendToINaturalist,Biomass_mg)
 
 
 
 #Sites
 greenup = raster("data/inca_midgup_median_nad83_02deg.tif")
-sites<-data.frame(Site=c('Coweeta_BB', 'Coweeta_BS'),Latitude=c('35.041667', '35.025'), Longitude=c('-83.475','-83.458333'))
-sites$medianGreenup = round(extract(greenup, sites[, c('Longitude', 'Latitude')]))
+sites<-data.frame(Site=c('Coweeta_BB', 'Coweeta_BS'),Latitude=c(35.041667, 35.025), Longitude=c(-83.475,-83.458333))
+sites$medianGreenup = round(raster::extract(greenup, sites[, c('Longitude', 'Latitude')]))
 
 
 # Write files
@@ -201,7 +203,7 @@ sites$medianGreenup = round(extract(greenup, sites[, c('Longitude', 'Latitude')]
 #write.table(cowsurvs[, !names(cowsurvs) %in% "Branch"], "Survey_Coweeta_2010_BB.txt", sep = '\t', row.names = F)
 #write.table(cowarths, "ArthropodSighting_Coweeta_2010_BB.txt", sep = '\t', row.names = F)
 
-#Merge arth and surv, used as final dataset format
+#Merge arth, surv, and sites, used as final dataset format
   final_cow_set<-coweeta_surveys%>%
     left_join(coweeta_arths, by= c('ID'= 'SurveyFK'))%>%
     rename(arthID=ID.y)%>%
@@ -210,7 +212,8 @@ sites$medianGreenup = round(extract(greenup, sites[, c('Longitude', 'Latitude')]
     mutate(julianday = yday(LocalDate)-1)%>%
     mutate(julianweek=7*floor((julianday)/7)+4)%>% 
     mutate(site="Coweeta", foo=substring(Branch,0,2))%>%
-    unite(Name, site:foo,remove=TRUE,sep="_")
+    unite(Name, site:foo,remove=TRUE,sep="_")%>%
+    left_join(sites,by=c('Name'='Site'))
 
 
 
@@ -277,7 +280,7 @@ phenoSummary = function(fullDataset, # fullDataset format
           summarize(# mean for the month of July
             Name = site,
             Year = y,
-            medianGreenup = greenup,
+            medianGreenup = NA,
             minJulianWeek = min(julianweek),
             maxJulianWeek = max(julianweek),
             totalSurveys = sum(nSurveys),
