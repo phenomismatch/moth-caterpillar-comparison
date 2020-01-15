@@ -7,6 +7,25 @@ library(gridExtra)
 
 cow_pheno_sum <- read.csv("C:/git/moth-caterpillar-comparison/data/coweeta_phenosummary.csv", header=TRUE)
 
+par(mfrow=c(3,3))
+coweeta<-for ( i in 2010:2018){
+   for(j in c("BB","BS")){
+  year_filt<-cow_pheno%>%
+    filter(Year==i, Plot==j)%>%
+    group_by(Yearday)%>%
+    summarize(raw=sum(NumCaterpillars))
+  plot(x=year_filt$Yearday,y=year_filt$raw, xlab="Yearday", ylab="raw", main=i)
+  
+}
+}
+ 
+coweeta<-for ( i in 2010:2018){
+    year_filt<-cow_pheno%>%
+      filter(Year==i, Plot=="BB")%>%
+      group_by(Yearday)%>%
+      summarize(raw=sum(NumCaterpillars))
+    plot(x=year_filt$Yearday,y=year_filt$raw, xlab="Yearday", ylab="raw")
+  }
 
 #Convert cow_pheno_sum using pivot_wider to get phenometrics for both sites as columns
 Phen_BB<-cow_pheno_sum%>%
@@ -173,6 +192,9 @@ cow_thresh<-cowplusnotes%>%
 #  add_count()%>%
 #rename(nWeeks=n)
 plot(x=cow_thresh$Yearday,y=cow_thresh$PropSurv, main=i,sub=j, xlab="Yearday", ylab="Proportion of Surveys", type="l")
+
+
+#Create plots of Raw Count of Caterpillar data with the phenometrics imposed on top of them
 
 
 

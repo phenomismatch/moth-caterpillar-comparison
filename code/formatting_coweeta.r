@@ -346,7 +346,7 @@ phenoSummary = function(fullDataset, # fullDataset format
 test<-phenoSummary(fullDataset = final_cow_set,postGreenupBeg = 40,postGreenupEnd = 75,fullWindowBeg = 120,fullWindowEnd = 212,minNumWeeks = 0)
 
 
-
+#Need to reorganize this and make the process of reading in these files more clear
 
 #-----
 
