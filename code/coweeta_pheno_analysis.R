@@ -14,7 +14,7 @@ coweeta<-for ( i in 2010:2018){
     filter(Year==i, Plot==j)%>%
     group_by(Yearday)%>%
     summarize(raw=sum(NumCaterpillars))
-  plot(x=year_filt$Yearday,y=year_filt$raw, xlab="Yearday", ylab="raw", main=i)
+  plot(x=year_filt$Yearday,y=year_filt$raw, xlab="Yearday", ylab="raw", main=c(i, j))
   
 }
 }
@@ -34,7 +34,7 @@ Phen_BB<-cow_pheno_sum%>%
               values_from=medianGreenup:massRollingPeakDateWindow)%>%
   mutate_if(is.integer,replace_na,0)%>% 
   setnames(old=c( "pctPeakDate_Coweeta - BB", "massPeakDate_Coweeta - BB", "pctRollingPeakDateWindow_Coweeta - BB", "massRollingPeakDateWindow_Coweeta - BB"), new=c( "pct_peak_BB", "mass_peak_BB","pctRolling_BB", "massRolling_BB"))%>%
-  select(c(Year, pct_peak_BB, mass_peak_BB,pctRolling_BB,massRolling_BB))
+  dplyr::select(c(Year, pct_peak_BB, mass_peak_BB,pctRolling_BB,massRolling_BB))
   
 Phen_BS<-cow_pheno_sum%>%
   filter(Year>2009, Name == "Coweeta - BS")%>%
@@ -42,7 +42,7 @@ Phen_BS<-cow_pheno_sum%>%
               values_from=medianGreenup:massRollingPeakDateWindow)%>%
   mutate_if(is.integer,replace_na,0)%>%
   setnames(old=c( "pctPeakDate_Coweeta - BS", "massPeakDate_Coweeta - BS","pctRollingPeakDateWindow_Coweeta - BS", "massRollingPeakDateWindow_Coweeta - BS"), new=c( "pct_peak_BS", "mass_peak_BS","pctRolling_BS", "massRolling_BS"))%>%
-  select(c(Year, pct_peak_BS, mass_peak_BS, pctRolling_BS,massRolling_BS))
+  dplyr::select(c(Year, pct_peak_BS, mass_peak_BS, pctRolling_BS,massRolling_BS))
 
 BB_BS<-merge(Phen_BS, Phen_BB, by="Year")
 Phen_Final<-merge(BB_BS,moth_pheno,by="Year")
@@ -63,7 +63,7 @@ cow_plots<-for (i in 2017){
   foo<-Phen_Final%>%
     filter(Year==i)
   
-table<-meanDensityByWeek(surveyData = cow_filt, plot=TRUE,plotVar = 'meanBiomass',xlab="Julian Week", ylab="Mean Biomass", main="Mean Biomass for Site BB 2017")
+table<-meanDensityByWeek(surveyData = cow_filt, plot=TRUE,plotVar = 'totalCount',xlab="Julian Week", ylab="Weekly Counts", main="Total Counts for Site BB 2017")
 abline(v = foo$mass_peak_BB, col="red", lwd=3, lty=2)
 abline(v = foo$massRolling_BB, col="blue", lwd=3, lty=2)
 
