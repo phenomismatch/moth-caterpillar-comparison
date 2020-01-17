@@ -12,10 +12,14 @@ coweeta<-for ( i in 2010:2018){
    for(j in c("BB","BS")){
   year_filt<-cow_pheno%>%
     filter(Year==i, Plot==j)%>%
-    group_by(Yearday)%>%
+    group_by(Yearday)%>% 
     summarize(raw=sum(NumCaterpillars))
   plot(x=year_filt$Yearday,y=year_filt$raw, xlab="Yearday", ylab="raw", main=c(i, j))
+  foo<-Phen_Final%>%
+    filter(Year==i)
   
+  abline(v = foo$mass_peak_BB, col="red", lwd=4, lty=2)
+  abline(v = foo$massRolling_BB, col="blue", lwd=3, lty=2)
 }
 }
  
@@ -57,18 +61,30 @@ corrplot(phen_mat,type="upper",tl.col="black", tl.srt=45)
 
 
 #Example Plot of Mean Density of Caterpillars for BB 2017
-cow_plots<-for (i in 2017){
+par(mfrow=c(3,3))
+cow_plots<-for (i in 2010:2018){
   cow_filt<-final_cow_set%>%
     filter(Year==i,Name=="Coweeta_BB")
   foo<-Phen_Final%>%
     filter(Year==i)
   
-table<-meanDensityByWeek(surveyData = cow_filt, plot=TRUE,plotVar = 'totalCount',xlab="Julian Week", ylab="Weekly Counts", main="Total Counts for Site BB 2017")
-abline(v = foo$mass_peak_BB, col="red", lwd=3, lty=2)
+table<-meanDensityByWeek(surveyData = cow_filt, plot=TRUE,plotVar = 'totalCount',xlab="Julian Week", ylab="Weekly Counts", main=c(i))
+abline(v = foo$mass_peak_BB, col="red", lwd=4, lty=2)
 abline(v = foo$massRolling_BB, col="blue", lwd=3, lty=2)
 
 }
 legend(x = 165, y=1.6, legend = c("Mean BioMass Peak Date", "BioMass Rolling Window"),lty=c(2,2), col=c(2,4))
+
+cow_plots<-for (i in 2010:2018){
+  cow_filt<-final_cow_set%>%
+    filter(Year==i,Name=="Coweeta_BS")
+  foo<-Phen_Final%>%
+    filter(Year==i)
+  
+  table<-meanDensityByWeek(surveyData = cow_filt, plot=TRUE,plotVar = 'totalCount',xlab="Julian Week", ylab="Weekly Counts", main=c(i))
+  abline(v = foo$mass_peak_BS, col="red", lwd=4, lty=2)
+  abline(v = foo$massRolling_BS, col="blue", lwd=3, lty=2)
+}
 
 
 #Plots of Selected Phenometrics based on correlation matrix

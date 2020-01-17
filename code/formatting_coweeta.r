@@ -68,13 +68,13 @@ branches = count(catplus, Plot, Point, TreeSpecies, Sample) %>%
          Species = paste(substring(TreeSpecies, 1, 1), 
                          gsub("-", " ", tolower(substring(TreeSpecies, 2))), sep = ''),
          Species = gsub("_", " ", Species)) %>%
-  select(Branch, ID, SiteFK, Circle, Orientation, Code, Species)
+  dplyr::select(Branch, ID, SiteFK, Circle, Orientation, Code, Species)
 
 
 # surveys
 
 multSurveyRecs = catplus %>%
-  select(Year, Plot, Yearday, Point, TreeSpecies, Sample, Comments) %>%
+  dplyr::select(Year, Plot, Yearday, Point, TreeSpecies, Sample, Comments) %>%
   distinct() %>%
   count(Year, Plot, Yearday, Point, TreeSpecies, Sample) %>%
   filter(n > 1) %>%
@@ -93,7 +93,7 @@ dups = read.table('data/coweeta_dup_surveys.txt',
 dups019 = filter(dups, n %in% c(0, 1, 9)) %>%
   mutate(Notes = ifelse(n==1, Comments, ""),
          Notes = ifelse(n==9, x, Notes)) %>%
-  select(Year, Plot, Yearday, Point, TreeSpecies, Sample, Notes)
+  dplyr::select(Year, Plot, Yearday, Point, TreeSpecies, Sample, Notes)
 
 # surveys table for Coweeta data; 62097 recs
 
