@@ -1,7 +1,7 @@
 
 
 
-source('C:/git/caterpillars-analysis-public/code/analysis_functions.r')
+source('../caterpillars-analysis-public/code/analysis_functions.r')
 source('code/formatting_coweeta.r')
 
 

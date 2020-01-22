@@ -11,6 +11,9 @@ library(raster)
 library(rgdal)
 library(dggridR)
 library(sf)
+
+source('../caterpillars-analysis-public/code/analysis_functions.r')
+
 # Read in data, clean up leading/trailing spaces, weird symbols
 cats = read.table('data/Coweeta_cats.txt', header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE) %>%
   filter(Plot != "") %>%

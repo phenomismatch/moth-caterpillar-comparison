@@ -3,7 +3,7 @@ library(dplyr)
 library(stringr)
 library(tidyr)
 library(pracma)
-source('C:/git/caterpillars-analysis-public/code/analysis_functions.r')
+source('../caterpillars-analysis-public/code/analysis_functions.r')
 
 
 
@@ -35,9 +35,9 @@ locmax=function(df, dipFromPeak=0.1){
 }
 
 
-moth <- read.table('c:/git/moth-caterpillar-comparison/data/moth-abundance.txt', header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE)%>%
+moth <- read.table('data/moth-abundance.txt', header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE)%>%
   filter(site=='Blue Heron')
-coweeta<- read.table('c:/git/moth-caterpillar-comparison/data/coweeta_cats.txt',header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE)%>%
+coweeta<- read.table('data/coweeta_cats.txt',header = T, sep = '\t', fill = TRUE, stringsAsFactors = FALSE)%>%
   filter(Year>2009)
 #Moth abundance data seems to be clean and complete, has NA's for the morpho species but don't think I need to worry about that.
 #Coweeta data is filtered for 2010 and beyond and each observation has the appropriate amount of leaves (n>40 leaves). 

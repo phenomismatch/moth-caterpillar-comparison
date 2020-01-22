@@ -1,4 +1,3 @@
-source('code/analysis_functions.r')
 source('code/formatting_coweeta.r')
 source('code/Coweeta_threshold_testing.r')
 source('code/moth_abundance.R')
@@ -73,7 +72,7 @@ coweeta<-for ( i in 2010:2018){
 legend(100,30,legend=c("Mass_Peak","Mass_Rolling", "Pct_Rolling"),lty=c(5,4,3),col=c(2,4,3),title="Legend", xpd=NA,cex=.9)
 
 
-
+## NESTED FOR LOOP ACROSS SITE, PLOTVAR (meanBiomass, fracSurveys), AND YEAR
 
 
 #Plots of Mean Density 
@@ -85,7 +84,7 @@ cow_plots<-for (i in 2010:2018){
     filter(Year==i)
   
   
-  table<-meanDensityByWeek(surveyData = cow_filt, plot=TRUE,plotVar = 'meanDensity',xlab="Julian Week", ylab="Mean Density", main=c(i,"BB"))
+  table<-meanDensityByWeek(surveyData = cow_filt, plot=TRUE,plotVar = 'fracSurveys',xlab="Julian Week", ylab="% surveys", main = paste(i,", BB"))
   abline(v = foo$pct_peak_BB, col="yellow", lwd=5, lty=2)
   abline(v = foo$mass_peak_BB, col="red", lwd=4, lty=2)
   abline(v = foo$massRolling_BB, col="blue", lwd=3, lty=2)
