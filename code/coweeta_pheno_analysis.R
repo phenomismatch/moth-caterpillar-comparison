@@ -1,11 +1,11 @@
-source('C:/git/caterpillars-analysis-public/code/analysis_functions.r')
+source('code/analysis_functions.r')
 source('code/formatting_coweeta.r')
-source('C:/git/moth-caterpillar-comparison/code/Coweeta_threshold_testing.r')
-source('C:/git/moth-caterpillar-comparison//code/moth_abundance.R')
+source('code/Coweeta_threshold_testing.r')
+source('code/moth_abundance.R')
 library(corrplot)
 library(gridExtra)
 
-cow_pheno_sum <- read.csv("C:/git/moth-caterpillar-comparison/data/coweeta_phenosummary.csv", header=TRUE)
+cow_pheno_sum <- read.csv("data/coweeta_phenosummary.csv", header=TRUE)
 
 
 #Convert cow_pheno_sum using pivot_wider to get phenometrics for both sites as columns
