@@ -76,7 +76,7 @@ legend(100,30,legend=c("Mass_Peak","Mass_Rolling", "Pct_Rolling"),lty=c(5,4,3),c
 
 
 
-#Plots of Mean Density 
+#Plots
 par(mfrow=c(3,3))
 cow_plots<-for (i in 2010:2018){
   cow_filt<-final_cow_set%>%
