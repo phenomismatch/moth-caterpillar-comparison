@@ -7,73 +7,6 @@ library(gridExtra)
 
 cow_pheno_sum <- read.csv("C:/git/moth-caterpillar-comparison/data/coweeta_phenosummary.csv", header=TRUE)
 
-par(mfrow=c(3,3))
-coweeta<-for ( i in 2010:2018){
-  year_filt<-cow_pheno%>%
-    filter(Year==i, Plot=="BB")%>%
-    group_by(Yearday)%>% 
-    summarize(raw=sum(NumCaterpillars))
-  plot(x=year_filt$Yearday,y=year_filt$raw, xlab="Yearday", ylab="raw", main=c(i,"BB"))
-  foo<-Phen_Final%>%
-    filter(Year==i)
-  
-  abline(v = foo$mass_peak_BB, col="red", lwd=5, lty=2)
-  abline(v = foo$massRolling_BB, col="blue", lwd=4, lty=2)
-  abline(v = foo$pctRolling_BB, col="green", lwd=3, lty=2)
- # abline(v = foo$massRolling_BS, col="yellow", lwd=3, lty=2)
-}
-legend(100,30,legend=c("Mass_Peak","Mass_Rolling", "Pct_Rolling"),lty=c(4,3,2),col=c(2,4,3),title="Legend", xpd=NA,cex=.9)
-
-par(mfrow=c(3,3))
-coweeta<-for ( i in 2010:2018){
-    year_filt<-cow_pheno%>%
-      filter(Year==i, Plot=="BS")%>%
-      group_by(Yearday)%>%
-      summarize(raw=sum(NumCaterpillars))
-    
-    
-    plot(x=year_filt$Yearday,y=year_filt$raw, xlab="Yearday", ylab="raw", main=c(i,j))
-    foo<-Phen_Final%>%
-      filter(Year==i)
-    abline(v = foo$mass_peak_BS, col="red", lwd=5, lty=2)
-    abline(v = foo$massRolling_BS, col="blue", lwd=4, lty=2)
-    abline(v = foo$pctRolling_BS, col="green", lwd=3, lty=2)
-    
-  }
-legend(100,30,legend=c("Mass_Peak","Mass_Rolling", "Pct_Rolling"),lty=c(5,4,3),col=c(2,4,3),title="Legend", xpd=NA,cex=.9)
-
-par(mfrow=c(3,3))
-cow_plots<-for (i in 2010:2018){
-  cow_filt<-final_cow_set%>%
-    filter(Year==i,Name=="Coweeta_BB")
-  foo<-Phen_Final%>%
-    filter(Year==i)
-  
-  table<-meanDensityByWeek(surveyData = cow_filt, plot=TRUE,plotVar = 'meanDensity',xlab="Julian Week", ylab="Weekly Counts", main=c(i,"BB"))
-  abline(v = foo$mass_peak_BB, col="red", lwd=4, lty=2)
-  abline(v = foo$massRolling_BB, col="blue", lwd=3, lty=2)
-  abline(v = foo$pctRolling_BB, col="green", lwd=2, lty=2)
- # abline(v=foo$Moth_50,col="yellow",lwd=5,lty=2)
-  
-}
-#legend(x = 20, y=50, legend = c("Mean BioMass Peak Date", "BioMass Rolling Window"),lty=c(2,2), col=c(2,4))
-legend(100,30,legend=c("Mass_Peak","Mass_Rolling", "Pct_Rolling"),lty=c(4,3,2),col=c(2,4,3),title="Legend", xpd=NA,cex=.9)
-
-
-par(mfrow=c(3,3))
-cow_plots<-for (i in 2010:2018){
-  cow_filt<-final_cow_set%>%
-    filter(Year==i,Name=="Coweeta_BS")
-  foo<-Phen_Final%>%
-    filter(Year==i)
-  
-  table<-meanDensityByWeek(surveyData = cow_filt, plot=TRUE,plotVar = 'meanDensity',xlab="Julian Week", ylab="Weekly Counts", main=c(i,"BS"))
-  abline(v = foo$mass_peak_BS, col="red", lwd=4, lty=2)
-  abline(v = foo$massRolling_BS, col="blue", lwd=3, lty=2)
-  abline(v = foo$pctRolling_BS, col="green", lwd=2, lty=2)
-}
-legend(100,60,legend=c("Mass_Peak","Mass_Rolling", "Pct_Rolling"),lty=c(4,3,2),col=c(2,4,3),title="Legend", xpd=NA,cex=.9)
-
 
 #Convert cow_pheno_sum using pivot_wider to get phenometrics for both sites as columns
 Phen_BB<-cow_pheno_sum%>%
@@ -101,6 +34,83 @@ phen_mat<-round((cor(Phen_Final[2:14], use = 'pairwise.complete.obs' )), 2)
 #Quick visualization of correlation matrix
 corrplot(phen_mat,type="upper",tl.col="black", tl.srt=45)
 
+
+par(mfrow=c(3,3))
+coweeta<-for ( i in 2010:2018){
+  year_filt<-cow_pheno%>%
+    filter(Year==i, Plot=="BB")%>%
+    group_by(Yearday)%>% 
+    summarize(raw=sum(NumCaterpillars))
+  plot(x=year_filt$Yearday,y=year_filt$raw, xlab="Yearday", ylab="raw", main=c(i,"BB"))
+  foo<-Phen_Final%>%
+    filter(Year==i)
+  
+  abline(v = foo$mass_peak_BB, col="red", lwd=5, lty=2)
+  abline(v = foo$massRolling_BB, col="blue", lwd=4, lty=2)
+  abline(v = foo$pctRolling_BB, col="green", lwd=3, lty=2)
+  abline(v = foo$pct_peak_BB, col="yellow", lwd=2, lty=2)
+  
+  # abline(v = foo$massRolling_BS, col="yellow", lwd=3, lty=2)
+}
+legend(100,30,legend=c("Mass_Peak","Mass_Rolling", "Pct_Rolling"),lty=c(4,3,2),col=c(2,4,3),title="Legend", xpd=NA,cex=.9)
+
+par(mfrow=c(3,3))
+coweeta<-for ( i in 2010:2018){
+  year_filt<-cow_pheno%>%
+    filter(Year==i, Plot=="BS")%>%
+    group_by(Yearday)%>%
+    summarize(raw=sum(NumCaterpillars))
+  
+  
+  plot(x=year_filt$Yearday,y=year_filt$raw, xlab="Yearday", ylab="raw", main=c(i,j))
+  foo<-Phen_Final%>%
+    filter(Year==i)
+  abline(v = foo$mass_peak_BS, col="red", lwd=5, lty=2)
+  abline(v = foo$massRolling_BS, col="blue", lwd=4, lty=2)
+  abline(v = foo$pctRolling_BS, col="green", lwd=3, lty=2)
+  abline(v = foo$pct_peak_BS, col="yellow", lwd=2, lty=2)
+}
+legend(100,30,legend=c("Mass_Peak","Mass_Rolling", "Pct_Rolling"),lty=c(5,4,3),col=c(2,4,3),title="Legend", xpd=NA,cex=.9)
+
+
+
+
+
+#Plots of Mean Density 
+par(mfrow=c(3,3))
+cow_plots<-for (i in 2010:2018){
+  cow_filt<-final_cow_set%>%
+    filter(Year==i,Name=="Coweeta_BB")
+  foo<-Phen_Final%>%
+    filter(Year==i)
+  
+  
+  table<-meanDensityByWeek(surveyData = cow_filt, plot=TRUE,plotVar = 'meanDensity',xlab="Julian Week", ylab="Mean Density", main=c(i,"BB"))
+  abline(v = foo$pct_peak_BB, col="yellow", lwd=5, lty=2)
+  abline(v = foo$mass_peak_BB, col="red", lwd=4, lty=2)
+  abline(v = foo$massRolling_BB, col="blue", lwd=3, lty=2)
+  abline(v = foo$pctRolling_BB, col="green", lwd=2, lty=2)
+  # abline(v=foo$Moth_50,col="yellow",lwd=5,lty=2)
+  
+}
+#legend(x = 20, y=50, legend = c("Mean BioMass Peak Date", "BioMass Rolling Window"),lty=c(2,2), col=c(2,4))
+legend("bottomright",legend=c("Mass_Peak","Mass_Rolling", "Pct_Rolling", "Pct_Peak"),lty=c(4,3,2, 5),col=c(2,4,3,7),title="Legend", xpd=NA,cex=.9)
+
+
+par(mfrow=c(3,3))
+cow_plots<-for (i in 2010:2018){
+  cow_filt<-final_cow_set%>%
+    filter(Year==i,Name=="Coweeta_BS")
+  foo<-Phen_Final%>%
+    filter(Year==i)
+  
+  table<-meanDensityByWeek(surveyData = cow_filt, plot=TRUE,plotVar = 'meanDensity',xlab="Julian Week", ylab="Mean Density", main=c(i,"BS"))
+  abline(v = foo$pct_peak_BS, col="yellow", lwd=5, lty=2) 
+  abline(v = foo$mass_peak_BS, col="red", lwd=4, lty=2)
+  abline(v = foo$massRolling_BS, col="blue", lwd=3, lty=2)
+  abline(v = foo$pctRolling_BS, col="green", lwd=2, lty=2)
+}
+legend("bottomright",legend=c("Mass_Peak","Mass_Rolling", "Pct_Rolling", "Pct_Peak"),lty=c(4,3,2, 5),col=c(2,4,3, 7),title="Legend", xpd=NA,cex=.9)
 
 
 
