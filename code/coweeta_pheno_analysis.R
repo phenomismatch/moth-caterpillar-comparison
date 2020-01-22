@@ -1,11 +1,10 @@
-source('C:/git/caterpillars-analysis-public/code/analysis_functions.r')
 source('code/formatting_coweeta.r')
-source('C:/git/moth-caterpillar-comparison/code/Coweeta_threshold_testing.r')
-source('C:/git/moth-caterpillar-comparison//code/moth_abundance.R')
+source('code/Coweeta_threshold_testing.r')
+source('code/moth_abundance.R')
 library(corrplot)
 library(gridExtra)
 
-cow_pheno_sum <- read.csv("C:/git/moth-caterpillar-comparison/data/coweeta_phenosummary.csv", header=TRUE)
+cow_pheno_sum <- read.csv("data/coweeta_phenosummary.csv", header=TRUE)
 
 
 #Convert cow_pheno_sum using pivot_wider to get phenometrics for both sites as columns
@@ -73,7 +72,7 @@ coweeta<-for ( i in 2010:2018){
 legend(100,30,legend=c("Mass_Peak","Mass_Rolling", "Pct_Rolling"),lty=c(5,4,3),col=c(2,4,3),title="Legend", xpd=NA,cex=.9)
 
 
-
+## NESTED FOR LOOP ACROSS SITE, PLOTVAR (meanBiomass, fracSurveys), AND YEAR
 
 
 #Plots
@@ -85,7 +84,7 @@ cow_plots<-for (i in 2010:2018){
     filter(Year==i)
   
   
-  table<-meanDensityByWeek(surveyData = cow_filt, plot=TRUE,plotVar = 'meanDensity',xlab="Julian Week", ylab="Mean Density", main=c(i,"BB"))
+  table<-meanDensityByWeek(surveyData = cow_filt, plot=TRUE,plotVar = 'fracSurveys',xlab="Julian Week", ylab="% surveys", main = paste(i,", BB"))
   abline(v = foo$pct_peak_BB, col="yellow", lwd=5, lty=2)
   abline(v = foo$mass_peak_BB, col="red", lwd=4, lty=2)
   abline(v = foo$massRolling_BB, col="blue", lwd=3, lty=2)
