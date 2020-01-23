@@ -162,7 +162,7 @@ for(i in 2010:2018){
 moth_pheno<-bind_rows(cont)
 names(moth_pheno)<-c("Moth_Peak_1", "Moth_Peak_2", "Moth_10%", "Moth_50", "Moth_Half_Peak","Year")
 
-
+write.table(moth_pheno, "moth_pheno.txt", sep='\t',row.names=F)
 title("Mean Density of Moths over Lunar Phases",outer=TRUE,line=-1)
 legend(280,300,legend=c("Pre New Moon","Post New Moon","10%","50%", "Half of Max", "Peak 1", "Peak 2"),pch=c(1,1,NA,NA,NA,NA,NA),lty=c(NA,NA,2,2,2,2,2),col=c(3,4,2,4,3, 1, 7),title="Legend", xpd=NA,cex=.9)
 
