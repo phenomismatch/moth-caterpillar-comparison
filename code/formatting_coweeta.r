@@ -218,6 +218,7 @@ sites$medianGreenup = round(raster::extract(greenup, sites[, c('Longitude', 'Lat
     mutate(julianweek=7*floor((julianday)/7)+4)%>% 
     mutate(site="Coweeta", foo=substring(Branch,0,2))%>%
     unite(Name, site:foo,remove=TRUE,sep="_")%>%
+    mutate(Plot=substring(Branch, 0, 2))%>%
     left_join(sites,by=c('Name'='Site'))
 
 write.table(final_cow_set,"Coweeta_Filtered.txt", sep='\t',row.names=F)

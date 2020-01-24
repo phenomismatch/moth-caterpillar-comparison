@@ -70,7 +70,7 @@ for(i in 2010:2019){
     mutate(New.moon=replace(New.moon,New.moon==FALSE,0))%>%
     group_by(year,Lunar.Cycle=cumsum(New.moon)+1)%>%
     mutate(Lunar.Days=row_number())%>%
-    dplyr::select(c(days.past.new.moon,New.moon,Lunar.Cycle,Lunar.Days))
+    dplyr::select(c(days.past.new.moon,New.moon,Lunar.Cycle,Lunar.Days, year))
   dfs[[i]]<-moth_lunar
 }
 final_lunar<-bind_rows(dfs)

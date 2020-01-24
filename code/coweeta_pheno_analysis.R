@@ -33,8 +33,9 @@ Phen_Final<-merge(BB_BS,moth_pheno,by="Year")
 phen_mat<-round((cor(Phen_Final[2:14], use = 'pairwise.complete.obs' )), 2)
 
 #Quick visualization of correlation matrix
+pdf("Correlation_Matrix")
 corrplot(phen_mat,type="upper",tl.col="black", tl.srt=45)
-
+dev.off()
 
 par(mfrow=c(3,3))
 coweeta<-for ( i in 2010:2018){
@@ -78,24 +79,30 @@ legend(100,30,legend=c("Mass_Peak","Mass_Rolling", "Pct_Rolling"),lty=c(5,4,3),c
 
 
 #Plots
+pdf("Coweeta_Mean_Density")
 par(mfrow=c(3,3))
 for (var in c("meanBiomass", "fracSurveys")){
-  for(j in c("Coweeta_BB", "Coweeta_BS")){
+  for(j in c("BB", "BS")){
     for ( i in 2010:2018){
       cow_filt<-cow_dat%>%
-        filter(Year==i, Name==j)
+        filter(Year==i, Plot==j)
       foo<-Phen_Final%>%
-        filter(Year==i)
-      
+        filter(Year==i)%>%
+        dplyr::select(contains(j))
+        
       table<-meanDensityByWeek(surveyData=cow_filt, plot=TRUE, plotVar=var, xlab="Julian Week", ylab= var, main = paste(i,j) )
-      abline(v = foo$pct_peak_BB, col="yellow", lwd=5, lty=2)
-      abline(v = foo$mass_peak_BB, col="red", lwd=4, lty=2)
-      abline(v = foo$massRolling_BB, col="blue", lwd=3, lty=2)
-      abline(v = foo$pctRolling_BB, col="green", lwd=2, lty=2)    
+      abline(v = foo[1], col="yellow", lwd=5, lty=2)
+      abline(v = foo[2], col="red", lwd=4, lty=2)
+      abline(v = foo[3], col="blue", lwd=3, lty=2)
+      abline(v = foo[4], col="green", lwd=2, lty=2)    
       }
   }
-  
 }
+dev.off()
+
+
+
+
 par(mfrow=c(3,3))
 cow_plots<-for (i in 2010:2018){
   cow_filt<-final_cow_set%>%
@@ -303,7 +310,9 @@ plot(x=cow_thresh$Yearday,y=cow_thresh$PropSurv, main=i,sub=j, xlab="Yearday", y
 
 
 #PhenoSummary function with medianGreenup date set to NA, otherwise errors showed up 
-
+test<-cow_dat%>%
+  filter(Year==2011, Plot=="BB")
+foo<-phenoSummary(test)
 phenoSummary = function(fullDataset, # fullDataset format
                         postGreenupBeg = 40,     # number of days post-greenup marking the beginning of the time window
                         postGreenupEnd = 75,     # number of days post-greenup marking the end of the time window
