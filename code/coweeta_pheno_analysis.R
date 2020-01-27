@@ -108,6 +108,8 @@ for (var in c("meanBiomass", "fracSurveys")){
       }
   }
 }
+legend("bottomright",legend=c("Mass_Peak","Mass_Rolling", "Pct_Rolling", "Pct_Peak"),lty=c(4,3,2, 5),col=c(2,4,3,7),title="Legend", xpd=NA,cex=.9)
+
 dev.off()
 
 
