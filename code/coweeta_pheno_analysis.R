@@ -1,6 +1,16 @@
 source('code/formatting_coweeta.r')
 source('code/Coweeta_threshold_testing.r')
-source('code/moth_abundance.R')
+
+library(dplyr)
+library(stringr)
+library(tidyr)
+library(ggplot2)
+library(gridExtra)
+library(lubridate)
+library(raster)
+library(rgdal)
+library(dggridR)
+library(sf)
 library(corrplot)
 library(gridExtra)
 
