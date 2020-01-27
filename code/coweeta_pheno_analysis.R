@@ -18,23 +18,26 @@ cow_dat<-read.table("data/Coweeta_Filtered.txt",header=TRUE)
 moth_pheno<-read.table("data/moth_pheno.txt",header=TRUE)
 cow_pheno_sum <- read.csv("data/coweeta_phenosummary.csv", header=TRUE)
 
+test<-cow_pheno_sum%>%
+  filter(Year==2010, Name=="Coweeta - BB")
 
 #Convert cow_pheno_sum using pivot_wider to get phenometrics for both sites as columns
-Phen_BB<-cow_pheno_sum%>%
-  filter(Year>2009, Name == "Coweeta - BB")%>%
+Phen_BB<-new%>%
+  filter(Year>2009, Name == "Coweeta_BB")%>%
   pivot_wider(names_from=Name,
               values_from=medianGreenup:massRollingPeakDateWindow)%>%
   mutate_if(is.integer,replace_na,0)%>% 
-  setnames(old=c( "pctPeakDate_Coweeta - BB", "massPeakDate_Coweeta - BB", "pctRollingPeakDateWindow_Coweeta - BB", "massRollingPeakDateWindow_Coweeta - BB"), new=c( "pct_peak_BB", "mass_peak_BB","pctRolling_BB", "massRolling_BB"))%>%
+  dplyr::select(c(Year,pctPeakDate_Coweeta_BB,massPeakDate_Coweeta_BB,pctRollingPeakDateWindow_Coweeta_BB, massRollingPeakDateWindow_Coweeta_BB))
+ # setnames(old=c( "pctPeakDate_Coweeta - BB", "massPeakDate_Coweeta - BB", "pctRollingPeakDateWindow_Coweeta - BB", "massRollingPeakDateWindow_Coweeta - BB"), new=c( "pct_peak_BB", "mass_peak_BB","pctRolling_BB", "massRolling_BB"))%>%
   dplyr::select(c(Year, pct_peak_BB, mass_peak_BB,pctRolling_BB,massRolling_BB))
   
-Phen_BS<-cow_pheno_sum%>%
-  filter(Year>2009, Name == "Coweeta - BS")%>%
+Phen_BS<-new%>%
+  filter(Year>2009, Name == "Coweeta_BS")%>%
   pivot_wider(names_from=Name,
               values_from=medianGreenup:massRollingPeakDateWindow)%>%
   mutate_if(is.integer,replace_na,0)%>%
-  setnames(old=c( "pctPeakDate_Coweeta - BS", "massPeakDate_Coweeta - BS","pctRollingPeakDateWindow_Coweeta - BS", "massRollingPeakDateWindow_Coweeta - BS"), new=c( "pct_peak_BS", "mass_peak_BS","pctRolling_BS", "massRolling_BS"))%>%
-  dplyr::select(c(Year, pct_peak_BS, mass_peak_BS, pctRolling_BS,massRolling_BS))
+  dplyr::select(c(Year,pctPeakDate_Coweeta_BS,massPeakDate_Coweeta_BS,pctRollingPeakDateWindow_Coweeta_BS, massRollingPeakDateWindow_Coweeta_BS))
+dplyr::select(c(Year, pct_peak_BS, mass_peak_BS, pctRolling_BS,massRolling_BS))
 
 BB_BS<-merge(Phen_BS, Phen_BB, by="Year")
 Phen_Final<-merge(BB_BS,moth_pheno,by="Year")
@@ -89,7 +92,7 @@ legend(100,30,legend=c("Mass_Peak","Mass_Rolling", "Pct_Rolling"),lty=c(5,4,3),c
 
 
 #Plots
-pdf("Coweeta_Mean_Density")
+pdf("Coweeta_Mean_Density_Plots")
 par(mfrow=c(3,3))
 for (var in c("meanBiomass", "fracSurveys")){
   for(j in c("BB", "BS")){
@@ -322,15 +325,19 @@ plot(x=cow_thresh$Yearday,y=cow_thresh$PropSurv, main=i,sub=j, xlab="Yearday", y
 
 
 #PhenoSummary function with medianGreenup date set to NA, otherwise errors showed up 
-test<-cow_dat%>%
-  filter(Year==2011, Plot=="BB")
-foo<-phenoSummary(test)
+test<-cow_dat
+new<-phenoSummary(test,  postGreenupBeg = 40,     # number of days post-greenup marking the beginning of the time window
+                  postGreenupEnd = 75,     # number of days post-greenup marking the end of the time window
+                  fullWindowBeg = 135,     # julian day of the beginning of a specified time window (default May 15)
+                  fullWindowEnd = 212,     # julian day of the end of a specified time window (default July 31)
+                  minNumWeeks = 0)
+
 phenoSummary = function(fullDataset, # fullDataset format
                         postGreenupBeg = 40,     # number of days post-greenup marking the beginning of the time window
                         postGreenupEnd = 75,     # number of days post-greenup marking the end of the time window
                         fullWindowBeg = 135,     # julian day of the beginning of a specified time window (default May 15)
                         fullWindowEnd = 212,     # julian day of the end of a specified time window (default July 31)
-                        minNumWeeks = 0,         # minimum number of weeks of survey data to calculate pheno summaries
+                        minNumWeeks = 5,         # minimum number of weeks of survey data to calculate pheno summaries
                         ...) {
   
   years = unique(fullDataset$Year)
@@ -348,7 +355,7 @@ phenoSummary = function(fullDataset, # fullDataset format
     for (site in uniqueSites) {
       siteYearFilteredDataset = dplyr::filter(yearFilteredDataset, Name==site)
       
-      pheno = meanDensityByWeek(siteYearFilteredDataset, allDates = FALSE, plot = FALSE,  ...)
+      pheno = meanDensityByWeek(siteYearFilteredDataset, allDates = TRUE, plot = FALSE, ...)
       
       if (nrow(pheno) >= minNumWeeks) {
         
@@ -362,7 +369,7 @@ phenoSummary = function(fullDataset, # fullDataset format
           summarize(# mean for the month of July
             Name = site,
             Year = y,
-            medianGreenup = NA,
+            medianGreenup = greenup,
             minJulianWeek = min(julianweek),
             maxJulianWeek = max(julianweek),
             totalSurveys = sum(nSurveys),
