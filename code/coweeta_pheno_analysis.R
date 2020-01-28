@@ -16,28 +16,28 @@ library(gridExtra)
 
 cow_dat<-read.table("data/Coweeta_Filtered.txt",header=TRUE)
 moth_pheno<-read.table("data/moth_pheno.txt",header=TRUE)
-cow_pheno_sum <- read.csv("data/coweeta_phenosummary.csv", header=TRUE)
+cow_pheno_sum<-read.table("data/Coweeta_Phenometrics.txt", header=TRUE)
 
-test<-cow_pheno_sum%>%
-  filter(Year==2010, Name=="Coweeta - BB")
 
 #Convert cow_pheno_sum using pivot_wider to get phenometrics for both sites as columns
-Phen_BB<-new%>%
+Phen_BB<-cow_pheno_sum%>%
   filter(Year>2009, Name == "Coweeta_BB")%>%
   pivot_wider(names_from=Name,
               values_from=medianGreenup:massRollingPeakDateWindow)%>%
   mutate_if(is.integer,replace_na,0)%>% 
-  dplyr::select(c(Year,pctPeakDate_Coweeta_BB,massPeakDate_Coweeta_BB,pctRollingPeakDateWindow_Coweeta_BB, massRollingPeakDateWindow_Coweeta_BB))
- # setnames(old=c( "pctPeakDate_Coweeta - BB", "massPeakDate_Coweeta - BB", "pctRollingPeakDateWindow_Coweeta - BB", "massRollingPeakDateWindow_Coweeta - BB"), new=c( "pct_peak_BB", "mass_peak_BB","pctRolling_BB", "massRolling_BB"))%>%
+  dplyr::select(c(Year,pctPeakDate_Coweeta_BB,massPeakDate_Coweeta_BB,pctRollingPeakDateWindow_Coweeta_BB, massRollingPeakDateWindow_Coweeta_BB))%>%
+  setnames(old=c( "pctPeakDate_Coweeta_BB", "massPeakDate_Coweeta_BB", "pctRollingPeakDateWindow_Coweeta_BB", "massRollingPeakDateWindow_Coweeta_BB"), new=c( "pct_peak_BB", "mass_peak_BB","pctRolling_BB", "massRolling_BB"))
   dplyr::select(c(Year, pct_peak_BB, mass_peak_BB,pctRolling_BB,massRolling_BB))
   
-Phen_BS<-new%>%
+Phen_BS<-cow_pheno_sum%>%
   filter(Year>2009, Name == "Coweeta_BS")%>%
   pivot_wider(names_from=Name,
               values_from=medianGreenup:massRollingPeakDateWindow)%>%
   mutate_if(is.integer,replace_na,0)%>%
-  dplyr::select(c(Year,pctPeakDate_Coweeta_BS,massPeakDate_Coweeta_BS,pctRollingPeakDateWindow_Coweeta_BS, massRollingPeakDateWindow_Coweeta_BS))
-dplyr::select(c(Year, pct_peak_BS, mass_peak_BS, pctRolling_BS,massRolling_BS))
+  dplyr::select(c(Year,pctPeakDate_Coweeta_BS,massPeakDate_Coweeta_BS,pctRollingPeakDateWindow_Coweeta_BS, massRollingPeakDateWindow_Coweeta_BS))%>%
+  setnames(old=c( "pctPeakDate_Coweeta_BS", "massPeakDate_Coweeta_BS", "pctRollingPeakDateWindow_Coweeta_BS", "massRollingPeakDateWindow_Coweeta_BS"), new=c( "pct_peak_BS", "mass_peak_BS","pctRolling_BS", "massRolling_BS"))
+
+
 
 BB_BS<-merge(Phen_BS, Phen_BB, by="Year")
 Phen_Final<-merge(BB_BS,moth_pheno,by="Year")
@@ -118,42 +118,6 @@ dev.off()
 
 
 
-par(mfrow=c(3,3))
-cow_plots<-for (i in 2010:2018){
-  cow_filt<-final_cow_set%>%
-    filter(Year==i,Name=="Coweeta_BB")
-  foo<-Phen_Final%>%
-    filter(Year==i)
-  
-  
-  table<-meanDensityByWeek(surveyData = cow_filt, plot=TRUE,plotVar = 'fracSurveys',xlab="Julian Week", ylab="% surveys", main = paste(i,", BB"))
-  abline(v = foo$pct_peak_BB, col="yellow", lwd=5, lty=2)
-  abline(v = foo$mass_peak_BB, col="red", lwd=4, lty=2)
-  abline(v = foo$massRolling_BB, col="blue", lwd=3, lty=2)
-  abline(v = foo$pctRolling_BB, col="green", lwd=2, lty=2)
-  # abline(v=foo$Moth_50,col="yellow",lwd=5,lty=2)
-  
-}
-#legend(x = 20, y=50, legend = c("Mean BioMass Peak Date", "BioMass Rolling Window"),lty=c(2,2), col=c(2,4))
-legend("bottomright",legend=c("Mass_Peak","Mass_Rolling", "Pct_Rolling", "Pct_Peak"),lty=c(4,3,2, 5),col=c(2,4,3,7),title="Legend", xpd=NA,cex=.9)
-
-
-par(mfrow=c(3,3))
-cow_plots<-for (i in 2010:2018){
-  cow_filt<-final_cow_set%>%
-    filter(Year==i,Name=="Coweeta_BS")
-  foo<-Phen_Final%>%
-    filter(Year==i)
-  
-  table<-meanDensityByWeek(surveyData = cow_filt, plot=TRUE,plotVar = 'meanDensity',xlab="Julian Week", ylab="Mean Density", main=c(i,"BS"))
-  abline(v = foo$pct_peak_BS, col="yellow", lwd=5, lty=2) 
-  abline(v = foo$mass_peak_BS, col="red", lwd=4, lty=2)
-  abline(v = foo$massRolling_BS, col="blue", lwd=3, lty=2)
-  abline(v = foo$pctRolling_BS, col="green", lwd=2, lty=2)
-}
-legend("bottomright",legend=c("Mass_Peak","Mass_Rolling", "Pct_Rolling", "Pct_Peak"),lty=c(4,3,2, 5),col=c(2,4,3, 7),title="Legend", xpd=NA,cex=.9)
-
-
 
 #Example Plot of Mean Density of Caterpillars for BB 2017
 par(mfrow=c(3,3))
@@ -184,23 +148,23 @@ cow_plots<-for (i in 2010:2018){
 
 #Plots of Selected Phenometrics based on correlation matrix
 par(mfrow=c(2,2))
-
-plot(x=Phen_Final$`Moth_10%`, y=Phen_Final$massRolling_BS, main="mean Biomass (rolling) BS vs. Moth 10%", xlab="Moth 10% Date (Julian Day)", ylab="Mean Biomass Rolling Window BS")
-plotfit<-lm(Phen_Final$massRolling_BS~Phen_Final$`Moth_10%`)
+plot(x=Phen_Final$Moth_10., y=Phen_Final$mass_peak_BS, main="mean Biomass (rolling) BS vs. Moth 10%", xlab="Moth 10% Date (Julian Day)", ylab="Mean Biomass Rolling Window BS")
+plotfit<-lm(Phen_Final$massRolling_BS~Phen_Final$Moth_10.)
 square<-summary(plotfit)$r.squared
-abline(-143.93, 3.94)
+abline(coef(plotfit)["(Intercept)"], coef(plotfit)["Phen_Final$Moth_10."])
 legend("topleft",bty="n",legend=paste("R^2=",square))
 
-plot(x=Phen_Final$`Moth_50`, y=Phen_Final$massRolling_BS,main="mean Biomass (rolling) BS vs. Moth 50%  ", xlab="Moth 50% Date (Julian Day)", ylab="Mean Biomass Rolling Window BS")
+
+plot(x=Phen_Final$Moth_50, y=Phen_Final$massRolling_BS,main="mean Biomass (rolling) BS vs. Moth 50%  ", xlab="Moth 50% Date (Julian Day)", ylab="Mean Biomass Rolling Window BS")
 plotfit<-lm(Phen_Final$massRolling_BS~Phen_Final$`Moth_50`)
 square<-summary(plotfit)$r.squared
-abline(-635.273,3.645)
+abline(coef(plotfit)["(Intercept)"], coef(plotfit)["Phen_Final$`Moth_50`"])
 legend("topleft",bty="n",legend=paste("R^2=",square))
 
-plot(x=Phen_Final$`Moth_10%`, y=Phen_Final$pct_peak_BS,main="pct Peak Date BS vs. Moth 10%", xlab="Moth 10% Date (Julian Day)", ylab="pct Peak Date BS")
+plot(x=Phen_Final$Moth_10., y=Phen_Final$pct_peak_BS,main="pct Peak Date BS vs. Moth 10%", xlab="Moth 10% Date (Julian Day)", ylab="pct Peak Date BS")
 plotfit<-lm(pct_peak_BS~`Moth_10%`, data=Phen_Final)
 square<-summary(plotfit)$r.squared
-abline(191.26,-0.63)
+abline(coef(plotfit)["(Intercept)"], coef(plotfit)["Phen_Final$`Moth_50`"])
 legend("topleft",bty="n",legend=paste("R^2=",square))
 
 plot(x=Phen_Final$Moth_Half_Peak, y=Phen_Final$pct_peak_BS. , main = "pct Peak Date BS vs. Moth Half Peak", xlab="Moth Half Peak Date (Julian Day)", ylab="pct Peak Date BS")
@@ -209,7 +173,7 @@ square<-summary(plotfit)$r.squared
 abline(178.057, -0.2519)
 legend("topleft",bty="n",legend=paste("R^2=",square))
 
-plot(x=Phen_Final$`Moth_10%`, y=Phen_Final$massRolling_BS,main = "pctRollingBS vs. Moth 10%", xlab="Moth 10% Date", ylab="pct Peak Date Rolling BS")
+plot(x=Phen_Final$Moth_10., y=Phen_Final$massRolling_BS,main = "pctRollingBS vs. Moth 10%", xlab="Moth 10% Date", ylab="pct Peak Date Rolling BS")
 lm(Phen_Final$massRolling_BS~Phen_Final$`Moth_10%`)
 square<-summary(plotfit)$r.squared
 abline(-143.93, 3.94)

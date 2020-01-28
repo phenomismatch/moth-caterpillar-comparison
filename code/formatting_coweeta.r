@@ -221,6 +221,109 @@ sites$medianGreenup = round(raster::extract(greenup, sites[, c('Longitude', 'Lat
     mutate(Plot=substring(Branch, 0, 2))%>%
     left_join(sites,by=c('Name'='Site'))
 
+  
+  updatedphenosum = function(fullDataset, # fullDataset format
+                          postGreenupBeg = 40,     # number of days post-greenup marking the beginning of the time window
+                          postGreenupEnd = 75,     # number of days post-greenup marking the end of the time window
+                          fullWindowBeg = 135,     # julian day of the beginning of a specified time window (default May 15)
+                          fullWindowEnd = 212,     # julian day of the end of a specified time window (default July 31)
+                          minNumWeeks = 5,         # minimum number of weeks of survey data to calculate pheno summaries
+                          ...) {
+    
+    years = unique(fullDataset$Year)
+    output = data.frame(Name = NA, Year = NA, medianGreenup = NA, minJulianWeek = NA, maxJulianWeek = NA, totalSurveys = NA,
+                        numGoodWeeks = NA, numWeeksPostSolsticeWindow = NA, numWeeksPostGreenupWindow = NA, 
+                        pctSolstice = NA, densSolstice = NA, massSolstice= NA, pctPostGU = NA, densPostGU = NA, massPostGU = NA,
+                        pctPeakDate = NA, densPeakDate = NA, massPeakDate = NA, pctPeakDateWindow = NA, densPeakDateWindow = NA,
+                        massPeakDateWindow = NA, pctPeakDateGreenupWindow = NA, densPeakDateGreenupWindow = NA, 
+                        massPeakDateGreenupWindow = NA, pctRollingPeakDateWindow = NA, densRollingPeakDateWindow = NA, massRollingPeakDateWindow = NA)
+    
+    for (y in years) {
+      yearFilteredDataset = dplyr::filter(fullDataset, Year == y)
+      uniqueSites = unique(yearFilteredDataset$Name)
+      
+      for (site in uniqueSites) {
+        siteYearFilteredDataset = dplyr::filter(yearFilteredDataset, Name==site)
+        
+        pheno = meanDensityByWeek(siteYearFilteredDataset, allDates = TRUE, plot = FALSE, ...)
+        
+        if (nrow(pheno) >= minNumWeeks) {
+          
+          greenup = siteYearFilteredDataset$medianGreenup[1]
+          
+          siteoutput = pheno %>%
+            # calculate 3-week rolling averages
+            mutate(rollingPct = frollmean(fracSurveys, 3, align = "center"),
+                   rollingDensity = frollmean(meanDensity, 3, align = "center"),
+                   rollingBiomass = frollmean(meanBiomass, 3, align = "center")) %>%
+            summarize(# mean for the month of July
+              Name = site,
+              Year = y,
+              medianGreenup = greenup,
+              minJulianWeek = min(julianweek),
+              maxJulianWeek = max(julianweek),
+              totalSurveys = sum(nSurveys),
+              numGoodWeeks = sum(okWeek == 1),
+              numWeeksPostSolsticeWindow = sum(okWeek[julianweek >= 172 & julianweek <= 202] == 1),
+              numWeeksPostGreenupWindow = sum(okWeek[julianweek >= (greenup + postGreenupBeg) & julianweek <= (greenup + postGreenupEnd)] == 1),
+              pctSolstice = ifelse(sum(julianweek >= 172 & julianweek <= 202) > 0, 
+                                   mean(fracSurveys[julianweek >= 172 & julianweek <= 202], na.rm = TRUE), NA),
+              densSolstice = ifelse(sum(julianweek >= 172 & julianweek <= 202) > 0, 
+                                    mean(meanDensity[julianweek >= 172 & julianweek <= 202], na.rm = TRUE), NA),
+              massSolstice = ifelse(sum(julianweek >= 172 & julianweek <= 202) > 0, 
+                                    mean(meanBiomass[julianweek >= 172 & julianweek <= 202], na.rm = TRUE), NA),
+              # mean for the post-greenup window specified
+              pctPostGU = ifelse(sum(julianweek >= (greenup + postGreenupBeg) & julianweek <= (greenup + postGreenupEnd)) > 0, 
+                                 mean(fracSurveys[julianweek >= (greenup + postGreenupBeg) & julianweek <= (greenup + postGreenupEnd)], na.rm = TRUE), NA),
+              densPostGU = ifelse(sum(julianweek >= (greenup + postGreenupBeg) & julianweek <= (greenup + postGreenupEnd)) > 0, 
+                                  mean(meanDensity[julianweek >= (greenup + postGreenupBeg) & julianweek <= (greenup + postGreenupEnd)], na.rm = TRUE), NA),
+              massPostGU = ifelse(sum(julianweek >= (greenup + postGreenupBeg) & julianweek <= (greenup + postGreenupEnd)) > 0, 
+                                  mean(meanBiomass[julianweek >= (greenup + postGreenupBeg) & julianweek <= (greenup + postGreenupEnd)], na.rm = TRUE), NA),
+              # peak date of the time-series unconstrained
+              pctPeakDate = ifelse(sum(totalCount) == 0, NA, 
+                                   julianweek[fracSurveys == max(fracSurveys, na.rm = TRUE)][1]),
+              densPeakDate = ifelse(sum(totalCount) == 0, NA, 
+                                    julianweek[meanDensity == max(meanDensity, na.rm = TRUE)][1]),
+              massPeakDate = ifelse(sum(totalCount) == 0, NA, 
+                                    julianweek[meanBiomass == max(meanBiomass, na.rm = TRUE)][1]),
+              # peak date within a specified, hard-coded window; [1] selects the 1st date if multiple dates have the same peak value
+              pctPeakDateWindow = ifelse(sum(totalCount) == 0, NA, 
+                                         julianweek[fracSurveys == max(fracSurveys[julianweek >= fullWindowBeg & julianweek <= fullWindowEnd], na.rm = TRUE)][1]),
+              densPeakDateWindow = ifelse(sum(totalCount) == 0, NA, 
+                                          julianweek[meanDensity == max(meanDensity[julianweek >= fullWindowBeg & julianweek <= fullWindowEnd], na.rm = TRUE)][1]),
+              massPeakDateWindow = ifelse(sum(totalCount) == 0, NA, 
+                                          julianweek[meanBiomass == max(meanBiomass[julianweek >= fullWindowBeg & julianweek <= fullWindowEnd], na.rm = TRUE)][1]),
+              # peak date between the beginning of the post-greenup window and the end of July; [1] selects the 1st date if multiple dates have the same peak value
+              pctPeakDateGreenupWindow = ifelse(sum(totalCount) == 0, NA, 
+                                                julianweek[fracSurveys == max(fracSurveys[julianweek >= (greenup + postGreenupBeg) & julianweek <= 212], na.rm = TRUE)][1]),
+              densPeakDateGreenupWindow = ifelse(sum(totalCount) == 0, NA, 
+                                                 julianweek[meanDensity == max(meanDensity[julianweek >= (greenup + postGreenupBeg) & julianweek <= 212], na.rm = TRUE)][1]),
+              massPeakDateGreenupWindow = ifelse(sum(totalCount) == 0, NA, 
+                                                 julianweek[meanBiomass == max(meanBiomass[julianweek >= (greenup + postGreenupBeg) & julianweek <= 212], na.rm = TRUE)][1]),
+              # peak date for the 3-week rolling average between the beginning of the post-greenup window and the end of July;
+              #    -1 at the end to select the middle (rather than end) of the 3-week window
+              pctRollingPeakDateWindow = ifelse(sum(totalCount) == 0, NA, 
+                                                julianweek[which(rollingPct == max(rollingPct[julianweek >= fullWindowBeg & julianweek <= fullWindowEnd], na.rm = TRUE))][1]),
+              densRollingPeakDateWindow = ifelse(sum(totalCount) == 0, NA, 
+                                                 julianweek[which(rollingDensity == max(rollingDensity[julianweek >= fullWindowBeg & julianweek <= fullWindowEnd], na.rm = TRUE))][1]),
+              massRollingPeakDateWindow = ifelse(sum(totalCount) == 0, NA, 
+                                                 julianweek[which(rollingBiomass == max(rollingBiomass[julianweek >= fullWindowBeg & julianweek <= fullWindowEnd], na.rm = TRUE))][1]))
+          
+          output = rbind(output, siteoutput)        
+        }
+      } # end site
+    } # end year
+    out = output[-1, ]
+    out[is.na(out)] = NA # converts NaN's to NA's
+    return(output[-1, ])
+    
+  }
+  phenometrics<-updatedphenosum(final_cow_set,  postGreenupBeg = 40,     # number of days post-greenup marking the beginning of the time window
+                    postGreenupEnd = 75,     # number of days post-greenup marking the end of the time window
+                    fullWindowBeg = 135,     # julian day of the beginning of a specified time window (default May 15)
+                    fullWindowEnd = 212,     # julian day of the end of a specified time window (default July 31)
+                    minNumWeeks = 0)
+write.table(phenometrics, "Coweeta_Phenometrics.txt", row.names=F, sep="\t", quote=FALSE)
 write.table(final_cow_set,"Coweeta_Filtered.txt", sep='\t',row.names=F)
 
   
