@@ -18,6 +18,12 @@ cow_dat<-read.table("data/Coweeta_Filtered.txt",header=TRUE)
 moth_pheno<-read.table("data/moth_pheno.txt",header=TRUE)
 cow_pheno_sum<-read.table("data/Coweeta_Phenometrics.txt", header=TRUE)
 
+# Visualize basic summaries of survey effort
+cow_survs = final_cow_set %>% distinct(LocalDate, Year, PlantFK, PlantSpecies, julianday, julianweek, Plot)
+survs_by_plotyear = data.frame(table(cow_survs[, c('Year', 'Plot')]))
+plot(survs_by_plotyear$Year[survs_by_plotyear$Plot == 'BB'], survs_by_plotyear$Freq[survs_by_plotyear$Plot == 'BB'], type = 'l', lwd = 3, col = 'darkred')
+points(survs_by_plotyear$Year[survs_by_plotyear$Plot == 'BS'], survs_by_plotyear$Freq[survs_by_plotyear$Plot == 'BS'], type = 'l', lwd = 3, col = 'darkblue')
+
 
 #Convert cow_pheno_sum using pivot_wider to get phenometrics for both sites as columns
 Phen_BB<-cow_pheno_sum%>%
