@@ -10,7 +10,7 @@ source('code/formatting_coweeta.r')
 threshold<-function(threshold_value, plot){
   cow_thresh<-cowplusnotes%>%
     filter(Year>2009, Plot%in% c(plot), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
-    select(Year,Yearday,Plot,Point,TreeSpecies,Sample)%>%
+    dplyr::select(Year,Yearday,Plot,Point,TreeSpecies,Sample)%>%
     distinct()%>%
     group_by(Year,Yearday)%>%
     tally()%>%
@@ -37,7 +37,7 @@ thresh_50<-threshold(50,"BB")
 freq_plot<-function(field_year, field_plot){
   group_cow_set<-cowplusnotes%>%
     filter(cowplusnotes$Year==field_year, cowplusnotes$Plot==field_plot)%>%
-    select(Plot,Yearday,Point,TreeSpecies,Sample)%>%
+    dplyr::select(Plot,Yearday,Point,TreeSpecies,Sample)%>%
     distinct()%>%
     group_by(Point,Plot,TreeSpecies,Sample,Yearday)%>%
     summarise(n())%>%
