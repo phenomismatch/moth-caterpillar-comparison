@@ -147,39 +147,43 @@ cow_plots<-for (i in 2010:2018){
 
 
 #Plots of Selected Phenometrics based on correlation matrix
+
+pdf("Coweeta_Bivariate_Analysis")
+
 par(mfrow=c(2,2))
-plot(x=Phen_Final$Moth_10., y=Phen_Final$mass_peak_BS, main="mean Biomass (rolling) BS vs. Moth 10%", xlab="Moth 10% Date (Julian Day)", ylab="Mean Biomass Rolling Window BS")
-plotfit<-lm(Phen_Final$massRolling_BS~Phen_Final$Moth_10.)
+
+plot(x=Phen_Final$Moth_Peak_1, y=Phen_Final$mass_peak_BS, main="mean Biomass (rolling) BS vs. Moth 10%", xlab="Moth 10% Date (Julian Day)", ylab="Mean Biomass Rolling Window BS")
+plotfit<-lm(Phen_Final$mass_peak_BS~Phen_Final$Moth_Peak_1)
 square<-summary(plotfit)$r.squared
-abline(coef(plotfit)["(Intercept)"], coef(plotfit)["Phen_Final$Moth_10."])
+abline(coef(plotfit)["(Intercept)"], coef(plotfit)["Phen_Final$Moth_Peak_1"])
+legend("topleft",bty="n",legend=paste("R^2=",square))
+
+plot(x=Phen_Final$Moth_Half_Peak, y=Phen_Final$mass_peak_BS, main="mean Biomass (rolling) BS vs. Moth 10%", xlab="Moth Half Peak Date (Julian Day)", ylab="Mean Biomass Rolling Window BS")
+plotfit<-lm(Phen_Final$mass_peak_BS~Phen_Final$Moth_Half_Peak)
+square<-summary(plotfit)$r.squared
+abline(coef(plotfit)["(Intercept)"], coef(plotfit)["Phen_Final$Moth_Half_Peak"])
 legend("topleft",bty="n",legend=paste("R^2=",square))
 
 
-plot(x=Phen_Final$Moth_50, y=Phen_Final$massRolling_BS,main="mean Biomass (rolling) BS vs. Moth 50%  ", xlab="Moth 50% Date (Julian Day)", ylab="Mean Biomass Rolling Window BS")
-plotfit<-lm(Phen_Final$massRolling_BS~Phen_Final$`Moth_50`)
+plot(x=Phen_Final$Moth_Half_Peak, y=Phen_Final$massRolling_BB,main="mean Biomass (rolling) BS vs. Moth 50%  ", xlab="Moth 50% Date (Julian Day)", ylab="Mean Biomass Rolling Window BS")
+plotfit<-lm(Phen_Final$massRolling_BB~Phen_Final$Moth_Half_Peak)
 square<-summary(plotfit)$r.squared
-abline(coef(plotfit)["(Intercept)"], coef(plotfit)["Phen_Final$`Moth_50`"])
+abline(coef(plotfit)["(Intercept)"], coef(plotfit)["Phen_Final$Moth_Half_Peak"])
 legend("topleft",bty="n",legend=paste("R^2=",square))
 
-plot(x=Phen_Final$Moth_10., y=Phen_Final$pct_peak_BS,main="pct Peak Date BS vs. Moth 10%", xlab="Moth 10% Date (Julian Day)", ylab="pct Peak Date BS")
-plotfit<-lm(pct_peak_BS~`Moth_10%`, data=Phen_Final)
+plot(x=Phen_Final$Moth_Peak_1, y=Phen_Final$pct_peak_BB,main="pct Peak Date BS vs. Moth 10%", xlab="Moth 10% Date (Julian Day)", ylab="pct Peak Date BS")
+plotfit<-lm(Phen_Final$pct_peak_BB~Phen_Final$Moth_Peak_1)
 square<-summary(plotfit)$r.squared
-abline(coef(plotfit)["(Intercept)"], coef(plotfit)["Phen_Final$`Moth_50`"])
+abline(coef(plotfit)["(Intercept)"], coef(plotfit)["Phen_Final$Moth_Peak_1"])
 legend("topleft",bty="n",legend=paste("R^2=",square))
 
-plot(x=Phen_Final$Moth_Half_Peak, y=Phen_Final$pct_peak_BS. , main = "pct Peak Date BS vs. Moth Half Peak", xlab="Moth Half Peak Date (Julian Day)", ylab="pct Peak Date BS")
-plotfit<-lm(pct_peak_BS~Moth_Half_Peak, data=Phen_Final)
+plot(x=Phen_Final$Moth_Peak_2, y=Phen_Final$massRolling_BB, main = "mass rolling BB vs. Moth Peak 2", xlab="Moth Peak 2 Date (Julian Day)", ylab="Mass Rolling BB")
+plotfit<-lm(Phen_Final$massRolling_BB~Phen_Final$Moth_Peak_2)
 square<-summary(plotfit)$r.squared
-abline(178.057, -0.2519)
+abline(coef(plotfit)["(Intercept)"], coef(plotfit)["Phen_Final$Moth_Peak_2"])
 legend("topleft",bty="n",legend=paste("R^2=",square))
 
-plot(x=Phen_Final$Moth_10., y=Phen_Final$massRolling_BS,main = "pctRollingBS vs. Moth 10%", xlab="Moth 10% Date", ylab="pct Peak Date Rolling BS")
-lm(Phen_Final$massRolling_BS~Phen_Final$`Moth_10%`)
-square<-summary(plotfit)$r.squared
-abline(-143.93, 3.94)
-legend("topleft",bty="n",legend=paste("R^2=",square))
-
-
+dev.off()
 #par(mfrow=c(3,3))
 #for (i in 2010:2018){
 #  Tree<-site_filter(i, "BB", 50)%>%
