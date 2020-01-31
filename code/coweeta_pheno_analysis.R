@@ -18,6 +18,12 @@ cow_dat<-read.table("data/Coweeta_Filtered.txt",header=TRUE)
 moth_pheno<-read.table("data/moth_pheno.txt",header=TRUE)
 cow_pheno_sum<-read.table("data/Coweeta_Phenometrics.txt", header=TRUE)
 
+# Visualize basic summaries of survey effort
+cow_survs = final_cow_set %>% distinct(LocalDate, Year, PlantFK, PlantSpecies, julianday, julianweek, Plot)
+survs_by_plotyear = data.frame(table(cow_survs[, c('Year', 'Plot')]))
+plot(survs_by_plotyear$Year[survs_by_plotyear$Plot == 'BB'], survs_by_plotyear$Freq[survs_by_plotyear$Plot == 'BB'], type = 'l', lwd = 3, col = 'darkred')
+points(survs_by_plotyear$Year[survs_by_plotyear$Plot == 'BS'], survs_by_plotyear$Freq[survs_by_plotyear$Plot == 'BS'], type = 'l', lwd = 3, col = 'darkblue')
+
 
 #Convert cow_pheno_sum using pivot_wider to get phenometrics for both sites as columns
 Phen_BB<-cow_pheno_sum%>%
@@ -146,41 +152,6 @@ cow_plots<-for (i in 2010:2018){
 
 
 #Plots of Selected Phenometrics based on correlation matrix
-
-pdf("Coweeta_Bivariate_Analysis")
-
-plot(x=Phen_Final$Moth_Peak_1, y=Phen_Final$mass_peak_BS, main="mean Biomass (rolling) BS vs. Moth 10%", xlab="Moth 10% Date (Julian Day)", ylab="Mean Biomass Rolling Window BS")
-plotfit<-lm(Phen_Final$mass_peak_BS~Phen_Final$Moth_Peak_1)
-square<-summary(plotfit)$r.squared
-abline(coef(plotfit)["(Intercept)"], coef(plotfit)["Phen_Final$Moth_Peak_1"])
-legend("topleft",bty="n",legend=paste("R^2=",square))
-
-plot(x=Phen_Final$Moth_Half_Peak, y=Phen_Final$mass_peak_BS, main="mean Biomass (rolling) BS vs. Moth 10%", xlab="Moth Half Peak Date (Julian Day)", ylab="Mean Biomass Rolling Window BS")
-plotfit<-lm(Phen_Final$mass_peak_BS~Phen_Final$Moth_Half_Peak)
-square<-summary(plotfit)$r.squared
-abline(coef(plotfit)["(Intercept)"], coef(plotfit)["Phen_Final$Moth_Half_Peak"])
-legend("topleft",bty="n",legend=paste("R^2=",square))
-
-
-plot(x=Phen_Final$Moth_Half_Peak, y=Phen_Final$massRolling_BB,main="mean Biomass (rolling) BS vs. Moth 50%  ", xlab="Moth 50% Date (Julian Day)", ylab="Mean Biomass Rolling Window BS")
-plotfit<-lm(Phen_Final$massRolling_BB~Phen_Final$Moth_Half_Peak)
-square<-summary(plotfit)$r.squared
-abline(coef(plotfit)["(Intercept)"], coef(plotfit)["Phen_Final$Moth_Half_Peak"])
-legend("topleft",bty="n",legend=paste("R^2=",square))
-
-plot(x=Phen_Final$Moth_Peak_1, y=Phen_Final$pct_peak_BB,main="pct Peak Date BS vs. Moth 10%", xlab="Moth 10% Date (Julian Day)", ylab="pct Peak Date BS")
-plotfit<-lm(Phen_Final$pct_peak_BB~Phen_Final$Moth_Peak_1)
-square<-summary(plotfit)$r.squared
-abline(coef(plotfit)["(Intercept)"], coef(plotfit)["Phen_Final$Moth_Peak_1"])
-legend("topleft",bty="n",legend=paste("R^2=",square))
-
-plot(x=Phen_Final$Moth_Peak_2, y=Phen_Final$massRolling_BB, main = "mass rolling BB vs. Moth Peak 2", xlab="Moth Peak 2 Date (Julian Day)", ylab="Mass Rolling BB")
-plotfit<-lm(Phen_Final$massRolling_BB~Phen_Final$Moth_Peak_2)
-square<-summary(plotfit)$r.squared
-abline(coef(plotfit)["(Intercept)"], coef(plotfit)["Phen_Final$Moth_Peak_2"])
-legend("topleft",bty="n",legend=paste("R^2=",square))
-
-dev.off()
 
 pdf("Coweeta_Bivariate_Analysis_Plots")
 
