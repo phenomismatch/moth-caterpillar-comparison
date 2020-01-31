@@ -27,8 +27,7 @@ Phen_BB<-cow_pheno_sum%>%
   mutate_if(is.integer,replace_na,0)%>% 
   dplyr::select(c(Year,pctPeakDate_Coweeta_BB,massPeakDate_Coweeta_BB,pctRollingPeakDateWindow_Coweeta_BB, massRollingPeakDateWindow_Coweeta_BB))%>%
   setnames(old=c( "pctPeakDate_Coweeta_BB", "massPeakDate_Coweeta_BB", "pctRollingPeakDateWindow_Coweeta_BB", "massRollingPeakDateWindow_Coweeta_BB"), new=c( "pct_peak_BB", "mass_peak_BB","pctRolling_BB", "massRolling_BB"))
-  dplyr::select(c(Year, pct_peak_BB, mass_peak_BB,pctRolling_BB,massRolling_BB))
-  
+
 Phen_BS<-cow_pheno_sum%>%
   filter(Year>2009, Name == "Coweeta_BS")%>%
   pivot_wider(names_from=Name,
@@ -150,8 +149,6 @@ cow_plots<-for (i in 2010:2018){
 
 pdf("Coweeta_Bivariate_Analysis")
 
-par(mfrow=c(2,2))
-
 plot(x=Phen_Final$Moth_Peak_1, y=Phen_Final$mass_peak_BS, main="mean Biomass (rolling) BS vs. Moth 10%", xlab="Moth 10% Date (Julian Day)", ylab="Mean Biomass Rolling Window BS")
 plotfit<-lm(Phen_Final$mass_peak_BS~Phen_Final$Moth_Peak_1)
 square<-summary(plotfit)$r.squared
@@ -184,6 +181,60 @@ abline(coef(plotfit)["(Intercept)"], coef(plotfit)["Phen_Final$Moth_Peak_2"])
 legend("topleft",bty="n",legend=paste("R^2=",square))
 
 dev.off()
+
+pdf("Coweeta_Bivariate_Analysis_Plots")
+
+plot(x=Phen_Final$Moth_Half_Peak, y=Phen_Final$mass_peak_BS, main="Mean Biomass Peak BS vs. Moth Half Peak Date", xlab="Moth Half Peak (Julian Day)", ylab="Mean Biomass Peak BS (Julian Day)", pch=16)
+plotfit<-lm(Phen_Final$mass_peak_BS~Phen_Final$Moth_Half_Peak)
+square<-summary(plotfit)$r.squared
+abline(coef(plotfit)["(Intercept)"], coef(plotfit)["Phen_Final$Moth_Half_Peak"])
+legend("topleft",bty="n",legend=paste("R^2=",square))
+
+plot(x=Phen_Final$Moth_Half_Peak, y=Phen_Final$massRolling_BS, main="Mean Biomass rolling window BS vs. Moth Half Peak Date", xlab="Moth Half Peak (Julian Day)", ylab="Mean Biomass Rolling Window BS (Julian Day)", pch=16)
+plotfit<-lm(Phen_Final$massRolling_BS~Phen_Final$Moth_Half_Peak)
+square<-summary(plotfit)$r.squared
+abline(coef(plotfit)["(Intercept)"], coef(plotfit)["Phen_Final$Moth_Half_Peak"])
+legend("topleft",bty="n",legend=paste("R^2=",square))
+
+plot(x=Phen_Final$Moth_Half_Peak, y=Phen_Final$mass_peak_BB, main="Mean Biomass Peak BB vs. Moth Half Peak Date", xlab="Moth Half Peak (Julian Day)", ylab="Mean Biomass Peak BB (Julian Day)", pch=16)
+plotfit<-lm(Phen_Final$mass_peak_BB~Phen_Final$Moth_Half_Peak)
+square<-summary(plotfit)$r.squared
+abline(coef(plotfit)["(Intercept)"], coef(plotfit)["Phen_Final$Moth_Half_Peak"])
+legend("topleft",bty="n",legend=paste("R^2=",square))
+
+plot(x=Phen_Final$Moth_Half_Peak, y=Phen_Final$massRolling_BB,main="Mean Biomass (rolling) BB vs. Moth Half Peak Date", xlab="Moth Half Peak (Julian Day)", ylab="Mean Biomass Rolling Window BB (Julian Day)", pch=16)
+plotfit<-lm(Phen_Final$massRolling_BB~Phen_Final$Moth_Half_Peak)
+square<-summary(plotfit)$r.squared
+abline(coef(plotfit)["(Intercept)"], coef(plotfit)["Phen_Final$Moth_Half_Peak"])
+legend("topleft",bty="n",legend=paste("R^2=",square))
+
+
+plot(x=Phen_Final$Moth_Peak_1, y=Phen_Final$mass_peak_BS, main="Mean Biomass Peak BS vs. First Moth Peak Date", xlab="Moth Peak (Julian Day)", ylab="Mean Biomass Peak BS (Julian Day)", pch=16)
+plotfit<-lm(Phen_Final$mass_peak_BS~Phen_Final$Moth_Peak_1)
+square<-summary(plotfit)$r.squared
+abline(coef(plotfit)["(Intercept)"], coef(plotfit)["Phen_Final$Moth_Peak_1"])
+legend("topleft",bty="n",legend=paste("R^2=",square))
+
+plot(x=Phen_Final$Moth_Peak_1, y=Phen_Final$massRolling_BS, main="Mean Biomass rolling window BS vs. First Moth Peak Date", xlab="Moth Peak (Julian Day)", ylab="Mean Biomass Rolling Window BS (Julian Day)", pch=16)
+plotfit<-lm(Phen_Final$massRolling_BS~Phen_Final$Moth_Peak_1)
+square<-summary(plotfit)$r.squared
+abline(coef(plotfit)["(Intercept)"], coef(plotfit)["Phen_Final$Moth_Peak_1"])
+legend("topleft",bty="n",legend=paste("R^2=",square))
+
+plot(x=Phen_Final$Moth_Peak_1, y=Phen_Final$mass_peak_BB, main="Mean Biomass Peak BB vs. First Moth Peak Date", xlab="Moth Peak (Julian Day)", ylab="Mean Biomass Peak BS (Julian Day)", pch=16)
+plotfit<-lm(Phen_Final$mass_peak_BB~Phen_Final$Moth_Peak_1)
+square<-summary(plotfit)$r.squared
+abline(coef(plotfit)["(Intercept)"], coef(plotfit)["Phen_Final$Moth_Peak_1"])
+legend("topleft",bty="n",legend=paste("R^2=",square))
+
+plot(x=Phen_Final$Moth_Peak_1, y=Phen_Final$massRolling_BB,main="Mean Biomass (rolling) BB vs. First Moth Peak Date", xlab="Moth Peak (Julian Day)", ylab="Mean Biomass Rolling Window BS (Julian Day)", pch=16)
+plotfit<-lm(Phen_Final$massRolling_BB~Phen_Final$Moth_Peak_1)
+square<-summary(plotfit)$r.squared
+abline(coef(plotfit)["(Intercept)"], coef(plotfit)["Phen_Final$Moth_Peak_1"])
+legend("topleft",bty="n",legend=paste("R^2=",square))
+
+dev.off()
+
 #par(mfrow=c(3,3))
 #for (i in 2010:2018){
 #  Tree<-site_filter(i, "BB", 50)%>%
@@ -292,108 +343,4 @@ plot(x=cow_thresh$Yearday,y=cow_thresh$PropSurv, main=i,sub=j, xlab="Yearday", y
 "9" (554)
 
 
-#PhenoSummary function with medianGreenup date set to NA, otherwise errors showed up 
-test<-cow_dat
-new<-phenoSummary(test,  postGreenupBeg = 40,     # number of days post-greenup marking the beginning of the time window
-                  postGreenupEnd = 75,     # number of days post-greenup marking the end of the time window
-                  fullWindowBeg = 135,     # julian day of the beginning of a specified time window (default May 15)
-                  fullWindowEnd = 212,     # julian day of the end of a specified time window (default July 31)
-                  minNumWeeks = 0)
-
-phenoSummary = function(fullDataset, # fullDataset format
-                        postGreenupBeg = 40,     # number of days post-greenup marking the beginning of the time window
-                        postGreenupEnd = 75,     # number of days post-greenup marking the end of the time window
-                        fullWindowBeg = 135,     # julian day of the beginning of a specified time window (default May 15)
-                        fullWindowEnd = 212,     # julian day of the end of a specified time window (default July 31)
-                        minNumWeeks = 5,         # minimum number of weeks of survey data to calculate pheno summaries
-                        ...) {
-  
-  years = unique(fullDataset$Year)
-  output = data.frame(Name = NA, Year = NA, medianGreenup = NA, minJulianWeek = NA, maxJulianWeek = NA, totalSurveys = NA,
-                      numGoodWeeks = NA, numWeeksPostSolsticeWindow = NA, numWeeksPostGreenupWindow = NA, 
-                      pctSolstice = NA, densSolstice = NA, massSolstice= NA, pctPostGU = NA, densPostGU = NA, massPostGU = NA,
-                      pctPeakDate = NA, densPeakDate = NA, massPeakDate = NA, pctPeakDateWindow = NA, densPeakDateWindow = NA,
-                      massPeakDateWindow = NA, pctPeakDateGreenupWindow = NA, densPeakDateGreenupWindow = NA, 
-                      massPeakDateGreenupWindow = NA, pctRollingPeakDateWindow = NA, densRollingPeakDateWindow = NA, massRollingPeakDateWindow = NA)
-  
-  for (y in years) {
-    yearFilteredDataset = dplyr::filter(fullDataset, Year == y)
-    uniqueSites = unique(yearFilteredDataset$Name)
-    
-    for (site in uniqueSites) {
-      siteYearFilteredDataset = dplyr::filter(yearFilteredDataset, Name==site)
-      
-      pheno = meanDensityByWeek(siteYearFilteredDataset, allDates = TRUE, plot = FALSE, ...)
-      
-      if (nrow(pheno) >= minNumWeeks) {
-        
-        greenup = siteYearFilteredDataset$medianGreenup[1]
-        
-        siteoutput = pheno %>%
-          # calculate 3-week rolling averages
-          mutate(rollingPct = frollmean(fracSurveys, 3, align = "center"),
-                 rollingDensity = frollmean(meanDensity, 3, align = "center"),
-                 rollingBiomass = frollmean(meanBiomass, 3, align = "center")) %>%
-          summarize(# mean for the month of July
-            Name = site,
-            Year = y,
-            medianGreenup = greenup,
-            minJulianWeek = min(julianweek),
-            maxJulianWeek = max(julianweek),
-            totalSurveys = sum(nSurveys),
-            numGoodWeeks = sum(okWeek == 1),
-            numWeeksPostSolsticeWindow = sum(okWeek[julianweek >= 172 & julianweek <= 202] == 1),
-            numWeeksPostGreenupWindow = sum(okWeek[julianweek >= (greenup + postGreenupBeg) & julianweek <= (greenup + postGreenupEnd)] == 1),
-            pctSolstice = ifelse(sum(julianweek >= 172 & julianweek <= 202) > 0, 
-                                 mean(fracSurveys[julianweek >= 172 & julianweek <= 202], na.rm = TRUE), NA),
-            densSolstice = ifelse(sum(julianweek >= 172 & julianweek <= 202) > 0, 
-                                  mean(meanDensity[julianweek >= 172 & julianweek <= 202], na.rm = TRUE), NA),
-            massSolstice = ifelse(sum(julianweek >= 172 & julianweek <= 202) > 0, 
-                                  mean(meanBiomass[julianweek >= 172 & julianweek <= 202], na.rm = TRUE), NA),
-            # mean for the post-greenup window specified
-            pctPostGU = ifelse(sum(julianweek >= (greenup + postGreenupBeg) & julianweek <= (greenup + postGreenupEnd)) > 0, 
-                               mean(fracSurveys[julianweek >= (greenup + postGreenupBeg) & julianweek <= (greenup + postGreenupEnd)], na.rm = TRUE), NA),
-            densPostGU = ifelse(sum(julianweek >= (greenup + postGreenupBeg) & julianweek <= (greenup + postGreenupEnd)) > 0, 
-                                mean(meanDensity[julianweek >= (greenup + postGreenupBeg) & julianweek <= (greenup + postGreenupEnd)], na.rm = TRUE), NA),
-            massPostGU = ifelse(sum(julianweek >= (greenup + postGreenupBeg) & julianweek <= (greenup + postGreenupEnd)) > 0, 
-                                mean(meanBiomass[julianweek >= (greenup + postGreenupBeg) & julianweek <= (greenup + postGreenupEnd)], na.rm = TRUE), NA),
-            # peak date of the time-series unconstrained
-            pctPeakDate = ifelse(sum(totalCount) == 0, NA, 
-                                 julianweek[fracSurveys == max(fracSurveys, na.rm = TRUE)][1]),
-            densPeakDate = ifelse(sum(totalCount) == 0, NA, 
-                                  julianweek[meanDensity == max(meanDensity, na.rm = TRUE)][1]),
-            massPeakDate = ifelse(sum(totalCount) == 0, NA, 
-                                  julianweek[meanBiomass == max(meanBiomass, na.rm = TRUE)][1]),
-            # peak date within a specified, hard-coded window; [1] selects the 1st date if multiple dates have the same peak value
-            pctPeakDateWindow = ifelse(sum(totalCount) == 0, NA, 
-                                       julianweek[fracSurveys == max(fracSurveys[julianweek >= fullWindowBeg & julianweek <= fullWindowEnd], na.rm = TRUE)][1]),
-            densPeakDateWindow = ifelse(sum(totalCount) == 0, NA, 
-                                        julianweek[meanDensity == max(meanDensity[julianweek >= fullWindowBeg & julianweek <= fullWindowEnd], na.rm = TRUE)][1]),
-            massPeakDateWindow = ifelse(sum(totalCount) == 0, NA, 
-                                        julianweek[meanBiomass == max(meanBiomass[julianweek >= fullWindowBeg & julianweek <= fullWindowEnd], na.rm = TRUE)][1]),
-            # peak date between the beginning of the post-greenup window and the end of July; [1] selects the 1st date if multiple dates have the same peak value
-            pctPeakDateGreenupWindow = ifelse(sum(totalCount) == 0, NA, 
-                                              julianweek[fracSurveys == max(fracSurveys[julianweek >= (greenup + postGreenupBeg) & julianweek <= 212], na.rm = TRUE)][1]),
-            densPeakDateGreenupWindow = ifelse(sum(totalCount) == 0, NA, 
-                                               julianweek[meanDensity == max(meanDensity[julianweek >= (greenup + postGreenupBeg) & julianweek <= 212], na.rm = TRUE)][1]),
-            massPeakDateGreenupWindow = ifelse(sum(totalCount) == 0, NA, 
-                                               julianweek[meanBiomass == max(meanBiomass[julianweek >= (greenup + postGreenupBeg) & julianweek <= 212], na.rm = TRUE)][1]),
-            # peak date for the 3-week rolling average between the beginning of the post-greenup window and the end of July;
-            #    -1 at the end to select the middle (rather than end) of the 3-week window
-            pctRollingPeakDateWindow = ifelse(sum(totalCount) == 0, NA, 
-                                              julianweek[which(rollingPct == max(rollingPct[julianweek >= fullWindowBeg & julianweek <= fullWindowEnd], na.rm = TRUE))][1]),
-            densRollingPeakDateWindow = ifelse(sum(totalCount) == 0, NA, 
-                                               julianweek[which(rollingDensity == max(rollingDensity[julianweek >= fullWindowBeg & julianweek <= fullWindowEnd], na.rm = TRUE))][1]),
-            massRollingPeakDateWindow = ifelse(sum(totalCount) == 0, NA, 
-                                               julianweek[which(rollingBiomass == max(rollingBiomass[julianweek >= fullWindowBeg & julianweek <= fullWindowEnd], na.rm = TRUE))][1]))
-        
-        output = rbind(output, siteoutput)        
-      }
-    } # end site
-  } # end year
-  out = output[-1, ]
-  out[is.na(out)] = NA # converts NaN's to NA's
-  return(output[-1, ])
-  
-}
 
