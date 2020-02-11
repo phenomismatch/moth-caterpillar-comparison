@@ -109,11 +109,12 @@ for (var in c("meanBiomass", "fracSurveys")){
         filter(Year==i)%>%
         dplyr::select(contains(j))
         
-      table<-meanDensityByWeek(surveyData=cow_filt, plot=TRUE, plotVar=var, xlab="Julian Week", ylab= var, main = paste(i,j,cow_filt$surveys) )
+      table<-meanDensityByWeek(surveyData=cow_filt, plot=TRUE, plotVar=var, xlab="Julian Week", ylab= var, main = paste(i,j,"# Surveys =", cow_filt$surveys[1]) )
       abline(v = foo[1], col="yellow", lwd=5, lty=2)
       abline(v = foo[2], col="red", lwd=4, lty=2)
       abline(v = foo[3], col="blue", lwd=3, lty=2)
       abline(v = foo[4], col="green", lwd=2, lty=2)    
+  
     }
     
   }
