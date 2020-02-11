@@ -103,17 +103,19 @@ for (var in c("meanBiomass", "fracSurveys")){
   for(j in c("BB", "BS")){
     for ( i in 2010:2018){
       cow_filt<-cow_dat%>%
-        filter(Year==i, Plot==j)
+        filter(Year==i, Plot==j)%>%
+        mutate(surveys=n())
       foo<-Phen_Final%>%
         filter(Year==i)%>%
         dplyr::select(contains(j))
         
-      table<-meanDensityByWeek(surveyData=cow_filt, plot=TRUE, plotVar=var, xlab="Julian Week", ylab= var, main = paste(i,j) )
+      table<-meanDensityByWeek(surveyData=cow_filt, plot=TRUE, plotVar=var, xlab="Julian Week", ylab= var, main = paste(i,j,cow_filt$surveys) )
       abline(v = foo[1], col="yellow", lwd=5, lty=2)
       abline(v = foo[2], col="red", lwd=4, lty=2)
       abline(v = foo[3], col="blue", lwd=3, lty=2)
       abline(v = foo[4], col="green", lwd=2, lty=2)    
-      }
+    }
+    
   }
 }
 legend("bottomright",legend=c("Mass_Peak","Mass_Rolling", "Pct_Rolling", "Pct_Peak"),lty=c(4,3,2, 5),col=c(2,4,3,7),title="Legend", xpd=NA,cex=.9)

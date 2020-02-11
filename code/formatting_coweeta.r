@@ -225,8 +225,8 @@ sites$medianGreenup = round(raster::extract(greenup, sites[, c('Longitude', 'Lat
   updatedphenosum = function(fullDataset, # fullDataset format
                           postGreenupBeg = 40,     # number of days post-greenup marking the beginning of the time window
                           postGreenupEnd = 75,     # number of days post-greenup marking the end of the time window
-                          fullWindowBeg = 135,     # julian day of the beginning of a specified time window (default May 15)
-                          fullWindowEnd = 212,     # julian day of the end of a specified time window (default July 31)
+                          fullWindowBeg = 136,     # julian day of the beginning of a specified time window (default May 15)
+                          fullWindowEnd = 182,     # julian day of the end of a specified time window (default July 31)
                           minNumWeeks = 5,         # minimum number of weeks of survey data to calculate pheno summaries
                           ...) {
     
@@ -320,8 +320,8 @@ sites$medianGreenup = round(raster::extract(greenup, sites[, c('Longitude', 'Lat
   }
   phenometrics<-updatedphenosum(final_cow_set,  postGreenupBeg = 40,     # number of days post-greenup marking the beginning of the time window
                     postGreenupEnd = 75,     # number of days post-greenup marking the end of the time window
-                    fullWindowBeg = 135,     # julian day of the beginning of a specified time window (default May 15)
-                    fullWindowEnd = 212,     # julian day of the end of a specified time window (default July 31)
+                    fullWindowBeg = 136,     # julian day of the beginning of a specified time window (default May 15)
+                    fullWindowEnd = 182,     # julian day of the end of a specified time window (default July 31)
                     minNumWeeks = 0)
 write.table(phenometrics, "Coweeta_Phenometrics.txt", row.names=F, sep="\t", quote=FALSE)
 write.table(final_cow_set,"Coweeta_Filtered.txt", sep='\t',row.names=F)
