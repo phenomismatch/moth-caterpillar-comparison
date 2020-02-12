@@ -124,8 +124,42 @@ legend("bottomright",legend=c("Mass_Peak","Mass_Rolling", "Pct_Rolling", "Pct_Pe
 dev.off()
 
 
+#Overlaid plots, still need to do it for meanBiomass, so far just for fracsurveys
+par(mfrow=c(3,3))
+for (var in c("meanBiomass", "fracSurveys")){
+    for ( i in 2010:2018){
+      cow_filtBB<-cow_dat%>%
+        filter(Year==i, Plot=="BB")%>%
+        mutate(surveys=n())
+      cow_filtBS<-cow_dat%>%
+        filter(Year==i, Plot=="BS")%>%
+        mutate(surveys=n())
+    
+      fooBB<-Phen_Final%>%
+        filter(Year==i)%>%
+        dplyr::select(contains("BB"))
+      fooBS<-Phen_Final%>%
+        filter(Year==i)%>%
+        dplyr::select(contains("BS"))
+      
+      
+      plot1<-meanDensityByWeek(surveyData=cow_filtBB, plot=FALSE, plotVar=var, xlab="Julian Week", ylab= var, main = paste(i,"BB","# Surveys =", cow_filtBB$surveys[1]))
+      plot2<-meanDensityByWeek(surveyData=cow_filtBS, plot=FALSE, plotVar=var, xlab="Julian Week", ylab= var, main = paste(i,"BS","# Surveys =", cow_filtBS$surveys[1]))
+      
+      plot(x=plot1$julianweek, y=plot1$fracSurveys, ylab=var, type="b", main = paste(i,"BB=", cow_filtBB$surveys[1], "BS=", cow_filtBS$surveys[1])) 
+      lines(x=plot2$julianweek, y=plot2$fracSurveys, type="b", col="blue")
+      
+    }
+  
+}
+legend("bottomright",legend=c("BB", "BS"),lty=c(1),col=c(1,4),title="Legend", xpd=NA,cex=.9)
 
-
+#Plot of Coweeta data survey data across all years for tree species 
+trees<-cow_dat%>%
+  group_by(PlantSpecies, Plot)%>%
+  summarise(surveys=n())
+  
+barplot( height=trees$surveys,main="Tree Species Survey Efforts",xlab="Tree Species", ylab="Surveys",col=c("blue","red"),legend=c("BB", "BS"))
 
 #Example Plot of Mean Density of Caterpillars for BB 2017
 par(mfrow=c(3,3))
