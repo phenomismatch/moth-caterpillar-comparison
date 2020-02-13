@@ -221,6 +221,8 @@ sites$medianGreenup = round(raster::extract(greenup, sites[, c('Longitude', 'Lat
     mutate(Plot=substring(Branch, 0, 2))%>%
     left_join(sites,by=c('Name'='Site'))
 
+  debug<-final_cow_set%>%
+    filter(Year==2014, Plot=="BB")
   
   updatedphenosum = function(fullDataset, # fullDataset format
                           postGreenupBeg = 40,     # number of days post-greenup marking the beginning of the time window
@@ -239,7 +241,7 @@ sites$medianGreenup = round(raster::extract(greenup, sites[, c('Longitude', 'Lat
                         massPeakDateGreenupWindow = NA, pctRollingPeakDateWindow = NA, densRollingPeakDateWindow = NA, massRollingPeakDateWindow = NA)
     
     for (y in years) {
-      yearFilteredDataset = dplyr::filter(fullDataset, Year == y)
+      yearFilteredDataset = dplyr::filter(debug, Year == y)
       uniqueSites = unique(yearFilteredDataset$Name)
       
       for (site in uniqueSites) {
