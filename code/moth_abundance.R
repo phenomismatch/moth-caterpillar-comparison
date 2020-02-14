@@ -104,9 +104,34 @@ preNmoon<-moth_set%>%
 
 lunar_phase_bind<-bind_rows(postNmoon,preNmoon)
 
-  
+#Seems to still have taken out the zeros from it
+frames<-list()
+for(i in 2010:2018){
+      mixture<-moth_set%>%
+        filter(year==i)%>%
+          dplyr::select(year,month,day, julian.day, photos, Lunar.Cycle)
+      
+      df <- as.data.frame(lapply(mixture, rep, mixture$photos))
+      frames[[i]]<-df
+}
+mix<-bind_rows(frames)
 
 
+
+par(mfrow=c(3,3))
+for(i in 2010:2018){
+ df<-mix%>%
+    filter(year==i)
+    plot(x = df$julian.day, y=df$photos)
+}
+
+plot_mix_comps <- function(x, mu, sigma, lam) {
+  lam * dnorm(x, mu, sigma)
+}
+
+set.seed(1)
+days<-mix$day
+mixmdl<-normalmixEM(days, k=2)
 
 Gauss<-lunar_phase_bind%>%
   group_by(year, Lunar.Cycle , Phase , nLunarDays)%>%

@@ -13,6 +13,7 @@ library(dggridR)
 library(sf)
 library(corrplot)
 library(gridExtra)
+library(mixtools)
 
 cow_dat<-read.table("data/Coweeta_Filtered.txt",header=TRUE)
 moth_pheno<-read.table("data/moth_pheno.txt",header=TRUE)
@@ -124,8 +125,8 @@ legend("bottomright",legend=c("Pct_Peak","Mass_Peak", "Pct_Rolling", "Mass_Rolli
 dev.off()
 
 
-#Overlaid plots, still need to do it for meanBiomass, so far just for fracsurveys
-par(mfrow=c(3,3))
+#Overlaid plots
+pdf("Coweeta_Frac_surveys_Site_Comparison")
 for (var in c( "fracSurveys")){
     for ( i in 2010:2018){
       cow_filtBB<-cow_dat%>%
@@ -153,8 +154,8 @@ for (var in c( "fracSurveys")){
   
 }
 legend("bottomright",legend=c("BB", "BS"),lty=c(1),col=c(1,4),title="Legend", xpd=NA,cex=.9)
-
-
+dev.off()
+pdf("Coweeta_Mean_Biomass_Site_Comparison")
 par(mfrow=c(3,3))
 for (var in c( "meanBiomass")){
   for ( i in 2010:2018){
@@ -183,14 +184,17 @@ for (var in c( "meanBiomass")){
   
 }
 legend("bottomright",legend=c("BB", "BS"),lty=c(1),col=c(1,4),title="Legend", xpd=NA,cex=.9)
+dev.off()
+
 
 #Plot of Coweeta data survey data across all years for tree species 
+pdf("Tree_Species_Survey_Efforts")
 trees<-cow_dat%>%
   group_by(PlantSpecies, Plot)%>%
   summarise(surveys=n())
   
 barplot(height=trees$surveys,main="Tree Species Survey Efforts",xlab="Tree Species", ylab="Surveys",col=c("lightblue","darkgreen"),legend=c("BB", "BS"), las=1, names.arg=trees$PlantSpecies)
-
+dev.off()
 #Example Plot of Mean Density of Caterpillars for BB 2017
 par(mfrow=c(3,3))
 cow_plots<-for (i in 2010:2018){
