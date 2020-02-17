@@ -4,6 +4,8 @@ library(stringr)
 library(tidyr)
 library(pracma)
 library(gridExtra)
+library(compare)
+library(mixtools)
 source('../caterpillars-analysis-public/code/analysis_functions.r')
 
 
@@ -106,32 +108,22 @@ preNmoon<-moth_set%>%
 lunar_phase_bind<-bind_rows(postNmoon,preNmoon)
 
 #Seems to still have taken out the zeros from it
-mixlist<-list()
-for(i in 2010:2018){
-      mixture<-moth_set%>%
-        filter(year==i)
-      
-      df <- as.data.frame(lapply(mixture, rep, mixture$photos))
-      mixlist[[i]]<-df
-      
-}
-mix<-bind_rows(mixlist)
-
-
 mixture2<-moth_set
 df<-as.data.frame(lapply(mixture2, rep, mixture2$photos))
 
 plot_mix_comps <- function(x, mu, sigma, lam) {
   lam * dnorm(x, mu, sigma)
 }
+
+
 pdf("Coweeta_GMM_Plot")
 par(mfrow=c(3,3))
 for(i in 2010:2018){
- df<-mix%>%
+ mixturefilt<-df%>%
     filter(year==i)
     
   set.seed(1)
-  days<-df$day
+  days<-mixturefilt$day
   mixmdl<-normalmixEM(days, k=2)
   
   plot(mixmdl, which=2)
@@ -153,6 +145,14 @@ Gauss<-lunar_phase_bind%>%
   group_by(year, day, Phase, avg)%>%
   summarize()%>%
   mutate_cond(is.na(avg), avg = 0)
+
+GMM<-lunar_phase_bind%>%
+  group_by(year, Lunar.Cycle , Phase , nLunarDays)%>%
+  mutate(day = median(julian.day))%>%
+  group_by(year, day)%>%
+  summarise(moths=sum(photos))
+
+df<-as.data.frame(lapply(GMM, rep, GMM$moths))
 
 
 par(mfrow=c(3,3))
