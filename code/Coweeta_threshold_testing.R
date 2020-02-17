@@ -58,7 +58,7 @@ freq_plot(2010,"BB")
 
 treesByYear = cowplusnotes %>%
   filter(Plot != "RK") %>%
-  select(Year, Plot,Yearday,Point,TreeSpecies,Sample)%>%
+  dplyr::select(Year, Plot,Yearday,Point,TreeSpecies,Sample)%>%
   distinct()%>%
   count(Year, TreeSpecies) %>%
   arrange(Year, desc(n)) %>%
@@ -88,7 +88,7 @@ treesByYear = cowplusnotes %>%
 samp_days<-function(field_year,field_plot){
   coweeta_data<-cowplusnotes%>%
     filter(cowplusnotes$Year==field_year,cowplusnotes$Plot==field_plot)%>%
-    select(Plot, Yearday, Point,TreeSpecies, Sample)%>%
+    dplyr::select(Plot, Yearday, Point,TreeSpecies, Sample)%>%
     distinct()%>%
     group_by(Plot,Point, Yearday)%>%
     summarize(obsv=n())%>%
@@ -122,7 +122,7 @@ BSsamp12<-samp_days(2012,"BS")
 #Histogram of frequency of survey efforts
 cow_samples<-cowplusnotes%>%
   filter(Year>2009, Plot%in% c("BS", "BB"), TreeSpecies%in% c("American-Chestnut", "Striped-Maple", "Red-Oak", "Red-Maple"))%>%
-  select(Year,Yearday,Plot, Point, TreeSpecies, Sample)%>%
+  dplyr::select(Year,Yearday,Plot, Point, TreeSpecies, Sample)%>%
   distinct()%>%
   count(Year, Yearday)%>%
   rename(nSurveys=n)

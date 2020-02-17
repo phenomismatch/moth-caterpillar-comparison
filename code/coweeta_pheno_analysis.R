@@ -127,6 +127,7 @@ dev.off()
 
 #Overlaid plots
 pdf("Coweeta_Frac_surveys_Site_Comparison")
+par(mfrow=c(3,3))
 for (var in c( "fracSurveys")){
     for ( i in 2010:2018){
       cow_filtBB<-cow_dat%>%
@@ -155,6 +156,7 @@ for (var in c( "fracSurveys")){
 }
 legend("bottomright",legend=c("BB", "BS"),lty=c(1),col=c(1,4),title="Legend", xpd=NA,cex=.9)
 dev.off()
+
 pdf("Coweeta_Mean_Biomass_Site_Comparison")
 par(mfrow=c(3,3))
 for (var in c( "meanBiomass")){
@@ -195,6 +197,8 @@ trees<-cow_dat%>%
   
 barplot(height=trees$surveys,main="Tree Species Survey Efforts",xlab="Tree Species", ylab="Surveys",col=c("lightblue","darkgreen"),legend=c("BB", "BS"), las=1, names.arg=trees$PlantSpecies)
 dev.off()
+
+
 #Example Plot of Mean Density of Caterpillars for BB 2017
 par(mfrow=c(3,3))
 cow_plots<-for (i in 2010:2018){
