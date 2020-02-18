@@ -123,7 +123,7 @@ for(i in 2010:2018){
     filter(year==i)
     
   set.seed(1)
-  days<-mixturefilt$day
+  days<-mixturefilt$julian.day
   mixmdl<-normalmixEM(days, k=2)
   
   plot(mixmdl, which=2)
@@ -154,6 +154,19 @@ GMM<-lunar_phase_bind%>%
 
 df<-as.data.frame(lapply(GMM, rep, GMM$moths))
 
+par(mfrow=c(3,3))
+for(i in 2010:2018){
+  mixturefilt<-df%>%
+    filter(year==i)
+  
+  set.seed(1)
+  days<-mixturefilt$day
+  mixmdl<-normalmixEM(days, k=2)
+  
+  plot(mixmdl, which=2)
+}
+
+dev.off()
 
 par(mfrow=c(3,3))
 cont<-NULL
