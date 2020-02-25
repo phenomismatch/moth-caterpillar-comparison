@@ -107,34 +107,13 @@ preNmoon<-moth_set%>%
 
 lunar_phase_bind<-bind_rows(postNmoon,preNmoon)
 
-#Seems to still have taken out the zeros from it
-mixture2<-moth_set
-df<-as.data.frame(lapply(mixture2, rep, mixture2$photos))
+
+
 
 plot_mix_comps <- function(x, mu, sigma, lam) {
   lam * dnorm(x, mu, sigma)
 }
 
-
-pdf("Coweeta_GMM_Plot")
-par(mfrow=c(3,3))
-for(i in 2010:2018){
- mixturefilt<-df%>%
-    filter(year==i)
-    
-  set.seed(1)
-  days<-mixturefilt$julian.day
-  mixmdl<-normalmixEM(days, k=2)
-  
-  plot(mixmdl, which=2)
-}
-
-
-
-set.seed(1)
-days<-mix$day
-mixmdl<-normalmixEM(days, k=2)
-#Still need to run for loop for this 
 
 
 Gauss<-lunar_phase_bind%>%
@@ -154,6 +133,7 @@ GMM<-lunar_phase_bind%>%
 
 df<-as.data.frame(lapply(GMM, rep, GMM$moths))
 
+pdf("Coweeta_GMM_Plot")
 par(mfrow=c(3,3))
 for(i in 2010:2018){
   mixturefilt<-df%>%
@@ -162,11 +142,27 @@ for(i in 2010:2018){
   set.seed(1)
   days<-mixturefilt$day
   mixmdl<-normalmixEM(days, k=2)
-  
-  plot(mixmdl, which=2)
+  summary(mixmdl)
+  plot(mixmdl, which=1)
 }
-
 dev.off()
+mixmdl$lambda
+
+
+mixturefilt<-df%>%
+  filter(year==2010)
+
+set.seed(1)
+days<-mixturefilt$day
+mixmdl<-normalmixEM(days, k=1)
+summary(mixmdl)
+plot(mixmdl, which=1)
+
+
+
+
+
+
 
 par(mfrow=c(3,3))
 cont<-NULL
