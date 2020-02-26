@@ -148,8 +148,8 @@ for (var in c( "fracSurveys")){
       plot1<-meanDensityByWeek(surveyData=cow_filtBB, plot=FALSE, plotVar=var, xlab="Julian Week", ylab= var, main = paste(i,"BB","# Surveys =", cow_filtBB$surveys[1]))
       plot2<-meanDensityByWeek(surveyData=cow_filtBS, plot=FALSE, plotVar=var, xlab="Julian Week", ylab= var, main = paste(i,"BS","# Surveys =", cow_filtBS$surveys[1]))
       
-      plot(x=plot1$julianweek, y=plot1$fracSurveys, ylab=var, type="b", main = paste(i,"BB=", cow_filtBB$surveys[1], "BS=", cow_filtBS$surveys[1])) 
-      lines(x=plot2$julianweek, y=plot2$fracSurveys, type="b", col="blue")
+      plot(x=plot1$julianweek, y=plot1$fracSurveys, ylab=var, type="l", main = paste(i,"BB=", cow_filtBB$surveys[1], "BS=", cow_filtBS$surveys[1])) 
+      lines(x=plot2$julianweek, y=plot2$fracSurveys, type="l", col="blue")
       
     }
   

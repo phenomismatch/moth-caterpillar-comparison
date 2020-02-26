@@ -202,6 +202,12 @@ sampled_days_BB<-cowplusnotes%>%
   group_by(TreeSpecies)%>%
   summarize(n=n())
 
+sampled_days_BS<-cowplusnotes%>%
+  filter(cowplusnotes$Plot=="BS",cowplusnotes$TreeSpecies!="8",cowplusnotes$TreeSpecies!="9")%>%
+  group_by(TreeSpecies)%>%
+  summarize(n=n())
+
+
 sum(sampled_days_BB$n)
 sum(sampled_days_BS$n)
 sampled_days_BS<-cowplusnotes%>%
