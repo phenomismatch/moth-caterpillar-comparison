@@ -15,9 +15,9 @@ library(corrplot)
 library(gridExtra)
 library(mixtools)
 
-cow_dat<-read.table("data/Coweeta_Filtered.txt",header=TRUE)
+cow_dat<-read.table("data/Coweeta_Filtered_136_182.txt",header=TRUE)
 moth_pheno<-read.table("data/moth_pheno.txt",header=TRUE)
-cow_pheno_sum<-read.table("data/Coweeta_Phenometrics.txt", header=TRUE)
+cow_pheno_sum<-read.table("data/Coweeta_Phenometrics_136_182.txt", header=TRUE)
 
 # Visualize basic summaries of survey effort
 cow_survs = final_cow_set %>% distinct(LocalDate, Year, PlantFK, PlantSpecies, julianday, julianweek, Plot)
@@ -98,7 +98,7 @@ legend(100,30,legend=c("Mass_Peak","Mass_Rolling", "Pct_Rolling"),lty=c(5,4,3),c
 
 
 #Plots
-pdf("Coweeta_Mean_Density_Plots")
+pdf("Coweeta_Mean_Density_Plots_136_182")
 par(mfrow=c(3,3))
 for (var in c("meanBiomass", "fracSurveys")){
   for(j in c("BB", "BS")){
@@ -126,7 +126,7 @@ dev.off()
 
 
 #Overlaid plots
-pdf("Coweeta_Frac_surveys_Site_Comparison")
+pdf("Coweeta_Frac_surveys_Site_Comparison_136_182")
 par(mfrow=c(3,3))
 for (var in c( "fracSurveys")){
     for ( i in 2010:2018){
@@ -157,7 +157,7 @@ for (var in c( "fracSurveys")){
 legend("bottomright",legend=c("BB", "BS"),lty=c(1),col=c(1,4),title="Legend", xpd=NA,cex=.9)
 dev.off()
 
-pdf("Coweeta_Mean_Biomass_Site_Comparison")
+pdf("Coweeta_Mean_Biomass_Site_Comparison_136_182")
 par(mfrow=c(3,3))
 for (var in c( "meanBiomass")){
   for ( i in 2010:2018){
@@ -179,8 +179,8 @@ for (var in c( "meanBiomass")){
     plot1<-meanDensityByWeek(surveyData=cow_filtBB, plot=FALSE, plotVar=var, xlab="Julian Week", ylab= var, main = paste(i,"BB","# Surveys =", cow_filtBB$surveys[1]))
     plot2<-meanDensityByWeek(surveyData=cow_filtBS, plot=FALSE, plotVar=var, xlab="Julian Week", ylab= var, main = paste(i,"BS","# Surveys =", cow_filtBS$surveys[1]))
     
-    plot(x=plot1$julianweek, y=plot1$meanBiomass, ylab=var, type="b", main = paste(i,"BB=", cow_filtBB$surveys[1], "BS=", cow_filtBS$surveys[1])) 
-    lines(x=plot2$julianweek, y=plot2$meanBiomass, type="b", col="blue")
+    plot(x=plot1$julianweek, y=plot1$meanBiomass, ylab=var, type="l", main = paste(i,"BB=", cow_filtBB$surveys[1], "BS=", cow_filtBS$surveys[1])) 
+    lines(x=plot2$julianweek, y=plot2$meanBiomass, type="l", col="blue")
     
   }
   

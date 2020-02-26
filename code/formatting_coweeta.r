@@ -221,8 +221,6 @@ sites$medianGreenup = round(raster::extract(greenup, sites[, c('Longitude', 'Lat
     mutate(Plot=substring(Branch, 0, 2))%>%
     left_join(sites,by=c('Name'='Site'))
 
-  debug<-final_cow_set%>%
-    filter(Year==2014, Plot=="BB")
   
   updatedphenosum = function(fullDataset, # fullDataset format
                           postGreenupBeg = 40,     # number of days post-greenup marking the beginning of the time window
@@ -241,7 +239,7 @@ sites$medianGreenup = round(raster::extract(greenup, sites[, c('Longitude', 'Lat
                         massPeakDateGreenupWindow = NA, pctRollingPeakDateWindow = NA, densRollingPeakDateWindow = NA, massRollingPeakDateWindow = NA)
     
     for (y in years) {
-      yearFilteredDataset = dplyr::filter(debug, Year == y)
+      yearFilteredDataset = dplyr::filter(final_cow_set, Year == y)
       uniqueSites = unique(yearFilteredDataset$Name)
       
       for (site in uniqueSites) {
@@ -325,8 +323,8 @@ sites$medianGreenup = round(raster::extract(greenup, sites[, c('Longitude', 'Lat
                     fullWindowBeg = 136,     # julian day of the beginning of a specified time window (default May 15)
                     fullWindowEnd = 182,     # julian day of the end of a specified time window (default July 31)
                     minNumWeeks = 0)
-write.table(phenometrics, "Coweeta_Phenometrics.txt", row.names=F, sep="\t", quote=FALSE)
-write.table(final_cow_set,"Coweeta_Filtered.txt", sep='\t',row.names=F)
+write.table(phenometrics, "Coweeta_Phenometrics_136_182.txt", row.names=F, sep="\t", quote=FALSE)
+write.table(final_cow_set,"Coweeta_Filtered_136_182.txt", sep='\t',row.names=F)
 
   
 #Changed yday(localDate) to subtract 1 to account for weird date shift
