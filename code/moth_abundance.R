@@ -132,20 +132,29 @@ GMM<-lunar_phase_bind%>%
   summarise(moths=sum(photos))
 
 df<-as.data.frame(lapply(GMM, rep, GMM$moths))
+hist(mixturefilt$day, breaks=fit$day)
+hist(fit$day,breaks=fit$day, freq=FALSE)
 
-pdf("Coweeta_GMM_Plot")
+pdf("Moth_GMM_Plot")
 par(mfrow=c(3,3))
 for(i in 2010:2018){
   mixturefilt<-df%>%
     filter(year==i)
-  
+  fit<-Gauss%>%
+    filter(year==i)%>%
+    mutate(prepost=ifelse(Phase=="PreNewMoon", 3,4))
+  hist(mixturefilt$day, breaks=fit$day)
   set.seed(1)
   days<-mixturefilt$day
+  args<-list(...)
+  hist()
   mixmdl<-normalmixEM(days, k=2)
   summary(mixmdl)
-  plot(mixmdl, which=1)
+  plot(mixmdl, which=2)
 }
 dev.off()
+
+
 mixmdl$lambda
 
 

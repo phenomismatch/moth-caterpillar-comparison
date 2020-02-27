@@ -127,7 +127,7 @@ dev.off()
 
 #Overlaid plots
 pdf("Coweeta_Frac_surveys_Site_Comparison_136_182")
-par(mfrow=c(3,3))
+par(mfrow=c(3,3) )
 for (var in c( "fracSurveys")){
     for ( i in 2010:2018){
       cow_filtBB<-cow_dat%>%
@@ -147,8 +147,8 @@ for (var in c( "fracSurveys")){
       
       plot1<-meanDensityByWeek(surveyData=cow_filtBB, plot=FALSE, plotVar=var, xlab="Julian Week", ylab= var, main = paste(i,"BB","# Surveys =", cow_filtBB$surveys[1]))
       plot2<-meanDensityByWeek(surveyData=cow_filtBS, plot=FALSE, plotVar=var, xlab="Julian Week", ylab= var, main = paste(i,"BS","# Surveys =", cow_filtBS$surveys[1]))
-      
-      plot(x=plot1$julianweek, y=plot1$fracSurveys, ylab=var, type="l", main = paste(i,"BB=", cow_filtBB$surveys[1], "BS=", cow_filtBS$surveys[1])) 
+      max<-max(c(plot1$fracSurveys, plot2$fracSurveys))
+      plot(x=plot1$julianweek, y=plot1$fracSurveys, ylab=var, type="l", main = paste(i,"BB=", cow_filtBB$surveys[1], "BS=", cow_filtBS$surveys[1]), ylim=c(0, max)) 
       lines(x=plot2$julianweek, y=plot2$fracSurveys, type="l", col="blue")
       
     }
@@ -178,8 +178,8 @@ for (var in c( "meanBiomass")){
     
     plot1<-meanDensityByWeek(surveyData=cow_filtBB, plot=FALSE, plotVar=var, xlab="Julian Week", ylab= var, main = paste(i,"BB","# Surveys =", cow_filtBB$surveys[1]))
     plot2<-meanDensityByWeek(surveyData=cow_filtBS, plot=FALSE, plotVar=var, xlab="Julian Week", ylab= var, main = paste(i,"BS","# Surveys =", cow_filtBS$surveys[1]))
-    
-    plot(x=plot1$julianweek, y=plot1$meanBiomass, ylab=var, type="l", main = paste(i,"BB=", cow_filtBB$surveys[1], "BS=", cow_filtBS$surveys[1])) 
+    max<-max(c(plot1$meanBiomass, plot2$meanBiomass))
+    plot(x=plot1$julianweek, y=plot1$meanBiomass, ylab=var, type="l", main = paste(i,"BB=", cow_filtBB$surveys[1], "BS=", cow_filtBS$surveys[1]), ylim=c(0, max)) 
     lines(x=plot2$julianweek, y=plot2$meanBiomass, type="l", col="blue")
     
   }
