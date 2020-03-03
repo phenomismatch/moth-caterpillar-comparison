@@ -6,6 +6,7 @@ library(pracma)
 library(gridExtra)
 library(compare)
 library(mixtools)
+library(data.table)
 source('../caterpillars-analysis-public/code/analysis_functions.r')
 
 
@@ -135,26 +136,41 @@ df<-as.data.frame(lapply(GMM, rep, GMM$moths))
 hist(mixturefilt$day, breaks=fit$day)
 hist(fit$day,breaks=fit$day, freq=FALSE)
 
+par(mfrow=c(1,2))
+
+
 pdf("Moth_GMM_Plot")
+List<-list()
 par(mfrow=c(3,3))
 for(i in 2010:2018){
   mixturefilt<-df%>%
     filter(year==i)
+days<-mixturefilt$day
   fit<-Gauss%>%
     filter(year==i)%>%
     mutate(prepost=ifelse(Phase=="PreNewMoon", 3,4))
-  hist(mixturefilt$day, breaks=fit$day)
+
   set.seed(1)
-  days<-mixturefilt$day
-  args<-list(...)
-  hist()
   mixmdl<-normalmixEM(days, k=2)
-  summary(mixmdl)
-  plot(mixmdl, which=2)
+  #summary(mixmdl)
+  #mixmdl$loglik
+  #plot(mixmdl, which=2)
+  List[[i]]<-mixmdl$loglik
+  
 }
+
+df<-do.call(rbind.data.frame, List[2010:2018])
+
+
+loglik<-rbindlist(dfs)
+
 dev.off()
 
-
+hist(mixturefilt$day, breaks=fit$day)
+  
+days<-mixturefilt$day
+  args<-list(...)
+  hist()
 mixmdl$lambda
 
 
@@ -163,9 +179,9 @@ mixturefilt<-df%>%
 
 set.seed(1)
 days<-mixturefilt$day
-mixmdl<-normalmixEM(days, k=1)
+mixmdl<-normalmixEM(days, k=2)
 summary(mixmdl)
-plot(mixmdl, which=1)
+plot(mixmdl, which=2)
 
 
 
