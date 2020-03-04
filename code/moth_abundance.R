@@ -142,6 +142,39 @@ par(mfrow=c(1,2))
 pdf("Moth_GMM_Plot")
 List<-list()
 par(mfrow=c(3,3))
+for(j in 2:4){
+  for(i in 2010:2018){
+    mixturefilt<-df%>%
+      filter(year==i)
+    days<-mixturefilt$day
+    fit<-Gauss%>%
+      filter(year==i)%>%
+      mutate(prepost=ifelse(Phase=="PreNewMoon", 3,4))
+    
+    set.seed(1)
+    mixmdl<-normalmixEM(days, k=j)
+    
+    #summary(mixmdl)
+    #mixmdl$loglik
+    #plot(mixmdl, which=2)
+    List[[length(List)+1]]<-mixmdl$loglik
+  }
+}
+df<-do.call(rbind.data.frame, List)
+
+k2<-df%>%
+  slice(1:9)%>%
+  rename("k=2"= c..110274.82267582...170442.219666662...197071.610295324...199580.112787305.. )
+k3<-df%>%
+  slice(10:18)%>%
+  rename("k=3"= c..110274.82267582...170442.219666662...197071.610295324...199580.112787305.. )
+k4<-df%>%
+  slice(19:27)%>%
+  rename("k=4"= c..110274.82267582...170442.219666662...197071.610295324...199580.112787305.. )
+Log_Lik_Table<-k2%>%
+  bind_cols(k3,k4)%>%
+  mutate("Year"=2010:2018)
+
 for(i in 2010:2018){
   mixturefilt<-df%>%
     filter(year==i)
