@@ -9,7 +9,6 @@ library(gridExtra)
 library(lubridate)
 library(raster)
 library(rgdal)
-library(dggridR)
 library(sf)
 
 source('../caterpillars-analysis-public/code/analysis_functions.r')
